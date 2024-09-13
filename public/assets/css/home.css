@@ -1,0 +1,188 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    --conectec-color:#00A8B5;
+    --conectec-background: #e6ecf0;
+    height: 100vh;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+    display: flex;
+}
+
+
+
+.sidebarBotao{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebarBotao .material-symbols-outlined, 
+.fa-twitter {
+    padding: 20px;   
+}
+
+.sidebarBotao h2{
+    font-weight: 800;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.sidebarBotao:hover{
+    background-color: var(--conectec-background);
+    border-radius: 30px;
+    color: var(--conectec-color);
+    transition: color 100ms ease-out;
+}
+
+.sidebarBotao.active{
+    color: var(--conectec-color);
+
+}
+
+.btnPublicar{
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    border: none;
+    background-color: #00A8B5;
+    color: white;
+    font-weight: 600;
+    margin-top: 10px;
+
+}
+
+.sidebar{
+    border-right: 1px solid var(--conectec-background);
+    flex: 0.2;
+    min-width: 250px;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.feedTitle{
+    border-bottom:1px solid #00A8B5 ;
+    width: 100%;
+}
+
+.feedContainer{
+    flex: 0.5;
+    border-right: 1px solid var(--conectec-background);
+    min-width: fit-content;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+.feedContainer::-webkit-scrollbar{
+    display: none;
+}
+
+.feedTitle{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border: 1px solid var(--conectec-background);
+    padding: 15px 20px;
+
+}
+
+.publicarInput img{
+    border-radius: 50%;
+    height: 40px;
+    width: 50px;
+}
+
+.feedBox{
+    padding-bottom: 10px;
+    border-bottom: 8px solid var(--conectec-background);
+    padding-right: 10px;
+
+}
+
+.feedBox form{
+    display: flex;
+    flex-direction: column;
+
+}
+.feedBox .publicarInput{
+    display: flex;
+    padding: 20px;
+   
+}
+
+.feedBox .publicarInput input{
+    flex: 1;
+    margin-left: 20px;
+    border: none;
+    outline: none;
+}
+
+.postBtn{
+    background-color: var(--conectec-color);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 30px;
+    width: 80px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: auto;
+
+}
+
+/* post */
+
+.postAvatar img{
+    border-radius: 50%;
+    height: 40px;
+}
+
+.post{
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--conectec-background);
+    padding-bottom: 10px;
+}
+
+.postBody img{
+    width: 405px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.postFooter{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.postHeader{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.postHeaderDescription{
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.postBody{
+    flex: 1;
+    padding: 10px;
+}
+
+.postAvatar{
+    padding: 20px;
+}
+
+
+
+
