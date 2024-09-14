@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{url('assets/css/register.css')}}">
+</head>
+<body>
+
+
+<!-- <header>
+        <nav class="navBar" id="navBar">
+          <div class="titleNav">
+            <i class="fa-brands fa-cloudversify" style="font-size: 30pt; margin-right: 6px; color: #00c9e9; margin-bottom: 5px"></i><h2 style="font-size: 18pt">Conectec</h2>
+        </div>
+          <ul class="navLinks">
+        </div>
+     </header>   -->
+
+
+    <div class="main">
+        <div class="cadastroCont" id="step1">
+            <form method="POST" action="{{ route('register')}}"  enctype="multipart/form-data" id="formStep1">
+                @csrf
+                <div class="logo">
+                    <div class="headerLogo">
+                        <i class="fa-brands fa-cloudversify"></i>
+                        <h2>Conectec</h2>
+                    </div>
+                    <button class="botaoLoginNav">Login</button>
+                </div>
+
+                <div class="tituloCadastro">
+                    <h1>Crie sua conta</h1>
+                    <p>Obrigado por usar nossa plataforma, agora vamos criar um perfil</p>
+                </div>
+
+                <div class="progress" style="height: 5px; width: 80%" >
+                    <div class="progress-bar"id="progressBar"  role="progressbar" style="width: 50%; background-color: #00c9e9; "  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <div class="grupo-inputs">
+                    <div class="inputForm">
+                        <label for="nome">
+                            Nome (Apelido)
+                        </label>
+                        <div class="inputText">
+                            <input type="text" id="nome" name="nome" placeholder="Ex: NeymarJr" >
+                            
+                        </div>
+                    </div>
+
+                    <div class="inputForm">
+                        <label for="email">
+                            E-mail
+                        </label>
+                        <div class="inputText">
+                            <input type="email" id="email" name="email" placeholder="Ex: nome@gmail.com" >
+                            
+                        </div>
+                    </div>
+
+                    <div class="inputForm">
+                        <label for="senha">
+                            Senha
+                        </label>
+                        <div class="inputText">
+                            <input type="password" id="senha"name="senha" placeholder="Ex: 1234567" >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="extras">
+                    <div class="extraTitle">
+                        <h1>Selecione um perfil</h1>
+                        <p>Isso ajudará a personalizar sua experiência</p>
+                    </div>
+
+                    <div class="botoesMain">
+                        <input type="radio" name="role" value="Aluno" id="aluno">
+                        <label for="aluno"> <i class="fa-solid fa-user-graduate"></i> Aluno</label>
+
+                        <input type="radio" name="role" value="Professor" id="professor">
+                        <label for="professor"><i class="fa-solid fa-user-tie"></i> Professor</label>
+
+                        <input type="radio" name="role" value="Outros" id="outros">
+                        <label for="outros"> <i class="fa-solid fa-circle-question"></i> Outros</label>
+                    </div>
+                </div>
+
+                <button class="botaoContinuar"type="button" onclick="nextStep()">Continuar</button>
+            </form>
+        </div>
+
+        <div class="cadastroCont-2" id="step2" style="display: none;">
+            <form  method="POST" action="{{route('register')}}"  id="formStep2" enctype="multipart/form-data">
+            @csrf
+
+            <input type="hidden" id="nome" name="nome" value="">
+             <input type="hidden" id="email" name="email" value="">
+                <input type="hidden" id="senha" name="senha" value="">
+
+
+                <div class="logo">
+                    <div class="headerLogo">
+                        <i class="fa-brands fa-cloudversify"></i>
+                        <h2>Conectec</h2>
+                    </div>
+                </div>
+
+                <div class="tituloCadastro">
+                    <h1>Finalizar cadasto</h1>
+                    <p>Para finalizarmos vamos escolher uma foto de perfil, e selecionar seu módulo</p>
+                </div>
+
+                <div  class="progress" style="height: 5px; width: 100%">
+                    <div class="progress-bar" id="progressBar"  role="progressbar" style="width: 100%; background-color: #00c9e9;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <div class="fotoPerfilCont">
+                    <div class="fotoPerfilTitle">
+                        <label for="urlDaFoto" id="titleFoto">Foto de Perfil</label>
+                        <p>Selecione uma foto para usar no nosso aplicativo</p>
+
+                        <label for="urlDaFoto" class="botaoFotoPerfil">Escolher Foto de Perfil</label>
+                    </div>
+                    <input type="file" id="urlDaFoto" name="urlDaFoto" accept="image/*" onchange="previewImage(event)">
+
+                    <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">
+
+                </div>
+
+                <div class="moduloContainer">
+                    <label for="module" class="form-label">Módulo</label>
+                    <select class="form-select" id="module" name="module">
+                        <option value="">Selecione...</option>
+                        <option value="Modulo 1">Módulo 1</option>
+                        <option value="Modulo 2">Módulo 2</option>
+                        <option value="Modulo 3">Módulo 3</option>
+                    </select>
+                </div>
+
+                <button class="botaoContinuar" type=submit>Finalizar</button>
+
+
+            </form>
+        </div>
+
+        </div>
+       
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+   
+    <script>
+
+
+
+function nextStep() {
+    // Validar os campos do passo 1
+    var formStep1 = document.getElementById('formStep1');
+
+    document.getElementById('formStep2').nome.value = document.getElementById('formStep1').nome.value;
+    document.getElementById('formStep2').email.value = document.getElementById('formStep1').email.value;
+    document.getElementById('formStep2').senha.value = document.getElementById('formStep1').senha.value;
+
+
+    var selectedRole = document.querySelector('input[name="role"]:checked');
+    if (selectedRole) {
+        var roleValue = selectedRole.value;
+        var inputHiddenRole = document.createElement('input');
+        inputHiddenRole.type = 'hidden';
+        inputHiddenRole.name = 'perfil'; // Nome correto de acordo com o banco de dados
+        inputHiddenRole.value = roleValue;
+        document.getElementById('formStep2').appendChild(inputHiddenRole);
+    }
+    
+        // Esconde a Etapa 1 e mostra a Etapa 2
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+
+        // Atualiza a barra de progresso
+        var progressBar = document.getElementById('progressBar');
+        progressBar.style.width = '100%';
+        progressBar.innerText = 'Passo 2 de 2';
+  
+        
+    
+}
+
+function previewImage(event) {
+            var image = document.getElementById('imagePreview');
+            var file = event.target.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                    image.style.display = 'block'; 
+                }
+                reader.readAsDataURL(file); 
+            }
+        }
+
+
+    </script>
+</body>
+</html>
