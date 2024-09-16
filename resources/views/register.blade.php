@@ -101,9 +101,10 @@
             <form  method="POST" action="{{route('register')}}"  id="formStep2" enctype="multipart/form-data">
             @csrf
 
-            <input type="hidden" id="nome" name="nome" value="">
-             <input type="hidden" id="email" name="email" value="">
-                <input type="hidden" id="senha" name="senha" value="">
+            <input type="hidden" id="hiddenNome" name="nome" value="">
+            <input type="hidden" id="hiddenEmail" name="email" value="">
+            <input type="hidden" id="hiddenSenha" name="senha" value="">
+            <input type="hidden" id="hiddenPerfil" name="role" value="">
 
 
                 <div class="logo">
@@ -155,6 +156,24 @@
        
     </div>
 
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Cadastro Concluído</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Seu cadastro foi concluído com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -164,29 +183,38 @@
 
 
 function nextStep() {
-    // Validar os campos do passo 1
-    var formStep1 = document.getElementById('formStep1');
-
-    document.getElementById('formStep2').nome.value = document.getElementById('formStep1').nome.value;
-    document.getElementById('formStep2').email.value = document.getElementById('formStep1').email.value;
-    document.getElementById('formStep2').senha.value = document.getElementById('formStep1').senha.value;
-
-
-    var selectedRole = document.querySelector('input[name="role"]:checked');
-    if (selectedRole) {
-        var roleValue = selectedRole.value;
-        var inputHiddenRole = document.createElement('input');
-        inputHiddenRole.type = 'hidden';
-        inputHiddenRole.name = 'perfil'; // Nome correto de acordo com o banco de dados
-        inputHiddenRole.value = roleValue;
-        document.getElementById('formStep2').appendChild(inputHiddenRole);
-    }
     
-        // Esconde a Etapa 1 e mostra a Etapa 2
+    var formStep1 = document.getElementById('formStep1');
+    var selectedRole = document.querySelector('input[name="role"]:checked');
+    console.log('Role Selecionado:', selectedRole.value);  
+
+
+        var nome = document.getElementById('nome').value;
+        var email = document.getElementById('email').value;
+        var senha = document.getElementById('senha').value;
+     
+
+
+
+        if (!nome || !email || !senha || !selectedRole) {
+            alert("Por favor, preencha todos os campos e selecione um perfil.");
+            return;
+        }
+
+        
+        document.getElementById('hiddenNome').value = nome;
+        document.getElementById('hiddenEmail').value = email;
+        document.getElementById('hiddenSenha').value = senha;
+        document.getElementById('hiddenPerfil').value = selectedRole.value;
+
+    
+    
+    
+        
         document.getElementById('step1').style.display = 'none';
         document.getElementById('step2').style.display = 'block';
 
-        // Atualiza a barra de progresso
+        
         var progressBar = document.getElementById('progressBar');
         progressBar.style.width = '100%';
         progressBar.innerText = 'Passo 2 de 2';
@@ -208,6 +236,13 @@ function previewImage(event) {
                 reader.readAsDataURL(file); 
             }
         }
+
+        @if(session('showModal'))
+            document.addEventListener('DOMContentLoaded', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+                myModal.show();
+            });
+        @endif
 
 
     </script>

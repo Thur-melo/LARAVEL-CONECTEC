@@ -16,7 +16,9 @@ class RegisterController extends Controller
 
 
     public function register(Request $request)
+
     {
+        
 
         $profilePhotoUrl = null;
 
@@ -34,6 +36,9 @@ class RegisterController extends Controller
             'perfil' => $request->input('role'),
            
         ]);
+
+        $request->session()->flash('showModal', true);
+
 
 
         

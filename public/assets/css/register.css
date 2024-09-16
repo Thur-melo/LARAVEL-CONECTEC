@@ -301,4 +301,70 @@ nav{
 
 }
 
+/* Resposivisação  =============================================================*/
+@media screen and (max-width: 848px){
+    .main{
+        height: 100vh;
+        width: 100%;
+    }
+
+    .cadastroCont{
+        width: 90%;
+
+    }
+
+    .cadastroCont-2{
+        width: 90%;
+        
+    }
+    
+}
+
+@media screen and (max-width: 497px){
+    
+
+    .main{
+        height: 100vh;
+        width: 100%;
+    }
+
+    .cadastroCont, .cadastroCont-2{
+        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;                
+    }
+
+    .inputForm input{
+        width: 100%;
+        
+        
+    }
+
+    .grupo-inputs input{
+        width: 100%;
+        
+    }
+
+    
+
+    .inputText{
+        width: 100%;
+
+    }
+
+    .moduloContainer{
+        width: 100%;
+
+    }
+    
+}
+
 
