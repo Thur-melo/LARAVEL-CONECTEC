@@ -14,6 +14,12 @@ class RegisterController extends Controller
         return view('register');
     }
 
+    public function showLoginForm()
+{
+    return view('login');
+}
+
+
 
     public function register(Request $request)
 
@@ -48,4 +54,35 @@ class RegisterController extends Controller
 
         return redirect()->route('register')->with('status', 'Usuário registrado com sucesso');
     }
+
+
+
+    
+    public function login(Request $request){
+
+        // dd([
+        //     'emailUser' => $request->emailUser,
+        //     'senha' => $request->senha,
+           
+        // ]);
+
+        $usuario = Usuario::where('emailUser',$request->emailUser)->first();
+
+        if ($usuario && $usuario->senha === $request ->senha){
+            return redirect()->route('register')->with('status', 'Usuário Logado');
+            return response()->json($usuario);
+
+            
+        }
+       
+        return response()->json(['message' => 'Seha errada ae pae, ou email errado'], 401);
+
+       
+    }
 }
+
+
+
+
+
+
