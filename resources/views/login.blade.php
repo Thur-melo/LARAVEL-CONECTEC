@@ -3,74 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{url('assets/css/login.css')}}">
 </head>
 <body>
 
-
-<!-- <header>
-        <nav class="navBar" id="navBar">
-          <div class="titleNav">
-            <i class="fa-brands fa-cloudversify" style="font-size: 30pt; margin-right: 6px; color: #00c9e9; margin-bottom: 5px"></i><h2 style="font-size: 18pt">Conectec</h2>
-        </div>
-          <ul class="navLinks">
-        </div>
-     </header>   -->
-
-
     <div class="main">
         <div class="loginCont" id="step1">
-            <form method="POST" action="{{url('login')}}"  enctype="multipart/form-data" id="formStep1">
+            <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" id="loginForm">
                 @csrf
 
                 <div class="logo">
-                    <img src="" alt="Chronos">
+                    <div class="headerLogo">
+                        <i class="fa-brands fa-cloudversify"></i>
+                        <h2>Conectec</h2>
+                    </div>
+                    <button class="botaoLoginNav">Login</button>
                 </div>
 
                 <div class="tituloCadastro">
                     <h1>Entre na sua conta</h1>
                     <p>Bem-vindo de volta, acesse sua conta para continuar.</p>                   
-                 </div>
-
-                   
+                </div>
 
                 <div class="grupo-inputs">
-
                     <div class="inputForm">
-                        <label for="email">
-                            E-mail
-                        </label>
+                        <label for="email">E-mail</label>
                         <div class="inputText">
-                            <input type="email" id="email" name="emailUser" placeholder="Ex: nome@gmail.com" >
-                           
-                              
-                           
+                            <input type="email" id="emailUser" name="emailUser" placeholder="Ex: nome@gmail.com">
                         </div>
                     </div>
 
                     <div class="inputForm">
-                        <label for="senha">
-                            Senha
-                        </label>
+                        <label for="senha">Senha</label>
                         <div class="inputText">
-                            <input type="password" id="senha"name="senha" placeholder="Ex: 1234567" >
-                        
+                            <input type="password" id="senha" name="senha" placeholder="Ex: 1234567">
                         </div>
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
-                   
+                </form>
+            </div>
 
-                    </form>
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="errorModalLabel">Erro no Login</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Botão de fechar -->
+                        </div>
+                        <div class="modal-body">
+                            <p id="errorMessage">Erro: Email ou senha incorretos.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
                 </div>
- 
+            </div>
+        </div>
 
+    <!-- Carregar jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-   
+    <!-- Carregar o Bootstrap corretamente -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+   <script>
+    $(document).ready(function() {
+        $('#loginForm').on('submit', function(e) {
+            e.preventDefault(); // Impede o envio padrão do formulário
+
+            // Coletar os dados do formulário
+            var formData = {
+                emailUser: $('#emailUser').val(),
+                senha: $('#senha').val(),
+                _token: $('input[name="_token"]').val() // CSRF token
+            };
+
+            // Fazer a requisição AJAX
+            $.ajax({
+                url: '/login', // Substitua pela rota correta do Laravel
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.status === 'success') {
+                        window.location.href = '/home'; // Redirecionar para a home (ou outra página)
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 401) {
+                        $('#errorMessage').text('Senha ou email incorreto.');
+                        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                        errorModal.show();
+                    } else {
+                        $('#errorMessage').text('Ocorreu um erro. Tente novamente.');
+                        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                        errorModal.show();
+                    }
+                }
+            });
+        });
+    });
+   </script>
 </body>
 </html>

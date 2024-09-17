@@ -21,4 +21,10 @@ class Usuario extends Model
         'perfil',
         'urlDaFoto',
     ];
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
+    }
 }

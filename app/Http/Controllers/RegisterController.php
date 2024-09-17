@@ -58,7 +58,14 @@ class RegisterController extends Controller
 
 
     
-    public function login(Request $request){
+ 
+
+
+
+
+
+
+   public function login(Request $request){
 
         // dd([
         //     'emailUser' => $request->emailUser,
@@ -69,20 +76,12 @@ class RegisterController extends Controller
         $usuario = Usuario::where('emailUser',$request->emailUser)->first();
 
         if ($usuario && $usuario->senha === $request ->senha){
-            return redirect()->route('register')->with('status', 'Usuário Logado');
-            return response()->json($usuario);
 
-            
+            return response()->json(['status' => 'success', 'message' => 'Usuário Logado'], 200);
         }
        
-        return response()->json(['message' => 'Seha errada ae pae, ou email errado'], 401);
+        return response()->json(['message' => 'Senha ou email incorreto'], 401);
 
        
     }
 }
-
-
-
-
-
-
