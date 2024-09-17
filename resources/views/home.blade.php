@@ -68,19 +68,23 @@
         </div>
 
         <div class="feedBox">
-            <form action="">
+            <form action="{{ route('home')}}"  method="post">
+                @csrf
                 <div class="publicarInput">
                     <img src="https://midias.correiobraziliense.com.br/_midias/jpg/2023/03/06/neymar_2_1024x768-27560987.jpg" alt="">
-                    <input type="text" placeholder="Desabafa pá nóis">
+                    <input type="text" name="content" placeholder="Desabafa pá nóis">
                 </div>
 
-                <button class="postBtn">
+                <button type="submit" class="postBtn">
                     Publicar
                 </button>
             </form>
 
         </div>
-
+        @if ($posts->isEmpty())
+            <p>Não há posts para exibir.</p>
+        @else
+        @foreach ($posts as $post)
         <div class="post">
         <div class="postAvatar">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBrX2btsr-Atsn6qX9E5PsBAAK82RFpd8qNA&s" alt="">
@@ -95,11 +99,8 @@
             </div>
 
             <div class="postHeaderDescription">
-                <p>Sla bla bla bla</p>
+            <p>{{ $post->content }}</p>
             </div>
-
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThnMzSirwVE_GXh2xu9-6bIB9pNouAiS4jeHoAwK3PZL7vTKwelh05qbcfxlaqFfRntYE&usqp=CAU" alt="">
-
             <div class="postFooter">
 
             <span class="material-symbols-outlined">favorite</span>
@@ -108,9 +109,10 @@
             </div>
         </div>
     </div>
-
-
+    @endforeach
+    @endif
     </div>
+
 
     <!-- inicio perguntas  -->
     <div class="perguntas">
