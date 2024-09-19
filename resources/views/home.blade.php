@@ -64,33 +64,38 @@
 
     <div class="feedContainer">
         <div class="feedTitle">
-            <h3>Home</h3>
+
+            <h3>Home - Bem-vindo, 
+            {{ $user->name }}! </h3>
+
         </div>
 
         <div class="feedBox">
-            <form action="">
+             <form action="{{ route('home')}}"  method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="publicarInput">
-                    <img src="https://midias.correiobraziliense.com.br/_midias/jpg/2023/03/06/neymar_2_1024x768-27560987.jpg" alt="">
-                    <input type="text" placeholder="Desabafa pá nóis">
+                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                    <input type="text" name="texto" placeholder="Desabafa pá nóis">
                 </div>
-
-                <button class="postBtn">
+                
+                <input type="file" name="fotoPost"  accept="image/*" >
+                <button type="submit" class="postBtn" >
                     Publicar
                 </button>
-            </form>
+                </form>
+                </div>
 
-        </div>
 
-        <div class="post">
+        <!-- <div class="post">
         <div class="postAvatar">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBrX2btsr-Atsn6qX9E5PsBAAK82RFpd8qNA&s" alt="">
+            <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
         </div>
 
         <div class="postBody">
             <div class="postHeader">
                 <div class="postHeaderText">
-                    <h3>Cristionel Messialdo</h3>
-                    <span class="modulo"> 1° modulo</span>
+                    <h3> {{ $user->name }} </h3>
+                    <span class="modulo"> {{ $user->modulo }} </span>
                 </div>
             </div>
 
@@ -98,7 +103,7 @@
                 <p>Sla bla bla bla</p>
             </div>
 
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThnMzSirwVE_GXh2xu9-6bIB9pNouAiS4jeHoAwK3PZL7vTKwelh05qbcfxlaqFfRntYE&usqp=CAU" alt="">
+            <img src="{{ asset('storage/' . $user->urlDaFoto) }}"alt="">
 
             <div class="postFooter">
 
@@ -107,7 +112,35 @@
             <span class="material-symbols-outlined">bookmark</span>
             </div>
         </div>
-    </div>
+    </div> -->
+          
+
+        
+<!--  -->
+
+    @foreach($posts as $post)
+    <div class="postBody">
+            <div class="postHeader">
+                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}"alt="">
+                <div class="postHeaderText">
+                    <h3> {{ $post->user->name }} </h3>
+                </div>
+            </div>
+
+            <div class="postHeaderDescription">
+                <p>{{ $post->texto }}</p>
+            </div>
+            
+            <img src="{{ asset('storage/' . $post->fotoPost) }}"alt="">
+
+            <div class="postFooter">
+
+            <span class="material-symbols-outlined">favorite</span>
+            <span class="material-symbols-outlined">mode_comment</span>
+            <span class="material-symbols-outlined">bookmark</span>
+            </div>
+        </div>
+        @endforeach
 
 
     </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
+
 
 class RegisterController extends Controller
 {
@@ -17,6 +19,15 @@ class RegisterController extends Controller
     public function showLoginForm()
 {
     return view('login');
+}
+
+public function showHome()
+{
+    $user = Auth::user();
+    $posts = Post::all();
+    $posts = Post::with('user')->get();
+
+    return view('home', compact('user', 'posts'));
 }
 
 
@@ -52,7 +63,7 @@ class RegisterController extends Controller
          
      
 
-        return redirect()->route('register')->with('status', 'Usuário registrado com sucesso');
+        return redirect()->route('login')->with('status', 'Usuário registrado com sucesso');
     }
 
 
@@ -75,8 +86,9 @@ class RegisterController extends Controller
             return redirect()->route('login')->withErrors(['error' =>'Email ou senha errada']);
 
         }
-
-        return redirect()->route('login')->with(['success' =>'Logou']);
+        return redirect()->route('home', )->with(['success' =>'Logou']);
        
     }
+
+    
 }
