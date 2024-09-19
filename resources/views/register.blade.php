@@ -48,7 +48,7 @@
                             Nome (Apelido)
                         </label>
                         <div class="inputText">
-                            <input type="text" id="nome" name="nome" placeholder="Ex: NeymarJr" >
+                            <input type="text" id="nome" name="name" placeholder="Ex: NeymarJr" >
                             
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             Senha
                         </label>
                         <div class="inputText">
-                            <input type="password" id="senha"name="senha" placeholder="Ex: 1234567" >
+                            <input type="password" id="senha"name="password" placeholder="Ex: 1234567" >
                         </div>
                     </div>
                 </div>
@@ -101,9 +101,9 @@
             <form  method="POST" action="{{route('register')}}"  id="formStep2" enctype="multipart/form-data">
             @csrf
 
-            <input type="hidden" id="hiddenNome" name="nome" value="">
+            <input type="hidden" id="hiddenNome" name="name" value="">
             <input type="hidden" id="hiddenEmail" name="email" value="">
-            <input type="hidden" id="hiddenSenha" name="senha" value="">
+            <input type="hidden" id="hiddenSenha" name="password" value="">
             <input type="hidden" id="hiddenPerfil" name="role" value="">
 
 

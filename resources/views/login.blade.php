@@ -23,46 +23,39 @@
                     <button class="botaoLoginNav">Login</button>
                 </div>
 
+                @if(session()->has('success'))
+
+                    {{ session()->get('success')}}
+                @endif
+
                 <div class="tituloCadastro">
                     <h1>Entre na sua conta</h1>
-                    <p>Bem-vindo de volta, acesse sua conta para continuar.</p>                   
+                    <p>Bem-vindo de volta, acesse  conta para continuar.</p>                   
                 </div>
+
+                @error('error')
+                    <span>{{ $message }} </span>
+                @enderror
 
                 <div class="grupo-inputs">
                     <div class="inputForm">
                         <label for="email">E-mail</label>
                         <div class="inputText">
-                            <input type="email" id="emailUser" name="emailUser" placeholder="Ex: nome@gmail.com">
+                            <input type="email" id="emailUser" name="email" placeholder="Ex: nome@gmail.com">
                         </div>
                     </div>
 
                     <div class="inputForm">
-                        <label for="senha">Senha</label>
+                        <label for="password">Senha</label>
                         <div class="inputText">
-                            <input type="password" id="senha" name="senha" placeholder="Ex: 1234567">
+                            <input type="password" id="senha" name="password" placeholder="Ex: 1234567">
                         </div>
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
                 </form>
             </div>
 
-            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="errorModalLabel">Erro no Login</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Botão de fechar -->
-                        </div>
-                        <div class="modal-body">
-                            <p id="errorMessage">Erro: Email ou senha incorretos.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+           
 
     <!-- Carregar jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -70,15 +63,15 @@
     <!-- Carregar o Bootstrap corretamente -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-   <script>
+   <!-- <script>
     $(document).ready(function() {
         $('#loginForm').on('submit', function(e) {
             e.preventDefault(); // Impede o envio padrão do formulário
 
             // Coletar os dados do formulário
             var formData = {
-                emailUser: $('#emailUser').val(),
-                senha: $('#senha').val(),
+                emailUser: $('#email').val(),
+                senha: $('#password').val(),
                 _token: $('input[name="_token"]').val() // CSRF token
             };
 
@@ -106,6 +99,6 @@
             });
         });
     });
-   </script>
+   </script> -->
 </body>
 </html>

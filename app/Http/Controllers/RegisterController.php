@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -33,10 +33,10 @@ class RegisterController extends Controller
             $profilePhotoUrl = $file->store('urlDaFoto', 'public');
         }
 
-        Usuario::create([
-            'nome' => $request->input('nome'),
-            'emailUser' => $request->input('email'),
-            'senha' => $request->input('senha'),
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
             'urlDaFoto' => $profilePhotoUrl,
             'modulo' => $request->input('module'),
             'perfil' => $request->input('role'),
@@ -67,21 +67,16 @@ class RegisterController extends Controller
 
    public function login(Request $request){
 
-        // dd([
-        //     'emailUser' => $request->emailUser,
-        //     'senha' => $request->senha,
-           
-        // ]);
+    
 
-        $usuario = Usuario::where('emailUser',$request->emailUser)->first();
+     $credentials = $request->only('email','password');
+     $autenticado =Auth::attempt($credentials);
+        if(!$autenticado){
+            return redirect()->route('login')->withErrors(['error' =>'Email ou senha errada']);
 
-        if ($usuario && $usuario->senha === $request ->senha){
-
-            return response()->json(['status' => 'success', 'message' => 'Usuário Logado'], 200);
         }
-       
-        return response()->json(['message' => 'Senha ou email incorreto'], 401);
 
+        return redirect()->route('login')->with(['success' =>'Logou']);
        
     }
 }
