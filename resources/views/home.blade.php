@@ -74,7 +74,7 @@
              <form action="{{ route('home')}}"  method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="publicarInput">
-                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}"alt="">
                     <input type="text" name="texto" placeholder="Desabafa pá nóis">
                 </div>
                 
