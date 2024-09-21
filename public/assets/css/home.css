@@ -2,9 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Roboto";
 }
 
-body{
+.main{
+
     --conectec-color:#00A8B5;
     --conectec-background: #e6ecf0;
     height: 100vh;
@@ -13,38 +15,34 @@ body{
     margin-right: auto;
     padding: 0 10px;
     display: flex;
+    justify-content:  center;
+    flex-direction: row;
 }
 
 
 
-.sidebarBotao{
+.modal-content{
+
+    height: 520px;
+}
+
+
+.modal-body p{
+
+    font-size: 12px;
+
+}
+
+.buscarContainer{
+
+    height: 80px;
+    justify-content: center;
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
-.sidebarBotao .material-symbols-outlined, 
-.fa-twitter {
-    padding: 20px;   
-}
 
-.sidebarBotao h2{
-    font-weight: 800;
-    font-size: 20px;
-    margin-right: 20px;
-}
 
-.sidebarBotao:hover{
-    background-color: var(--conectec-background);
-    border-radius: 30px;
-    color: var(--conectec-color);
-    transition: color 100ms ease-out;
-}
-
-.sidebarBotao.active{
-    color: var(--conectec-color);
-
-}
 
 .btnPublicar{
     width: 100%;
@@ -58,13 +56,24 @@ body{
 
 }
 
-.sidebar{
-    border-right: 1px solid var(--conectec-background);
-    flex: 0.2;
-    min-width: 250px;
-    margin-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+#perguntaTitulo{
+
+    font-weight: bold;
+}
+
+.perguntaCard{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 10px;
+  align-items: end;
+  
+}
+#perguntaBtn{
+
+    height: 40px;
+    width: 100px;
 }
 
 .feedTitle{
@@ -94,10 +103,13 @@ body{
     padding: 15px 20px;
 
 }
+.publicarInput{
+    margin: 10px;
+}
 
 .publicarInput img{
     border-radius: 50%;
-    height: 40px;
+    height: 50px;
     width: 50px;
 }
 
@@ -106,6 +118,10 @@ body{
     border-bottom: 8px solid var(--conectec-background);
     padding-right: 10px;
 
+}
+textarea{
+
+    height: 100px;
 }
 
 .feedBox form{
@@ -116,6 +132,7 @@ body{
 .feedBox .publicarInput{
     display: flex;
     padding: 20px;
+    flex-direction: row;
    
 }
 
@@ -154,9 +171,11 @@ body{
 }
 
 .postBody img{
-    width: 405px;
-    object-fit: contain;
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
     border-radius: 20px;
+    margin: 5px;
 }
 
 .postFooter{
@@ -168,11 +187,26 @@ body{
 .postHeader{
     font-size: 15px;
     margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.postHeader img{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    
 }
 
 .postHeaderDescription{
     margin-bottom: 10px;
     font-size: 15px;
+    width: 500px;
+}
+
+.postHeaderDescription p{
+
+    word-wrap: break-word; /* Quebra palavras longas */
 }
 .postBody{
     flex: 1;

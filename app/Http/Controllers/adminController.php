@@ -19,14 +19,18 @@ public function update(Request $request, string $id)
 {
 
     $profilePhotoUrl = null;
+// Atualiza o usuário com os dados validados
+$usuario = User::findOrFail($id);
 
     if ($request->hasFile('urlDaFoto')) {
         $file = $request->file('urlDaFoto');
         $profilePhotoUrl = $file->store('urlDaFoto', 'public');
+    } else {
+          // Se não houver nova foto, mantém a URL existente
+          $profilePhotoUrl = $usuario->urlDaFoto;
     }
     
-// Atualiza o usuário com os dados validados
-$usuario = User::findOrFail($id);
+
 
 $usuario->urlDaFoto= $profilePhotoUrl;
 
