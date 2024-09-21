@@ -17,7 +17,6 @@ public function showadmin(){
 
 public function update(Request $request, string $id)
 {
-
     $profilePhotoUrl = null;
 // Atualiza o usuário com os dados validados
 $usuario = User::findOrFail($id);

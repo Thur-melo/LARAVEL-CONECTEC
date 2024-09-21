@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{url('assets/css/login.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+
 </head>
 <body>
 
@@ -20,7 +22,7 @@
                         <i class="fa-brands fa-cloudversify"></i>
                         <h2>Conectec</h2>
                     </div>
-                    <button class="botaoLoginNav">Login</button>
+                    
                 </div>
 
                 @if(session()->has('success'))
@@ -50,9 +52,13 @@
                         <div class="inputText">
                             <input type="password" id="senha" name="password" placeholder="Ex: 1234567">
                         </div>
+                        
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
+                    <p>Não possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a></p>
+
                 </form>
+                
             </div>
 
             <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
