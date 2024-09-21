@@ -135,7 +135,7 @@
             <div class="botoesImg">
                 <label for="urlDaFoto" class="botaoFotoPerfil"><i class="fa-regular fa-image"></i>Trocar</label>
                 <input type="file" id="urlDaFoto" name="urlDaFoto" accept="image/*" onchange="previewImage(event)">
-                <button class="botaoFotoPerfil"><i class="fa-regular fa-trash-can"></i>Remover</button>
+                <button type="submit" name="deleteImg" value="1" class="botaoFotoPerfil"><i class="fa-regular fa-trash-can"></i>Remover</button>
             </div>
             <div class="desc">
                 <p>Aqui está suas informações, você pode editar algumas delas</p>
