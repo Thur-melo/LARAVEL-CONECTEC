@@ -10,17 +10,6 @@
 </head>
 <body>
 
-
-<!-- <header>
-        <nav class="navBar" id="navBar">
-          <div class="titleNav">
-            <i class="fa-brands fa-cloudversify" style="font-size: 30pt; margin-right: 6px; color: #00c9e9; margin-bottom: 5px"></i><h2 style="font-size: 18pt">Conectec</h2>
-        </div>
-          <ul class="navLinks">
-        </div>
-     </header>   -->
-
-
     <div class="main">
         <div class="cadastroCont" id="step1">
             <form method="POST" action="{{ route('register')}}"  enctype="multipart/form-data" id="formStep1">

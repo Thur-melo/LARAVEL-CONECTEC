@@ -169,4 +169,32 @@ input{
     border: 2px solid #00c9e9;
 }
 
+#urlDaFoto{
+    display: none;
+}
+
+
+.botaoFotoPerfil{
+    width: 120px;
+    padding: 12px 10px;
+    background-color: transparent;
+    border:2px solid #00c9e9 ;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    color: #00c9e9;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+
+}
+
+.botaoFotoPerfil i{
+    margin-right: 5px;  
+    font-size: 12pt;
+}
+
+
+
 

@@ -17,10 +17,13 @@
         </div>
 
         <div class="imgContainerEdit">
-             <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt=""> 
+             <!-- <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">  -->
+             <img id="imagePreview" alt="Prévia da Imagem" src="{{ asset('storage/' . $user->urlDaFoto) }}">
              
             <div class="botoesImg">
-                <button class="btnImg"><i class="fa-regular fa-image"></i>Trocar</button>
+                <label for="urlDaFoto" class="botaoFotoPerfil"><i class="fa-regular fa-image"></i>Trocar</label>
+            
+                <input type="file" id="urlDaFoto" name="urlDaFoto" accept="image/*" onchange="previewImage(event)">
                 <button class="btnImg"><i class="fa-regular fa-trash-can"></i>Remover</button>
             </div>
         </div>
@@ -37,29 +40,32 @@
         
 
         <div class="inputsCont">
+
             <div class="inputsEmailNomeSenha">
                 <div class="inputForm">
                     <label for="senha">
                         Nome
                     </label>
                     <div class="inputText">
-                        <input type="text" id="nome"name="name" value="{{ $user->nome }}" placeholder="Ex: hyguin Perereca" >
+                        <input type="text" id="nome"name="name" value="{{ $user->name }}"  >
                     </div>
                 </div>
-                 <div class="inputForm">
+
+                <div class="inputForm">
                     <label for="senha">
-                        imagem
+                        Email
                     </label>
                     <div class="inputText">
-                        <input type="file" id="urlDaFoto" name="urlDaFoto" accept="image/*">
+                        <input class="form-control" id="disabledInput" type="text" value="{{ $user->email }}" disabled >
                     </div>
                 </div>
-                <!--<div class="inputForm">
+
+                <div class="inputForm">
                     <label for="senha">
                         Senha
                     </label>
                     <div class="inputText">
-                        <input type="password" id="senha"name="password" placeholder="Ex: 1234567" >
+                        <input class="form-control" id="disabledInput" type="text" value="{{ $user->password }}" disabled>
                     </div>
                 </div>
             </div>
@@ -71,7 +77,7 @@
                         Modulo
                     </label>
                     <div class="inputText">
-                        <input type="password" id="senha"name="password" placeholder="Ex: 1234567" >
+                    <input class="form-control" id="disabledInput" type="text" value="{{ $user->modulo}}" disabled>
                     </div>
                 </div>
                 <div class="inputForm">
@@ -79,11 +85,11 @@
                         Perfil
                     </label>
                     <div class="inputText">
-                        <input type="password" id="senha"name="password" placeholder="Ex: 1234567" >
+                    <input class="form-control" id="disabledInput" type="text" value="{{ $user->perfil }}" disabled>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div> 
 
         <div class="btnsSalvar">
             <button type="submit">Salvar</button>
@@ -91,6 +97,25 @@
         </div>
         </form>
     </div>
+
+
+    <script>
+        function previewImage(event) {
+            var image = document.getElementById('imagePreview');
+            var file = event.target.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                    image.style.display = 'block'; 
+                }
+                reader.readAsDataURL(file); 
+            }
+        }
+
+
+    </script>
     
 </body>
 </html>

@@ -54,7 +54,11 @@ public function showHome()
            
         ]);
 
-        $request->session()->flash('showModal', true);
+        return redirect()->route('login')->with([
+            'status' => 'Usuário registrado com sucesso',
+            'showModal' => true,
+        ]);
+        
 
 
 
@@ -63,7 +67,6 @@ public function showHome()
          
      
 
-        return redirect()->route('login')->with('status', 'Usuário registrado com sucesso');
     }
 
 
