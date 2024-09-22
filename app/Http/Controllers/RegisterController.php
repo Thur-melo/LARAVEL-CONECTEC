@@ -25,7 +25,8 @@ public function showHome()
 {
     $user = Auth::user();
     $posts = Post::all();
-    $posts = Post::with('user')->get();
+    $posts = Post::with('user')->orderBy('created_at', 'desc')->get();
+
 
     return view('home', compact('user', 'posts'));
 }

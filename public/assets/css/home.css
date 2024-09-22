@@ -1,222 +1,336 @@
 *{
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
     font-family: "Roboto";
-}
-
-.main{
-
-    --conectec-color:#00A8B5;
-    --conectec-background: #e6ecf0;
-    height: 100vh;
-    max-width: 1300px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 10px;
-    display: flex;
-    justify-content:  center;
-    flex-direction: row;
-}
-
-
-
-.modal-content{
-
-    height: 520px;
-}
-
-
-.modal-body p{
-
-    font-size: 12px;
 
 }
 
-.buscarContainer{
+body{
+    overflow-x: hidden;
+     background-color: #F4F4F4 !important; 
+    
+}
 
-    height: 80px;
-    justify-content: center;
+
+nav{
+    width: 100%;
+    padding: 0.7rem 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background: white;
+}
+
+nav .container{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 
-
-
-.btnPublicar{
-    width: 100%;
-    padding: 20px;
-    border-radius: 12px;
-    border: none;
-    background-color: #00A8B5;
-    color: white;
-    font-weight: 600;
-    margin-top: 10px;
-
+.search-bar input[type="search"]{
+    background: transparent;
+    width: 30vw;
 }
 
-#perguntaTitulo{
-
-    font-weight: bold;
+nav .search-bar input[type="search"]::placeholder{
+    color: gray;
 }
 
-.perguntaCard{
-
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  padding: 10px;
-  align-items: end;
-  
-}
-#perguntaBtn{
-
-    height: 40px;
-    width: 100px;
+nav .create{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
-.feedTitle{
-    border-bottom:1px solid #00A8B5 ;
-    width: 100%;
+.container{
+    width: 80%;
+    margin: 0 auto;
 }
 
-.feedContainer{
-    flex: 0.5;
-    border-right: 1px solid var(--conectec-background);
-    min-width: fit-content;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none; 
-}
-
-.feedContainer::-webkit-scrollbar{
-    display: none;
-}
-
-.feedTitle{
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    border: 1px solid var(--conectec-background);
-    padding: 15px 20px;
-
-}
-.publicarInput{
-    margin: 10px;
-}
-
-.publicarInput img{
-    border-radius: 50%;
-    height: 50px;
+.profileImg{
     width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.feedBox{
-    padding-bottom: 10px;
-    border-bottom: 8px solid var(--conectec-background);
-    padding-right: 10px;
+.profileImg img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover; /* Mantém a proporção e corta a imagem para preencher o contêiner */
 
 }
-textarea{
 
-    height: 100px;
-}
-
-.feedBox form{
+.logoCont{
     display: flex;
-    flex-direction: column;
-
-}
-.feedBox .publicarInput{
-    display: flex;
-    padding: 20px;
-    flex-direction: row;
-   
+    align-items: center;
+    justify-content: center;
 }
 
-.feedBox .publicarInput input{
-    flex: 1;
-    margin-left: 20px;
+.logo{
+    font-size: 20pt;
+    font-weight: 600;
+
+}
+
+.logoCont span{
+    font-size: 33pt;
+    color: #00c9e9;
+    margin-right: 7px
+}
+
+.search-bar{
+    background:#eff3f6;
+    border-radius: 2rem;
+    padding: 0.6rem 1rem;
+}
+.search-bar input[type="search"]{
+    background: transparent;
+    width: 30vw;
     border: none;
     outline: none;
 }
 
-.postBtn{
-    background-color: var(--conectec-color);
-    border: none;
+nav .search-bar input[type="search"]::placeholder{
+    color: gray;
+}
+
+nav .createBtn{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.botaoPostar{
+    background-color: #00c9e9;
     color: white;
+    border: 1px solid #00c9e9;
     font-weight: 600;
-    border-radius: 30px;
-    width: 80px;
-    height: 40px;
-    margin-top: 10px;
-    margin-left: auto;
-
+    padding: 10px 25px;
+    border-radius: 7px;
 }
+/* NAVBAR ----------------------------------------------------------------*/
 
-/* post */
 
-.postAvatar img{
-    border-radius: 50%;
-    height: 40px;
-}
-
-.post{
-    display: flex;
-    align-items: flex-start;
-    border-bottom: 1px solid var(--conectec-background);
-    padding-bottom: 10px;
-}
-
-.postBody img{
-    max-width: 100%;
-    max-height: 300px;
-    height: auto;
-    border-radius: 20px;
-    margin: 5px;
-}
-
-.postFooter{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.postHeader{
-    font-size: 15px;
-    margin-top: 5px;
-    display: flex;
-    flex-direction: row;
-}
-
-.postHeader img{
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
+main{
+    position: relative;
+    top: 5.4rem;
     
 }
 
-.postHeaderDescription{
-    margin-bottom: 10px;
-    font-size: 15px;
-    width: 500px;
+main .container{
+    display: grid;
+    grid-template-columns: 18vw auto 20vw;
+    gap: 2rem;
+    position: relative;
+   
 }
 
-.postHeaderDescription p{
-
-    word-wrap: break-word; /* Quebra palavras longas */
-}
-.postBody{
-    flex: 1;
-    padding: 10px;
+main .container .left{
+    height: max-content;
+    position: sticky;
+    top: 5.4rem;
 }
 
-.postAvatar{
-    padding: 20px;
+.menu-item{
+    text-decoration: none;
 }
 
 
 
+.left .sidebar{
+    margin-top: 1rem;
+    background: white;
+    border-radius: 1rem;
+}
+
+.left .sidebar .menu-item{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 4rem;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.left .sidebar .menu-item:hover{
+    background-color:#eff3f6;
+}
+
+.left .sidebar i{
+    font-size: 1.4rem;
+    color: gray;
+    margin-left: 2rem;
+    position: relative;
+}
+
+
+
+.left .sidebar h3{
+    margin-left: 1rem;
+    font-size: 1.1rem;
+    color: #3f3950;
+    font-weight: 600;
+
+}
+
+.left .sidebar .active{
+    background-color: #ebeff3;
+
+}
+
+.left.sidebar .active i,
+.left .sidebar .active h3{
+    color:  #00c9e9;
+}
+
+.left .sidebar .active::before{
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 100%;
+    position: absolute;
+    background-color: #00c9e9;
+}
+
+.left .sidebar .menu-item:first-child.active{
+    border-top-left-radius:1rem ;
+    overflow: hidden;
+}
+.left .sidebar .menu-item:last-child.active{
+    border-bottom-left-radius:1rem ;
+    overflow: hidden;
+}
+
+
+.meio .criarPost{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    background: white;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+}
+
+.meio .criarPost input[type="text"]{
+    justify-self: start;
+    width: 100%;
+    padding-left: 2rem;
+    background: transparent;
+    color: hsl(240, 50%, 1%);
+    margin-right: 1rem;
+    border: none;
+    outline: none;
+}
+
+.profileImgPost{
+    width: 65px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profileImgPost img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    object-fit:cover;
+    overflow: hidden;
+}
+
+
+.meio .feeds .feed{
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.meio .feed .head{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.meio .feed .user{
+    display: flex;
+    gap: 1rem;
+}
+
+.meio .feed .imgPost{
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0.7rem 0;
+    max-width: 600px;
+    
+}
+
+
+
+.imgPost img{
+    object-fit: contain;
+}
+
+
+.meio .feed .action-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0.6rem;
+}
+
+.info h3{
+    font-size: 12pt;
+    font-weight: 600;
+    margin: 0;
+}
+
+.info p{
+    font-size: 9.5pt;
+    color: #554f66;
+    font-weight: 500;
+}
+
+.postarBotao{
+    padding: 9px 10px;
+    border: none;
+    background-color: #00c9e9;
+    color: white;
+    font-weight: 600;
+    font-size: 12pt;
+    border-radius: 6px;
+}
+
+.info{
+
+        width: 100%;
+        
+}
+
+.modulo-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px; 
+  border-radius: 20px;
+  height: 100%;
+}
+
+.modulo-div p{
+   text-align: center;
+   height: 100%;
+   margin: 0;
+   color: white;
+}
 
