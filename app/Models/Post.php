@@ -17,6 +17,7 @@ class Post extends Model
         'texto',
         'user_id',
         'fotoPost',
+        'status',
       
         
     ];

@@ -24,10 +24,9 @@ class RegisterController extends Controller
 public function showHome()
 {
     $user = Auth::user();
-    $posts = Post::all();
-    $posts = Post::with('user')->get();
+    $posts = Post::with('user')->where('status', 2)->get(); // Combina as duas consultas
 
-    return view('home', compact('user', 'posts'));
+    return view('home', compact('user', 'posts')); // Usa compact corretamente
 }
 
 

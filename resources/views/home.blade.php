@@ -55,7 +55,7 @@
         </div>
         
 
-        <a href="{{ route('admin') }}" class="sidebarBotao ">
+        <a href="{{ route('perfil') }}" class="sidebarBotao ">
             <span class="material-symbols-outlined">person</span>
             <h2>Perfil</h2>
         </a>
