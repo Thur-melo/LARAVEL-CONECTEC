@@ -56,7 +56,7 @@
         <div class="left">
             <div class="sidebar">
 
-            <a class="menu-item active">
+            <a href="{{ Route('home')}}" class="menu-item active">
                 <span><i class="uil uil-home"></i></span> <h3>Home</h3>
             </a>
             <a class="menu-item ">
@@ -69,7 +69,7 @@
             <a class="menu-item ">
                 <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
             </a>
-            <a class="menu-item ">
+            <a href="{{ Route('perfil')}}" class="menu-item ">
                 <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
             </a>
 
@@ -86,16 +86,16 @@
                     <div class="profileImgPost">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
                     </div>
-                    <input type="text" placeholder="Desabafa pá nóis dnv pae, da nada não" id="create-post">
+                    <input type="text" placeholder="Desabafa pá nóis dnv pae, da nada não" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
                     <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
                 </button>
                 </form>
 
                 @php
                             $coresModulo = [
-                            '1° Módulo' => 'red',
-                            '2° Módulo' => 'blue',
-                            '3° Módulo' => 'green',
+                            'Modulo 1' => 'red',
+                            'Modulo 2' => 'blue',
+                            'Modulo 3' => 'green',
                             
                                 ];
                         @endphp
@@ -127,7 +127,9 @@
                          </div>
 
                          <div class="imgPost">
-                             <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="">
+                         <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                            </a>
                          </div>
 
                          <div class="action-button">

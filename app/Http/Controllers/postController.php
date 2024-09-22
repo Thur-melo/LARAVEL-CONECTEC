@@ -31,5 +31,25 @@ class postController extends Controller
 
      return redirect()->route('home')->with('status', 'Post registrado com sucesso');
  }
+ 
+public function destroy($id)
+{
+    $post = Post::findOrFail($id);
+    $post->delete();
+
+    return redirect()->route('adminHome')->with('success', 'Post deletado com sucesso!');
+}
+
+public function updateStatus($id)
+{
+    $post = Post::findOrFail($id); // Encontre o post pelo ID
+    $post->status = 2; // Muda o status para 2
+    $post->save(); // Salva as alterações
+
+    return redirect()->route('adminHome')->with('success', 'Status do post atualizado para 2!');
+}
+
+
+
 
 }

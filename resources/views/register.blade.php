@@ -84,10 +84,7 @@
                 </div>
 
                 <button class="botaoContinuar"type="button" onclick="nextStep()">Continuar</button>
-                
-                <div class="esqueceu">
-                    <p >Já possui uma conta? <a href="{{ route('login') }}">Entrar</a></p>
-                </div>
+                <p>Já possui uma conta? <a href="{{ route('login') }}">Entrar</a></p>
 
             </form>
         </div>
@@ -135,9 +132,9 @@
                     <label for="module" class="form-label">Módulo</label>
                     <select class="form-select" id="module" name="module">
                         <option value="">Selecione...</option>
-                        <option value="1° Módulo">Módulo 1</option>
-                        <option value="2° Módulo">Módulo 2</option>
-                        <option value="3° Módulo">Módulo 3</option>
+                        <option value="Modulo 1">Módulo 1</option>
+                        <option value="Modulo 2">Módulo 2</option>
+                        <option value="Modulo 3">Módulo 3</option>
                     </select>
                 </div>
 

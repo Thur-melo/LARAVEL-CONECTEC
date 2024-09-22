@@ -55,9 +55,7 @@
                         
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
-                    <div class="esqueceu">
-                        <p >Já possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a></p>
-                    </div>
+                    <p>Não possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a></p>
 
                 </form>
                 

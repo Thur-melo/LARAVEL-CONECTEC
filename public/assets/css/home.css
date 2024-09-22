@@ -208,6 +208,8 @@ main .container .left{
 }
 
 
+/* Post */
+
 .meio .criarPost{
     width: 100%;
     display: flex;
@@ -278,6 +280,7 @@ main .container .left{
 
 .imgPost img{
     object-fit: contain;
+    width: 100%;
 }
 
 
