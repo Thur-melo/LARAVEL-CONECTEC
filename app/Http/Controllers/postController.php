@@ -25,6 +25,7 @@ class postController extends Controller
             'texto' => $request->input('texto'),
             'user_id' => Auth::id(),  
             'fotoPost' =>  $profilePhotoPost,
+            'tipo_post' => $request->input('tipo'),
 
         
      ]);

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('texto');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('fotoPost')->nullable();
+            $table->string('tipo_post');
             $table->integer('status')->default(1);
             $table->timestamps();
         });

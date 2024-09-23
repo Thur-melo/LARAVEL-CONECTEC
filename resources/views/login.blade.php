@@ -125,11 +125,13 @@
 
 
     @if(session('showModal'))
-            document.addEventListener('DOMContentLoaded', function() {
-                var myModal = new bootstrap.Modal(document.getElementById('successModal'));
-                myModal.show();
-            });
-        @endif
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+        myModal.show();
+    });
+</script>
+@endif
    </script> 
 </body>
 </html>

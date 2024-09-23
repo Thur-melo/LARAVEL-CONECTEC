@@ -93,9 +93,9 @@
 
                 @php
                             $coresModulo = [
-                            'Modulo 1' => 'red',
-                            'Modulo 2' => 'blue',
-                            'Modulo 3' => 'green',
+                            '1º Módulo' => 'red',
+                            '2º Módulo' => 'blue',
+                            '3º Módulo' => 'green',
                             
                                 ];
                         @endphp
@@ -111,17 +111,31 @@
                              </div>
                              <div class="info">
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                 <h3>{{ $post->user->name }}</h3>
+                                    <h3>{{ $post->user->name }}</h3>
                                  <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
                                     <p>{{ $post->user->modulo }}</p>
                                 </div>
+                                
                                  </div>
-                                 <p>{{ $post->user->perfil }}</p>
-
-                             </div >
-                             
+                                     <p>{{ $post->user->perfil }}</p>
+                                     
+                                 </div>
+                                 
+                                 
+                                
                          </div>
 
+                         
+
+                             
+                        
+                            
+
+                         <div class="tipoCont">
+                            <div class="tipo-div">
+                                <p>{{ $post->tipo_post }}</p>
+                            </div>
+                        </div>
                          <div class="textoPost">
                             {{ $post->texto }}
                          </div>
@@ -186,9 +200,17 @@
                             <div class="publicarInput"style="margin-top:10px">
                                  <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost"  accept="image/*">
                             </div>
+
+                            <select class="form-select"style="margin-top:10px" aria-label="Default select example" name="tipo">
+                                <option selected>Selecione a categoria</option>
+                                <option value="Informativo">Informativo</option>
+                                <option value="Aula">Aula</option>
+                                <option value="Duvida">Duvida</option>
+                                <option value="Estagios">Estagios</option>
+                                </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                             <button  type="submit" class="btn btn-primary">Enviar</button>
                         </div>
                     </div>

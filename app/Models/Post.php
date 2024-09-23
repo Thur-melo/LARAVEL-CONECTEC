@@ -18,6 +18,7 @@ class Post extends Model
         'user_id',
         'fotoPost',
         'status',
+        'tipo_post',
       
         
     ];

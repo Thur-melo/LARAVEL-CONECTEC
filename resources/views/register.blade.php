@@ -132,9 +132,9 @@
                     <label for="module" class="form-label">Módulo</label>
                     <select class="form-select" id="module" name="module">
                         <option value="">Selecione...</option>
-                        <option value="Modulo 1">Módulo 1</option>
-                        <option value="Modulo 2">Módulo 2</option>
-                        <option value="Modulo 3">Módulo 3</option>
+                        <option value="1º Módulo">Módulo 1</option>
+                        <option value="2º Módulo">Módulo 2</option>
+                        <option value="3º Módulo">Módulo 3</option>
                     </select>
                 </div>
 
