@@ -1,118 +1,205 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto";
-    --conectec-color:#00A8B5;
-    --conectec-background:#ffffff;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+body {
+    min-height: 100vh;
+    background-color: #f1f1f1;
+}
 
-body{
-    width: 100%;
-    height: 100vh;
-    background-color: #ffffff;
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1,
+h2 {
+    color: black;
+}
+
+h3 {
+    color: #00aaff; /* Azul claro */
+}
+
+.menu-lateral {
+    position: fixed;
+    background: #f4f4f4;
+    width: 15vw;
+    min-height: 100vh;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+.menu-lateral .brand-name {
+    height: 10vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-
+    justify-content: center;    
+    font-size: 20px; /* Tamanho da fonte maior */
+    color: #00aaff; /* Azul claro */
 }
 
-.main{
-    background-color: #f8f8fb;
-    padding-top: 130px;
-    width: 70%;
+.menu-lateral li {
+    font-size: 24px;
+    padding: 10px 30px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease; /* Transição suave para o hover */
+}
+
+.menu-lateral li:hover {
+    background: rgba(0, 0, 0, 0.7); /* Fundo mais escuro ao passar o mouse */
+    color: #00aaff; /* Azul claro */
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 1px 0 10px rgba(0, 170, 255, 0.5); /* Sombra azul clara */
+}
+
+.menu-lateral li:active {
+    transform: scale(0.95); /* Efeito de clique */
+}
+
+#icons {
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+#icons-card {
+    font-size: 50px;
+}
+
+/* Estilos para os ícones */
+.menu-lateral li i {
+    color: #00aaff; /* Azul claro */
+    margin-right: 10px; /* Espaçamento à direita do ícone */
+}
+
+.container {
+    position: absolute;
+    right: 0;
+    width: 80vw;
     height: 100vh;
-    border-radius: 12px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: row;
-    gap: 50px;
 }
 
-.sidebarAdm{
-    background-color: rgb(255, 255, 255);
+.container .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 10vh;
+    background: transparent;
     display: flex;
-    flex-direction: column;
+    margin-top: 20px;
+}
+
+.container .header .nav {
     width: 20%;
-    height: 30%;
-    border-radius: 12px;
-    border-right: 1px solid var(--conectec-background);
-    flex: 0.2;
-    min-width: 250px;
-    padding: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
-    gap: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 900px;
 }
 
-
-
-.ConteudoAdm{
-    background-color: #ffffff;
+.container .header .nav .buscar {
+    flex: 3;
     display: flex;
-    width: 70%;
-    border-radius: 12px;
-    min-height: 300px;
+    align-items: center;
+}
+
+.container .header .nav .buscar input[type=text] {
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.usuario img {
+    width: 40px; /* Ajuste o tamanho da imagem */
+    height: 40px; /* Ajuste o tamanho da imagem */
+    border-radius: 50%; /* Para torná-la redonda */
+    margin-left: 10px; /* Espaçamento à esquerda */
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin: 20px;
+    cursor: pointer;
+    width: calc(100% - 40px);
+    margin-top: 200%;
+    display: flex;
+    align-items: end;
+    font-size:24 ;
+}
+
+.logout-btn:hover {
+    background: black;
+    color: #00aaff; /* Azul claro */
+}
+
+.container .content {
+    position: relative;
+    margin-top: 10vh;
+    min-height: 90vh;
+}
+
+.container .content .cards {
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.container .content .cards .card {
+    width: 250px;
+    height: 150px;
+    background: white;
+    margin: 20px 10px;
+    display: flex;
     align-items: center;
     justify-content: space-around;
-    flex-direction: row;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
 }
 
-.cardAdm{
-    background-color: rgb(56, 56, 56);
+.container .content .cards .card:hover {
+    transform: translateY(-5px); /* Levanta o card */
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer; 
+}
+
+
+.container .content .content2 {
+    min-height: 60vh;
     display: flex;
-    justify-content: center;
-    width: 25%;
-    height: 100%;
-    border-radius: 12px;
-    padding: 20px;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    color: white;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
-#CardQntUser{
-
-    background-color: #75db92;
-}
-#CardQntUser2{
-
-    background-color: #d77575;
-}
-#CardQntUser3{
-
-    background-color: #d7d575;
+.container .content .content2 .tabela-usuarios {
+    min-height: 50vh;
+    flex: 5;
+    background: #fff;
+    margin: 0 25px 25px 25px;
 }
 
-.sidebarBotao{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 10px 10px;
-    gap: 5px;
-}
-
-.sidebarBotao h2{
-    font-weight: 800;
-    font-size: 20px;
-    margin-right: 20px;
-}
-
-.sidebarBotao:hover{
-    background-color: var(--conectec-background);
-    border-radius: 30px;
-    color:  var(--conectec-color);
-    transition: color 100ms ease-out;
-}
-
-.sidebarBotao.active{
-   background-color:  #00eeff71;
+.container .content .content2 .novo-usuarios {
+    flex: 2;
+    background: #fff;
+    min-height: 50vh;
+    margin: 0 25px;
 }
