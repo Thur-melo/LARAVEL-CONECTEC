@@ -21,6 +21,7 @@ li {
 h1,
 h2 {
     color: black;
+    text-align: center;
 }
 
 h3 {
@@ -32,7 +33,7 @@ h3 {
     background: #f4f4f4;
     width: 15vw;
     min-height: 100vh;
-    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 4px 4px 8px 0 rgba(53, 51, 51, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: all 0.3s ease; /* Transição suave */
 }
 
@@ -40,9 +41,12 @@ h3 {
     height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: center;    
-    font-size: 20px; /* Tamanho da fonte maior */
-    color: #00aaff; /* Azul claro */
+    justify-content: center; 
+
+}
+
+#logo{
+    height: 200px;
 }
 
 .menu-lateral li {
@@ -52,15 +56,13 @@ h3 {
     display: flex;
     align-items: center;
     transition: background 0.3s ease; /* Transição suave para o hover */
+    
 }
 
 .menu-lateral li:hover {
-    background: rgba(0, 0, 0, 0.7); /* Fundo mais escuro ao passar o mouse */
+    background: #f4f4f4; /* Fundo mais escuro ao passar o mouse */
     color: #00aaff; /* Azul claro */
-    border-radius: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    box-shadow: 1px 0 10px rgba(0, 170, 255, 0.5); /* Sombra azul clara */
+    cursor: pointer;
 }
 
 .menu-lateral li:active {
@@ -68,15 +70,23 @@ h3 {
 }
 
 #icons {
-    margin-right: 10px;
-    font-size: 22px;
+ 
+    font-size: 35px;
+    
 }
 
+
+
 #icons-card {
-    font-size: 50px;
+    font-size: 60px;
 }
 
 /* Estilos para os ícones */
+.menu-lateral li span {
+    color: #00aaff; /* Azul claro */
+    margin-right: 10px; /* Espaçamento à direita do ícone */
+}
+
 .menu-lateral li i {
     color: #00aaff; /* Azul claro */
     margin-right: 10px; /* Espaçamento à direita do ícone */
@@ -129,24 +139,21 @@ h3 {
     margin-left: 10px; /* Espaçamento à esquerda */
 }
 
-.logout-btn {
-    background-color: transparent;
+#logout{
     color: #000;
     border: none;
-    padding: 12px 15px;
-    border-radius: 10px;
-    margin: 20px;
     cursor: pointer;
     width: calc(100% - 40px);
-    margin-top: 200%;
+    margin-top: 380px;
     display: flex;
     align-items: end;
-    font-size:24 ;
+    font-size:35 ;
 }
 
-.logout-btn:hover {
-    background: black;
+#logout:hover {
+    background: #f4f4f4; /* Fundo mais escuro ao passar o mouse */
     color: #00aaff; /* Azul claro */
+    cursor: pointer;
 }
 
 .container .content {
