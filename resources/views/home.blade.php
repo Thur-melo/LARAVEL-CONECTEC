@@ -31,13 +31,13 @@
         <div class="container">
             <div class="logoCont">
                 <span class="fontisto--cloudy"></span>  
-                <h2 class="logo">Conectec</h2>
+               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
             </div>
                 <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
                     <input
                     type="search"
-                    placeholder="Desabafa pá nóis"
+                    placeholder="Pesquisar... "
                     />
                 </div>
                 <div class="createBtn">
@@ -86,7 +86,7 @@
                     <div class="profileImgPost">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
                     </div>
-                    <input type="text" placeholder="Desabafa pá nóis dnv pae, da nada não" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
+                    <input type="text" placeholder="Faça uma pergunta" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
                     <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
                 </button>
                 </form>
@@ -209,7 +209,7 @@
                                 <option value="Estagios">Estagios</option>
                                 </select>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" id="mf">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                             <button  type="submit" class="btn btn-primary">Enviar</button>
                         </div>

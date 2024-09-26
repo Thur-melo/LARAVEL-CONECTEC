@@ -29,6 +29,12 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [RegisterController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [RegisterController::class, 'login']);
 
+Route::get('/registerAdm', [adminController::class, 'showAdmForm'])->name('registerAdm');
+Route::post('/registerAdm', [adminController::class, 'registerAdm']);
+
+Route::get('/loginAdm', [adminController::class, 'showLoginAdmForm'])->name('loginAdm');
+Route::post('/loginAdm', [adminController::class, 'loginAdm']);
+
 
 
 

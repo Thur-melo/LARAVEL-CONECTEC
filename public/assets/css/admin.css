@@ -141,12 +141,8 @@ h3 {
 
 #logout{
     color: #000;
-    border: none;
     cursor: pointer;
-    width: calc(100% - 40px);
-    margin-top: 380px;
-    display: flex;
-    align-items: end;
+    margin-top: 450px;
     font-size:35 ;
 }
 
@@ -159,7 +155,8 @@ h3 {
 .container .content {
     position: relative;
     margin-top: 10vh;
-    min-height: 90vh;
+    min-height: 80vh;
+    margin-right: 100px;
 }
 
 .container .content .cards {
@@ -195,6 +192,7 @@ h3 {
     justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
+    
 }
 
 .container .content .content2 .tabela-usuarios {
@@ -202,11 +200,23 @@ h3 {
     flex: 5;
     background: #fff;
     margin: 0 25px 25px 25px;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
-.container .content .content2 .novo-usuarios {
-    flex: 2;
-    background: #fff;
-    min-height: 50vh;
-    margin: 0 25px;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+

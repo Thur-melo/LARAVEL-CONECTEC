@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Adm;
 
 class adminController extends Controller
 {
@@ -77,6 +78,73 @@ public function showadmin(){
     return view('admin', compact('qnt_users', 'qnt_aprovados', 'qnt_pendentes'));
 }
 
+public function registerAdm(Request $request)
+
+{
+    
+
+    $profilePhotoUrl = null;
+
+    if ($request->hasFile('urlDaFoto')) {
+        $file = $request->file('urlDaFoto');
+        $profilePhotoUrl = $file->store('urlDaFoto', 'public');
+    }
+
+    Adm::create([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => $request->input('password'),
+        'urlDaFoto' => $profilePhotoUrl,
+        'modulo' => $request->input('module'),
+        'perfil' => $request->input('role'),
+       
+    ]);
+
+    return redirect()->route('loginAdm')->with([
+        'status' => 'Usuário registrado com sucesso',
+        'showModal' => true,
+    ]);
+
+    
+    
+
+
+
+    
+
+     
+ 
+
+}
+
+public function loginAdm(Request $request){
+
+
+
+    $credentials = $request->only('email','password');
+    $autenticado =Auth::attempt($credentials);
+    
+       if(!$autenticado){
+        
+
+           return redirect()->route('loginAdm')->withErrors(['error' =>'Email ou senha errada']);
+
+       }
+       return redirect()->route('admin', )->with(['success' =>'Logou']);
+
+   }
+
+   public function showAdmForm()
+   {
+       return view('registerAdm');
+   }
+
+   public function showLoginAdmForm()
+    {
+         return view('loginAdm');
+    }
 
 
 }
+
+

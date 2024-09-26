@@ -86,8 +86,53 @@
                 </div>
             </div>
             <div class="content2">
-                <div class="tabela-usuarios"></div>
-                <div class="novo-usuarios"></div>
+            <div class="tabela-usuarios">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>João Silva</td>
+                <td>joao@example.com</td>
+                <td>Ativo</td>
+                <td>
+                    <button>Editar</button>
+                    <button>Deletar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Maria Oliveira</td>
+                <td>maria@example.com</td>
+                <td>Pendente</td>
+                <td>
+                    <button>Editar</button>
+                    <button>Deletar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Pedro Santos</td>
+                <td>pedro@example.com</td>
+                <td>Banido</td>
+                <td>
+                    <button>Editar</button>
+                    <button>Deletar</button>
+                </td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+</div>
+
             </div>
         </div>
 </body>

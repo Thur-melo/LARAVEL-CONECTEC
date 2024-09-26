@@ -20,6 +20,7 @@ nav{
     top: 0;
     z-index: 10;
     background: white;
+    
 }
 
 nav .container{
@@ -62,25 +63,10 @@ nav .create{
     border-radius: 50%;
     overflow: hidden;
     object-fit: cover; /* Mantém a proporção e corta a imagem para preencher o contêiner */
-
 }
 
-.logoCont{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo{
-    font-size: 20pt;
-    font-weight: 600;
-
-}
-
-.logoCont span{
-    font-size: 33pt;
-    color: #00c9e9;
-    margin-right: 7px
+#logo{
+    height: 100px;
 }
 
 .search-bar{
@@ -363,6 +349,29 @@ main .container .left{
     margin-top: 7px;
     margin-bottom: 15px;
 
+}
+
+#modalPost{
+    
+}
+
+.modal-header{
+    background-color: #00c9e9;
+    width: 700px;
+    color: #fff;
+    font-weight: 600;
+
+}
+
+.modal-body{
+    background-color: #f4f4f4;
+    height: 500px;
+    width: 700px;
+}
+
+#mf{
+    background-color: #f4f4f4;
+    width: 700px;
 }
 
 
