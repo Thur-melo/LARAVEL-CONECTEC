@@ -1,64 +1,41 @@
-*{
-    --conectec-color:#00A8B5;
-    --conectec-background: #e6ecf0;
-}
 
-.headerLogo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+nav{
     width: 100%;
-    height: 80px;
-    gap: 5px;
-    padding: 5px;
-
+    padding: 0.7rem 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background: white;
 }
 
-.headerLogo i{
-
-    font-size: 30pt;
-     margin-right: 6px;
-      color: #00c9e9;
-       margin-bottom: 5px;
-}
-
-.sidebarBotao{
+nav .container{
     display: flex;
     align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
+    justify-content: space-between;
 }
 
 
-.sidebarBotao .material-symbols-outlined, 
-.fa-twitter {
-    padding: 20px;   
+.search-bar input[type="search"]{
+    background: transparent;
+    width: 30vw;
 }
 
-.sidebarBotao h2{
-    font-weight: 800;
-    font-size: 20px;
-    margin-right: 20px;
+nav .search-bar input[type="search"]::placeholder{
+    color: gray;
 }
 
-.sidebarBotao:hover{
-    background-color: var(--conectec-background);
-    border-radius: 30px;
-    color: var(--conectec-color);
-    transition: color 100ms ease-out;
+nav .create{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
-.sidebarBotao.active{
-    color: var(--conectec-color);
-
+nav .search-bar input[type="search"]::placeholder{
+    color: gray;
 }
 
-
-.sidebar{
-    border-right: 1px solid var(--conectec-background);
-    flex: 0.2;
-    min-width: 250px;
-    padding-left: 25px;
-    padding-right: 25px;
+nav .createBtn{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }

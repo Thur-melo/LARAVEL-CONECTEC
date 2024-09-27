@@ -13,13 +13,6 @@ body{
 }
 
 
-
-
-.search-bar input[type="search"]{
-    background: transparent;
-    width: 30vw;
-}
-
 .container{
     width: 80%;
     margin: 0 auto;
@@ -38,10 +31,25 @@ body{
     border-radius: 50%;
     overflow: hidden;
     object-fit: cover; /* Mantém a proporção e corta a imagem para preencher o contêiner */
+
 }
 
-#logo{
-    height: 50px;
+.logoCont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo{
+    font-size: 20pt;
+    font-weight: 600;
+
+}
+
+.logoCont span{
+    font-size: 33pt;
+    color: #00c9e9;
+    margin-right: 7px
 }
 
 .search-bar{
@@ -55,6 +63,7 @@ body{
     border: none;
     outline: none;
 }
+
 
 
 .botaoPostar{
@@ -165,7 +174,7 @@ main .container .left{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 1rem;
     background: white;
     padding: 0.4rem 1rem;
@@ -316,27 +325,71 @@ main .container .left{
 
 }
 
-#modalPost{
+
+
+/* coment */
+
+.filtroComentarios {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+   
+}
+
+.dataFiltro {
+    display: flex;
+    flex-direction: row;
     
 }
 
-.modal-header{
-    background-color: #00c9e9;
-    width: 700px;
-    color: #fff;
-    font-weight: 600;
-
+.dataFiltro p {
+    margin-right: 10px;
+    font-weight: bold;
 }
 
-.modal-body{
-    background-color: #f4f4f4;
-    height: 500px;
-    width: 700px;
+.dataFiltro select {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
 }
 
-#mf{
-    background-color: #f4f4f4;
-    width: 700px;
+.comentarioContainer {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
+.comentarioContainer h1 {
+    font-size: 1.2em;
+    margin: 0;
+    display: inline;
+}
+
+.create-comentario{
+
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Permite redimensionar apenas na vertical */
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+}
+
+.create-comentario:focus {
+    border-color: #66afe9; /* Cor ao focar */
+    outline: none; /* Remove a borda padrão do foco */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}
+
+.organizar{
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
 

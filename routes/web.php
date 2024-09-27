@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\ComentariosController;
 
 
 Route::get('/perfil', [adminController::class, 'showperfil']) ->name('perfil');
@@ -35,6 +36,12 @@ Route::post('/registerAdm', [adminController::class, 'registerAdm']);
 Route::get('/loginAdm', [adminController::class, 'showLoginAdmForm'])->name('loginAdm');
 Route::post('/loginAdm', [adminController::class, 'loginAdm']);
 
+
+Route::delete('/admin/{id}', [adminController::class, 'desativaUser'])->name('user.off');
+Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.ativa');
+
+Route::get('/comentarios/{id}', [ComentariosController::class, 'showcomentarios'])->name('comentarios');
+Route::post('/comentarios/{postId}/comentarios', [ComentariosController::class, 'comentar'])->name('comentarios.store');
 
 
 

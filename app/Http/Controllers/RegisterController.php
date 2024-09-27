@@ -24,7 +24,7 @@ class RegisterController extends Controller
 public function showHome()
 {
     $user = Auth::user();
-    $posts = Post::with('user')->where('status', 2)->get(); // Combina as duas consultas
+    $posts = Post::with('user')->where('status', 2)->orderBy('created_at', 'desc')->get(); // Combina as duas consultas
 
     return view('home', compact('user', 'posts')); // Usa compact corretamente
 }
@@ -57,23 +57,8 @@ public function showHome()
             'status' => 'Usuário registrado com sucesso',
             'showModal' => true,
         ]);
-        
-
-
-
-        
-
-         
-     
 
     }
-
-
-
-    
- 
-
-
 
 
 

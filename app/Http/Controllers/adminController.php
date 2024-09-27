@@ -65,17 +65,19 @@ public function contarProdutos()
 
 public function showadmin(){
     // $user = Auth::User();
-
     $qnt_users = User::all()-> count();
+    $qnt_alunos = User::where('perfil', 'Aluno')-> count();
+    $qnt_professores = User::where('perfil', 'professor')-> count();
+    $qnt_outros = User::where('perfil', 'outros')-> count();
+    $users = User::all();
+    $usersAtivo = User::where('status', 1)-> get();
 
-    $qnt_aprovados = Post::where('status', 2)-> count();
 
-    $qnt_pendentes = Post::where('status', 1)-> count();
+    // $qnt_aprovados = Post::where('status', 2)-> count();
 
+    // $qnt_pendentes = Post::where('status', 1)-> count();
 
-
-
-    return view('admin', compact('qnt_users', 'qnt_aprovados', 'qnt_pendentes'));
+    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros' ));
 }
 
 public function registerAdm(Request $request)
@@ -144,6 +146,33 @@ public function loginAdm(Request $request){
          return view('loginAdm');
     }
 
+
+
+
+
+
+    
+public function desativaUser($id)
+{
+    
+    $user = User::findOrFail($id); // Encontre o User$user pelo ID
+    $user->status = 'Off'; // Muda o status para 2
+    $user->save(); // Salva as alterações
+
+    return redirect()->route('admin')->with('success', 'Status do post atualizado para 2!');
+}
+
+
+
+    public function AtivaUser($id)
+    {
+        
+        $user = User::findOrFail($id); // Encontre o User$user pelo ID
+        $user->status = 'Ativo'; // Muda o status para 2
+        $user->save(); // Salva as alterações
+    
+        return redirect()->route('admin')->with('success', 'Status do post atualizado para 1!');
+    }
 
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
-    <!-- <link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> -->
+    <<link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -149,7 +149,9 @@
                          <div class="action-button">
                              <div class="interaction-button">
                                  <span><i class="uil uil-thumbs-up"></i></span>
-                                 <span><i class="uil uil-comment"></i></span>
+                                 <a href="{{ route('comentarios', $post->id) }}">
+                                 <i class="uil uil-comment"></i>
+                                 </a> 
                              </div>
                              <div class="bookmark">
                                  <span><i class="uil uil-bookmark"></i></span>

@@ -46,7 +46,7 @@ h3 {
 }
 
 #logo{
-    height: 200px;
+    width: 90%;
 }
 
 .menu-lateral li {
@@ -55,7 +55,7 @@ h3 {
     color: #000;
     display: flex;
     align-items: center;
-    transition: background 0.3s ease; /* Transição suave para o hover */
+    transition: 0.5s ease; /* Transição suave para o hover */
     
 }
 
@@ -165,18 +165,21 @@ h3 {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    
 }
 
 .container .content .cards .card {
-    width: 250px;
+    width: 260px;
     height: 150px;
     background: white;
     margin: 20px 10px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    border-radius: 12px;
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+    gap: 30px;
 }
 
 .container .content .cards .card:hover {
@@ -201,18 +204,22 @@ h3 {
     background: #fff;
     margin: 0 25px 25px 25px;
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px;
 
 }
 
 table {
     width: 100%;
+    border-radius: 12px;
     border-collapse: collapse;
+
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+
 }
 
 th {
@@ -220,3 +227,49 @@ th {
 }
 
 
+.btnStatus{
+    border: 1px solid black;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 90px;
+    cursor: pointer;
+}
+
+#btnAtiva{
+
+    background-color: transparent;
+    transition: 0.3s ease; /* Transição suave */
+
+}
+#btnDesativa{
+
+    background-color: transparent;
+    transition: 0.3s ease; /* Transição suave */
+}
+
+#btnAtiva:hover{
+
+    background-color: #75db92;
+}
+#btnDesativa:hover{
+
+    background-color: #d77575;
+}
+
+
+
+
+.statusDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 30px;
+    width: 200px;
+    margin-left: 10px;
+
+}

@@ -4,71 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url('assets/css/perfil.css')}}">
-    <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
+    <<link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <title>Conectec</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
+    />
 </head>
+
+    <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" 
+    />
+
+    
 <body>
-    
-    <div class="main">
 
-    <div class="sidebar">
-        <div class="headerLogo">
-            <i class="fa-brands fa-cloudversify"></i>
-            <h2>Conectec</h2>
+
+<nav>
+        <div class="container">
+            <div class="logoCont">
+                <span class="fontisto--cloudy"></span>  
+               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
+            </div>
+                <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                    type="search"
+                    placeholder="Pesquisar... "
+                    />
+                </div>
+                <div class="createBtn">
+                    <label class="botaoPostar" for="create-post">Publicar</label>
+                    <div class="profileImg">
+                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                </div>
         </div>
-        <a href="{{ route('home') }}" class="sidebarBotao"> 
-            <span class="material-symbols-outlined"> home</span>
-            <h2>home</h2>
-</a>
+    </div>
+</nav>
+
+<!-------------------------------------------  NavAbar -------------------------------------------------------------------------------------->
+
+<main> 
+    <div class="container">
+        <div class="left">
+            <div class="sidebar">
+
+            <a href="{{ Route('home')}}" class="menu-item ">
+                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
+            </a>
+            <a class="menu-item ">
+                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
+            </a>
+
+            <a class="menu-item">
+                <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
+            </a>
+            <a class="menu-item ">
+                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
+            </a>
+            <a href="{{ Route('perfil')}}" class="menu-item active">
+                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
+            </a>
+
+
+            </div>
+        </div>
         
 
-        <div class="sidebarBotao">
-            <span class="material-symbols-outlined">search</span>
-            <h2>Buscar</h2>
-        </div>
-        
-
-        <div class="sidebarBotao">
-            <span class="material-symbols-outlined">notifications_none</span>
-            <h2>Notificações</h2>
-        </div>
-        
-
-        <div class="sidebarBotao">
-            <span class="material-symbols-outlined">help</span>
-            <h2>Perguntas</h2>
-        </div>
-        
-
-        <div class="sidebarBotao">
-            <span class="material-symbols-outlined">chat</span>
-            <h2>Chat</h2>
-        </div>
-        
-        <div class="sidebarBotao">
-            <span class="material-symbols-outlined">bookmarks</span>
-            <h2>Salvos</h2>
-        </div>
-        
-
-        <a href="{{ route('perfil') }}" class="sidebarBotao active">
-            <span class="material-symbols-outlined">person</span>
-            <h2>Perfil</h2>
-        </a>
-
-     </div> 
 
 
 
+        <div class="meio">
 
-
-    
         <form  method="POST"  action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
             @csrf
         <div class="title">
@@ -87,68 +101,84 @@
              
              <div class="inputsCont">
 
-<div class="inputsGrupos">
-    <div class="inputForm">
-        <label for="Nome">
-            Nome
-        </label>
-        <div class="inputText">
-            <input type="text" id="nome"name="name" class="form-control"  value="{{ $user->name }}"  >
+    <div class="inputsGrupos">
+        <div class="inputForm">
+            <label for="Nome">
+                Nome
+            </label>
+            <div class="inputText">
+                <input type="text" id="nome"name="name" class="form-control"  value="{{ $user->name }}"  required>
+            </div>
         </div>
-    </div>
 
-    <div class="inputForm">
-        <label for="senha">
-            Email
-        </label>
-        <div class="inputText">
-            <input class="form-control" id="disabledInput" type="text" value="{{ $user->email }}" disabled >
+        <div class="inputForm">
+            <label for="senha">
+                Email
+            </label>
+            <div class="inputText">
+                <input class="form-control" id="disabledInput" type="text" value="{{ $user->email }}" disabled >
+            </div>
         </div>
-    </div>
 
-  
-</div>
-
-<div class="inputsGrupos">
     
-    <div class="inputForm">
-        <label for="Modulo">
-            Modulo
-        </label>
-        <div class="inputText">
-        <input class="form-control" id="disabledInput" type="text" value="{{ $user->modulo}}" disabled>
-        </div>
-    </div>
-    <div class="inputForm">
-        <label for="Perfil">
-            Perfil
-        </label>
-        <div class="inputText">
-        <input class="form-control" id="disabledInput" type="text" value="{{ $user->perfil }}" disabled>
-        </div>
-    </div>
-</div>
-</div> 
-        </div>
-
-        <div class="linha">  
-            <div class="botoesImg">
-                <label for="urlDaFoto" class="botaoFotoPerfil"><i class="fa-regular fa-image"></i>Trocar</label>
-                <input type="file" id="urlDaFoto" name="urlDaFoto" accept="image/*" onchange="previewImage(event)">
-                <button type="submit" name="deleteImg" value="1" class="botaoFotoPerfil"><i class="fa-regular fa-trash-can"></i>Remover</button>
-            </div>
-            <div class="desc">
-                <p>Aqui está suas informações, você pode editar algumas delas</p>
-            </div>
-            <div class="btnsSalvar">
-            <button type="submit">Atualizar</button>
-            </div>
-        </div>
-        </form>
     </div>
 
+    <div class="inputsGrupos">
+        
+        <div class="inputForm">
+            <label for="Modulo">
+                Modulo
+            </label>
+            <div class="inputText">
+            <input class="form-control" id="disabledInput" type="text" value="{{ $user->modulo}}" disabled>
+            </div>
+        </div>
+        <div class="inputForm">
+            <label for="Perfil">
+                Perfil
+            </label>
+            <div class="inputText">
+            <input class="form-control" id="disabledInput" type="text" value="{{ $user->perfil }}" disabled>
+            </div>
+        </div>
+    </div>
+    </div> 
+            </div>
 
-    <script>
+            <div class="linha">  
+                <div class="botoesImg">
+                    <label for="urlDaFoto" class="botaoFotoPerfil"><i class="fa-regular fa-image"></i>Trocar</label>
+                    <input type="file" id="urlDaFoto" name="urlDaFoto" accept="image/*" onchange="previewImage(event)">
+                    <button type="submit" name="deleteImg" value="1" class="botaoFotoPerfil"><i class="fa-regular fa-trash-can"></i>Remover</button>
+                </div>
+                <div class="desc">
+                    <p>Aqui está suas informações, você pode editar algumas delas</p>
+                </div>
+                <div class="btnsSalvar">
+                <button type="submit">Atualizar</button>
+                </div>
+            </div>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+<script>
         function previewImage(event) {
             var image = document.getElementById('imagePreview');
             var file = event.target.files[0];
@@ -165,6 +195,11 @@
 
 
     </script>
-    
+  
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
 </html>
