@@ -27,4 +27,9 @@ class Usuario extends Model
     {
         return $this->hasMany(Post::class, 'user_id');
     }
+    
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

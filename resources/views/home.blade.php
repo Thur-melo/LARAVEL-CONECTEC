@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
-    <<link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
+    <link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -66,7 +66,7 @@
             <a class="menu-item">
                 <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
             </a>
-            <a class="menu-item ">
+            <a class="menu-item " href="{{Route('chat.list')}}">
                 <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
             </a>
             <a href="{{ Route('perfil')}}" class="menu-item ">

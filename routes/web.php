@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ComentariosController;
+use App\Http\Controllers\ChatController;
 
 
 Route::get('/perfil', [adminController::class, 'showperfil']) ->name('perfil');
@@ -45,4 +46,9 @@ Route::post('/comentarios/{postId}/comentarios', [ComentariosController::class, 
 
 
 
+
+Route::post('/conversations', [ChatController::class, 'createConversation']);
+Route::get('/conversations/{id}', [ChatController::class, 'showConversation'])->name('chat.show');
+Route::post('/conversations/{conversationId}/messages', [ChatController::class, 'storeMessage']);
+Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'); // Para listar conversas
 
