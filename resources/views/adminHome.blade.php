@@ -1,89 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM - Análises</title>
+
+    <!-- icons -->
+    <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/adminHome.css')}}">
-    <link rel="stylesheet" href="{{url('assets/css/perguntasAdm.css')}}">
 
-    <link rel="stylesheet" href="{{url('assets/css/navbarAdm.css')}}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/heroicons@1.0.0/dist/outline.js"></script>
+    <!--icons -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- font -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
+
 <body>
 
-<nav class="navbar">
-    <h1 class="title">Eae</h1>
-    <div class="user">
-    <h6>eu</h6>
-    </div>
-</nav>
-    <div class="main">
-        <div class="sidebarAdm">
+    <!--inicio menu lateral -->
 
-        <a href="{{ route('adminHome') }}" class="sidebarBotao active">
-            <span class="material-symbols-outlined">search</span>
-            <h2>Perguntas</h2>
-        </a>
-        <a href="{{ route('admin') }}"class="sidebarBotao ">
-            <span class="material-symbols-outlined">search</span>
-            <h2>Análises</h2>
-        </a>
-
+    <div class="menu-lateral">
+        <div class="brand-name">
+            <img src="{{url('assets/img/logoConectec.png')}}" id="logo" alt="">
         </div>
-        <div class="ConteudoAdm">
+        <ul>
+            <a href="{{ route('adminHome') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
+            </a>
+            <a href="{{ route('admin') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
+            </a>
+            <li> <span class="material-icons" id="icons">person</span> <span>Administrador</span> </li>
+            <li> <span class="material-icons" id="icons">chat</span> <span>Chat </span> </li>
 
-            @if ($posts->isEmpty())
-        <h1>Sem perguntas pendentes</h1>
-    @else
+            <!-- <li id="logout"> <span class="material-icons" id="icons">logout</span> Sair </li> -->
 
-        @foreach($posts as $post)
-        
-  <div class="postBody">
-            <div class="postHeader">
-                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}"alt="">
-                <div class="postHeaderText">
-                    <h3> {{ $post->user->name }} </h3>
-                    <span class="modulo"> {{ $post->user->modulo }} </span>
+        </ul>
+    </div>
+
+    <!--final menu lateral -->
+
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="text">
+                </div>
+                <div class="buscar">
+                    <input type="text" placeholder="Pesquisar...">
+                </div>
+                <div class="usuario">
+                    <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="cards">
+
+                <div class="card">
+                    <div class="box">
+                        <h1>{{$qnt_users}}</h1>
+                        <h3>Posts Aprovados</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" id="icons-card">people</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="box">
+                        <h1>{{$qnt_alunos}}</h1>
+                        <h3>Posts Rejeitados</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="box">
+                        <h2>{{$qnt_professores}}</h2>
+                        <h3>Posts Pendentes</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-graduate"></i></span>
+                    </div>
+                </div>
+
+
+
+                <div class="card">
+                    <div class="box">
+                        <h2>{{$qnt_outros}}</h2>
+
+                        <h3>Posts Recentes</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" id="icons-card">
+                            <i class="fa-regular fa-circle-question"></i>
+                    </div>
+                    </span>
                 </div>
             </div>
 
-            <div class="postHeaderDescription">
-                <p>{{ $post->texto }}</p>
+            @php
+            $coresModulo = [
+            '1º Módulo' => 'red',
+            '2º Módulo' => 'blue',
+            '3º Módulo' => 'green',
+
+            ];
+            @endphp
+
+
+            <div class="content2">
+                @if ($posts->isEmpty())
+                <h1>Sem perguntas pendentes</h1>
+                @else
+
+                @foreach($posts as $post)
+                <div class="postRow">
+                <div class="postBody">
+
+                    <div class="postHeader">
+                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
+                        <div class="info">
+                            <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
+                                <h3>{{ $post->user->name }}</h3>
+                                <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                    <p>{{ $post->user->modulo }}</p>
+                                </div>
+                            </div>
+
+                            <p>{{ $post->user->perfil }}</p>
+
+                        </div>
+                    </div>
+
+                    <div class="tipoCont">
+                            <div class="tipo-div">
+                                <p>{{ $post->tipo_post }}</p>
+                            </div>
+                        </div>
+
+                    <div class="postHeaderDescription">
+                        <p>{{ $post->texto }}</p>
+                    </div>
+
+
+
+                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery">
+                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="">
+                    </a>
+
+
+                    <div class="postFooter">
+
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btnStatus" id="btnDesativa" onclick="return confirm('Tem certeza que deseja deletar este post?')">Deletar</button>
+                        </form>
+
+
+
+                        <form action="{{ route('posts.aprovar', $post->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btnStatus" id="btnAtiva" onclick="return confirm('Tem certeza que deseja mudar o status para Aprovado?')">Aprovar</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+                @endforeach
+                @endif
+
+                </tbody>
+                </table>
             </div>
-            <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery">
-            <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="">
-            </a>
-            
-    
-            <div class="postFooter">
-
-            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este post?')">Deletar</button>
-            </form>
-
-
-
-            <form action="{{ route('posts.aprovar', $post->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('PATCH')
-            <button type="submit" onclick="return confirm('Tem certeza que deseja mudar o status para 2?')">Mudar Status</button>
-        </form>
-            </div>
-        </div>
-       
-        @endforeach
-        @endif
-      
         </div>
     </div>
- 
-
 </body>
+
 </html>

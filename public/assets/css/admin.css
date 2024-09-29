@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -33,8 +33,9 @@ h3 {
     background: #f4f4f4;
     width: 15vw;
     min-height: 100vh;
-    box-shadow: 4px 4px 8px 0 rgba(53, 51, 51, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 1px 1px 1px 0 rgba(53, 51, 51, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: all 0.3s ease; /* Transição suave */
+    border-radius: 15px;
 }
 
 .menu-lateral .brand-name {
@@ -48,30 +49,32 @@ h3 {
 #logo{
     width: 90%;
 }
-
-.menu-lateral li {
+.menu-lateral li, 
+.menu-lateral li span {
     font-size: 24px;
-    padding: 10px 30px;
+    padding: 5px 10px;
     color: #000;
     display: flex;
-    align-items: center;
     transition: 0.5s ease; /* Transição suave para o hover */
-    
 }
 
-.menu-lateral li:hover {
-    background: #f4f4f4; /* Fundo mais escuro ao passar o mouse */
+.menu-lateral li:hover, 
+.menu-lateral li span:hover {
+    background: transparent; /* Fundo mais escuro ao passar o mouse */
     color: #00aaff; /* Azul claro */
     cursor: pointer;
 }
 
-.menu-lateral li:active {
+.menu-lateral li:active, 
+.menu-lateral li span:active {
     transform: scale(0.95); /* Efeito de clique */
 }
+
 
 #icons {
  
     font-size: 35px;
+    color: #00aaff;
     
 }
 
@@ -82,7 +85,7 @@ h3 {
 }
 
 /* Estilos para os ícones */
-.menu-lateral li span {
+.menu-lateral li  {
     color: #00aaff; /* Azul claro */
     margin-right: 10px; /* Espaçamento à direita do ícone */
 }
@@ -207,60 +210,71 @@ h3 {
     border-radius: 12px;
 
 }
-
+/* Estilo para a tabela */
 table {
     width: 100%;
-    border-radius: 12px;
     border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden; /* Para manter o arredondamento */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
 
+thead {
+    background-color: #00aaff;
+    color: white;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #ddd; /* Bordas entre as linhas */
+}
 
+tbody tr:hover {
+    background-color: #f5f5f5; /* Cor ao passar o mouse */
+    transition: background-color 0.3s ease; /* Suavidade na transição */
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #00aaff;
+    color: white;
 }
 
+/* Estilo para os botões */
+.btnStatus {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Suavidade na transição */
+}
 
-.btnStatus{
-    border: 1px solid black;
-    border-radius: 12px;
+#btnAtiva {
+    background-color: #75db92;
+    color: white;
+}
+
+#btnDesativa {
+    background-color: #d77575;
+    color: white;
+}
+
+#btnAtiva:hover {
+    background-color: #5fb778; /* Cor de hover */
+}
+
+#btnDesativa:hover {
+    background-color: #c75454; /* Cor de hover */
+}
+
+.statusDiv {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    height: 30px;
-    width: 90px;
-    cursor: pointer;
+    gap: 20px; /* Espaçamento entre os botões */
 }
-
-#btnAtiva{
-
-    background-color: transparent;
-    transition: 0.3s ease; /* Transição suave */
-
-}
-#btnDesativa{
-
-    background-color: transparent;
-    transition: 0.3s ease; /* Transição suave */
-}
-
-#btnAtiva:hover{
-
-    background-color: #75db92;
-}
-#btnDesativa:hover{
-
-    background-color: #d77575;
-}
-
-
 
 
 .statusDiv{
@@ -272,4 +286,35 @@ th {
     width: 200px;
     margin-left: 10px;
 
+}
+
+@media screen and (max-width:1512px){
+   
+    .container .content .cards {
+        padding: 20px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 800px;
+        
+    }
+}
+
+@media screen and (min-width:1512px){
+   
+    .container .content .cards .card {
+        width: 250px;
+        height: 150px;
+        background: white;
+        padding: 05px;
+        margin: 20px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.207), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+        gap: 30px;
+    }
 }

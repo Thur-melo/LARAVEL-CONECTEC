@@ -52,7 +52,7 @@
 <!-------------------------------------------  NavAbar -------------------------------------------------------------------------------------->
 
 <main> 
-    <div class="container">
+<div class="container">
         <div class="left">
             <div class="sidebar">
 
@@ -66,7 +66,7 @@
             <a class="menu-item">
                 <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
             </a>
-            <a class="menu-item ">
+            <a class="menu-item " href="{{Route('chat.list')}}">
                 <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
             </a>
             <a href="{{ Route('perfil')}}" class="menu-item active">
@@ -87,7 +87,7 @@
             @csrf
         <div class="title">
             <i class="fa-regular fa-circle-user"></i>
-            <h1>Preferencias da conta {{ $user->name }}</h1>
+            <h1>Preferencias da conta {{ $user->name }} - Id: {{$user->id}}</h1>
         </div>
         <div class="titleInfo">
             <i class="fa-brands fa-squarespace"></i>

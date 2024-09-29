@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,8 +15,15 @@ class Conversation extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function users()
+    // Relação com o primeiro usuário
+    public function userOne()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'user_one_id');
+    }
+
+    // Relação com o segundo usuário
+    public function userTwo()
+    {
+        return $this->belongsTo(User::class, 'user_two_id');
     }
 }

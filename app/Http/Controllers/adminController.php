@@ -21,8 +21,15 @@ public function showPerguntas() {
 
     $user = Auth::user();
     $posts = Post::with('user')->where('status', 1)->get(); // Combina as duas consultas
+    $qnt_users = User::all()-> count();
+    $qnt_alunos = User::where('perfil', 'Aluno')-> count();
+    $qnt_professores = User::where('perfil', 'professor')-> count();
+    $qnt_outros = User::where('perfil', 'outros')-> count();
+    $users = User::all();
+    $usersAtivo = User::where('status', 1)-> get();
 
-    return view('adminHome', compact('user', 'posts')); // Usa compact corretamente
+
+    return view('adminHome', compact( 'posts', 'qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros' ));
 }
 
 
