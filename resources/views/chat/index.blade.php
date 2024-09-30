@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="{{url('assets/css/listaContatos.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
-   
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
+    />
+    <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" 
+    />
 </head>
 
 <body>
@@ -41,7 +48,7 @@
         <div class="left">
             <div class="sidebar">
 
-            <a href="{{ Route('home')}}" class="menu-item ">
+            <a href="{{ Route('home')}}" class="menu-item">
                 <span><i class="uil uil-home"></i></span> <h3>Home</h3>
             </a>
             <a class="menu-item ">

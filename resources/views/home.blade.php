@@ -16,12 +16,13 @@
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
     />
-</head>
-
     <link 
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" 
     />
+</head>
+
+
 
     
 <body>
@@ -200,7 +201,7 @@
                             <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Desabafa pá nóis" required></textarea>
                             </div>
                             <div class="publicarInput"style="margin-top:10px">
-                                 <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost"  accept="image/*">
+                                 <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost"  accept="image/*" onchange="previewImage(event)">
                             </div>
 
                             <select class="form-select"style="margin-top:10px" aria-label="Default select example" name="tipo">
@@ -210,7 +211,14 @@
                                 <option value="Duvida">Duvida</option>
                                 <option value="Estagios">Estagios</option>
                                 </select>
+                                <div class="previewModal">
+                                <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">
+                                </div>
                         </div>
+
+                            
+
+
                         <div class="modal-footer" id="mf">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                             <button  type="submit" class="btn btn-primary">Enviar</button>
@@ -219,9 +227,30 @@
                     </form>
                 </div>
 
+<script> 
 
-  
+function previewImage(event) {
+            var image = document.getElementById('imagePreview');
+            var file = event.target.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                    image.style.display = 'block'; 
+                }
+                reader.readAsDataURL(file); 
+            }
+        }
 
+        @if(session('showModal'))
+            document.addEventListener('DOMContentLoaded', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+                myModal.show();
+            });
+        @endif
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
