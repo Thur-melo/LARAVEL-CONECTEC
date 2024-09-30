@@ -42,10 +42,20 @@
                     />
                 </div>
                 <div class="createBtn">
-                    <label class="botaoPostar" for="create-post">Publicar</label>
+                    <div class="nomesNav">
+                        <span>{{ $user->name}}</span>
+                        <span>{{ $user->modulo}}</span>
+                    </div>
                     <div class="profileImg">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                        
                 </div>
+                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
         </div>
     </div>
 </nav>
@@ -175,6 +185,23 @@
 
 </main>
 
+        <div class="modal fade" id="confirmLogoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">Confirmar Logout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza de que deseja sair?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmLogoutBtn">Sair</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
 
 
 
@@ -196,9 +223,9 @@
                             </div> -->
                             
                             <div class="publicarInput">
-                            <h5 lass="modal-title" style="font-weight:600">Descrição da publicação</h5>
-                            <p> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
-                            <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Desabafa pá nóis" required></textarea>
+                            <h5 class="modal-title" style="font-weight:600">Descrição da publicação</h5>
+                            <p style="font-weight:500; color:#AFAFAF; font-size:10pt"> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
+                            <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Faça sua pergunta aqui..." required></textarea>
                             </div>
                             <div class="publicarInput"style="margin-top:10px">
                                  <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost"  accept="image/*" onchange="previewImage(event)">
@@ -221,11 +248,15 @@
 
                         <div class="modal-footer" id="mf">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button  type="submit" class="btn btn-primary">Enviar</button>
+                            <button  type="submit" class="postarBotao">Publicar</button>
                         </div>
                     </div>
                     </form>
                 </div>
+
+
+                <!-- Modal de Confirmação -->
+                
 
 <script> 
 
@@ -249,6 +280,22 @@ function previewImage(event) {
                 myModal.show();
             });
         @endif
+
+
+      
+        document.getElementById('logoutIcon').addEventListener('click', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('confirmLogoutModal'));
+        myModal.show();
+    });
+
+    // Quando o botão "Sair" do modal for clicado, submete o formulário de logout
+    document.getElementById('confirmLogoutBtn').addEventListener('click', function () {
+        document.getElementById('logout-form').submit();
+    });
+
+    
+    </script>
+
 
     </script>
 

@@ -30,6 +30,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/login', [RegisterController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [RegisterController::class, 'login']);
+Route::post('/logout', [RegisterController::class, 'logout'])->name('logout');
+
+
+
 
 Route::get('/registerAdm', [adminController::class, 'showAdmForm'])->name('registerAdm');
 Route::post('/registerAdm', [adminController::class, 'registerAdm']);
@@ -51,4 +55,6 @@ Route::post('/conversations', [ChatController::class, 'createConversation']);
 Route::get('/conversations/{id}', [ChatController::class, 'showConversation'])->name('chat.show');
 Route::post('/conversations/{conversationId}/messages', [ChatController::class, 'storeMessage']);
 Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'); // Para listar conversas
+
+
 

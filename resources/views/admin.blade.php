@@ -38,9 +38,11 @@
             <li> <span class="material-icons" id="icons">person</span> <span>Administrador</span> </li>
             <li> <span class="material-icons" id="icons">chat</span> <span>Chat </span> </li>
 
-            <!-- <li id="logout"> <span class="material-icons" id="icons">logout</span> Sair </li> -->
+            
 
         </ul>
+        
+       
     </div>
 
     <!--final menu lateral -->
@@ -56,6 +58,10 @@
                 <div class="usuario">
                     <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil">
                 </div>
+                
+            </div>
+            <div class="botaoLogar">
+            <a href="{{ route('login') }}"><button>Logar como usuario</button></a>
             </div>
         </div>
         <div class="content">

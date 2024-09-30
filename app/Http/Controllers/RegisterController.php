@@ -41,6 +41,9 @@ public function showHome()
         if ($request->hasFile('urlDaFoto')) {
             $file = $request->file('urlDaFoto');
             $profilePhotoUrl = $file->store('urlDaFoto', 'public');
+        } else {
+            
+            $profilePhotoUrl = 'img/default.jpg'; 
         }
 
         User::create([
@@ -75,6 +78,19 @@ public function showHome()
         }
         return redirect()->route('home', )->with(['success' =>'Logou']);
        
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard()->logout();
+
+        // Invalida a sessão atual e regenera o token CSRF
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        // Redireciona para a página de login
+        return redirect('/login');
     }
 
 

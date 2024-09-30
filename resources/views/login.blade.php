@@ -7,10 +7,26 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{url('assets/css/login.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
 </head>
 <body>
+
+<nav>
+        <div class="container">
+            <div class="logoCont">
+                <span class="fontisto--cloudy"></span>  
+               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
+            </div>
+               
+                <div class="createBtn">
+                    <div class="nomesNav">
+                      
+                    </div>
+        </div>
+    </div>
+</nav>
 
     <div class="main">
         <div class="loginCont" id="step1">
@@ -19,8 +35,7 @@
 
                 <div class="logo">
                     <div class="headerLogo">
-                        <i class="fa-brands fa-cloudversify"></i>
-                        <h2>Conectec</h2>
+                 
                     </div>
                     
                 </div>
