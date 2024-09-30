@@ -65,48 +65,47 @@
 
                 <div class="card">
                     <div class="box">
-                        <h1>{{$qnt_users}}</h1>
-                        <h3>Posts Aprovados</h3>
+                        <h1>{{$qnt_posts}}</h1>
+                        <h3>Total de posts</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">people</span>
+                        <span class="material-icons" id="icons-card">post_add</span>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="box">
-                        <h1>{{$qnt_alunos}}</h1>
-                        <h3>Posts Rejeitados</h3>
+                        <h1>{{$qnt_info}}</h1>
+                        <h3>Posts inativos</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
+                        <span class="material-icons" id="icons-card"> sentiment_dissatisfied</span>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="box">
-                        <h2>{{$qnt_professores}}</h2>
+                        <h2>{{$qnt_duvida}}</h2>
+                        <h3>Posts Ativos</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" id="icons-card">pending_actions</span>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="box">
+                        <h2>{{$qnt_duvida}}</h2>
                         <h3>Posts Pendentes</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-graduate"></i></span>
+                        <span class="material-icons" id="icons-card">pending_actions</span>
                     </div>
                 </div>
+          
 
 
-
-                <div class="card">
-                    <div class="box">
-                        <h2>{{$qnt_outros}}</h2>
-
-                        <h3>Posts Recentes</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" id="icons-card">
-                            <i class="fa-regular fa-circle-question"></i>
-                    </div>
-                    </span>
-                </div>
             </div>
 
             @php
@@ -118,74 +117,106 @@
             ];
             @endphp
 
+            <div class="rowContent">
+                <div class="content3">
+                    <div class="rowTipos">
+                        <h3><i class="fa-regular fa-circle-question"></i> Posts Informativos:</h3>
+                        <h2>{{$qnt_info}}</h2>
+                    </div>
 
-            <div class="content2">
-                @if ($posts->isEmpty())
-                <h1>Sem perguntas pendentes</h1>
-                @else
+                    <div class="rowTipos">
+                        <h3> <i class="fa-regular fa-circle-question"></i> Posts Aulas:</h3>
+                        <h2>{{$qnt_aula}}</h2>
+                    </div>
 
-                @foreach($posts as $post)
-                <div class="postRow">
-                <div class="postBody">
+                    <div class="rowTipos">
+                        <h3><i class="fa-regular fa-circle-question"></i> Posts Duvida:</h3>
+                        <h2>{{$qnt_duvida}}</h2>
 
-                    <div class="postHeader">
-                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
-                        <div class="info">
-                            <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                <h3>{{ $post->user->name }}</h3>
-                                <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $post->user->modulo }}</p>
+
+                    </div>
+
+                    <div class="rowTipos">
+                        <h3>  <i class="fa-regular fa-circle-question"></i> Posts Estagio:</h3>
+                        <h2>{{$qnt_estagios}}</h2>
+                    </div>
+                </div>
+                <div class="content2">
+                    @if ($posts->isEmpty())
+                    <h1>Sem perguntas pendentes</h1>
+                    @else
+
+                    @foreach($posts as $post)
+                    <div class="postRow">
+                        <div class="postBody">
+
+                            <div class="postHeader">
+                                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
+                                <div class="info">
+                                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
+                                        <h3>{{ $post->user->name }}</h3>
+                                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                            <p>{{ $post->user->modulo }}</p>
+                                        </div>
+                                    </div>
+
+                                    <p>{{ $post->user->perfil }}</p>
+
                                 </div>
                             </div>
 
-                            <p>{{ $post->user->perfil }}</p>
+                            <div class="tipoCont">
+                                <div class="tipo-div">
+                                    <p>{{ $post->tipo_post }}</p>
+                                </div>
+                            </div>
 
-                        </div>
-                    </div>
+                            <div class="postHeaderDescription">
+                                <p>{{ $post->texto }}</p>
+                            </div>
 
-                    <div class="tipoCont">
-                            <div class="tipo-div">
-                                <p>{{ $post->tipo_post }}</p>
+
+
+                            <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="">
+                            </a>
+
+
+                            <div class="postFooter">
+
+                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btnStatus" id="btnDesativa" onclick="return confirm('Tem certeza que deseja deletar este post?')">Deletar</button>
+                                </form>
+
+
+
+                                <form action="{{ route('posts.desativar', $post->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btnStatus" id="btnAtiva" onclick="return confirm('Tem certeza que deseja mudar o status para Aprovado?')">Desativar</button>
+                                </form>
+                                <form action="{{ route('posts.aprovar', $post->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btnStatus" id="btnAtiva" onclick="return confirm('Tem certeza que deseja mudar o status para Aprovado?')">Ativar</button>
+                                </form>
                             </div>
                         </div>
-
-                    <div class="postHeaderDescription">
-                        <p>{{ $post->texto }}</p>
                     </div>
+                    @endforeach
+                    @endif
 
-
-
-                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery">
-                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="">
-                    </a>
-
-
-                    <div class="postFooter">
-
-                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btnStatus" id="btnDesativa" onclick="return confirm('Tem certeza que deseja deletar este post?')">Deletar</button>
-                        </form>
-
-
-
-                        <form action="{{ route('posts.aprovar', $post->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="btnStatus" id="btnAtiva" onclick="return confirm('Tem certeza que deseja mudar o status para Aprovado?')">Aprovar</button>
-                        </form>
-                    </div>
+                    </tbody>
+                    </table>
                 </div>
-                </div>
-                @endforeach
-                @endif
-
-                </tbody>
-                </table>
             </div>
         </div>
     </div>
+
+
+    
 </body>
 
 </html>

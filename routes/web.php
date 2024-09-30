@@ -17,8 +17,8 @@ Route::get('/admin', [adminController::class, 'showadmin']) ->name('admin');
 
 Route::get('adminHome', [adminController::class, 'ShowPerguntas']) ->name('adminHome');
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
-Route::patch('/posts/{id}/aprovar', [PostController::class, 'updateStatus'])->name('posts.aprovar');
-
+Route::patch('/posts/{id}/aprovar', [PostController::class, 'updateStatus'])->name('posts.desativar');  
+Route::patch('/posts/{id}/desativar', [PostController::class, 'updateAtiva'])->name('posts.aprovar'); 
 
 Route::get('/home', [RegisterController::class, 'showHome']) ->name('home');
 Route::post('/home', [PostController::class, 'postar']); 
@@ -45,6 +45,7 @@ Route::post('/loginAdm', [adminController::class, 'loginAdm']);
 Route::delete('/admin/{id}', [adminController::class, 'desativaUser'])->name('user.off');
 Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.ativa');
 
+Route::get('/posts/{id}/comentarios', [ComentariosController::class, 'showcomentarios'])->name('comentarios.show');
 Route::get('/comentarios/{id}', [ComentariosController::class, 'showcomentarios'])->name('comentarios');
 Route::post('/comentarios/{postId}/comentarios', [ComentariosController::class, 'comentar'])->name('comentarios.store');
 

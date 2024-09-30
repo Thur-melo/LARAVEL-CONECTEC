@@ -51,6 +51,16 @@ public function updateStatus($id)
 }
 
 
+public function updateAtiva($id)
+{
+    $post = Post::findOrFail($id); // Encontre o post pelo ID
+    $post->status = 1; // Muda o status para 2
+    $post->save(); // Salva as alterações
+
+    return redirect()->route('adminHome')->with('success', 'Status do post atualizado para 2!');
+}
+
+
 
 
 }

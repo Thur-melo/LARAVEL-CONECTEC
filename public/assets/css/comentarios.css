@@ -278,12 +278,29 @@ main .container .left{
 
 /* coment */
 
+
+
+
 .filtroComentarios {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    display: flex;
+    width: 30vw;
+    border: none;
+    outline: none;
+    background:#eff3f6;
+    border-radius: 2rem;
+    padding: 0.6rem 1rem;
    
+}
+.filtroComentarios select{
+    background: transparent;
+    width: 90%;
+    border: none;
+}
+
+.filtroComentarios textarea{
+    background: transparent;
+    width: 90%;
+    border: none;
 }
 
 .dataFiltro {
@@ -340,5 +357,13 @@ main .container .left{
     height: 100%;
     align-items: center;
     justify-content: center;
+}
+
+/* comentarios Header */
+.headerComentarios {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding-left: 20px;
 }
 

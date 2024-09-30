@@ -20,7 +20,22 @@ public function showperfil(){
 public function showPerguntas() {
 
     $user = Auth::user();
-    $posts = Post::with('user')->where('status', 1)->get(); // Combina as duas consultas
+    $posts = Post::orderBy('created_at', 'desc')->get(); 
+    $qnt_posts = Post::all()-> count();
+    $qnt_info = Post::where('tipo_post', 'Informativo')-> count();
+    $qnt_aula = Post::where('tipo_post', 'Aula')-> count();
+    $qnt_duvida = Post::where('tipo_post', 'Duvida')-> count();
+    $qnt_estagios = Post::where('tipo_post', 'Estagios')-> count();
+
+
+    $users = User::all();
+
+
+    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_info', 'qnt_duvida', 'qnt_estagios', 'qnt_aula'));
+}
+
+public function showadmin(){
+    // $user = Auth::User();
     $qnt_users = User::all()-> count();
     $qnt_alunos = User::where('perfil', 'Aluno')-> count();
     $qnt_professores = User::where('perfil', 'professor')-> count();
@@ -28,8 +43,13 @@ public function showPerguntas() {
     $users = User::all();
     $usersAtivo = User::where('status', 1)-> get();
 
+    
 
-    return view('adminHome', compact( 'posts', 'qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros' ));
+    // $qnt_aprovados = Post::where('status', 2)-> count();
+
+    // $qnt_pendentes = Post::where('status', 1)-> count();
+
+    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros' ));
 }
 
 
@@ -68,23 +88,6 @@ return redirect()->route('perfil')->with('status', 'Usuário atualizado com suce
 public function contarProdutos()
 {
   
-}
-
-public function showadmin(){
-    // $user = Auth::User();
-    $qnt_users = User::all()-> count();
-    $qnt_alunos = User::where('perfil', 'Aluno')-> count();
-    $qnt_professores = User::where('perfil', 'professor')-> count();
-    $qnt_outros = User::where('perfil', 'outros')-> count();
-    $users = User::all();
-    $usersAtivo = User::where('status', 1)-> get();
-
-
-    // $qnt_aprovados = Post::where('status', 2)-> count();
-
-    // $qnt_pendentes = Post::where('status', 1)-> count();
-
-    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros' ));
 }
 
 public function registerAdm(Request $request)

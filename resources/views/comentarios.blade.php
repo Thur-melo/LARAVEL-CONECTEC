@@ -18,6 +18,7 @@
 <body>
 
 
+
 <nav>
         <div class="container">
             <div class="logoCont">
@@ -32,40 +33,54 @@
                     />
                 </div>
                 <div class="createBtn">
-                    <label class="botaoPostar" for="create-post">Publicar</label>
+                    <div class="nomesNav">
+                        <span>{{ $user->name}}</span>
+                        <span>{{ $user->modulo}}</span>
+                    </div>
                     <div class="profileImg">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                        
                 </div>
+                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
         </div>
     </div>
 </nav>
 
-
     <main>
-    <div class="container">
-        <div class="left">
-            <div class="sidebar">
+        <div class="container">
+            <div class="left">
+                <div class="sidebar">
 
-            <a href="{{ Route('home')}}" class="menu-item active">
-                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
-            </a>
-            <a class="menu-item ">
-                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
-            </a>
+                    <a href="{{ Route('home')}}" class="menu-item active">
+                        <span><i class="uil uil-home"></i></span>
+                        <h3>Home</h3>
+                    </a>
+                    <a class="menu-item ">
+                        <span><i class="uil uil-bell"></i></span>
+                        <h3>Notificações</h3>
+                    </a>
 
-            <a class="menu-item">
-                <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
-            </a>
-            <a class="menu-item " href="{{Route('chat.list')}}">
-                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
-            </a>
-            <a href="{{ Route('perfil')}}" class="menu-item ">
-                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
-            </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-question-circle"></i></span>
+                        <h3>Perguntas</h3>
+                    </a>
+                    <a class="menu-item " href="{{Route('chat.list')}}">
+                        <span><i class="uil uil-chat"></i></span>
+                        <h3>Chat</h3>
+                    </a>
+                    <a href="{{ Route('perfil')}}" class="menu-item ">
+                        <span><i class="uil uil-edit-alt"></i></span>
+                        <h3>Perfil</h3>
+                    </a>
 
 
+                </div>
             </div>
-        </div>
 
 
 
@@ -113,48 +128,51 @@
                                 <span><i class="uil uil-bookmark"></i></span>
                             </div>
                         </div>
-                        <form action="{{ route('comentarios.store', $post->id) }}" method="POST" class="criarPost">
-                            @csrf
-                            <div class="profileImgPost">
-                                <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                            <div class="headerComentarios">
+                                @csrf
+
+
+                                <div class="profileImg">
+                                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                                </div>
+
+                                <div class="dataFiltro">
+                                <form method="GET" action="{{ route('comentarios.show', ['id' => $post->id]) }}">
+                                    <select name="sortOrder" onchange="this.form.submit()">
+                                        <option value="desc" {{ request('sortOrder') == 'desc' ? 'selected' : '' }}>Mais recente</option>
+                                        <option value="asc" {{ request('sortOrder') == 'asc' ? 'selected' : '' }}>Mais antigo</option>
+                                    </select>
+                                </form>
                             </div>
+                           
+
+                        </div>
+
+                            <form action="{{ route('comentarios.store', $post->id) }}" method="POST" class="criarPost">
+                                @csrf
+                            <div class="filtroComentarios">
                             <textarea name="texto" placeholder="comentário..." required></textarea>
                             <button type="submit" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
-                            </button>
-
+                            
+                            </div>
 
 
                         </form>
 
-                        <div class="filtroComentarios">
-                            <div class="dataFiltro">
-                                <div class="organizar">
 
-                                    <p class="pzin">Organizar por:</p>
-
+                        <div id="comentariosSection">
+                            @foreach($comentarios as $comentario)
+                            <div class="comentarioContainer">
+                                <div class="user" style="align-items: center;">
+                                    <div class="profileImg" style="width: 35px; height: 35px;">
+                                        <img src="{{ asset('storage/' . $comentario->user->urlDaFoto) }}" alt="{{ $comentario->user->name }}">
+                                    </div>
+                                    <p style="font-weight: 600;">{{ $comentario->user->name }}</p>:
                                 </div>
-
-                                <select name="" id="">
-                                    <option value="Mais recente">Mais recente</option>
-                                    <option value="Mais antigo">Mais antigo</option>
-                                </select>
+                                <p>{{ $comentario->texto }}</p>
                             </div>
+                            @endforeach
                         </div>
-
-                        @foreach($comentarios as $comentario)
-                        <div class="comentarioContainer">
-                            <div class="user" style="align-items: center; ">
-                                <div class="profileImg" style="width: 35px; height: 35px;">
-                                    <img src="{{ asset('storage/' . $comentario->user->urlDaFoto) }}" alt="">
-                                </div>
-                                <p style="font-weight: 600; ">{{ $comentario->user->name }}</p>:
-                            </div>
-
-                            <p>{{ $comentario->texto }}</p>
-
-                        </div>
-                        @endforeach
-
                     </div>
 
                 </div>

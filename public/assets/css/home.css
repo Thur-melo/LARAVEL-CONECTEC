@@ -289,20 +289,3 @@ main .container .left{
     max-height: 200px;
 
 }
-
-.nomesNav{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-direction: column;
-
-}
-.nomesNav span{
-    font-size: 11pt;
-    font-weight: 600;
-    color: #3f3950;
-}
-
-.nomesNav span:last-child{
-    color: #00c9e9;
-}

@@ -21,12 +21,17 @@ class RegisterController extends Controller
     return view('login');
 }
 
-public function showHome()
-{
-    $user = Auth::user();
-    $posts = Post::with('user')->where('status', 2)->orderBy('created_at', 'desc')->get(); // Combina as duas consultas
 
-    return view('home', compact('user', 'posts')); // Usa compact corretamente
+public function showHome(Request $request)
+{
+
+    if ($request->has('s')) {
+        $posts = Post::search($request->input('s'));
+    } else {
+        $posts = Post::with('user')->where('status', 1)->orderBy('created_at', 'desc')->get();
+    }
+    $user = Auth::user();
+    return view('home', compact('user', 'posts'));
 }
 
 

@@ -16,12 +16,22 @@ use App\Models\Comentarios;
 class ComentariosController extends Controller
 {
  
-    public function showcomentarios($id)
+  
+    public function showcomentarios(Request $request, $id)
     {
         $post = Post::findOrFail($id);
         $user = Auth::user();
-        $comentarios = Comentarios::where('post_id', $id)->with('user')->get();
-        return view('comentarios', compact('post', 'comentarios', 'user'));
+    
+        // Get the sorting option from the request (default to 'desc' if not specified)
+        $sortOrder = $request->get('sortOrder', 'desc'); // 'desc' = "Mais recente", 'asc' = "Mais antigo"
+        
+        // Sort comments based on the sorting order
+        $comentarios = Comentarios::where('post_id', $id)
+            ->with('user')
+            ->orderBy('created_at', $sortOrder)
+            ->get();
+    
+        return view('comentarios', compact('post', 'comentarios', 'user', 'sortOrder'));
     }
 
     public function comentar(Request $request, $postId)

@@ -34,13 +34,17 @@
                 <span class="fontisto--cloudy"></span>  
                <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
             </div>
+            <form  action="{{route('home')}}" method="get">
                 <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
                     <input
                     type="search"
                     placeholder="Pesquisar... "
+                    name="s"
+                     id="s"
                     />
                 </div>
+            </form>
                 <div class="createBtn">
                     <div class="nomesNav">
                         <span>{{ $user->name}}</span>
