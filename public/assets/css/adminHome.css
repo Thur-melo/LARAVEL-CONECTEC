@@ -78,7 +78,7 @@
 .container .content .content2 {
     min-height: 60vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: white;
     border-radius: 12px;

@@ -301,6 +301,7 @@ main .container .left{
     background: transparent;
     width: 90%;
     border: none;
+    outline: none;
 }
 
 .dataFiltro {

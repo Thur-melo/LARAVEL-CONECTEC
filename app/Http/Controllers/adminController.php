@@ -26,12 +26,15 @@ public function showPerguntas() {
     $qnt_aula = Post::where('tipo_post', 'Aula')-> count();
     $qnt_duvida = Post::where('tipo_post', 'Duvida')-> count();
     $qnt_estagios = Post::where('tipo_post', 'Estagios')-> count();
+    $qnt_postInativos = Post::where('status', 2)-> count();
+    $qnt_postAtivos = Post::where('status', 1)-> count();
+
 
 
     $users = User::all();
 
 
-    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_info', 'qnt_duvida', 'qnt_estagios', 'qnt_aula'));
+    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_info', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos'));
 }
 
 public function showadmin(){

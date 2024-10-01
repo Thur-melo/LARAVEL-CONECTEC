@@ -236,7 +236,6 @@
                             </div>
 
                             <select class="form-select"style="margin-top:10px" aria-label="Default select example" name="tipo">
-                                <option selected>Selecione a categoria</option>
                                 <option value="Informativo">Informativo</option>
                                 <option value="Aula">Aula</option>
                                 <option value="Duvida">Duvida</option>

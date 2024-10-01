@@ -75,7 +75,7 @@
 
                 <div class="card">
                     <div class="box">
-                        <h1>{{$qnt_info}}</h1>
+                        <h1>{{$qnt_postInativos}}</h1>
                         <h3>Posts inativos</h3>
                     </div>
                     <div class="icon-case">
@@ -85,7 +85,7 @@
 
                 <div class="card">
                     <div class="box">
-                        <h2>{{$qnt_duvida}}</h2>
+                        <h2>{{$qnt_postAtivos}}</h2>
                         <h3>Posts Ativos</h3>
                     </div>
                     <div class="icon-case">
@@ -94,7 +94,7 @@
                 </div>
 
 
-                <div class="card">
+                <!-- <div class="card">
                     <div class="box">
                         <h2>{{$qnt_duvida}}</h2>
                         <h3>Posts Pendentes</h3>
@@ -103,7 +103,7 @@
                         <span class="material-icons" id="icons-card">pending_actions</span>
                     </div>
                 </div>
-          
+           -->
 
 
             </div>
