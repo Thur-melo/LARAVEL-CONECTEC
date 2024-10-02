@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{url('assets/css/listaContatos.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
@@ -26,21 +28,36 @@
                 <span class="fontisto--cloudy"></span>  
                <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
             </div>
+            <form  action="{{route('home')}}" method="get">
                 <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
                     <input
                     type="search"
                     placeholder="Pesquisar... "
+                    name="s"
+                     id="s"
                     />
                 </div>
+            </form>
                 <div class="createBtn">
-                    <label class="botaoPostar" for="create-post">Publicar</label>
+                    <div class="nomesNav">
+                        <span>{{ $user->name}}</span>
+                        <span>{{ $user->modulo}}</span>
+                    </div>
                     <div class="profileImg">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                        
                 </div>
+                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
         </div>
     </div>
 </nav>
+
 
 
 <main> 

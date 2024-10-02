@@ -41,15 +41,13 @@ public function showHome(Request $request)
     {
         
 
-        $profilePhotoUrl = null;
+        $profilePhotoUrl = 'urlDaFoto/default.jpg';
 
         if ($request->hasFile('urlDaFoto')) {
             $file = $request->file('urlDaFoto');
             $profilePhotoUrl = $file->store('urlDaFoto', 'public');
-        } else {
+        } 
             
-            $profilePhotoUrl = 'img/default.jpg'; 
-        }
 
         User::create([
             'name' => $request->input('name'),

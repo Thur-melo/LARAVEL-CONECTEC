@@ -14,6 +14,7 @@
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 
@@ -21,46 +22,42 @@
 
 <body>
 
-    <nav>
+<nav>
         <div class="container">
             <div class="logoCont">
-                <span class="fontisto--cloudy"></span>
-                <img src="{{url('assets/img/logoConectec.png')}}" id="logo">
+                <span class="fontisto--cloudy"></span>  
+               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
             </div>
-            <div class="search-bar">
+            <form  action="{{route('home')}}" method="get">
+                <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input
+                    <input
                     type="search"
-                    placeholder="Pesquisar... " />
-            </div>
-            <div class="createBtn">
-                <label class="botaoPostar" for="create-post">Publicar</label>
-                <div class="profileImg">
-                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                    placeholder="Pesquisar... "
+                    name="s"
+                     id="s"
+                    />
                 </div>
-            </div>
-        </div>
-    </nav>
-    <nav>
-        <div class="container">
-            <div class="logoCont">
-                <span class="fontisto--cloudy"></span>
-                <img src="{{url('assets/img/logoConectec.png')}}" id="logo">
-            </div>
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input
-                    type="search"
-                    placeholder="Pesquisar... " />
-            </div>
-            <div class="createBtn">
-                <label class="botaoPostar" for="create-post">Publicar</label>
-                <div class="profileImg">
-                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+            </form>
+                <div class="createBtn">
+                    <div class="nomesNav">
+                        <span>{{ $user->name}}</span>
+                        <span>{{ $user->modulo}}</span>
+                    </div>
+                    <div class="profileImg">
+                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                        
                 </div>
-            </div>
+                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <main>
         <div class="container">
@@ -96,7 +93,8 @@
             <div class="chat-container">
                 <div class="userTwo-container">
                     <div class="profileImg">
-                        <img src="{{ asset('storage/' . $conversation->usertwo->urlDaFoto) }}" alt="">
+                        
+                    <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="">
                     </div>
                     <h1> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </h1>
                 </div>

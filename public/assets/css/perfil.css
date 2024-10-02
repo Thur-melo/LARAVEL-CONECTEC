@@ -116,7 +116,7 @@ main .container .left{
     margin: 10px;
 }
 
-form{
+#formPerfil{
     width: 100%;
     display: flex;
     flex-direction: column;

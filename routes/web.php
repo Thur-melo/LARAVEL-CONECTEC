@@ -9,6 +9,10 @@ use App\Http\Controllers\ComentariosController;
 use App\Http\Controllers\ChatController;
 
 
+
+Route::get('/', function () {
+    return redirect('/login');
+});
 Route::get('/perfil', [adminController::class, 'showperfil']) ->name('perfil');
 Route::post('/perfil/user/{id}', [adminController::class, 'update'])->name('user.update');
 

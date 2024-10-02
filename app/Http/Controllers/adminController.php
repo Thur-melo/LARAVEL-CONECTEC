@@ -59,7 +59,7 @@ public function showadmin(){
 
 public function update(Request $request, string $id)
 {
-    $profilePhotoUrl = null;
+    $profilePhotoUrl = 'urlDaFoto/default.jpg';
 // Atualiza o usuário com os dados validados
 $usuario = User::findOrFail($id);
 
@@ -69,8 +69,7 @@ $usuario = User::findOrFail($id);
 
     } elseif ($request->input('deleteImg')){
 
-        $profilePhotoUrl = null;
-
+        $profilePhotoUrl = 'urlDaFoto/default.jpg';
     } else {
           // Se não houver nova foto, mantém a URL existente
           $profilePhotoUrl = $usuario->urlDaFoto;
