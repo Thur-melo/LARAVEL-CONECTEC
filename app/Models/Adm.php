@@ -24,7 +24,6 @@ class Adm extends Authenticatable
         'name',
         'email',
         'password',
-        'modulo',
         'perfil',
         'urlDaFoto',
     ];

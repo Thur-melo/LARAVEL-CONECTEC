@@ -72,14 +72,8 @@
                     </div>
 
                     <div class="botoesMain">
-                        <input type="radio" name="role" value="Aluno" id="aluno">
-                        <label for="aluno"> <i class="fa-solid fa-user-graduate"></i> Aluno</label>
-
-                        <input type="radio" name="role" value="Professor" id="professor">
-                        <label for="professor"><i class="fa-solid fa-user-tie"></i> Professor</label>
-
-                        <input type="radio" name="role" value="Outros" id="outros">
-                        <label for="outros"> <i class="fa-solid fa-circle-question"></i> Outros</label>
+                        <input type="radio" name="role" value="Admin" id="aluno">
+                        <label for="aluno"> <i class="fa-solid fa-user-graduate"></i> Admin</label>
                     </div>
                 </div>
 
@@ -127,17 +121,6 @@
                     <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">
 
                 </div>
-
-                <div class="moduloContainer">
-                    <label for="module" class="form-label">Módulo</label>
-                    <select class="form-select" id="module" name="module">
-                        <option value="">Selecione...</option>
-                        <option value="1º Módulo">Módulo 1</option>
-                        <option value="2º Módulo">Módulo 2</option>
-                        <option value="3º Módulo">Módulo 3</option>
-                    </select>
-                </div>
-
                 <button class="botaoContinuar" type=submit>Finalizar</button>
 
 

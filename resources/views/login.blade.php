@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<nav>
+<!-- <nav>
         <div class="container">
             <div class="logoCont">
                 <span class="fontisto--cloudy"></span>  
@@ -26,8 +26,9 @@
                     </div>
         </div>
     </div>
-</nav>
+</nav> -->
 
+   
     <div class="main">
         <div class="loginCont" id="step1">
             <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" id="loginForm">
@@ -35,9 +36,10 @@
 
                 <div class="logo">
                     <div class="headerLogo">
-                 
+                        <i class="fa-brands fa-cloudversify"></i>
+                        <h2>Conectec</h2>
                     </div>
-                    
+                 
                 </div>
 
                 @if(session()->has('success'))
@@ -70,7 +72,7 @@
                         
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
-                    <p>Não possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a></p>
+                    <p>Não possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a> | Entrar como <a href="{{ route('loginAdm') }}">Admin</a></p>
 
                 </form>
                 

@@ -22,7 +22,7 @@
                         <i class="fa-brands fa-cloudversify"></i>
                         <h2>Conectec</h2>
                     </div>
-                    
+                 
                 </div>
 
                 @if(session()->has('success'))
@@ -55,8 +55,7 @@
                         
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
-                    <p>Não possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a></p>
-
+                    <p>Não possui uma conta? <a href="{{ route('registerAdm') }}">Cadastre-se</a> | Entrar como <a href="{{ route('login') }}">usuário</a></p>
                 </form>
                 
             </div>

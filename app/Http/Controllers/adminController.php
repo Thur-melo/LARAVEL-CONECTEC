@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Adm;
+use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
 {
@@ -110,7 +111,6 @@ public function registerAdm(Request $request)
         'email' => $request->input('email'),
         'password' => $request->input('password'),
         'urlDaFoto' => $profilePhotoUrl,
-        'modulo' => $request->input('module'),
         'perfil' => $request->input('role'),
        
     ]);
@@ -132,33 +132,34 @@ public function registerAdm(Request $request)
 
 }
 
-public function loginAdm(Request $request){
 
+public function loginAdm(Request $request)
+{
+    $credentials = $request->only('email', 'password');
 
+    // Buscando o administrador pelo email
+    $adm = Adm::where('email', $credentials['email'])->first();
 
-    $credentials = $request->only('email','password');
-    $autenticado =Auth::attempt($credentials);
-    
-       if(!$autenticado){
+    // Verificando se o administrador existe e a senha está correta
+    if ($adm && Hash::check($credentials['password'], $adm->password)) {
+        // Autenticar o usuário
+        Auth::login($adm);
         
-
-           return redirect()->route('loginAdm')->withErrors(['error' =>'Email ou senha errada']);
-
-       }
-       return redirect()->route('admin', )->with(['success' =>'Logou']);
-
-   }
-
-   public function showAdmForm()
-   {
-       return view('registerAdm');
-   }
-
-   public function showLoginAdmForm()
-    {
-         return view('loginAdm');
+        return redirect()->route('admin')->with(['success' => 'Logou']);
     }
 
+    return redirect()->route('loginAdm')->withErrors(['error' => 'Email ou senha errada']);
+}
+
+public function showAdmForm()
+{
+    return view('registerAdm');
+}
+
+public function showLoginAdmForm()
+{
+    return view('loginAdm');
+}
 
 
 
