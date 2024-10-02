@@ -168,7 +168,7 @@
                             <form action="{{ route('comentarios.store', $post->id) }}" method="POST" class="criarPost">
                                 @csrf
                             <div class="filtroComentarios">
-                            <textarea name="texto" placeholder="comentário..." required></textarea>
+                            <textarea name="texto" placeholder="Responda..." required></textarea>
                             <button type="submit" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
                             
                             </div>

@@ -63,6 +63,9 @@
             <div class="botaoLogar">
             <a href="{{ route('login') }}"><button>Logar como usuario</button></a>
             </div>
+            <div class="botaoLogar">
+            <a href="{{ route('registerAdm') }}"><button>Cadastrar um novo adm</button></a>
+            </div>
         </div>
         <div class="content">
             <div class="cards">

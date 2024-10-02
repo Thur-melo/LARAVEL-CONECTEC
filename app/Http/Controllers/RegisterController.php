@@ -81,6 +81,14 @@ public function showHome(Request $request)
             return redirect()->route('login')->withErrors(['error' =>'Email ou senha errada']);
 
         }
+        $user = Auth::user();
+
+        // Verificando o status do usuário
+        if ($user->status === 'Off') {
+            Auth::logout(); // Deslogar o usuário
+            return redirect()->route('login')->withErrors(['error' => 'Sua conta está desativada.']);
+        }
+        
         return redirect()->route('home', )->with(['success' =>'Logou']);
        
     }

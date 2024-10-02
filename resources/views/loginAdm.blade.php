@@ -55,7 +55,7 @@
                         
                     </div>
                     <button class="botaoContinuar" type="submit">Entrar</button>
-                    <p>Não possui uma conta? <a href="{{ route('registerAdm') }}">Cadastre-se</a> | Entrar como <a href="{{ route('login') }}">usuário</a></p>
+                   <p>Entrar como <a href="{{ route('login') }}">usuário</a></p>
                 </form>
                 
             </div>
