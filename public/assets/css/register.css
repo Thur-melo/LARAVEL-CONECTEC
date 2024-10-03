@@ -56,7 +56,6 @@ body{
 
 .logo{
     display: flex;
-    justify-content: space-around;
     align-items: center;
     width: 100%;
     margin-bottom: 5%;
@@ -67,6 +66,12 @@ body{
     font-size: 25pt;
     margin-right: 5px;
     margin-bottom: 5px;
+
+}
+
+#logo{
+    width: 180px;
+    height: auto;
 
 }
 

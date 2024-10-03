@@ -287,8 +287,8 @@ main .container .left{
     border: none;
     outline: none;
     background:#eff3f6;
-    border-radius: 2rem;
-    padding: 0.6rem 1rem;
+    padding: 10px;
+    border-radius: 6px;
    
 }
 .filtroComentarios select{
@@ -299,14 +299,18 @@ main .container .left{
 
 .filtroComentarios textarea{
     background: transparent;
-    width: 90%;
+    width: 100%;
     border: none;
     outline: none;
+    resize: none;
+    
 }
 
 .dataFiltro {
     display: flex;
     flex-direction: row;
+  justify-content: flex-end;
+    width: 100%;
     
 }
 
@@ -336,7 +340,6 @@ main .container .left{
 }
 
 .create-comentario{
-
     width: 100%;
     height: 50px;
     padding: 10px;

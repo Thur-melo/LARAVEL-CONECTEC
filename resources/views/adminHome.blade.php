@@ -151,7 +151,7 @@
                         <div class="postBody">
 
                             <div class="postHeader">
-                                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
+                                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" style="object-fit:cover">
                                 <div class="info">
                                     <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
                                         <h3>{{ $post->user->name }}</h3>

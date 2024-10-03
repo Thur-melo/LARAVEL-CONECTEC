@@ -206,6 +206,16 @@
             }
         }
 
+        document.getElementById('logoutIcon').addEventListener('click', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('confirmLogoutModal'));
+        myModal.show();
+    });
+
+    // Quando o botão "Sair" do modal for clicado, submete o formulário de logout
+    document.getElementById('confirmLogoutBtn').addEventListener('click', function () {
+        document.getElementById('logout-form').submit();
+    });
+
 
     </script>
   

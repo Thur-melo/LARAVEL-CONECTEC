@@ -36,8 +36,7 @@
 
                 <div class="logo">
                     <div class="headerLogo">
-                        <i class="fa-brands fa-cloudversify"></i>
-                        <h2>Conectec</h2>
+                        <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
                     </div>
                  
                 </div>

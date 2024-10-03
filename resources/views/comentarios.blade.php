@@ -91,7 +91,14 @@
             </div>
 
 
-
+            @php
+                            $coresModulo = [
+                            '1º Módulo' => 'red',
+                            '2º Módulo' => 'blue',
+                            '3º Módulo' => 'green',
+                            
+                                ];
+            @endphp
 
 
 
@@ -149,9 +156,7 @@
                                 @csrf
 
 
-                                <div class="profileImg">
-                                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                                </div>
+                               
 
                                 <div class="dataFiltro">
                                 <form method="GET" action="{{ route('comentarios.show', ['id' => $post->id]) }}">
@@ -169,7 +174,7 @@
                                 @csrf
                             <div class="filtroComentarios">
                             <textarea name="texto" placeholder="Responda..." required></textarea>
-                            <button type="submit" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
+                            <button type="submit" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Enviar
                             
                             </div>
 
@@ -181,10 +186,20 @@
                             @foreach($comentarios as $comentario)
                             <div class="comentarioContainer">
                                 <div class="user" style="align-items: center;">
-                                    <div class="profileImg" style="width: 35px; height: 35px;">
+                                    <div class="profileImg" style="width: 50px; height: 50px;">
                                         <img src="{{ asset('storage/' . $comentario->user->urlDaFoto) }}" alt="{{ $comentario->user->name }}">
                                     </div>
-                                    <p style="font-weight: 600;">{{ $comentario->user->name }}</p>:
+                                    <div class="info">
+                                <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
+                                    <h3>{{ $comentario->user->name }}</h3>
+                                 <div class="modulo-div" style="background-color: {{ $coresModulo[$comentario->user->modulo] ?? 'defaultColor' }};">
+                                    <p>{{ $comentario->user->modulo }}</p>
+                                </div>
+                                
+                                 </div>
+                                     <p>{{ $comentario->user->perfil }}</p>
+                                     
+                                 </div>
                                 </div>
                                 <p>{{ $comentario->texto }}</p>
                             </div>
@@ -214,6 +229,18 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+        <script>
+                document.getElementById('logoutIcon').addEventListener('click', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('confirmLogoutModal'));
+            myModal.show();
+        });
+
+        // Quando o botão "Sair" do modal for clicado, submete o formulário de logout
+        document.getElementById('confirmLogoutBtn').addEventListener('click', function () {
+            document.getElementById('logout-form').submit();
+        });
+        </script>
 </body>
 
 </html>
