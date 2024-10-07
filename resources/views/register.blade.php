@@ -72,14 +72,19 @@
                     </div>
 
                     <div class="botoesMain">
-                        <input type="radio" name="role" value="Aluno" id="aluno">
-                        <label for="aluno"> <i class="fa-solid fa-user-graduate"></i> Aluno</label>
+                    <input type="radio" name="role" value="Adm" id="administração">
+                        <label for="administração"><i class="fa-solid fa-user-tie"></i> Administração</label>
 
-                        <input type="radio" name="role" value="Professor" id="professor">
-                        <label for="professor"><i class="fa-solid fa-user-tie"></i> Professor</label>
+                        <input type="radio" name="role" value="Ds" id="desenvolvimento de sistema">
+                        <label for="desenvolvimento de sistema"> <i class="fa-solid fa-laptop-code"></i> Desenvolvimento de sistemas</label>
 
-                        <input type="radio" name="role" value="Outros" id="outros">
-                        <label for="outros"> <i class="fa-solid fa-circle-question"></i> Outros</label>
+                      
+                        <input type="radio" name="role" value="Nutri" id="nutrição">
+                        <label for="nutrição"><i class="fa-solid fa-stethoscope"></i> Nutrição</label>
+
+
+
+                        
                     </div>
                 </div>
 
@@ -132,9 +137,9 @@
                     <label for="module" class="form-label">Módulo</label>
                     <select class="form-select" id="module" name="module">
                         <option value="">Selecione...</option>
-                        <option value="1º Módulo">Módulo 1</option>
-                        <option value="2º Módulo">Módulo 2</option>
-                        <option value="3º Módulo">Módulo 3</option>
+                        <option value="1º">Módulo 1</option>
+                        <option value="2º">Módulo 2</option>
+                        <option value="3º">Módulo 3</option>
                     </select>
                 </div>
 

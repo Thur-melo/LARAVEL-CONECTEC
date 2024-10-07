@@ -22,50 +22,16 @@
 
 <body>
 
-<nav>
-        <div class="container">
-            <div class="logoCont">
-                <span class="fontisto--cloudy"></span>  
-               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
-            </div>
-            <form  action="{{route('home')}}" method="get">
-                <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                    <input
-                    type="search"
-                    placeholder="Pesquisar... "
-                    name="s"
-                     id="s"
-                    />
-                </div>
-            </form>
-                <div class="createBtn">
-                    <div class="nomesNav">
-                        <span>{{ $user->name}}</span>
-                        <span>{{ $user->modulo}}</span>
-                    </div>
-                    <div class="profileImg">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                        
-                </div>
-                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-
-        </div>
-    </div>
-</nav>
+@include('partials.navbar')
 
 
 
 <main> 
     <div class="container">
-        <div class="left">
+    <div class="left">
             <div class="sidebar">
 
-            <a href="{{ Route('home')}}" class="menu-item">
+            <a href="{{ Route('home')}}" class="menu-item ">
                 <span><i class="uil uil-home"></i></span> <h3>Home</h3>
             </a>
             <a class="menu-item ">
@@ -86,7 +52,7 @@
             </div>
         </div>
 
-<div class="listaContainer">
+    <div class="listaContainer">
         <h1>Minhas Conversas</h1>
 
 <ul>

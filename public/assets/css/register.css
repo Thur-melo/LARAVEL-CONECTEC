@@ -187,8 +187,8 @@ form{
 
 /* Aplica estilo ao label quando o botão de rádio correspondente é selecionado */
 .botoesMain input[type="radio"]:checked + label {
-    border-color: #00c9e9;
-    background-color: #ebf8fa;
+    border-color: #3ad11b;
+    background-color: #e6fdda;
 }
 
 /* Efeito hover para os labels */

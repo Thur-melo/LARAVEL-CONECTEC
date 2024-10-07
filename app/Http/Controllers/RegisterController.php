@@ -39,9 +39,13 @@ public function showHome(Request $request)
     public function register(Request $request)
 
     {
-        
+        if (!str_contains($request->input('email'), 'etec')) {
+            return redirect()->back()->withErrors([
+                'email' => 'O email precisa conter "etec".',
+            ]);
+        }
 
-        $profilePhotoUrl = 'urlDaFoto/default.jpg';
+        $profilePhotoUrl = 'img/default.jpg';
 
         if ($request->hasFile('urlDaFoto')) {
             $file = $request->file('urlDaFoto');

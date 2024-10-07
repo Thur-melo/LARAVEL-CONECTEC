@@ -22,73 +22,34 @@
 
 <body>
 
-<nav>
-        <div class="container">
-            <div class="logoCont">
-                <span class="fontisto--cloudy"></span>  
-               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
-            </div>
-            <form  action="{{route('home')}}" method="get">
-                <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                    <input
-                    type="search"
-                    placeholder="Pesquisar... "
-                    name="s"
-                     id="s"
-                    />
-                </div>
-            </form>
-                <div class="createBtn">
-                    <div class="nomesNav">
-                        <span>{{ $user->name}}</span>
-                        <span>{{ $user->modulo}}</span>
-                    </div>
-                    <div class="profileImg">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                        
-                </div>
-                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-
-        </div>
-    </div>
-</nav>
+@include('partials.navbar')
 
 
     <main>
         <div class="container">
-            <div class="left">
-                <div class="sidebar">
+        <div class="left">
+            <div class="sidebar">
 
-                    <a href="{{ Route('home')}}" class="menu-item ">
-                        <span><i class="uil uil-home"></i></span>
-                        <h3>Home</h3>
-                    </a>
-                    <a class="menu-item ">
-                        <span><i class="uil uil-bell"></i></span>
-                        <h3>Notificações</h3>
-                    </a>
+            <a href="{{ Route('home')}}" class="menu-item ">
+                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
+            </a>
+            <a class="menu-item ">
+                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
+            </a>
 
-                    <a class="menu-item">
-                        <span><i class="uil uil-question-circle"></i></span>
-                        <h3>Perguntas</h3>
-                    </a>
-                    <a class="menu-item active" href="{{Route('chat.list')}}">
-                        <span><i class="uil uil-chat"></i></span>
-                        <h3>Chat</h3>
-                    </a>
-                    <a href="{{ Route('perfil')}}" class="menu-item ">
-                        <span><i class="uil uil-edit-alt"></i></span>
-                        <h3>Perfil</h3>
-                    </a>
+            <a class="menu-item">
+                <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
+            </a>
+            <a class="menu-item active " href="{{Route('chat.list')}}">
+                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
+            </a>
+            <a href="{{ Route('perfil')}}" class="menu-item ">
+                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
+            </a>
 
 
-                </div>
             </div>
+        </div>
 
             <div class="chat-container">
                 <div class="userTwo-container">

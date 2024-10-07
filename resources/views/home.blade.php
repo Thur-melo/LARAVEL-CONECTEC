@@ -27,42 +27,7 @@
     
 <body>
 
-
-<nav>
-        <div class="container">
-            <div class="logoCont">
-                <span class="fontisto--cloudy"></span>  
-               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
-            </div>
-            <form  action="{{route('home')}}" method="get">
-                <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                    <input
-                    type="search"
-                    placeholder="Pesquisar... "
-                    name="s"
-                     id="s"
-                    />
-                </div>
-            </form>
-                <div class="createBtn">
-                    <div class="nomesNav">
-                        <span>{{ $user->name}}</span>
-                        <span>{{ $user->modulo}}</span>
-                    </div>
-                    <div class="profileImg">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                        
-                </div>
-                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-
-        </div>
-    </div>
-</nav>
+@include('partials.navbar')
 
 <!-------------------------------------------  NavAbar -------------------------------------------------------------------------------------->
 
@@ -91,10 +56,10 @@
 
             </div>
         </div>
+      
 
 
-
-
+<!-------------------------------------------  Posts -------------------------------------------------------------------------------------->
 
         <div class="meio">
             <form class="criarPost">
@@ -106,17 +71,19 @@
                 </button>
                 </form>
 
-                @php
-                            $coresModulo = [
-                            '1º Módulo' => 'red',
-                            '2º Módulo' => 'blue',
-                            '3º Módulo' => 'green',
-                            
-                                ];
-                        @endphp
-
+            
 
                 @foreach($posts as $post)
+
+                @php
+                            $coresModulo = [
+                            '1º' => 'red',
+                            '2º' => 'blue',
+                            '3º' => 'yellow',
+                            
+                                ];
+
+                        @endphp
                 <div class="feeds">
                     <div class="feed">
                         
@@ -128,7 +95,7 @@
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
                                     <h3>{{ $post->user->name }}</h3>
                                  <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $post->user->modulo }}</p>
+                                    <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
                                 </div>
                                 
                                  </div>
@@ -174,7 +141,7 @@
                          </div>
                     </div>
                 @endforeach
-
+<!-------------------------------------------  Posts -------------------------------------------------------------------------------------->
         </div>
 
 
@@ -188,25 +155,7 @@
 
 
 </main>
-
-        <div class="modal fade" id="confirmLogoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="logoutModalLabel">Confirmar Logout</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Tem certeza de que deseja sair?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" id="confirmLogoutBtn">Sair</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-
+@include('partials.modalsair')
 
 
 
@@ -286,16 +235,7 @@ function previewImage(event) {
 
 
       
-        document.getElementById('logoutIcon').addEventListener('click', function () {
-        var myModal = new bootstrap.Modal(document.getElementById('confirmLogoutModal'));
-        myModal.show();
-    });
-
-    // Quando o botão "Sair" do modal for clicado, submete o formulário de logout
-    document.getElementById('confirmLogoutBtn').addEventListener('click', function () {
-        document.getElementById('logout-form').submit();
-    });
-
+    
     
     </script>
 

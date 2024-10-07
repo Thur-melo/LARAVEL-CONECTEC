@@ -228,7 +228,7 @@ main .container .left{
 }
 
 .tipo-div{
-    border: 2px dashed #00c9e9;
+    border: 3px dashed #00c9e9;
     background-color: transparent;
     padding: 2px;
     display: flex;

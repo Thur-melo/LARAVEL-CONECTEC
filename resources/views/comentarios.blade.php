@@ -18,86 +18,43 @@
 <body>
 
 
-@php
-                            $coresModulo = [
-                            '1º Módulo' => 'red',
-                            '2º Módulo' => 'blue',
-                            '3º Módulo' => 'green',
-                            
-                                ];
-                        @endphp
+   
 
-<nav>
-        <div class="container">
-            <div class="logoCont">
-                <span class="fontisto--cloudy"></span>  
-               <img src= "{{url('assets/img/logoConectec.png')}}"  id="logo">
-            </div>
-                <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                    <input
-                    type="search"
-                    placeholder="Pesquisar... "
-                    />
-                </div>
-                <div class="createBtn">
-                    <div class="nomesNav">
-                        <span>{{ $user->name}}</span>
-                        <span>{{ $user->modulo}}</span>
-                    </div>
-                    <div class="profileImg">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                        
-                </div>
-                <i class="fa-solid fa-right-from-bracket" id="logoutIcon" style="cursor: pointer;"></i>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-
-        </div>
-    </div>
-</nav>
+    @include('partials.navbar')
 
     <main>
         <div class="container">
-            <div class="left">
-                <div class="sidebar">
+        <div class="left">
+            <div class="sidebar">
 
-                    <a href="{{ Route('home')}}" class="menu-item active">
-                        <span><i class="uil uil-home"></i></span>
-                        <h3>Home</h3>
-                    </a>
-                    <a class="menu-item ">
-                        <span><i class="uil uil-bell"></i></span>
-                        <h3>Notificações</h3>
-                    </a>
+            <a href="{{ Route('home')}}" class="menu-item active">
+                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
+            </a>
+            <a class="menu-item ">
+                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
+            </a>
 
-                    <a class="menu-item">
-                        <span><i class="uil uil-question-circle"></i></span>
-                        <h3>Perguntas</h3>
-                    </a>
-                    <a class="menu-item " href="{{Route('chat.list')}}">
-                        <span><i class="uil uil-chat"></i></span>
-                        <h3>Chat</h3>
-                    </a>
-                    <a href="{{ Route('perfil')}}" class="menu-item ">
-                        <span><i class="uil uil-edit-alt"></i></span>
-                        <h3>Perfil</h3>
-                    </a>
+            <a class="menu-item">
+                <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
+            </a>
+            <a class="menu-item " href="{{Route('chat.list')}}">
+                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
+            </a>
+            <a href="{{ Route('perfil')}}" class="menu-item ">
+                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
+            </a>
 
 
-                </div>
             </div>
+        </div>
 
 
             @php
-                            $coresModulo = [
-                            '1º Módulo' => 'red',
-                            '2º Módulo' => 'blue',
-                            '3º Módulo' => 'green',
-                            
-                                ];
+            $coresModulo = [
+            '1º' => 'red',
+            '2º' => 'blue',
+             '3º' => 'green',       
+            ];
             @endphp
 
 
@@ -116,7 +73,7 @@
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
                                     <h3>{{ $post->user->name }}</h3>
                                  <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $post->user->modulo }}</p>
+                                    <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
                                 </div>
                                 
                                  </div>
@@ -193,7 +150,7 @@
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
                                     <h3>{{ $comentario->user->name }}</h3>
                                  <div class="modulo-div" style="background-color: {{ $coresModulo[$comentario->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $comentario->user->modulo }}</p>
+                                    <p>{{ $comentario->user->modulo }} {{ $post->user->perfil }}</p>
                                 </div>
                                 
                                  </div>
