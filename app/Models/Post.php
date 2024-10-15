@@ -33,4 +33,10 @@ class Post extends Model
         return self::where('texto', 'like', "%{$searchTerm}%")->get();
     }
     
+
+    // Post.php
+    public function likes() {
+        return $this->hasMany(Likes::class);
+    }
+
 }

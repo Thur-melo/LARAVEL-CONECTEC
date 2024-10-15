@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}"> 
 
@@ -106,13 +108,6 @@
                                  
                                 
                          </div>
-
-                         
-
-                             
-                        
-                            
-
                          <div class="tipoCont">
                             <div class="tipo-div">
                                 <p>{{ $post->tipo_post }}</p>
@@ -130,7 +125,16 @@
 
                          <div class="action-button">
                              <div class="interaction-button">
-                                 <span><i class="uil uil-thumbs-up"></i></span>
+
+                             <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
+                                    @if($post->likes()->where('user_id', Auth::id())->exists())
+                                        <i class="fas fa-heart liked"></i>
+                                    @else
+                                        <i class="far fa-heart"></i>
+                                    @endif
+                                </span>
+                            <span class="likes-count">{{ $post->likes()->count() }}</span>
+
                                  <a href="{{ route('comentarios', $post->id) }}">
                                  <i class="uil uil-comment"></i>
                                  </a> 
@@ -212,6 +216,14 @@
 
 <script> 
 
+
+
+
+
+
+
+
+
 function previewImage(event) {
             var image = document.getElementById('imagePreview');
             var file = event.target.files[0];
@@ -232,11 +244,7 @@ function previewImage(event) {
                 myModal.show();
             });
         @endif
-
-
-      
-    
-    
+ 
     </script>
 
 
@@ -245,5 +253,6 @@ function previewImage(event) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="{{ asset('js/like.js') }}"></script>
 </body>
 </html>

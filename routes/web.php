@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\ComentariosController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\likeController;
 
 
 
@@ -39,6 +40,7 @@ Route::post('/logout', [RegisterController::class, 'logout'])->name('logout');
 
 
 
+
 Route::get('/registerAdm', [adminController::class, 'showAdmForm'])->name('registerAdm');
 Route::post('/registerAdm', [adminController::class, 'registerAdm']);
 
@@ -63,3 +65,4 @@ Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'
 
 
 
+Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->middleware('auth');
