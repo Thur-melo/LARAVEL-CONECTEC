@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\preferenciasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
@@ -10,6 +11,10 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\likeController;
 
 
+
+
+Route::post('/salvar-preferencias', [preferenciasController::class, 'store'])->name('preferencias.store');
+Route::get('/preferencias', [preferenciasController::class, 'showPreferencias'])->name('preferencias');
 
 Route::get('/', function () {
     return redirect('/login');

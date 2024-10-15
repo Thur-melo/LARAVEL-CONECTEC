@@ -51,6 +51,9 @@
             <a href="{{ Route('perfil')}}" class="menu-item active">
                 <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
             </a>
+            <a href="{{ Route('preferencias')}}" class="menu-item">
+                <span><i class="uil uil-edit-alt"></i></span> <h3>preferencias</h3>
+            </a>
 
 
             </div>
