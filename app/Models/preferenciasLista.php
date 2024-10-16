@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Preferencia extends Model
+class preferenciasLista extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'preferencia_id','nomePreferencia']; // Atualize para 'preferencia_id'
+    protected $table = 'preferenciasLista';
+
+    protected $fillable = [
+        'name',
+    ];
+    
 
 
 
@@ -19,8 +24,4 @@ public function users()
     return $this->belongsToMany(User::class, 'preferencia_user');
 }
 
-public function preferenciaslista()
-{
-    return $this->belongsToMany(User::class, 'preferencia_lista');
-}
 }

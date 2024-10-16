@@ -13,8 +13,10 @@ use App\Http\Controllers\profileController;
 
 
 
+Route::post('/adminPreferencias', [preferenciasController::class, 'storeLista'])->name('preferenciasLista.store');
+Route::get('/adminPreferencias', [preferenciasController::class, 'index'])->name('preferenciasLista');
 
-Route::post('/salvar-preferencias', [preferenciasController::class, 'store'])->name('preferencias.store');
+Route::post('/preferencias', [preferenciasController::class, 'store'])->name('preferencias.store');
 Route::get('/preferencias', [preferenciasController::class, 'showPreferencias'])->name('preferencias');
 
 Route::get('/', function () {
@@ -75,3 +77,4 @@ Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'
 
 
 Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->middleware('auth');
+ 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Preferencia;
+use App\Models\preferenciasLista;
 
 
 
@@ -15,8 +16,10 @@ class preferenciasController extends Controller
 
     public function showPreferencias(){
         $user = Auth::User();
-    
-        return view('preferencias', );
+        $preferenciasLista = PreferenciasLista::all();
+        $preferenciasDoUsuario = $user->preferencia;
+
+        return view('preferencias', compact('preferenciasLista', 'preferenciasDoUsuario'));
     }
 
 
@@ -43,5 +46,31 @@ class preferenciasController extends Controller
     }
     
 
+    // admin
+
+
+    public function index()
+    {
+        $preferenciasLista = PreferenciasLista::all();
+
+        return view('adminPreferencias', compact('preferenciasLista'));
+    }
+
+
+    public function storeLista(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|unique:preferenciasLista|max:100',
+        ]);
+
+        PreferenciasLista::create([
+            'name' => $request->input('name'),
+        ]);
+
+
+
+        return redirect()->route('preferenciasLista')->with('success', 'Preferência criada com sucesso!');
+    }
+    
 
 }
