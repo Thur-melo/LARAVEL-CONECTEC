@@ -124,6 +124,7 @@ main .container .left{
     overflow: hidden;
 }
 
+
 .profileImgPost img{
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -132,6 +133,11 @@ main .container .left{
     overflow: hidden;
 }
 
+.horaPost{
+    color: rgb(255, 0, 0);
+    font-size: 6pt;
+
+}
 
 .meio .feeds .feed{
     background: white;

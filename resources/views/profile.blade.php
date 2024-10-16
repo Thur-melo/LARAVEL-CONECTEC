@@ -130,7 +130,7 @@
                         </div>
                         
                          </div>
-                             <p>{{ $post->user->perfil }}</p>
+                         <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
                              
                          </div>
                          

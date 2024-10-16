@@ -318,3 +318,28 @@ main .container .left{
     color: gray;
 }
 
+
+.like-btn i {
+    color: #000; 
+    transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.like-btn.liked i {
+    color: red; 
+    transform: scale(1.2); 
+}
+
+.interaction-button i{
+    font-size: 15pt;
+    cursor: pointer;
+
+}
+.interaction-button i:hover{
+    transform: scale(1.1);
+
+}
+
+.interaction-button span{
+    font-size: 12pt;
+
+}

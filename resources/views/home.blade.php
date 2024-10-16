@@ -92,18 +92,19 @@
                          <div class="user">
                              <div class="profileImg">
                              <a href="{{ route('profile', ['id' => $post->user->id]) }}">
-                                 <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
+                                 <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
                             </a>
                              </div>
                              <div class="info">
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                    <h3>{{ $post->user->name }}</h3>
+                                    <h3>{{ '@' . $post->user->name }} </h3>
+                                    
                                  <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
                                     <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
                                 </div>
                                 
                                  </div>
-                                     <p>{{ $post->user->perfil }}</p>
+                                 <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
                                      
                                  </div>
                                  
