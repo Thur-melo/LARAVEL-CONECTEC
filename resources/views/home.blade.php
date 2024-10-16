@@ -91,7 +91,9 @@
                         
                          <div class="user">
                              <div class="profileImg">
+                             <a href="{{ route('profile', ['id' => $post->user->id]) }}">
                                  <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
+                            </a>
                              </div>
                              <div class="info">
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
@@ -145,7 +147,7 @@
                          </div>
                     </div>
                 @endforeach
-<!-------------------------------------------  Posts -------------------------------------------------------------------------------------->
+<!-------------------------------------------  Postsss -------------------------------------------------------------------------------------->
         </div>
 
 

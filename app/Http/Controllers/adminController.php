@@ -18,6 +18,12 @@ public function showperfil(){
     return view('perfil', compact('user'));
 }
 
+public function showprofile(){
+    $user = Auth::User();
+
+    return view('profile', compact('user'));
+}
+
 public function showPerguntas() {
 
     $user = Auth::user();

@@ -9,6 +9,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\ComentariosController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\likeController;
+use App\Http\Controllers\profileController;
 
 
 
@@ -21,6 +22,9 @@ Route::get('/', function () {
 });
 Route::get('/perfil', [adminController::class, 'showperfil']) ->name('perfil');
 Route::post('/perfil/user/{id}', [adminController::class, 'update'])->name('user.update');
+Route::get('/profile/{id}', [profileController::class,'profile'])->name('profile');
+
+
 
 
 Route::get('/admin', [adminController::class, 'showadmin']) ->name('admin');
