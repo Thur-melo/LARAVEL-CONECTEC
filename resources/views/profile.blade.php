@@ -77,8 +77,11 @@
                     
                     <div class="contInfo">
                         <div class="nomePerfil">
-                            <h2>{{ '@' . $usuario->name }}</h2>
-                            
+                            <div class="nomes">
+                                <h2>{{  $usuario->name }}</h2>
+                                <h3>{{  $usuario->arroba }}</h3>
+                            </div>
+
                             <button>seguir</button>
                         </div>
                     
@@ -99,7 +102,7 @@
                     </div>
 
                     <div class="descUser">
-                       menininho que gosta de mexer nos compuiteerkkkkj (descrição)
+                        {{$user->bio}}
                     </div>
                 </div>
             

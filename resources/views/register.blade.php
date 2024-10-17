@@ -44,6 +44,16 @@
                     </div>
 
                     <div class="inputForm">
+                        <label for="arroba">
+                            arroba
+                        </label>
+                        <div class="inputText">
+                            <input type="text" id="arroba" name="arroba" placeholder="Ex: Neymar_Jr" >
+                            
+                        </div>
+                    </div>
+
+                    <div class="inputForm">
                         <label for="email">
                             E-mail
                         </label>
@@ -99,6 +109,7 @@
             @csrf
 
             <input type="hidden" id="hiddenNome" name="name" value="">
+            <input type="hidden" id="hiddenArroba" name="arroba" value="">
             <input type="hidden" id="hiddenEmail" name="email" value="">
             <input type="hidden" id="hiddenSenha" name="password" value="">
             <input type="hidden" id="hiddenPerfil" name="role" value="">
@@ -187,19 +198,21 @@ function nextStep() {
 
 
         var nome = document.getElementById('nome').value;
+        var arroba = document.getElementById('arroba').value;
         var email = document.getElementById('email').value;
         var senha = document.getElementById('senha').value;
      
 
 
 
-        if (!nome || !email || !senha || !selectedRole) {
-            alert("Por favor, preencha todos os campos e selecione um perfil.");
-            return;
-        }
+        if (!nome || !arroba || !email || !senha || !selectedRole) {
+        alert("Por favor, preencha todos os campos e selecione um perfil.");
+        return;
+    }
 
         
         document.getElementById('hiddenNome').value = nome;
+        document.getElementById('hiddenArroba').value = arroba;
         document.getElementById('hiddenEmail').value = email;
         document.getElementById('hiddenSenha').value = senha;
         document.getElementById('hiddenPerfil').value = selectedRole.value;

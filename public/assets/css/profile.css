@@ -343,3 +343,13 @@ main .container .left{
     font-size: 12pt;
 
 }
+
+
+.nomes{
+    flex-direction: column;
+}
+
+.nomes h3{
+    color: gray;
+    font-size: 1.3rem;
+}

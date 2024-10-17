@@ -59,11 +59,14 @@ public function showHome(Request $request)
 
         User::create([
             'name' => $request->input('name'),
+            'arroba' => $request->input('arroba'),
             'email' => $request->input('email'),
             'password' => $request->input('password'),
             'urlDaFoto' => $profilePhotoUrl,
             'modulo' => $request->input('module'),
             'perfil' => $request->input('role'),
+            'bio' => $request->input('bio'), // Adiciona o campo bio
+
            
         ]);
 

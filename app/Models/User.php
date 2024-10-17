@@ -12,12 +12,14 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'arroba',
         'email',
         'password',
         'modulo',
         'perfil',
         'status',
         'urlDaFoto',
+        'bio',
     ];
 
     protected $hidden = [

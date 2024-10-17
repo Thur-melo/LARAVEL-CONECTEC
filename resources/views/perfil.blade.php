@@ -124,6 +124,9 @@
     </div>
     </div> 
             </div>
+            <div class="linha">
+                <textarea name="bio" id="bio" cols="50" rows="4" placeholder="bio">{{ $user->bio }}</textarea>
+            </div>
 
             <div class="linha">  
                 <div class="botoesImg">

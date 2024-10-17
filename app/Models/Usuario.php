@@ -15,11 +15,13 @@ class Usuario extends Model
 
     protected $fillable = [
         'nome',
+        'arroba',
         'emailUser',
         'senha',
         'modulo',
         'perfil',
         'urlDaFoto',
+        'bio',
     ];
 
 
