@@ -12,6 +12,7 @@ use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
 
 
+
 Route::get('/postagens', [RegisterController::class, 'showPostagens']) ->name('postagens');
 
 

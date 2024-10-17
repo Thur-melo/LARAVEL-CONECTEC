@@ -18,59 +18,58 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-</head>
 
+    
 <body>
 
     <!--inicio menu lateral -->
-
     <div class="menu-lateral">
         <div class="brand-name">
-            <img src="{{url('assets/img/logoConectec.png')}}" id="logo" alt="">
+            <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
         </div>
         <ul>
-        <a href="{{ route('adminHome') }}" class="sidebarBotao active">
-            <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
-        </a>
-        <a href="{{ route('admin') }}" class="sidebarBotao active">
-            <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
-        </a>
+            <a href="{{ route('adminHome') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
+            </a>
+            <a href="{{ route('admin') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
+            </a>
+            
             <li> <span class="material-icons" id="icons">person</span> <span>Administrador</span> </li>
             <li> <span class="material-icons" id="icons">chat</span> <span>Chat </span> </li>
-
-            
-
+            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
+            </a>
         </ul>
-        
-       
     </div>
 
     <!--final menu lateral -->
 
     <div class="container">
-        <div class="header">
-            <div class="nav">
-                <div class="text">
-                </div>
-                <div class="buscar">
-                    <input type="text" placeholder="Pesquisar...">
-                </div>
-                <div class="usuario">
-                    <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil">
-                </div>
-                
-            </div>
-            <div class="botaoLogar">
-            <a href="{{ route('login') }}"><button>Logar como usuario</button></a>
-            </div>
-            <div class="botaoLogar">
-            <a href="{{ route('registerAdm') }}"><button>Cadastrar um novo adm</button></a>
+    <div class="header">
+    <div class="nav">
+        <!-- <div class="buscar">
+            <input type="text" placeholder="Pesquisar..." class="search-bar">
+        </div> -->
+        <div class="usuario">
+            <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil" class="user-img">
+            <div class="botoes">
+                <a href="{{ route('login') }}">
+                    <button class="btn-usuario">Logar como usuário</button>
+                </a>
+                <a href="{{ route('registerAdm') }}">
+                    <button class="btn-adm">Cadastrar novo adm</button>
+                </a>
             </div>
         </div>
+    </div>
+</div>
+
         <div class="content">
             <div class="cards">
 
-                <div class="card">
+                <!-- Card "Usuários Totais" que agora abre o modal -->
+                <div class="card" id="btnUsuariosTotais">
                     <div class="box">
                         <h1>{{$qnt_users}}</h1>
                         <h3>Usuários Totais</h3>
@@ -80,10 +79,11 @@
                     </div>
                 </div>
 
+                <!-- Outros cards -->
                 <div class="card">
                     <div class="box">
                         <h1>{{$qnt_alunos}}</h1>
-                        <h3>Total de Alunos</h3>
+                        <h3>Total de Aluno Ds</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
@@ -93,76 +93,146 @@
                 <div class="card">
                     <div class="box">
                         <h2>{{$qnt_professores}}</h2>
-                        <h3>Total de Professores</h3>
+                        <h3>Total de Aluno Nutrição</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-graduate"></i></span>
                     </div>
                 </div>
 
-
-
                 <div class="card">
                     <div class="box">
                         <h2>{{$qnt_outros}}</h2>
-
-                        <h3>Outros</h3>
+                        <h3>Total de Aluno ADM</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">
-                            <i class="fa-regular fa-circle-question"></i>
+                    <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
                     </div>
-                    </span>
                 </div>
             </div>
-            <div class="content2">
-                <div class="tabela-usuarios">
-                    @if($users->isEmpty())
-                    <h1>Sem Usuários Cadastrados</h1>
-                    @else
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        @foreach($users as $user)
-                        <tbody>
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->status}}</td>
-                                <td>
-                                    <div class="statusDiv">
-                                        <form action="{{ route('user.off', $user->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btnStatus" id="btnDesativa" onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
-                                                Desativar
-                                            </button>
-                                        </form>
-                                        <form action="{{ route('user.ativa', $user->id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="btnStatus" id="btnAtiva" onclick="return confirm('Tem certeza que deseja Ativar este usuário?')">
-                                                Ativar
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+
+            <!-- Modal -->
+            <div id="modalUsuarios" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeModal">&times;</span>
+                    <h2>Usuários Totais</h2>
+
+            
+                    
+                    <!-- Tabela de Usuários no Modal -->
+                    <div class="tabela-usuarios">
+                        @if($users->isEmpty())
+                        <h3>Sem Usuários Cadastrados</h3>
+                        @else
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            @foreach($users as $user)
+                            <tbody>
+                                <tr>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->status}}</td>
+                                    <td>
+                                        <div class="statusDiv">
+                                            <form action="{{ route('user.off', $user->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btnStatus" id="btnDesativa"
+                                                    onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
+                                                    Desativar
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('user.ativa', $user->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btnStatus" id="btnAtiva"
+                                                    onclick="return confirm('Tem certeza que deseja Ativar este usuário?')">
+                                                    Ativar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
                             @endforeach
                             @endif
-                        </tbody>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+
+
+        
+     
+
+       
+            <svg width="600" height="350">
+
+            <text x="40" y="30">Crescimento de Usúarios</text>
+            
+    <!-- Eixo Y -->
+
+    <!-- Eixo X -->
+    <line x1="80" y1="280" x2="520" y2="280" class="axis" />
+
+    <!-- Barras -->
+    <rect x="100" y="160" width="60" height="120" class="bar" />
+    <rect x="200" y="100" width="60" height="180" class="bar" />
+    <rect x="300" y="60" width="60" height="220" class="bar" />
+    <rect x="400" y="200" width="60" height="80" class="bar" />
+    <rect x="500" y="130" width="60" height="150" class="bar" />
+
+    <!-- Valores Acima das Barras -->
+    <text x="130" y="150" class="value">40</text>
+    <text x="230" y="90" class="value">60</text>
+    <text x="330" y="50" class="value">80</text>
+    <text x="430" y="190" class="value">20</text>
+    <text x="530" y="120" class="value">50</text>
+
+    <!-- Rótulos -->
+    <text x="110" y="300" class="label">Junho</text>
+    <text x="215" y="300" class="label">Julho</text>
+    <text x="310" y="300" class="label">Agosto</text>
+    <text x="410" y="300" class="label">Setembro</text>
+    <text x="510" y="300" class="label">Outubro</text>
+
+
+</svg>
+
         </div>
+    </div>
+    
+    <!-- Script para abrir e fechar o modal -->
+    <script>
+        // Abrir o modal ao clicar no card "Usuários Totais"
+        document.getElementById('btnUsuariosTotais').addEventListener('click', function () {
+            document.getElementById('modalUsuarios').style.display = 'block';
+        });
+
+        // Fechar o modal ao clicar no "x"
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('modalUsuarios').style.display = 'none';
+        });
+
+        // Fechar o modal ao clicar fora da área do modal
+        window.onclick = function (event) {
+            var modal = document.getElementById('modalUsuarios');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
 </body>
 
 </html>

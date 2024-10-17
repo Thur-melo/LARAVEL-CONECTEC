@@ -7,6 +7,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Preferencia;
 use App\Models\preferenciasLista;
+use App\Models\Post;
+use Illuminate\Support\Facades\DB;
+
+
 
 
 
@@ -26,7 +30,10 @@ class preferenciasController extends Controller
         $preferenciasListaOutro = PreferenciasLista::where('curso', 'Outro')->get();
         $preferenciasUser = Preferencia::where('user_id', $userId)->get();
 
-        return view('preferencias', compact('user','preferenciasUser', 'preferenciasLista', 'preferenciasListaDS', 'preferenciasListaNutri', 'preferenciasListaADM', 'preferenciasListaOutro'));
+
+    
+
+        return view('preferencias', compact('user', 'preferenciasUser', 'preferenciasLista', 'preferenciasListaDS', 'preferenciasListaNutri', 'preferenciasListaADM', 'preferenciasListaOutro'));
     }
 
 
@@ -64,6 +71,8 @@ class preferenciasController extends Controller
 
         return redirect()->route('perfil')->with('success', 'Preferências salvas com sucesso!');
     }
+
+
 
     public function destroyPreferencia($preferenciaId)
     {
@@ -124,6 +133,19 @@ class preferenciasController extends Controller
             $preferenciasLista = preferenciasLista::all();
         }
 
+             // Obter contagem de preferências por curso
+    $qnt_postCursos = PreferenciasLista::select('curso', DB::raw('count(*) as total'))
+    ->whereIn('curso', ['D.S', 'Nutrição', 'ADM'])
+    ->groupBy('curso')
+    ->get()
+    ->keyBy('curso');
+
+// Obter contagem de postagens por tipo
+$qnt_postTipo = Post::select('tipo_post', DB::raw('count(*) as total'))
+    ->groupBy('tipo_post')
+    ->get()
+    ->keyBy('tipo_post');
+
         return view('adminPreferencias', compact(
             'preferenciasLista',
             'qnt_preferencia',
@@ -134,7 +156,8 @@ class preferenciasController extends Controller
             'preferenciasListaDS',
             'preferenciasListaNutri',
             'preferenciasListaADM',
-            'preferenciasListaOutro'
+            'preferenciasListaOutro',
+            'qnt_postCursos', 'qnt_postTipo', 
         ));
     }
 

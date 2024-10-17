@@ -25,17 +25,21 @@
     <!--inicio menu lateral -->
     <div class="menu-lateral">
         <div class="brand-name">
-            <img src="{{url('assets/img/logoConectec.png')}}" id="logo" alt="">
+            <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
         </div>
         <ul>
-            <a href="{{ route('adminHome') }}" class="sidebarBotao">
+            <a href="{{ route('adminHome') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
             </a>
-            <a href="{{ route('admin') }}" class="sidebarBotao">
+            <a href="{{ route('admin') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
+            
             <li> <span class="material-icons" id="icons">person</span> <span>Administrador</span> </li>
             <li> <span class="material-icons" id="icons">chat</span> <span>Chat </span> </li>
+            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
+            </a>
         </ul>
     </div>
 
@@ -48,7 +52,7 @@
                 <div class="usuario">
                     <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil" class="user-img">
                     <div class="botoes">
-                        <button class="btn-adm" id="btncadastroPreferencia">Cadastrar nova Preferencia</button>
+                        <button class="btn-adm" id="btncadastroPreferencia">Cadastrar nova Preferência</button>
                     </div>
                 </div>
             </div>
@@ -61,7 +65,7 @@
                 <div class="card" id="btnTotal">
                     <div class="box">
                         <h1>{{$qnt_preferencia}}</h1>
-                        <h3>Preferencias Totais</h3>
+                        <h3>Preferências Totais</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card">people</span>
@@ -73,7 +77,7 @@
                 <div class="card" id="btnDS">
                     <div class="box">
                         <h1>{{$qnt_DS}}</h1>
-                        <h3>Preferencias DS</h3>
+                        <h3>Preferências DS</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
@@ -83,7 +87,7 @@
                 <div class="card" id="btnNutri">
                     <div class="box">
                         <h2>{{$qnt_Nutri}}</h2>
-                        <h3>Preferencias Nutrição</h3>
+                        <h3>Preferências Nutrição</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-graduate"></i></span>
@@ -93,7 +97,7 @@
                 <div class="card" id="btnADM">
                     <div class="box">
                         <h2>{{$qnt_ADM}}</h2>
-                        <h3>Preferencias ADM</h3>
+                        <h3>Preferências ADM</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card">
@@ -105,7 +109,7 @@
                 <div class="card" id="btnOutro">
                     <div class="box">
                         <h1>{{$qnt_Outro}}</h1>
-                        <h3>Preferencias Outros</h3>
+                        <h3>Preferências Outros</h3>
                     </div>
                     <div class="icon-case">
                         <span class="material-icons" id="icons-card">people</span>
@@ -115,13 +119,49 @@
             </div>
          
             
+        <svg width="600" height="350">
+    <text x="40" y="30">Número de Preferências Cadastradas por Curso</text>
+
+    <!-- Eixo X -->
+    <line x1="80" y1="280" x2="520" y2="280" class="axis" />
+
+    @php
+        // Lista de cursos específicos que você deseja exibir
+        $cursosEspecificos = ['D.S', 'Nutrição', 'ADM'];
+    @endphp
+
+    @foreach($cursosEspecificos as $index => $curso)
+        @php
+            // Obtenha a contagem de preferências para cada curso
+            $qnt_postagens = $qnt_postCursos[$curso]->total ?? 0;
+
+            // Verifique se $qnt_postagens é um número
+            $qnt_postagens = is_numeric($qnt_postagens) ? $qnt_postagens : 0;
+
+            $barHeight = $qnt_postagens * 1.5; // Ajuste a escala como necessário
+            $yPosition = 280 - $barHeight * 10; // Ajuste a posição Y da barra
+            $xPosition = 100 + ($index * 80); // Espaçamento entre as barras
+        @endphp
+        
+        <!-- Barras -->
+        <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="60" height="{{ $barHeight * 10 }}" class="bar" />
+  
+        <!-- Valores Acima das Barras -->
+        <text x="{{ $xPosition + 15 }}" y="{{ $yPosition - 10 }}" class="value">{{ $qnt_postagens }}</text>
+
+        <!-- Rótulos -->
+        <text x="{{ $xPosition }}" y="300" class="label">{{ $curso }}</text>
+    @endforeach
+</svg>
+
+            
                       
 
             <!-- Modal -->
             <div id="modalUsuarios" class="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModal">&times;</span>
-                    <h2>Preferencias Totais</h2>
+                    <h2>Preferências Totais</h2>
                 
           
 
@@ -145,7 +185,7 @@
                     <!-- Tabela de Usuários no Modal -->
                     <div class="tabela-usuarios">
                         @if($preferenciasLista->isEmpty())
-                        <h3>Sem Preferencias Cadastrados</h3>
+                        <h3>Sem Preferências Cadastrados</h3>
                         @else
                         <table>
                             <thead>
@@ -190,7 +230,7 @@
                <div id="modalDS" class="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModalDs">&times;</span>
-                    <h2>Preferencias Desenvolvimento de Sistemas</h2>
+                    <h2>Preferências Desenvolvimento de Sistemas</h2>
                 
           
 
@@ -214,7 +254,7 @@
                     <!-- Tabela de Usuários no Modal -->
                     <div class="tabela-usuarios">
                         @if($preferenciasLista->isEmpty())
-                        <h3>Sem Preferencias Cadastrados</h3>
+                        <h3>Sem Preferências Cadastrados</h3>
                         @else
                         <table>
                             <thead>
@@ -257,7 +297,7 @@
             <div id="modalNutri" class="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModalNutri">&times;</span>
-                    <h2>Preferencias Nutrição</h2>
+                    <h2>Preferências Nutrição</h2>
                 
           
 
@@ -281,7 +321,7 @@
                     <!-- Tabela de Usuários no Modal -->
                     <div class="tabela-usuarios">
                         @if($preferenciasLista->isEmpty())
-                        <h3>Sem Preferencias Cadastrados</h3>
+                        <h3>Sem Preferências Cadastrados</h3>
                         @else
                         <table>
                             <thead>
@@ -325,7 +365,7 @@
             <div id="modalADM" class="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModalADM">&times;</span>
-                    <h2>Preferencias Administração</h2>
+                    <h2>Preferências Administração</h2>
                 
           
 
@@ -349,7 +389,7 @@
                     <!-- Tabela de Usuários no Modal -->
                     <div class="tabela-usuarios">
                         @if($preferenciasLista->isEmpty())
-                        <h3>Sem Preferencias Cadastrados</h3>
+                        <h3>Sem Preferências Cadastrados</h3>
                         @else
                         <table>
                             <thead>
@@ -392,7 +432,7 @@
             <div id="modalOutro" class="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModalOutro">&times;</span>
-                    <h2>Preferencias Outros</h2>
+                    <h2>Preferências Outros</h2>
                 
           
 
@@ -416,7 +456,7 @@
                     <!-- Tabela de Usuários no Modal -->
                     <div class="tabela-usuarios">
                         @if($preferenciasLista->isEmpty())
-                        <h3>Sem Preferencias Cadastrados</h3>
+                        <h3>Sem Preferências Cadastrados</h3>
                         @else
                         <table>
                             <thead>
