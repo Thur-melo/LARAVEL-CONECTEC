@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
-
+use App\Models\preferenciasLista;
 
 class RegisterController extends Controller
 {
@@ -21,17 +21,21 @@ class RegisterController extends Controller
     return view('login');
 }
 
+public function showPostagens()
+{
+    return view('postagens');
+}
 
 public function showHome(Request $request)
 {
-
+    $preferenciasLista = PreferenciasLista::all();
     if ($request->has('s')) {
         $posts = Post::search($request->input('s'));
     } else {
         $posts = Post::with('user')->where('status', 1)->orderBy('created_at', 'desc')->get();
     }
     $user = Auth::user();
-    return view('home', compact('user', 'posts'));
+    return view('home', compact('user', 'posts', 'preferenciasLista'));
 }
 
 

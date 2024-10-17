@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class preferenciasLista extends Model
+class PreferenciasLista extends Model
 {
     use HasFactory;
 
@@ -13,15 +13,16 @@ class preferenciasLista extends Model
 
     protected $fillable = [
         'name',
+        'curso',
     ];
-    
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'preferencias', 'preferencia_id', 'user_id');
+    }
 
-
-
-public function users()
-{
-    return $this->belongsToMany(User::class, 'preferencia_user');
-}
-
+    public static function search($searchTerm)
+    {
+        return self::where('name', 'like', "%{$searchTerm}%")->get();
+    }
 }

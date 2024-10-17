@@ -12,7 +12,10 @@ use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
 
 
+Route::get('/postagens', [RegisterController::class, 'showPostagens']) ->name('postagens');
 
+
+Route::delete('/adminPreferencias/{id}', [preferenciasController::class, 'destroy'])->name('preferenciasLista.destroy');
 Route::post('/adminPreferencias', [preferenciasController::class, 'storeLista'])->name('preferenciasLista.store');
 Route::get('/adminPreferencias', [preferenciasController::class, 'index'])->name('preferenciasLista');
 

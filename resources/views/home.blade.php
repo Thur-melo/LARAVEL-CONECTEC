@@ -45,7 +45,7 @@
                 <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
             </a>
 
-            <a class="menu-item">
+            <a  href="{{ Route('postagens')}}" class="menu-item">
                 <span><i class="uil uil-question-circle"></i></span> <h3>Postagens</h3>
             </a>
             <a class="menu-item " href="{{Route('chat.list')}}">
@@ -81,7 +81,7 @@
                             $coresModulo = [
                             '1º' => 'red',
                             '2º' => 'blue',
-                            '3º' => 'yellow',
+                            '3º' => 'green',
                             
                                 ];
 
@@ -190,12 +190,11 @@
                             <div class="publicarInput"style="margin-top:10px">
                                  <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost"  accept="image/*" onchange="previewImage(event)">
                             </div>
-
-                            <select class="form-select"style="margin-top:10px" aria-label="Default select example" name="tipo">
-                                <option value="Informativo">Informativo</option>
-                                <option value="Aula">Aula</option>
-                                <option value="Duvida">Duvida</option>
-                                <option value="Estagios">Estagios</option>
+                                
+                                <select class="form-select"style="margin-top:10px" aria-label="Default select example" name="tipo">
+                                @foreach($preferenciasLista as $preferencia)
+                                <option value="{{ $preferencia->name }}">{{ $preferencia->name }}</option>
+                                @endforeach
                                 </select>
                                 <div class="previewModal">
                                 <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">

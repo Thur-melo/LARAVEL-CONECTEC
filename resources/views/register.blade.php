@@ -48,7 +48,7 @@
                             E-mail
                         </label>
                         <div class="inputText">
-                            <input type="email" id="email" name="email" placeholder="Ex: nome@gmail.com" >
+                            <input type="email" id="email" name="email" placeholder="Ex: nome@etec.sp.gov.br" >
                             
                         </div>
                     </div>

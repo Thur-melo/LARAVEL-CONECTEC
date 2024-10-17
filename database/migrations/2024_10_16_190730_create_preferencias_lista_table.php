@@ -10,6 +10,7 @@ class CreatePreferenciasListaTable extends Migration
         Schema::create('preferenciasLista', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // nome
+            $table->string('curso'); //curso
             $table->timestamps();
         });
     }
