@@ -6,14 +6,14 @@
     /* box-shadow: 0 2px 50px rgba(255, 255, 255, 0.747); */
     max-width: 700px;
     width: 100%;
-    height: 90%;
+    height: 600px;
     overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-h1 {
+.container2 h1 {
     font-size: 24px; /* Aumentar um pouco o tamanho */
     color: #3f3950;
     font-weight: 600;
@@ -48,7 +48,7 @@ form {
 .interest-card {
     background-color: #ffffff;
     border-radius: 15px;
-    padding: 15px; /* Aumentar o padding para mais conforto */
+    padding: 5px; /* Aumentar o padding para mais conforto */
     text-align: center;
     transition: all 0.3s ease;
     font-size: 14px;
@@ -78,12 +78,13 @@ form {
     font-size: 14px;
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 20px;
 }
 
 .submit-btn:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .submit-btn:active {
@@ -121,6 +122,41 @@ form {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555555d8; /* Cor ao passar o mouse sobre o "polegar" */
+}
+
+svg {
+    background: linear-gradient(135deg, #ffffff, #f4f4f9);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.bar {
+    fill: #00aaff;
+    rx: 5;
+    ry: 5;
+    transition: fill 0.3s, height 0.3s;
+}
+
+.bar:hover {
+    fill: #055c87;
+}
+
+.label, .value {
+    font-size: 13px;
+    fill: #555;
+}
+
+.axis {
+    stroke-width: 3;
+    stroke: #ccc;
+}
+
+.value {
+    text-anchor: middle;
+    font-weight: bold;
+    fill: #222;
 }
 
 

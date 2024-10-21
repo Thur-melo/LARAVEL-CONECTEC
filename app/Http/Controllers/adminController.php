@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Adm;
+use App\Models\PreferenciasLista;
 use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
@@ -29,7 +30,19 @@ public function showPerguntas() {
     $user = Auth::user();
     $posts = Post::orderBy('created_at', 'desc')->get(); 
     $qnt_posts = Post::all()-> count();
-    $qnt_info = Post::where('tipo_post', 'Informativo')-> count();
+    $qnt_tipos = PreferenciasLista::all()-> count();
+    $preferenciasLista = PreferenciasLista::all();
+
+    $qnt_postTipo = Post::select('tipo_post', DB::raw('count(*) as total'))
+    ->groupBy('tipo_post')
+    ->get()
+    ->keyBy('tipo_post');
+
+    $qnt_postCursos = PreferenciasLista::select('curso', DB::raw('count(*) as total'))
+        ->groupBy('curso')
+        ->get()
+        ->keyBy('curso');
+
     $qnt_aula = Post::where('tipo_post', 'Aula')-> count();
     $qnt_duvida = Post::where('tipo_post', 'Duvida')-> count();
     $qnt_estagios = Post::where('tipo_post', 'Estagios')-> count();
@@ -37,11 +50,16 @@ public function showPerguntas() {
     $qnt_postAtivos = Post::where('status', 1)-> count();
 
 
+        
+   
+ 
+
+
 
     $users = User::all();
 
 
-    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_info', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos'));
+    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_postTipo',  'qnt_postCursos', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos', 'qnt_tipos', 'preferenciasLista'));
 }
 
 public function showadmin(){

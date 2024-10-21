@@ -13,6 +13,7 @@ use App\Http\Controllers\profileController;
 use App\Http\Controllers\seguirController;
 
 
+
 Route::get('/postagens', [RegisterController::class, 'showPostagens']) ->name('postagens');
 
 

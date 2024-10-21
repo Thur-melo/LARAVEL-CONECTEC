@@ -42,8 +42,8 @@
                 <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
             </a>
 
-            <a class="menu-item">
-                <span><i class="uil uil-question-circle"></i></span> <h3>Perguntas</h3>
+            <a href="{{ Route('postagens')}}" class="menu-item">
+                <span><i class="uil uil-question-circle"></i></span> <h3>Postagens</h3>
             </a>
             <a class="menu-item " href="{{Route('chat.list')}}">
                 <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
