@@ -45,7 +45,7 @@
 
                     <div class="inputForm">
                         <label for="arroba">
-                            arroba
+                            Arroba (@)
                         </label>
                         <div class="inputText">
                             <input type="text" id="arroba" name="arroba" placeholder="Ex: Neymar_Jr" >

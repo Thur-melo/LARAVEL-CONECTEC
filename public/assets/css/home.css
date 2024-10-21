@@ -32,6 +32,7 @@ main .container .left{
     margin-top: 1rem;
     background: white;
     border-radius: 1rem;
+    box-shadow: rgba(116, 116, 116, 0.315) 0px 2px 5px 0px;
 }
 
 .left .sidebar .menu-item{
@@ -103,6 +104,7 @@ main .container .left{
     margin-top: 1rem;
     background: white;
     padding: 0.4rem 1rem;
+    box-shadow: rgba(116, 116, 116, 0.315) 0px 2px 5px 0px;
     border-radius: 2rem;
 }
 
@@ -146,6 +148,7 @@ main .container .left{
     margin: 1rem 0;
     font-size: 0.85rem;
     line-height: 1.5;
+    box-shadow: rgba(116, 116, 116, 0.315) 0px 2px 5px 0px;
 }
 
 .meio .feed .head{
@@ -220,7 +223,7 @@ main .container .left{
   padding: 4px 10px; 
   border-radius: 25px;
   height: 100%;
- 
+  box-shadow: rgba(116, 116, 116, 0.315) 0px 2px 5px 0px;
 }
 
 .modulo-div p{

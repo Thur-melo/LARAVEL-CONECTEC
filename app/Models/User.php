@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class User extends Authenticatable
 {
@@ -39,4 +41,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(PreferenciasLista::class, 'preferencias', 'user_id', 'preferencia_id');
     }
+
+    
+    public function seguindo(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'seguidores', 'seguidor_id', 'seguindo_id');
+    }
+
+    public function seguidores(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'seguidores', 'seguindo_id', 'seguidor_id');
+    }
+
 }

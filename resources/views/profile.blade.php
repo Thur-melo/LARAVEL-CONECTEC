@@ -82,7 +82,14 @@
                                 <h3>{{  $usuario->arroba }}</h3>
                             </div>
 
-                            <button>seguir</button>
+                            <button class="follow-btn" data-user-id="{{ $usuario ->id }}" data-action="@if(Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists()) unfollow @else follow @endif">
+                                
+                                @if(Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists())
+                                    Deixar de Seguir
+                                @else
+                                    Seguir
+                                @endif
+                        </button>
                         </div>
                     
                 
@@ -92,7 +99,8 @@
                             <span>Posts</span>
                         </div>
                         <div class="infos">
-                            <span>2110</span>
+                            <span>{{ $usuario->seguidores()->count() }}</span>
+                            
                             <span>Seguidores</span>
                         </div>
                         <div class="infos">
@@ -115,7 +123,7 @@
             $coresModulo = [
             '1º' => 'red',
             '2º' => 'blue',
-            '3º' => 'yellow',
+            '3º' => 'green',
             ];
         @endphp
 
@@ -236,5 +244,6 @@ function previewImage(event) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="{{ asset('js/like.js') }}"></script>
+    <script src="{{ asset('js/seguir.js') }}"></script>
 </body>
 </html>
