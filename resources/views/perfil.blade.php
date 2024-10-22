@@ -59,10 +59,12 @@
             </div>
         </div>
 
-
-
         <div class="meio">
 
+
+
+
+        
         <form  method="POST"  action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data" id="formPerfil">
             @csrf
         <div class="title">
