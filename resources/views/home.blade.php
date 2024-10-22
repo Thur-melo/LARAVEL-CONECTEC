@@ -165,10 +165,6 @@
     </div>
     
    
-    
-<div class="right">
-    <h1>ola</h1>
-</div>
   
 </main>
 
