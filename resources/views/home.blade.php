@@ -39,22 +39,27 @@
             <div class="sidebar">
 
             <a href="{{ Route('home')}}" class="menu-item active">
-                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
+                <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
             </a>
             <a class="menu-item ">
-                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
+                <span><i class="fa-regular fa-bell"></i></span> <h3>Notificações</h3>
             </a>
 
             <a  href="{{ Route('postagens')}}" class="menu-item">
-                <span><i class="uil uil-question-circle"></i></span> <h3>Postagens</h3>
+                <span><i class="fa-regular fa-images"></i></span> <h3>Postagens</h3>
             </a>
             <a class="menu-item " href="{{Route('chat.list')}}">
-                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
-            </a>
-            <a href="{{ Route('perfil')}}" class="menu-item ">
-                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
+                <span><i class="fa-regular fa-message"></i></span> <h3>Chat</h3>
             </a>
 
+            <a class="menu-item " href="{{Route('chat.list')}}">
+                <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
+            </a>
+
+            <a class="menu-item " href="{{Route('chat.list')}}" >
+            <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
+            </a>
+            
 
             </div>
         </div>
@@ -79,9 +84,9 @@
 
                 @php
                             $coresModulo = [
-                            '1º' => 'red',
-                            '2º' => 'blue',
-                            '3º' => 'green',
+                            '1º' => '#CD4642',
+                            '2º' => '#5169B1',
+                            '3º' => '#64B467',
                             
                                 ];
 

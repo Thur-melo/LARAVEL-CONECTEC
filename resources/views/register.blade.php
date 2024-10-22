@@ -35,7 +35,7 @@
                 <div class="grupo-inputs">
                     <div class="inputForm">
                         <label for="nome">
-                            Nome (Apelido)
+                            Nome completo
                         </label>
                         <div class="inputText">
                             <input type="text" id="nome" name="name" placeholder="Ex: NeymarJr" >
@@ -45,7 +45,7 @@
 
                     <div class="inputForm">
                         <label for="arroba">
-                            Arroba (@)
+                            Nome de usúario
                         </label>
                         <div class="inputText">
                             <input type="text" id="arroba" name="arroba" placeholder="Ex: Neymar_Jr" >

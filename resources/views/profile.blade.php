@@ -55,6 +55,9 @@
                 <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
             </a>
 
+            
+            
+
 
             </div>
         </div>
@@ -120,11 +123,13 @@
         @foreach($posts as $post)
 
         @php
-            $coresModulo = [
-            '1º' => 'red',
-            '2º' => 'blue',
-            '3º' => 'green',
-            ];
+        $coresModulo = [
+                            '1º' => '#CD4642',
+                            '2º' => '#5169B1',
+                            '3º' => '#64B467',
+                            
+                                ];
+
         @endphp
 
         <div class="feeds">
