@@ -75,7 +75,7 @@
                         <h3>Usuários Totais</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">people</span>
+                    <span class="material-icons" id="icons-card" style="color: #111111;">groups_2</span>
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
                         <h3>Total de Aluno Ds</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
+                        <span class="material-icons" id="icons-card" style="color: #0051ffce;"> <i class="fa-solid fa-user-tie"></i></span>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                         <h3>Total de Aluno Nutrição</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-graduate"></i></span>
+                        <span class="material-icons" id="icons-card" style="color: #3ea043ec;"> <i class="fa-solid fa-user-graduate"></i></span>
                     </div>
                 </div>
 
@@ -106,7 +106,7 @@
                         <h3>Total de Aluno ADM</h3>
                     </div>
                     <div class="icon-case">
-                    <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
+                    <span class="material-icons" id="icons-card" style="color: #ff0000b0;"> <i class="fa-solid fa-user-tie"></i></span>
                     </div>
                 </div>
             </div>

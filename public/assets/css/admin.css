@@ -465,6 +465,43 @@ svg {
     fill: #055c87;
 }
 
+.bar1 {
+    fill: #0051ffec;
+    rx: 5;
+    ry: 5;
+    transition: fill 0.3s, height 0.3s;
+    cursor: pointer;
+}
+
+.bar1:hover {
+    fill: #0051ffce;
+}
+
+.bar2 {
+    fill: #3ea043ec;
+    rx: 5;
+    ry: 5;
+    transition: fill 0.3s, height 0.3s;
+    cursor: pointer;
+}
+
+.bar2:hover {
+    fill: #3ea043cb;
+}
+
+.bar3 {
+    fill: #ff0000b0;
+    rx: 5;
+    ry: 5;
+    transition: fill 0.3s, height 0.3s;
+    cursor: pointer;
+}
+
+.bar3:hover {
+    fill: #ff00009c;
+}
+
+
 .label, .value {
     font-size: 13px;
     fill: #555;

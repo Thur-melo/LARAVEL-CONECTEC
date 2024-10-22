@@ -74,13 +74,23 @@
                     </div>
                 </div>
 
+                <div class="card" id="openModalTypesBtn">
+                    <div class="box">
+                        <h2>{{$qnt_tipos}}</h2>
+                        <h3>Tipos de Post</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" id="icons-card">pending_actions</span>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="box">
                         <h1>{{$qnt_postInativos}}</h1>
                         <h3>Posts inativos</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> sentiment_dissatisfied</span>
+                        <span class="material-icons" id="icons-card" style="color: red;"> sentiment_dissatisfied</span>
                     </div>
                 </div>
 
@@ -91,20 +101,12 @@
                     </div>
 
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">pending_actions</span>
+                        <span class="material-icons" id="icons-card" style="color: green">sentiment_satisfied</span>
                     </div>
                 </div>
 
                 <!-- Card Tipos de Post com ação de abrir modal -->
-                <div class="card" id="openModalTypesBtn">
-                    <div class="box">
-                        <h2>{{$qnt_tipos}}</h2>
-                        <h3>Tipos de Post</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" id="icons-card">pending_actions</span>
-                    </div>
-                </div>
+              
             </div>
 
             @php
@@ -132,9 +134,9 @@
 <line x1="80" y1="280" x2="520" y2="280" class="axis" />
 
 <!-- Barras -->
-<rect x="100" y="160" width="60" height="120" class="bar" />
-<rect x="200" y="100" width="60" height="180" class="bar" />
-<rect x="300" y="60" width="60" height="220" class="bar" />
+<rect x="100" y="160" width="60" height="120" class="bar1" style="color: green;" />
+<rect x="200" y="100" width="60" height="180" class="bar2" />
+<rect x="300" y="60" width="60" height="220" class="bar3" />
 
 
 <!-- Valores Acima das Barras -->

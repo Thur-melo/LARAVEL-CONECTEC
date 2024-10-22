@@ -80,7 +80,7 @@
                         <h3>Preferências DS</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-tie"></i></span>
+                        <span class="material-icons" id="icons-card" style="color: #0051ffce;"> <i class="fa-solid fa-user-tie"></i></span>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
                         <h3>Preferências Nutrição</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card"> <i class="fa-solid fa-user-graduate"></i></span>
+                        <span class="material-icons" id="icons-card" style="color: #3ea043ec;"> <i class="fa-solid fa-user-graduate"></i></span>
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@
                         <h3>Preferências ADM</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">
+                        <span class="material-icons" id="icons-card" style="color: #ff0000b0;">
                             <i class="fa-regular fa-circle-question"></i>
                         </span>
                     </div>
@@ -125,9 +125,22 @@
     <!-- Eixo X -->
     <line x1="80" y1="280" x2="520" y2="280" class="axis" />
 
+    <svg width="600" height="350">
+    <text x="40" y="30">Número de Preferências Cadastradas por Curso</text>
+
+    <!-- Eixo X -->
+    <line x1="80" y1="280" x2="520" y2="280" class="axis" />
+
     @php
         // Lista de cursos específicos que você deseja exibir
         $cursosEspecificos = ['D.S', 'Nutrição', 'ADM'];
+
+        // Definindo as cores para cada curso
+        $coresBarras = [
+            'D.S' => '#0051ffec',
+            'Nutrição' => '#3ea043ec',
+            'ADM' => '#ff0000b0',
+        ];
     @endphp
 
     @foreach($cursosEspecificos as $index => $curso)
@@ -144,7 +157,7 @@
         @endphp
         
         <!-- Barras -->
-        <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="60" height="{{ $barHeight * 10 }}" class="bar" />
+        <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="60" height="{{ $barHeight * 10 }}" class="bar" style="fill: {{ $coresBarras[$curso] ?? '#ccc' }};"/>
   
         <!-- Valores Acima das Barras -->
         <text x="{{ $xPosition + 15 }}" y="{{ $yPosition - 10 }}" class="value">{{ $qnt_postagens }}</text>
@@ -153,6 +166,7 @@
         <text x="{{ $xPosition }}" y="300" class="label">{{ $curso }}</text>
     @endforeach
 </svg>
+
 
             
                       
