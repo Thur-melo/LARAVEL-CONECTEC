@@ -135,7 +135,7 @@ class preferenciasController extends Controller
 
              // Obter contagem de preferências por curso
     $qnt_postCursos = PreferenciasLista::select('curso', DB::raw('count(*) as total'))
-    ->whereIn('curso', ['D.S', 'Nutrição', 'ADM'])
+    ->whereIn('curso', ['D.S', 'Nutrição', 'ADM', 'Outro'])
     ->groupBy('curso')
     ->get()
     ->keyBy('curso');

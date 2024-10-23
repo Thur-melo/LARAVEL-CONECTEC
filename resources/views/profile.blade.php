@@ -75,7 +75,31 @@
 
             <div class="meio">
                 <div class="perfilContainer">
-                    <h1>OI</h1>
+                    <div class="fundo">
+                    <img src= "{{url('assets/img/fundo.jpg')}}"  id="banner">
+                    </div>
+
+          
+                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" class="profileImg" id="icon">
+                   
+
+                    <div class="infoContainer">
+                        <div class="rowEditarPerfil">
+                            <button type="button"  data-bs-toggle="modal" data-bs-target="#modalPost"> Editar Perfil
+                        </div>
+                        <div class="rowNomeUser">
+                            <h1 class="username">{{ $user->name}}</h1>
+                            <p class="arroba"> {{ '@' . $user->name }} </p>
+                        </div>
+
+                        <div class="rowBio">
+                            <div class="bio">
+                                <p>{{ $user->bio }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
 

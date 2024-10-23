@@ -1,3 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+   font-family: 'Roboto';
+}
 
 
 main{
@@ -134,5 +140,51 @@ main .container .left{
     font-size: 0.85rem;
     line-height: 1.5;
     box-shadow: rgba(116, 116, 116, 0.315) 0px 2px 5px 0px;
+}
+
+
+
+.fundo{
+    width: 100%;
+    height: 200px;
+}
+
+#banner{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#icon{
+    position: absolute;
+    top: 150px;
+    width: 13%;
+    margin-left: 2%;
+    height: auto;
+    border: 3px solid white;
+
+}
+
+.rowEditarPerfil {
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px;
+}
+
+.username {
+    font-size: 2.5rem; /* Tamanho da fonte */
+    color: #333; /* Cor do texto */
+    font-weight: bold; /* Negrito */
+ 
+}
+
+.arroba {
+    font-size: 1.0rem; /* Tamanho da fonte */
+    color: #616161; /* Cor do texto */
+    font-weight: bold; /* Negrito */
+ 
+}
+.infoContainer {
+    padding: 10px;
 }
 

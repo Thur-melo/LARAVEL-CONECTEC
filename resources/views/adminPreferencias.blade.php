@@ -68,10 +68,19 @@
                         <h3>Preferências Totais</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">people</span>
+                        <span class="material-icons" style="color: black;" id="icons-card">people</span>
                     </div>
                 </div>
                 
+                <div class="card" id="btnOutro">
+                    <div class="box">
+                        <h1>{{$qnt_Outro}}</h1>
+                        <h3>Preferências Outros</h3>
+                    </div>
+                    <div class="icon-case">
+                        <span class="material-icons" style="color: #686A6C;" id="icons-card">people</span>
+                    </div>
+                </div>
 
                 <!-- Outros cards -->
                 <div class="card" id="btnDS">
@@ -106,15 +115,7 @@
                     </div>
                 </div>
 
-                <div class="card" id="btnOutro">
-                    <div class="box">
-                        <h1>{{$qnt_Outro}}</h1>
-                        <h3>Preferências Outros</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" id="icons-card">people</span>
-                    </div>
-                </div>
+               
 
             </div>
          
@@ -133,13 +134,14 @@
 
     @php
         // Lista de cursos específicos que você deseja exibir
-        $cursosEspecificos = ['D.S', 'Nutrição', 'ADM'];
+        $cursosEspecificos = ['D.S', 'Nutrição', 'ADM', 'Outro'];
 
         // Definindo as cores para cada curso
         $coresBarras = [
             'D.S' => '#0051ffec',
             'Nutrição' => '#3ea043ec',
             'ADM' => '#ff0000b0',
+            'Outro' => '#686A6C',
         ];
     @endphp
 
@@ -152,12 +154,12 @@
             $qnt_postagens = is_numeric($qnt_postagens) ? $qnt_postagens : 0;
 
             $barHeight = $qnt_postagens * 1.5; // Ajuste a escala como necessário
-            $yPosition = 280 - $barHeight * 10; // Ajuste a posição Y da barra
+            $yPosition = 280 - $barHeight * 5; // Ajuste a posição Y da barra
             $xPosition = 100 + ($index * 80); // Espaçamento entre as barras
         @endphp
         
         <!-- Barras -->
-        <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="60" height="{{ $barHeight * 10 }}" class="bar" style="fill: {{ $coresBarras[$curso] ?? '#ccc' }};"/>
+        <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="60" height="{{ $barHeight * 5 }}" class="bar" style="fill: {{ $coresBarras[$curso] ?? '#ccc' }};"/>
   
         <!-- Valores Acima das Barras -->
         <text x="{{ $xPosition + 15 }}" y="{{ $yPosition - 10 }}" class="value">{{ $qnt_postagens }}</text>
