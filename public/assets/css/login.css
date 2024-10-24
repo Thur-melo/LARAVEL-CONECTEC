@@ -13,12 +13,14 @@ body{
 }
 
 .loginCont{
+    width: 50%;
     align-items: center;
      width: 50%;
-   
     display: flex;
-    justify-content: center;
+    justify-content:left;
     flex-direction: column;
+    border: 1px solid #27272725;
+    margin-right: 50px;
 }
 
 
@@ -183,4 +185,8 @@ form{
     font-weight: 600;
     cursor: pointer;
 
+}
+
+.imgCont{
+    width: 50%;
 }
