@@ -212,10 +212,9 @@
                     <div class="publicarInput" style="margin-top:10px">
                         <label for="tipo_post">Selecione o tipo de publicação:</label>
                         <select class="form-select" aria-label="Selecione o tipo de publicação" id="tipo_post" name="tipo_post">
-                            <option selected disabled>Selecione</option>
-                            <option value="Pergunta">Pergunta</option>
-                            <option value="Comentário">Comentário</option>
-                            <option value="Outro">Outro</option>
+                        @foreach($preferenciasLista as $preferencia)
+                                <option value="{{ $preferencia->name }}">{{ $preferencia->name }}</option>
+                                @endforeach
                         </select>
                     </div>
                 </div>
