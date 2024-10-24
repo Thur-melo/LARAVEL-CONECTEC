@@ -30,6 +30,9 @@
 
    
     <div class="main">
+        <div class="imgCont"> 
+        <img src= "{{url('assets/img/img_login.png')}}"  >    
+        </div>
         <div class="loginCont" id="step1">
             <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" id="loginForm">
                 @csrf
