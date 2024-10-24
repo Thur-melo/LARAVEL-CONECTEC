@@ -24,244 +24,212 @@
     />
 </head>
 
-
-
-    
 <body>
 
 @include('partials.navbar')
 
-<!-------------------------------------------  NavAbar -------------------------------------------------------------------------------------->
-
+<!-------------------------------------------  Main Container ---------------------------------------------->
 <main> 
-    <div class="container">
-        <div class="left">
-            <div class="sidebar">
+    <div class="container"> <!-- Container geral que engloba toda a página -->
 
-            <a href="{{ Route('home')}}" class="menu-item active">
-                <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
-            </a>
-            <a class="menu-item ">
-                <span><i class="fa-regular fa-bell"></i></span> <h3>Notificações</h3>
-            </a>
+        <div class="left"> <!-- Seção da barra lateral esquerda -->
+            <div class="sidebar"> <!-- Sidebar com itens de menu -->
+                <a href="{{ Route('home')}}" class="menu-item active">
+                    <span><i class="fa-solid fa-house"></i></span> <h3>Home</h3>
+                </a>
+                <a class="menu-item ">
+                    <span><i class="fa-regular fa-bell"></i></span> <h3>Notificações</h3>
+                </a>
 
-            <a  href="{{ Route('postagens')}}" class="menu-item">
-                <span><i class="fa-regular fa-images"></i></span> <h3>Postagens</h3>
-            </a>
-            <a class="menu-item " href="{{Route('chat.list')}}">
-                <span><i class="fa-regular fa-message"></i></span> <h3>Chat</h3>
-            </a>
+                <a href="{{ Route('postagens')}}" class="menu-item">
+                    <span><i class="fa-regular fa-images"></i></span> <h3>Postagens</h3>
+                </a>
+                <a class="menu-item" href="{{Route('chat.list')}}">
+                    <span><i class="fa-regular fa-message"></i></span> <h3>Chat</h3>
+                </a>
 
-            <a class="menu-item " href="{{Route('chat.list')}}">
-                <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
-            </a>
+                <a class="menu-item" href="{{Route('chat.list')}}">
+                    <span><i class="fa-regular fa-square-plus"></i></span> <h3>Criar</h3>
+                </a>
 
-            <a class="menu-item " href="{{Route('chat.list')}}" >
-            <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
-            </a>
-            
-
-            </div>
-        </div>
-      
-
+                <a class="menu-item" href="{{Route('chat.list')}}">
+                    <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
+                </a>
+            </div> <!-- Fim da Sidebar -->
+        </div> <!-- Fim da barra lateral esquerda -->
 
 <!-------------------------------------------  Posts -------------------------------------------------------------------------------------->
+        <div class="meio"> <!-- Seção principal de posts -->
+            <form class="criarPost"> <!-- Formulário de criar post -->
+                <div class="profileImgPost">
+                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                </div>
+                <input type="text" placeholder="Faça uma pergunta" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
+                <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost">Publicar</button>
+            </form> <!-- Fim do formulário de criar post -->
 
-        <div class="meio">
-            <form class="criarPost">
-                    <div class="profileImgPost">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                    </div>
-                    <input type="text" placeholder="Faça uma pergunta" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
-                    <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
-                </button>
-                </form>
+            @foreach($posts as $post)
 
-            
+            @php
+                $coresModulo = [
+                    '1º' => '#CD4642',
+                    '2º' => '#5169B1',
+                    '3º' => '#64B467',
+                ];
+            @endphp
 
-                @foreach($posts as $post)
+            <div class="feeds"> <!-- Seção de feeds -->
+                <div class="feed"> <!-- Cada post individual -->
 
-                @php
-                            $coresModulo = [
-                            '1º' => '#CD4642',
-                            '2º' => '#5169B1',
-                            '3º' => '#64B467',
-                            
-                                ];
-
-                        @endphp
-                <div class="feeds">
-                    <div class="feed">
-                        
-                         <div class="user">
-                             <div class="profileImg">
-                             <a href="{{ route('profile', ['id' => $post->user->id]) }}">
-                                 <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
+                    <div class="user"> <!-- Informações do usuário do post -->
+                        <div class="profileImg"> <!-- Imagem de perfil do usuário -->
+                            <a href="{{ route('profile', ['id' => $post->user->id]) }}">
+                                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
                             </a>
-                             </div>
-                             <div class="info">
-                                <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                    <h3>{{ '@' . $post->user->name }} </h3>
-                                    
-                                 <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
-                                </div>
-                                
-                                 </div>
-                                 <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
-                                     
-                                 </div>
-                                 
-                                 
-                                
-                         </div>
-                         <div class="tipoCont">
-                            <div class="tipo-div">
-                                <p>{{ $post->tipo_post }}</p>
-                            </div>
                         </div>
-                         <div class="textoPost">
-                            {{ $post->texto }}
-                         </div>
+                        <div class="info"> <!-- Informações sobre o usuário e o post -->
+                            <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                                <h3>{{ '@' . $post->user->name }}</h3>
 
-                         <div class="imgPost">
-                         <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                            </a>
-                         </div>
+                                <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                    <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
+                                </div>
+                            </div>
+                            <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                        </div> <!-- Fim das informações do post -->
+                    </div> <!-- Fim da seção do usuário -->
 
-                         <div class="action-button">
-                             <div class="interaction-button">
+                    <div class="tipoCont"> <!-- Tipo de post -->
+                        <div class="tipo-div">
+                            <p>{{ $post->tipo_post }}</p>
+                        </div>
+                    </div> <!-- Fim do tipo de post -->
 
-                             <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
-                                    @if($post->likes()->where('user_id', Auth::id())->exists())
-                                        <i class="fas fa-heart liked"></i>
-                                    @else
-                                        <i class="far fa-heart"></i>
-                                    @endif
-                                </span>
+                    <div class="textoPost"> <!-- Conteúdo do post -->
+                        {{ $post->texto }}
+                    </div> <!-- Fim do conteúdo do post -->
+
+                    <div class="imgPost"> <!-- Imagem do post -->
+                        <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                            <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                        </a>
+                    </div> <!-- Fim da imagem do post -->
+
+                    <div class="action-button"> <!-- Botões de interação -->
+                        <div class="interaction-button">
+                            <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
+                                @if($post->likes()->where('user_id', Auth::id())->exists())
+                                    <i class="fas fa-heart liked"></i>
+                                @else
+                                    <i class="far fa-heart"></i>
+                                @endif
+                            </span>
                             <span class="likes-count">{{ $post->likes()->count() }}</span>
 
-                                 <a href="{{ route('comentarios', $post->id) }}">
-                                 <i class="uil uil-comment"></i>
-                                 </a> 
-                             </div>
-                             <div class="bookmark">
-                                 <span><i class="uil uil-bookmark"></i></span>
-                             </div>
-                         </div>
+                            <a href="{{ route('comentarios', $post->id) }}">
+                                <i class="uil uil-comment"></i>
+                            </a>
+                        </div>
+                        <div class="bookmark">
+                            <span><i class="uil uil-bookmark"></i></span>
+                        </div>
+                    </div> <!-- Fim dos botões de interação -->
+
+                </div> <!-- Fim do post individual -->
+            </div> <!-- Fim da seção de feeds -->
+
+            @endforeach
+
+        </div> <!-- Fim da seção principal de posts -->
+             <div class="right">
+                    <div class="emAltaCont">
+
+                        <div class="headerAlta">
+                            <h2>Em alta</h2>
+                        </div>
+
+                        <div class="listaAlta">
+                            <div class="cursoAlta">
+                                <span class="cursoLista">DS- Progamação e algoritimos</span>
+                                <span class="assuntoAlta">#JavaOuPython</span>
+                                <span class="qtdsPostAlta">129 Posts</span>
+                            </div>
+
+                            <div class="cursoAlta">
+                                <span class="cursoLista">Nutrição- Comidas e massinhas</span>
+                                <span class="assuntoAlta">#ComoFazerArrozSemPanelaEeAguaKkkkj</span>
+                                <span class="qtdsPostAlta">2 Posts</span>
+                            </div>
+
+                            <div class="cursoAlta">
+                                <span class="cursoLista">ADM- Caixa de mercado e uber</span>
+                                <span class="assuntoAlta">#ComoImprimirDinheirokkkkj</span>
+                                <span class="qtdsPostAlta">1.200 Posts</span>
+                            </div>
+
+                            <div class="cursoAlta">
+                                <span class="cursoLista">Outros- Geral</span>
+                                <span class="assuntoAlta">#NaoSeiOqColocarAqui</span>
+                                <span class="qtdsPostAlta">532 Posts</span>
+                            </div>
+                        </div>
+
                     </div>
-                @endforeach
-                
-<!-------------------------------------------  Postsss -------------------------------------------------------------------------------------->
-        </div>
+            
+              </div> 
 
 
-       
-    </div>
+              
 
+    </div> <!-- Fim do container geral -->
 
-    </div>
-    
-   
-  
-</main>
-
+</main> <!-- Fim do main -->
 
 @include('partials.modalsair')
 
+<!-------------------------------------------  Modal -------------------------------------------------------------------------------------->
 
-
-            <div class="modal" tabindex="-1"  id="modalPost">
-                    <form action="{{ route('home')}}"  method="post" enctype="multipart/form-data">
-                        @csrf
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Criar uma nova publicação</h4>
-                        </div>
-                        <div class="modal-body" >
-                            
-                            <!-- <div class="publicarInput">
-                            <h5 lass="modal-title">Título da publicação</h5>
-                            <p> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
-                            <input type="text" class="form-control" name="texto" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-                            </div> -->
-                            
-                            <div class="publicarInput">
-                            <h5 class="modal-title" style="font-weight:600">Descrição da publicação</h5>
-                            <p style="font-weight:500; color:#AFAFAF; font-size:10pt"> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
-                            <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Faça sua pergunta aqui..." required></textarea>
-                            </div>
-                            <div class="publicarInput"style="margin-top:10px">
-                                 <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost"  accept="image/*" onchange="previewImage(event)">
-                            </div>
-                                
-                                <select class="form-select"style="margin-top:10px" aria-label="Default select example" name="tipo">
-                                @foreach($preferenciasLista as $preferencia)
-                                <option value="{{ $preferencia->name }}">{{ $preferencia->name }}</option>
-                                @endforeach
-                                </select>
-                                <div class="previewModal">
-                                <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">
-                                </div>
-                        </div>
-
-                            
-
-
-                        <div class="modal-footer" id="mf">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button  type="submit" class="postarBotao">Publicar</button>
-                        </div>
-                    </div>
-                    </form>
+<div class="modal" tabindex="-1" id="modalPost">
+    <form action="{{ route('home') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Criar uma nova publicação</h4>
                 </div>
+                <div class="modal-body">
+                    <div class="publicarInput">
+                        <h5 class="modal-title" style="font-weight:600">Descrição da publicação</h5>
+                        <p style="font-weight:500; color:#AFAFAF; font-size:10pt">Para postagem ser enviada são necessários pelo menos 10 caracteres.</p>
+                        <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Faça sua pergunta aqui..." required></textarea>
+                    </div>
+                    <div class="publicarInput" style="margin-top:10px">
+                        <input type="file" id="file-input" name="fotoPost" accept="image/*" style="display:none" />
+                        <label for="file-input">
+                            <i class="fas fa-camera"></i> Adicionar Foto
+                        </label>
+                    </div>
+                    <div class="publicarInput" style="margin-top:10px">
+                        <label for="tipo_post">Selecione o tipo de publicação:</label>
+                        <select class="form-select" aria-label="Selecione o tipo de publicação" id="tipo_post" name="tipo_post">
+                            <option selected disabled>Selecione</option>
+                            <option value="Pergunta">Pergunta</option>
+                            <option value="Comentário">Comentário</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Fechar</button>
+                    <button class="btn btn-primary" type="submit">Publicar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> <!-- Fim do modal -->
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-0FXbuKXKHmnD+fJ2NUCRsZ0mjMRiNGvbapG1lB+2sCniUX9cUGMBigvWuOYyVCV9" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
-                <!-- Modal de Confirmação -->
-                
-
-<script> 
-
-
-
-
-
-
-
-
-
-function previewImage(event) {
-            var image = document.getElementById('imagePreview');
-            var file = event.target.files[0];
-            
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    image.src = e.target.result;
-                    image.style.display = 'block'; 
-                }
-                reader.readAsDataURL(file); 
-            }
-        }
-
-        @if(session('showModal'))
-            document.addEventListener('DOMContentLoaded', function() {
-                var myModal = new bootstrap.Modal(document.getElementById('successModal'));
-                myModal.show();
-            });
-        @endif
- 
-    </script>
-
-
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-    <script src="{{ asset('js/like.js') }}"></script>
 </body>
 </html>
