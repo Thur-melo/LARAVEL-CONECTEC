@@ -180,11 +180,32 @@ main .container .left{
 
 .arroba {
     font-size: 1.0rem; /* Tamanho da fonte */
-    color: #616161; /* Cor do texto */
+    color: #8a8a8a; /* Cor do texto */
     font-weight: bold; /* Negrito */
  
 }
 .infoContainer {
     padding: 10px;
 }
+.bio{
+    width: 400px; /* Defina a largura desejada */
+    max-height: 110px; /* Limite de altura */
+    padding: 10px;
+    overflow-wrap: break-word; /* Permite quebra de palavras longas */
+    overflow: hidden; /* Oculta o conteúdo que excede a altura */
+    text-overflow: ellipsis; /* Adiciona reticências se o texto exceder */
+    display: -webkit-box; /* Para usar com -webkit-line-clamp */
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 5; /* Número de linhas a exibir */
+    
+}
 
+.bio p{
+    font-size: 16px; /* Tamanho da fonte */
+    color: #14171a; 
+}
+
+.footerPerfil{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;}

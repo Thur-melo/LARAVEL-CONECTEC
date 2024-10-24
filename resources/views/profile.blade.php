@@ -98,6 +98,13 @@
                             </div>
                         </div>
 
+                        <div class="footerPerfil">
+                            <span class="material-symbols-outlined">
+                            calendar_month
+                            </span>
+                            <p>{{ $user->created_at->diffForHumans() }}</p>
+                        </div>
+
                     </div>
 
                 </div>
