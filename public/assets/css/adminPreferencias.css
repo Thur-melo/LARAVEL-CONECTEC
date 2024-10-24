@@ -161,6 +161,7 @@ body {
     justify-content: space-between;
     align-items: center;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .card:hover {
@@ -421,7 +422,7 @@ tr:hover {
 
 .usuario .btn-usuario, .btn-adm {
     padding: 10px 10px;
-    background-color: #1ABC9C;
+    background-color: #00c9e9;
     color: white;
     border: none;
     border-radius: 8px; /* Border radius nos botões */
@@ -430,7 +431,7 @@ tr:hover {
 }
 
 .usuario .btn-usuario:hover, .btn-adm:hover {
-    background-color: #16a085;
+    background-color: #00c9e9;
 }
 a {
     text-decoration: none; 

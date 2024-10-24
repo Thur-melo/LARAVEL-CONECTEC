@@ -70,7 +70,7 @@
                         <h3>Total de posts</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">post_add</span>
+                        <span class="material-icons" style="color: #111111;" id="icons-card">post_add</span>
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
                         <h3>Tipos de Post</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card">pending_actions</span>
+                        <span class="material-icons"  id="icons-card">pending_actions</span>
                     </div>
                 </div>
 
