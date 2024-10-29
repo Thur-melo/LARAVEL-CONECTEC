@@ -60,6 +60,31 @@ public function updateAtiva($id)
     return redirect()->route('adminHome')->with('success', 'Status do post atualizado para 2!');
 }
 
+public function popular()
+    {
+        $posts = Post::with('user') // Carregar o usuário que fez o post
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('posts.index', ['posts' => $posts]);
+    }
+
+    public function seguindo()
+    {
+        $user = Auth::user();
+
+        
+        $seguindoIds = $user->seguindo()->pluck('id');
+
+        // Pegar apenas os posts desses usuários
+        $posts = Post::whereIn('user_id', $seguindoIds)
+            ->with('user') // Carregar o usuário que fez o post
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('posts.index', ['posts' => $posts]);
+    }
+
 
 
 

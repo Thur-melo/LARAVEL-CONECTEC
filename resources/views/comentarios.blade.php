@@ -28,22 +28,27 @@
             <div class="sidebar">
 
             <a href="{{ Route('home')}}" class="menu-item active">
-                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
+                <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
             </a>
             <a class="menu-item ">
-                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
+                <span><i class="fa-regular fa-bell"></i></span> <h3>Notificações</h3>
             </a>
 
-            <a href="{{ Route('postagens')}}" class="menu-item">
-                <span><i class="uil uil-question-circle"></i></span> <h3>Postagens</h3>
+            <a  href="{{ Route('postagens')}}" class="menu-item">
+                <span><i class="fa-regular fa-images"></i></span> <h3>Postagens</h3>
             </a>
             <a class="menu-item " href="{{Route('chat.list')}}">
-                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
-            </a>
-            <a href="{{ Route('perfil')}}" class="menu-item ">
-                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
+                <span><i class="fa-regular fa-message"></i></span> <h3>Chat</h3>
             </a>
 
+            <a class="menu-item " href="{{Route('chat.list')}}">
+                <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
+            </a>
+
+            <a class="menu-item " href="{{Route('perfil')}}" >
+            <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
+            </a>
+            
 
             </div>
         </div>
@@ -51,127 +56,165 @@
 
             @php
             $coresModulo = [
-            '1º' => 'red',
-            '2º' => 'blue',
-             '3º' => 'green',       
-            ];
+            '1º' => '#CD4642',
+            '2º' => '#5169B1',
+            '3º' => '#64B467',
+        ];
             @endphp
 
 
 
             <div class="meio">
+    <!-- Início da estrutura de feeds -->
+    <div class="feeds">
+        <!-- Início do feed individual -->
+        <div class="feed">
 
-                <div class="feeds">
-                    <div class="feed">
+            <!-- Início da seção de usuário -->
+            <div class="user">
+                <!-- Início da imagem de perfil do usuário -->
+                <div class="profileImg">
+                    <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
+                </div>
+                <!-- Fim da imagem de perfil do usuário -->
 
-                              
-                    <div class="user">
-                             <div class="profileImg">
-                                 <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="">
-                             </div>
-                             <div class="info">
-                                <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                    <h3>{{ $post->user->name }}</h3>
-                                 <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
-                                </div>
-                                
-                                 </div>
-                                     <p>{{ $post->user->perfil }}</p>
-                                     
-                                 </div>
-                                 
-                                 
-                                
-                         </div>
+                <!-- Início das informações do usuário -->
+                <div class="info">
+                    <!-- Início do cabeçalho das informações -->
+                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
 
-                         <div class="tipoCont">
-                            <div class="tipo-div">
-                                <p>{{ $post->tipo_post }}</p>
-                            </div>
+                        <!-- Início da div do módulo do usuário -->
+                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                            <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
                         </div>
-                        <div class="textoPost">
-                            {{ $post->texto }}
+                        <!-- Fim da div do módulo do usuário -->
+                    </div>
+                    <!-- Fim do cabeçalho das informações -->
+
+                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                </div>
+                <!-- Fim das informações do usuário -->
+            </div>
+            <!-- Fim da seção de usuário -->
+
+            <!-- Início da div do tipo de conteúdo -->
+            <div class="tipoCont">
+                <div class="tipo-div">
+                    <p>{{ $post->tipo_post }}</p>
+                </div>
+            </div>
+            <!-- Fim da div do tipo de conteúdo -->
+
+            <!-- Início da div de texto do post -->
+            <div class="textoPost">
+                {{ $post->texto }}
+            </div>
+            <!-- Fim da div de texto do post -->
+
+            <!-- Início da div de imagem do post -->
+            <div class="imgPost">
+                <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+            <!-- Fim da div de imagem do post -->
+
+            <!-- Início dos botões de ação -->
+            <div class="action-button">
+                <!-- Início dos botões de interação -->
+                <div class="interaction-button">
+                    <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
+                        @if($post->likes()->where('user_id', Auth::id())->exists())
+                            <i class="fas fa-heart liked"></i>
+                        @else
+                            <i class="far fa-heart"></i>
+                        @endif
+                    </span>
+                    <span class="likes-count">{{ $post->likes()->count() }}</span>
+
+                    <a href="{{ route('comentarios', $post->id) }}">
+                        <button class="comentarioCotn">
+                            <i class="uil uil-comment"></i>
+                        </button>
+                    </a>
+                </div>
+                <!-- Fim dos botões de interação -->
+
+                <!-- Início do botão de salvar -->
+                <div class="bookmark">
+                    <span><i class="uil uil-bookmark"></i></span>
+                </div>
+                <!-- Fim do botão de salvar -->
+            </div>
+            <!-- Fim dos botões de ação -->
+
+            <!-- Início do cabeçalho dos comentários -->
+            <div class="headerComentarios">
+                @csrf
+
+                <!-- Início do filtro de data dos comentários -->
+                <div class="dataFiltro">
+                    <form method="GET" action="{{ route('comentarios.show', ['id' => $post->id]) }}">
+                        <select name="sortOrder" onchange="this.form.submit()">
+                            <option value="desc" {{ request('sortOrder') == 'desc' ? 'selected' : '' }}>Mais recente</option>
+                            <option value="asc" {{ request('sortOrder') == 'asc' ? 'selected' : '' }}>Mais antigo</option>
+                        </select>
+                    </form>
+                </div>
+                <!-- Fim do filtro de data dos comentários -->
+            </div>
+            <!-- Fim do cabeçalho dos comentários -->
+
+            <!-- Início do formulário de criação de comentários -->
+            <form action="{{ route('comentarios.store', $post->id) }}" method="POST" class="criarPost">
+                @csrf
+                <div class="filtroComentarios">
+                    <textarea name="texto" placeholder="Faça um comentário..." required></textarea>
+                    
+                    <div class="btnComentario">
+                        <button type="submit" class="postarBotao" >Comentar</button>
+                    </div>
+                </div>
+            </form>
+            <!-- Fim do formulário de criação de comentários -->
+
+            <!-- Início da seção de comentários -->
+            <div id="comentariosSection">
+            
+                @foreach($comentarios as $comentario)
+                <div class="comentarioContainer">
+                    <!-- Início das informações do usuário no comentário -->
+                    <div class="user" style="align-items: center;">
+                        <div class="profileImg" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('storage/' . $comentario->user->urlDaFoto) }}" alt="{{ $comentario->user->name }}">
                         </div>
-
-                        <div class="imgPost">
-                            <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                            </a>
-                        </div>
-
-                        <div class="action-button">
-                            <div class="interaction-button">
-                                <span><i class="uil uil-thumbs-up"></i></span>
-                                <span><i class="uil uil-comment"></i></span>
-                            </div>
-                            <div class="bookmark">
-                                <span><i class="uil uil-bookmark"></i></span>
-                            </div>
-                        </div>
-                            <div class="headerComentarios">
-                                @csrf
-
-
-                               
-
-                                <div class="dataFiltro">
-                                <form method="GET" action="{{ route('comentarios.show', ['id' => $post->id]) }}">
-                                    <select name="sortOrder" onchange="this.form.submit()">
-                                        <option value="desc" {{ request('sortOrder') == 'desc' ? 'selected' : '' }}>Mais recente</option>
-                                        <option value="asc" {{ request('sortOrder') == 'asc' ? 'selected' : '' }}>Mais antigo</option>
-                                    </select>
-                                </form>
-                            </div>
-                           
-
-                        </div>
-
-                            <form action="{{ route('comentarios.store', $post->id) }}" method="POST" class="criarPost">
-                                @csrf
-                            <div class="filtroComentarios">
-                            <textarea name="texto" placeholder="Responda..." required></textarea>
-                            <button type="submit" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Enviar
-                            
-                            </div>
-
-
-                        </form>
-
-
-                        <div id="comentariosSection">
-                            @foreach($comentarios as $comentario)
-                            <div class="comentarioContainer">
-                                <div class="user" style="align-items: center;">
-                                    <div class="profileImg" style="width: 50px; height: 50px;">
-                                        <img src="{{ asset('storage/' . $comentario->user->urlDaFoto) }}" alt="{{ $comentario->user->name }}">
-                                    </div>
-                                    <div class="info">
-                                <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                    <h3>{{ $comentario->user->name }}</h3>
-                                 <div class="modulo-div" style="background-color: {{ $coresModulo[$comentario->user->modulo] ?? 'defaultColor' }};">
+                        
+                        <div class="info">
+                            <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                            <h3>{{ '@' . $comentario->user->name }} <span class="publiSpan"> • Comentou na publicação de {{$post->user->name}}</span></h3>
+                                <div class="modulo-div" style="background-color: {{ $coresModulo[$comentario->user->modulo] ?? 'defaultColor' }};">
                                     <p>{{ $comentario->user->modulo }} {{ $post->user->perfil }}</p>
                                 </div>
-                                
-                                 </div>
-                                     <p>{{ $comentario->user->perfil }}</p>
-                                     
-                                 </div>
-                                </div>
-                                <p>{{ $comentario->texto }}</p>
                             </div>
-                            @endforeach
+                            <p class="horaPost">{{ $comentario->created_at->diffForHumans() }}</p>
                         </div>
+
                     </div>
+                    <!-- Fim das informações do usuário no comentário -->
 
+                    <p>{{ $comentario->texto }}</p>
                 </div>
-
-
-
-
-
+                @endforeach
             </div>
+            <!-- Fim da seção de comentários -->
 
+        </div>
+        <!-- Fim do feed individual -->
+    </div>
+    <!-- Fim da estrutura de feeds -->
+</div>
+            @include ('partials.emAlta')
 
             <!-- comentarios -->
 

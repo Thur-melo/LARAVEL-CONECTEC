@@ -42,6 +42,7 @@ Route::patch('/posts/{id}/aprovar', [PostController::class, 'updateStatus'])->na
 Route::patch('/posts/{id}/desativar', [PostController::class, 'updateAtiva'])->name('posts.aprovar'); 
 
 Route::get('/home', [RegisterController::class, 'showHome']) ->name('home');
+
 Route::post('/home', [PostController::class, 'postar']); 
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register');

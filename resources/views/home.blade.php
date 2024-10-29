@@ -56,7 +56,7 @@
                 <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
             </a>
 
-            <a class="menu-item " href="{{Route('chat.list')}}" >
+            <a class="menu-item " href="{{Route('perfil')}}" >
             <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
             </a>
             
@@ -68,103 +68,139 @@
 
 <!-------------------------------------------  Posts -------------------------------------------------------------------------------------->
 
-        <div class="meio">
-            <form class="criarPost">
-                    <div class="profileImgPost">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                    </div>
-                    <input type="text" placeholder="Faça uma pergunta" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
-                    <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
-                </button>
-                </form>
+<div class="meio">
+    <!-- Formulário de criar post -->
+    <form class="criarPost">
+        <div class="profileImgPost">
+            <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+        </div>
+        <input type="text" placeholder="Faça uma pergunta" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
+        <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
+        </button>
+    </form>
+    <!-- Fim do formulário de criar post -->
 
-            
+    <!-- Loop de postagens -->
+    @foreach($posts as $post)
 
-                @foreach($posts as $post)
+    @php
+        $coresModulo = [
+            '1º' => '#CD4642',
+            '2º' => '#5169B1',
+            '3º' => '#64B467',
+        ];
+    @endphp
 
-                @php
-                            $coresModulo = [
-                            '1º' => '#CD4642',
-                            '2º' => '#5169B1',
-                            '3º' => '#64B467',
-                            
-                                ];
+    <div class="feeds">
+        <div class="feed">
+            <!-- Seção de informações do usuário -->
+            <div class="user">
+                <div class="profileImg">
+                    <a href="{{ route('profile', ['id' => $post->user->id]) }}">
+                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
+                    </a>
+                </div>
+                <div class="info">
+                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
 
-                        @endphp
-                <div class="feeds">
-                    <div class="feed">
-                        
-                         <div class="user">
-                             <div class="profileImg">
-                             <a href="{{ route('profile', ['id' => $post->user->id]) }}">
-                                 <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
-                            </a>
-                             </div>
-                             <div class="info">
-                                <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; widht:100%">
-                                    <h3>{{ '@' . $post->user->name }} </h3>
-                                    
-                                 <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                    <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
-                                </div>
-                                
-                                 </div>
-                                 <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
-                                     
-                                 </div>
-                                 
-                                 
-                                
-                         </div>
-                         <div class="tipoCont">
-                            <div class="tipo-div">
-                                <p>{{ $post->tipo_post }}</p>
-                            </div>
+                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                            <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
                         </div>
-                         <div class="textoPost">
-                            {{ $post->texto }}
-                         </div>
-
-                         <div class="imgPost">
-                         <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                            </a>
-                         </div>
-
-                         <div class="action-button">
-                             <div class="interaction-button">
-
-                             <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
-                                    @if($post->likes()->where('user_id', Auth::id())->exists())
-                                        <i class="fas fa-heart liked"></i>
-                                    @else
-                                        <i class="far fa-heart"></i>
-                                    @endif
-                                </span>
-                            <span class="likes-count">{{ $post->likes()->count() }}</span>
-
-                                 <a href="{{ route('comentarios', $post->id) }}">
-                                 <i class="uil uil-comment"></i>
-                                 </a> 
-                             </div>
-                             <div class="bookmark">
-                                 <span><i class="uil uil-bookmark"></i></span>
-                             </div>
-                         </div>
                     </div>
-                @endforeach
-                
-<!-------------------------------------------  Postsss -------------------------------------------------------------------------------------->
+                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                </div>
+            </div>
+            <!-- Fim da seção de informações do usuário -->
+
+            <!-- Tipo de post -->
+            <!-- <div class="tipoCont">
+                <div class="tipo-div">
+                    <p>{{ $post->tipo_post }}</p>
+                </div>
+            </div> -->
+            <!-- Fim do tipo de post -->
+
+            <!-- Texto do post -->
+            <div class="textoPost">
+                {{ $post->texto }}
+            </div>
+            <!-- Fim do texto do post -->
+
+            <!-- Imagem do post -->
+            <div class="imgPost">
+                <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                </a>
+            </div>
+            <!-- Fim da imagem do post -->
+
+            <!-- Botões de ação (Curtir, Comentar, Salvar) -->
+            <div class="action-button">
+                <div class="interaction-button">
+                    <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
+                        @if($post->likes()->where('user_id', Auth::id())->exists())
+                            <i class="fas fa-heart liked"></i>
+                        @else
+                            <i class="far fa-heart"></i>
+                        @endif
+                    </span>
+                    <span class="likes-count">{{ $post->likes()->count() }}</span>
+
+                    <a href="{{ route('comentarios', $post->id) }}">
+                        <button class="comentarioCotn">
+                            <i class="uil uil-comment"></i>
+                        </button>
+                    </a>
+                </div>
+                <div class="bookmark">
+                    <span><i class="uil uil-bookmark"></i></span>
+                </div>
+            </div>
+            <!-- Fim dos botões de ação -->
+        </div>
+    </div>
+    @endforeach
+    <!-- Fim do loop de postagens -->
+</div>
+@include ('partials.emAlta')
+
+
+
+    <div class="amigosCont">
+        <div class="amigosHeader">
+            <h2>Sugestões</h2>
+           
+        </div>
+
+        <div class="listaSuges">
+        @foreach($usuariosSugestoes as $usuariosSuge)
+            <div class="sugestoes">
+
+            <div class="infoUserCont">
+            <div class="profileImgSuge">
+                <img src="{{ asset('storage/' . $usuariosSuge->urlDaFoto) }}" alt="">
+            </div>
+
+            <div class="inforUserSuge">
+                <span>{{ $usuariosSuge->name }}</span>
+                <span>{{ $usuariosSuge->modulo }} {{ $usuariosSuge->perfil }}</span>
+             </div>
+            </div>
+
+             <div class="btnSeguirCont">
+                <button class="btnSeguir">Seguir</button>
+             </div>
+
+            </div>
+
+            @endforeach
         </div>
 
 
-       
     </div>
+</div>
 
-
-    </div>
-    
-   
   
 </main>
 

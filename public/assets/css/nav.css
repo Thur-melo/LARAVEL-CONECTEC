@@ -47,8 +47,20 @@ nav .createBtn{
 
 body{
     overflow-x: hidden;
-     background-color: #F4F4F4 !important; 
+     background-color: #F5F5F5 !important; 
     
+}
+
+.criarBtn{
+    padding:6px 15px;
+    border-radius: 6px;
+    border: none;
+    background-color: #07beff;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
 }
 
 
@@ -97,9 +109,9 @@ body{
 
 
 .botaoPostar{
-    background-color: #00c9e9;
+    background-color: #07beff;
     color: white;
-    border: 1px solid #00c9e9;
+    border: 1px solid #07beff;
     font-weight: 600;
     padding: 10px 25px;
     border-radius: 7px;
@@ -119,5 +131,5 @@ body{
 }
 
 .nomesNav span:last-child{
-    color: #00c9e9;
+    color: #0f1c59;
 }

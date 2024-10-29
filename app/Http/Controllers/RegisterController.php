@@ -28,6 +28,10 @@ public function showPostagens()
 
 public function showHome(Request $request)
 {
+    $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
+   
+   
+
     $preferenciasLista = PreferenciasLista::all();
     if ($request->has('s')) {
         $posts = Post::search($request->input('s'));
@@ -35,7 +39,7 @@ public function showHome(Request $request)
         $posts = Post::with('user')->where('status', 1)->orderBy('created_at', 'desc')->get();
     }
     $user = Auth::user();
-    return view('home', compact('user', 'posts', 'preferenciasLista'));
+    return view('home', compact('user', 'posts', 'preferenciasLista', 'usuariosSugestoes'));
 }
 
 
@@ -114,6 +118,9 @@ public function showHome(Request $request)
         // Redireciona para a página de login
         return redirect('/login');
     }
+
+
+
 
 
 

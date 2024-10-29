@@ -50,6 +50,10 @@ class seguirController extends Controller
 
     return view('profile', compact('usuario', 'followersCount'));
 }
+
+
+
+
 }
 
 
