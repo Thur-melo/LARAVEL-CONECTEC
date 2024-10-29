@@ -23,8 +23,8 @@ main{
 
 main .container{
     display: grid;
-    grid-template-columns: 18vw 37vw 20vw;
-    gap: 2rem;
+    grid-template-columns: 10vw 40vw 20vw;
+    gap: 3rem;
     position: relative;
    
 }
@@ -55,9 +55,9 @@ main .container .left{
     background: white;
     border-radius: 1rem;
     box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
-    position: fixed;
-    width: 300px;
-    left: 12%;
+   position: absolute;
+    width: 350px;
+    right: 5%;
 }
 
 .left .sidebar .menu-item{
@@ -98,6 +98,37 @@ main .container .left{
 .left.sidebar .active i,
 .left .sidebar .active h3{
     color:  #07beff;
+}
+
+.left .sidebar .imgPerfilSide{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: start;
+
+}
+
+.left .sidebar .imgPerfilSide img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 1.5rem;
+    position: relative;
+    object-fit: cover;
+
+}
+
+.left .sidebar .imgPerfilSide h3{
+    margin-left: 0.5rem;
+    margin-bottom: 0;
+    
+
+}
+
+.sidebarList{
+  
+    margin-bottom: 7%;
+
 }
 
 .btnCriar{

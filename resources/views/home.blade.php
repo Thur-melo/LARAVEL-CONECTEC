@@ -37,6 +37,7 @@
     <div class="container">
         <div class="left">
             <div class="sidebar">
+                <div class="sidebarList">
 
             <a href="{{ Route('home')}}" class="menu-item active">
                 <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
@@ -58,6 +59,14 @@
 
             <a class="menu-item " href="{{Route('perfil')}}" >
             <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
+            </a>
+            </div>
+
+            <a href="" class="menu-item">
+                <div class="imgPerfilSide">
+                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                    <h3>Perfil</h3>
+                </div>
             </a>
             
 
@@ -108,17 +117,17 @@
                             <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
                         </div>
                     </div>
-                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p> 
                 </div>
             </div>
             <!-- Fim da seção de informações do usuário -->
 
             <!-- Tipo de post -->
-            <!-- <div class="tipoCont">
+             <!-- <div class="tipoCont">
                 <div class="tipo-div">
                     <p>{{ $post->tipo_post }}</p>
                 </div>
-            </div> -->
+            </div>  -->
             <!-- Fim do tipo de post -->
 
             <!-- Texto do post -->
