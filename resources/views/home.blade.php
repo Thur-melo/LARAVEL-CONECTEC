@@ -42,6 +42,11 @@
             <a href="{{ Route('home')}}" class="menu-item active">
                 <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
             </a>
+
+            <a class="menu-item " href="{{Route('perfil')}}" >
+            <span><i class="fa-regular fa-compass"></i></span> <h3>Explorar</h3>
+            </a> 
+            
             <a class="menu-item ">
                 <span><i class="fa-regular fa-bell"></i></span> <h3>Notificações</h3>
             </a>
@@ -57,15 +62,16 @@
                 <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
             </a>
 
-            <a class="menu-item " href="{{Route('perfil')}}" >
-            <span><i class="fa-regular fa-user"></i></span> <h3>Perfil</h3>
-            </a>
+             
             </div>
 
             <a href="" class="menu-item">
                 <div class="imgPerfilSide">
                     <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                    <h3>Perfil</h3>
+                    <div class="sidePerfilNames">
+                    <h3>{{$user->name }}</h3>
+                    <span class="arrobaSide">{{ '@'. $user->arroba}}</span>
+                    </div>
                 </div>
             </a>
             
