@@ -65,7 +65,7 @@
              
             </div>
 
-            <a href="" class="menu-item">
+            <a href="{{ route('profile', ['id' => $user->id]) }}" class="menu-item">
                 <div class="imgPerfilSide">
                     <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
                     <div class="sidePerfilNames">

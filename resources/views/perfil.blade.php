@@ -34,30 +34,48 @@
 <div class="container">
         <div class="left">
             <div class="sidebar">
+                <div class="sidebarList">
 
             <a href="{{ Route('home')}}" class="menu-item">
-                <span><i class="uil uil-home"></i></span> <h3>Home</h3>
-            </a>
-            <a class="menu-item ">
-                <span><i class="uil uil-bell"></i></span> <h3>Notificações</h3>
+                <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
             </a>
 
-            <a href="{{ Route('postagens')}}" class="menu-item">
-                <span><i class="uil uil-question-circle"></i></span> <h3>Postagens</h3>
+            <a class="menu-item " href="{{Route('perfil')}}" >
+            <span><i class="fa-regular fa-compass"></i></span> <h3>Explorar</h3>
+            </a> 
+            
+            <a class="menu-item ">
+                <span><i class="fa-regular fa-bell"></i></span> <h3>Notificações</h3>
+            </a>
+
+            <a  href="{{ Route('postagens')}}" class="menu-item">
+                <span><i class="fa-regular fa-images"></i></span> <h3>Postagens</h3>
             </a>
             <a class="menu-item " href="{{Route('chat.list')}}">
-                <span><i class="uil uil-chat"></i></span> <h3>Chat</h3>
-            </a>
-            <a href="{{ Route('perfil')}}" class="menu-item active">
-                <span><i class="uil uil-edit-alt"></i></span> <h3>Perfil</h3>
-            </a>
-            <a href="{{ Route('preferencias')}}" class="menu-item">
-                <span><i class="uil uil-edit-alt"></i></span> <h3>preferencias</h3>
+                <span><i class="fa-regular fa-message"></i></span> <h3>Chat</h3>
             </a>
 
+            <a class="menu-item " href="{{Route('chat.list')}}">
+                <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
+            </a>
+
+             
+            </div>
+
+            <a href="{{ route('profile', ['id' => $user->id]) }}" class="menu-item active">
+                <div class="imgPerfilSide">
+                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                    <div class="sidePerfilNames">
+                    <h3>{{$user->name }}</h3>
+                    <span class="arrobaSide">{{ '@'. $user->arroba}}</span>
+                    </div>
+                </div>
+            </a>
+            
 
             </div>
         </div>
+      
 
         <div class="meio">
 
