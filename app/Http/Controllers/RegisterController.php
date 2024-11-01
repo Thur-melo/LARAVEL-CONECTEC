@@ -22,8 +22,12 @@ class RegisterController extends Controller
 }
 
 public function showPostagens()
-{
-    return view('postagens');
+{   
+
+    $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
+    $user = Auth::user();
+    $posts = Post::where('user_id', $user->id)->get();
+    return view('postagens',compact('user', 'usuariosSugestoes', 'posts'));
 }
 
 public function showHome(Request $request)
