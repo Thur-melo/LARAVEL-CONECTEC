@@ -28,7 +28,7 @@ class profileController extends Controller
 
         // Obtém as curtidas dos posts do usuário
         $curtidas = $usuario->likes()->pluck('post_id');
-        $postCurtidas = Post::whereIn('id', $curtidas)->get();
+        $postCurtidas    = Post::whereIn('id', $curtidas)->get();
 
         // Contar seguidores e seguindo
         $myseguidores = Seguir::where('seguindo_id', $usuario->id)->count();

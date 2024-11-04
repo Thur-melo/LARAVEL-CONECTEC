@@ -10,6 +10,7 @@
 <body>
 
 <style>
+
 #postImage{
     width: 100%;
     max-width:auto;

@@ -1,0 +1,104 @@
+/* estrutura modal */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.267); /* Altere para a cor desejada com a opacidade */
+}
+
+
+.custom-modal .modal-body {
+    max-height: 700px; /* Ajuste a altura máxima conforme necessário */
+        overflow-y: auto; /* Adiciona a rolagem vertical */
+}
+
+.custom-modal .modal-content{
+    width: 800px;
+    position: absolute;
+    top: 50;
+    left: 0;
+}
+
+/* imgs e btns */
+.fundo{
+    width: 100%;
+    height: 200px;
+}
+
+#banner{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#imagePreview{
+    position: absolute;
+    top: 150px;
+    width: 150px;
+    margin-left: 2%;
+    height: 150px;
+    border: 3px solid white;
+
+
+}
+
+#btnEditBanner{   
+    position: absolute;
+    top: 100px;
+    left: 45%;
+
+}
+
+#btnEditIcon{   
+    position: absolute;
+    top: 200px;
+    left: 90px;
+    cursor: pointer;
+
+}
+
+.btnModalEdit{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.411);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 50px;
+    height: 50px;
+}
+
+/* inputs */
+.imgContainerEdit {
+    margin-top: 100px;
+}
+
+.inputsGrupos {
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    gap: 50px;
+}
+
+#InputLeft {
+    width: 575px;
+}
+
+#InputRight{
+    width: 100px;
+}
+
+.linha {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.linha #bio {
+    width: 725px;
+    height: 100px;
+}
+
+.bioForm{
+    display: flex;
+    flex-direction: column;
+}
