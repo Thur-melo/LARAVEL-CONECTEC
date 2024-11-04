@@ -112,7 +112,7 @@
             <!-- Seção de informações do usuário -->
             <div class="user">
                 <div class="profileImg">
-                    <a href="{{ route('profile', ['id' => $post->user->id]) }}">
+                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
                         <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
                     </a>
                 </div>
@@ -204,8 +204,13 @@
              </div>
             </div>
 
-             <div class="btnSeguirCont">
-                <button class="btnSeguir">Seguir</button>
+             <div class="btnSeguirCont" >
+             <button class="follow-btn" 
+        data-user-id="{{ $usuariosSuge->id }}" 
+        data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuariosSuge->id)->exists() ? 'unfollow' : 'follow' }}">
+        {{ Auth::user()->seguindo()->where('seguindo_id', $usuariosSuge->id)->exists() ? 'Seguindo' : 'Seguir' }}
+        </button>
+
              </div>
 
             </div>
@@ -315,5 +320,7 @@ function previewImage(event) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="{{ asset('js/like.js') }}"></script>
+    <script src="{{ asset('js/seguir.js') }}"></script>
 </body>
+
 </html>

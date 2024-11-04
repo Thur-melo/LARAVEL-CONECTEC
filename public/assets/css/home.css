@@ -343,7 +343,7 @@ main .container .left{
 
 }
 
-.btnSeguir {
+.follow-btn {
     background-color: #00aaff;
     color: white;
     border: none;
@@ -353,10 +353,11 @@ main .container .left{
     cursor: pointer;
     box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
     transition: all 0.3s ease; 
+    width: 100px;
 }
 
 /* Efeito de hover */
-.btnSeguir:hover {
+.follow-btn:hover {
     background-color: #007acc;
     box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
     transform: translateY(-2px); 

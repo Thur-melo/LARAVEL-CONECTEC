@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.status === 'followed') {
                     this.dataset.action = 'unfollow';
-                    this.textContent = 'Deixar de Seguir';
+                    this.textContent = 'Seguindo';
                 } else if (data.status === 'unfollowed') {
                     this.dataset.action = 'follow';
                     this.textContent = 'Seguir';
