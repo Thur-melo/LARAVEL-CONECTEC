@@ -272,6 +272,69 @@ main .container .left{
     text-align: left;
 }
 
+.containerTabela {
+    max-height: 700px; /* Ajuste para definir a altura conforme necessário */
+    overflow-y: auto; /* Habilita rolagem vertical no container */
+}
+
+/* Estilos adicionais opcionais */
+.containerTabela::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.containerTabela::-webkit-scrollbar-thumb {
+    background-color: #cccccc; /* Cor da barra de rolagem */
+    border-radius: 4px;
+}
+
+.containerTabela::-webkit-scrollbar-thumb:hover {
+    background-color: #aaaaaa;
+}
+
+.containerTabela .sumarioCont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    margin-bottom: 2%;
+}
+
+.containerTabela .sumarioCont span{
+    color: gray;
+
+}
+
+.containerTabela .sumarios .cor1{
+    border: 1px solid #3ad11b;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #e6fdda;
+}
+
+.containerTabela .sumarios .cor2{
+    border: 1px solid #ff0000;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #e98585;
+}
+
+.containerTabela .sumarios .cor3{
+    border: 1px solid #07beff;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #83d7f5;
+}
+
+.containerTabela .sumarios{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+}
+
 .cardsCont{
     display: flex;
     justify-content: space-evenly;

@@ -109,6 +109,19 @@
 
 <div class="containerTabela">
     <h2>Minhas publicações</h2>
+
+    <div class="sumarioCont">
+        <div class="sumarios">
+            <div class="cor1"></div><span>Aprovado</span>
+        </div>
+        <div class="sumarios">
+            <div class="cor2"></div> <span>Rejeitado</span>
+        </div>
+        <div class="sumarios">
+            <div class="cor3"></div>  <span>Respondido</span>
+        </div>
+    </div>
+
     <div class="headerTabela">
         <div>Data de Publicação</div>
         <div>Conteúdo</div>
@@ -129,7 +142,16 @@
             </div>
             <div class="icons">
                 <i class="fa-regular fa-trash-can"></i>
-                <i class="fa-regular fa-eye"></i>
+                <i class="fa-regular fa-eye" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#postModal" 
+                    data-post="{{ $post->texto }}" 
+                    data-hora="{{ $post->created_at->diffForHumans() }}"
+
+                    @if(!empty($post->fotoPost))
+                        data-image="{{asset('storage/' . $post->fotoPost)}}"
+                    @endif
+                ></i>
                 <i class="fa-regular fa-pen-to-square"></i>
             </div>
         </div>
@@ -141,6 +163,17 @@
 </main>
 
 
+@include('partials.modalMostrarPost')
 
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
+
 </html>
