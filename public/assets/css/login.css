@@ -12,28 +12,25 @@ body{
     justify-content: center;
 }
 
-.loginCont{
-    width: 50%;
+.loginCont {
     align-items: center;
-     width: 50%;
+    width: 600px;
+    height: 800px;
     display: flex;
-    justify-content:left;
     flex-direction: column;
-    border: 1px solid #27272725;
-    margin-right: 50px;
+    border: 2px solid #d9d9d9;
+    padding: 20px;
+    border-radius: 15px;
+    justify-content: center;
 }
-
-
 .main{
     display: flex;
     width: 100%;
     height: 100vh;
-    background-color: white;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
-
 
 
 .logo h2{
@@ -60,11 +57,7 @@ body{
     justify-content: flex-start;
 }
 
-.logo img{
 
-    height: 100px;
-
-}
 
 .tituloCadastro a{
 
@@ -85,20 +78,27 @@ body{
     font-size: 10.5pt;
 }
 
-.grupo-inputs{
+.grupo-inputs {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 25px;
+    align-items: center;
+}
+.tituloCadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.inputForm input{
-    width: 80%;
+.inputForm input {
+    width: 470px;
+    height: 60px;
     padding: 10px;
     border-radius: 7px;
     border: 2px solid #d9d9d9;
-
 }
+
 
 .inputForm input::placeholder{
     font-size: 9pt;
@@ -113,12 +113,13 @@ body{
 
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 80%;
+    width: 100%;
     position: relative;
+    align-items: center;
 }
 
 .imgDireita img{
@@ -189,4 +190,16 @@ form{
 
 .imgCont{
     width: 50%;
+}
+
+#logo {
+    height: auto;
+    width: 100%;
+}
+
+.footerLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
 }
