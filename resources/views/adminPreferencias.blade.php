@@ -35,8 +35,7 @@
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
             
-            <li> <span class="material-icons" id="icons">person</span> <span>Administrador</span> </li>
-            <li> <span class="material-icons" id="icons">chat</span> <span>Chat </span> </li>
+    
             <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
             </a>

@@ -102,11 +102,16 @@
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalPost" class="btn-edit"> Editar Perfil
+                            <button type="button" class="btn-edit"
+                                data-bs-toggle="modal" data-bs-target="#profileModal">
+                                Editar Perfil
+                            </button>
+
+
                         </div>
                         <div class="rowNomeUser">
                             <h1 class="username">{{ $user->name}}</h1>
-                            <p class="arroba"> {{ '@' . $user->name }} </p>
+                            <p class="arroba"> {{ '@' . $user->arroba }} </p>
                         </div>
 
                         <div class="rowBio">
@@ -130,7 +135,7 @@
 
                         <div class="categoriaFooter">
                             <div class="categoria" onclick="mudarConteudo('meusPosts')">Meus Posts</div>
-                            <div class="categoria" onclick="mudarConteudo('republicar')">Republicar</div>
+                            <div class="categoria" onclick="mudarConteudo('salvos')">Salvos</div>
                             <div class="categoria " onclick="mudarConteudo('curtidas')">Curtidas</div>
                         </div>
 
@@ -153,7 +158,7 @@
     </main>
     @include('partials.modalsair')
     <!-- Modal de Confirmação -->
-
+    @include('partials.modalEditarPerfil')
 
 
 
@@ -224,8 +229,8 @@
                         </div>
                     </div>
                 @endforeach`;
-            } else if (tipo === 'republicar') {
-                resultado.innerHTML = '<p>Função de republicar ainda não implementada.</p>';
+            } else if (tipo === 'salvos') {
+                resultado.innerHTML = '<p>Função de salvos ainda não implementada.</p>';
             } else if (tipo === 'curtidas') {
                 resultado.innerHTML += ` @foreach($postCurtidas as $post)
                 @php

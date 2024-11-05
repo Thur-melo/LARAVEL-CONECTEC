@@ -84,6 +84,7 @@ public function showadmin(){
 public function update(Request $request, string $id)
 {
     $profilePhotoUrl = 'urlDaFoto/default.jpg';
+
 // Atualiza o usuário com os dados validados
 $usuario = User::findOrFail($id);
 
@@ -108,14 +109,13 @@ $usuario->urlDaFoto= $profilePhotoUrl;
 $usuario->update($request->except('urlDaFoto'));
 
 
-return redirect()->route('perfil')->with('status', 'Usuário atualizado com sucesso');
+return redirect()->route('profile', ['id' => $usuario->id])->with('status', 'Usuário atualizado com sucesso');
 }
 
 
-public function contarProdutos()
-{
-  
-}
+
+
+
 
 public function registerAdm(Request $request)
 

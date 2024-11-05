@@ -35,8 +35,6 @@
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
             
-            <li> <span class="material-icons" id="icons">person</span> <span>Administrador</span> </li>
-            <li> <span class="material-icons" id="icons">chat</span> <span>Chat </span> </li>
             <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
             </a>
@@ -46,24 +44,7 @@
     <!--final menu lateral -->
 
     <div class="container">
-    <div class="header">
-    <div class="nav">
-        <!-- <div class="buscar">
-            <input type="text" placeholder="Pesquisar..." class="search-bar">
-        </div> -->
-        <div class="usuario">
-            <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil" class="user-img">
-            <div class="botoes">
-                <a href="{{ route('login') }}">
-                    <button class="btn-usuario">Logar como usuário</button>
-                </a>
-                <a href="{{ route('registerAdm') }}">
-                    <button class="btn-adm">Cadastrar novo adm</button>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+
 
         <div class="content">
             <div class="cards">
