@@ -5,6 +5,8 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+
 
 class postController extends Controller
 {
@@ -38,7 +40,7 @@ public function destroy($id)
     $post = Post::findOrFail($id);
     $post->delete();
 
-    return redirect()->route('adminHome')->with('success', 'Post deletado com sucesso!');
+    return redirect()->route('adminHome')->with('success', 'Post deletado com sucessoaee!');
 }
 
 public function updateStatus($id)
@@ -84,6 +86,43 @@ public function popular()
 
         return view('posts.index', ['posts' => $posts]);
     }
+
+    public function update(Request $request, $id)
+{
+    
+
+    $post = Post::findOrFail($id);
+    $post->texto = $request->input('texto');
+
+    if ($request->hasFile('fotoPost')) {
+        // Excluir a imagem antiga, se existir
+        if ($post->fotoPost) {
+            Storage::delete('public/' . $post->fotoPost);
+        }
+        // Armazenar a nova imagem
+        $path = $request->file('fotoPost')->store('posts', 'public');
+        $post->fotoPost = $path;
+    }
+
+    $post->save();
+
+    return redirect()->back()->with('success', 'Post atualizado com sucesso!');
+}
+
+
+
+
+public function destroyPost($id)
+{
+    $post = Post::findOrFail($id);
+    $post->delete();
+
+    return redirect()->back()->with('success', 'Post deletado com suces!');
+}
+
+
+
+    
 
 
 

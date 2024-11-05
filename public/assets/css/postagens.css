@@ -228,14 +228,20 @@ main .container .left{
     border: 1px solid #3ad11b;
     border-radius: 25px;
     background-color: #e6fdda;
-    
-
 }
 
 .status span{
     color: #207905;
+}
 
+.status-ativo{
+background-color: #e6fdda;
+  border: 1px solid #3ad11b;
+}
 
+.status-desativado {
+    background-color: red; /* Cor para status desativado */
+    color: white; /* Ajuste conforme necessário */
 }
 
 .headerTabela div:first-child, .question-row div:first-child {
@@ -332,6 +338,12 @@ main .container .left{
     display: flex;
     align-items: center;
     gap: 4px;
+
+}
+
+.delete-button{
+    border: none;
+    background-color: transparent;
 
 }
 

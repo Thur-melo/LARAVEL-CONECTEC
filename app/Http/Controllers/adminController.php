@@ -211,6 +211,15 @@ public function desativaUser($id)
         return redirect()->route('admin')->with('success', 'Status do post atualizado para 1!');
     }
 
+
+    public function destroyPost($id)
+{
+    $post = Post::findOrFail($id);
+    $post->delete();
+
+    return redirect()->back()->with('success', 'Post deletado com sucesso!');
+}
+
 }
 
 

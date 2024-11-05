@@ -83,7 +83,9 @@ Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'
 
 
 Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->middleware('auth');
- 
+Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+ Route::delete('/posts/{id}', [PostController::class, 'destroyPost'])->name('posts.destroyPost');
+
 
 Route::post('/follow/{userId}', [seguirController::class, 'follow'])->name('follow');
 Route::post('/unfollow/{userId}', [seguirController::class, 'unfollow'])->name('unfollow');

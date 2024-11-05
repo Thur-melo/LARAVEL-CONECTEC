@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/postagens.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/modalEditPost.css')}}">
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -135,43 +136,89 @@
             <div class="content-preview">{{ $post->texto}}</div>
             <div>
                 <div class="statusPost">
-                    <div class="status">
-                        <span>Publicado</span>
+                    <div class="status {{ $post->status ? 'status-ativo' : 'status-desativado' }}">
+                        <span>{{ $post->status ? 'Ativado' : 'Desativado' }}</span>
                     </div>
                 </div>
             </div>
             <div class="icons">
-                <i class="fa-regular fa-trash-can"></i>
-                <i class="fa-regular fa-eye" 
+
+            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroyPost', $post->id) }}" method="POST">                @csrf
+                @method('DELETE')
+                <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
+                <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
+                </button>
+            </form>
+
+
+
+              <i class="fa-regular fa-eye" 
                     data-bs-toggle="modal" 
                     data-bs-target="#postModal" 
                     data-post="{{ $post->texto }}" 
                     data-hora="{{ $post->created_at->diffForHumans() }}"
-
                     @if(!empty($post->fotoPost))
                         data-image="{{asset('storage/' . $post->fotoPost)}}"
                     @endif
                 ></i>
-                <i class="fa-regular fa-pen-to-square"></i>
+
+                <i class="fa-regular fa-pen-to-square edit-button" data-modal-id="postModal-{{ $post->id }}"></i>
+                
             </div>
+            
         </div>
     @endforeach
 </div>
 
 
-  
+
 </main>
 
 
-@include('partials.modalMostrarPost')
+
+@include('partials.modalMostrarPost  ')
+
+<script>
+    //-----------------------------------------Modal de confirmção do DELETE------------------------------------------------------------------
+
+document.querySelectorAll('.delete-button').forEach(button => {
+    button.addEventListener('click', function () {
+        const postId = this.getAttribute('data-post-id');
+        const deleteForm = document.getElementById(`deleteForm-${postId}`);
+
+        Swal.fire({
+            title: "Voçê tem certeza que quer deletar esse post?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#07beff",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Deletar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submete o formulário de exclusão
+                deleteForm.submit();
+                
+                Swal.fire({
+                    title: "Excluido!",
+                    text: "Seus post foi excluido com sucesso!",
+                    icon: "success",
+                    confirmButtonColor: "#07beff",
+                });
+            }
+        });
+    });
+});
+// -----------------------------------------Modal de confirmção do DELETE------------------------------------------------------------------
+
+</script>
 
 
+    <!-- Script para os MODAIS LEGAIS tmnc bootrape -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Script para os MODAIS LEGAIS tmnc bootrape -->
 
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
