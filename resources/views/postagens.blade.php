@@ -136,14 +136,14 @@
             <div class="content-preview">{{ $post->texto}}</div>
             <div>
                 <div class="statusPost">
-                    <div class="status {{ $post->status ? 'status-ativo' : 'status-desativado' }}">
-                        <span>{{ $post->status ? 'Ativado' : 'Desativado' }}</span>
+                    <div class="status {{ $post->status == 1 ? 'status-ativo' : 'status-desativado' }}">
+                        <span>{{ $post->status == 1 ? 'Ativo' : 'Desativado' }}</span>
                     </div>
                 </div>
             </div>
             <div class="icons">
 
-            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroyPost', $post->id) }}" method="POST">                @csrf
+            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST">                @csrf
                 @method('DELETE')
                 <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
                 <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->

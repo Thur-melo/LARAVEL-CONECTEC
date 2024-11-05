@@ -28,7 +28,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 Route::get('/perfil', [adminController::class, 'showperfil']) ->name('perfil');
-Route::post('/profile/{id}', [adminController::class, 'update'])->name('user.update');
+Route::post('/perfil/user/{id}', [adminController::class, 'update'])->name('user.update');
 Route::get('/profile/{id}', [profileController::class,'profile'])->name('profile');
 
 
@@ -84,7 +84,7 @@ Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'
 
 Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->middleware('auth');
 Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
- Route::delete('/posts/{id}', [PostController::class, 'destroyPost'])->name('posts.destroyPost');
+ 
 
 
 Route::post('/follow/{userId}', [seguirController::class, 'follow'])->name('follow');

@@ -40,7 +40,7 @@ public function destroy($id)
     $post = Post::findOrFail($id);
     $post->delete();
 
-    return redirect()->route('adminHome')->with('success', 'Post deletado com sucessoaee!');
+    return redirect()->back()->with('success', 'Post deletado com sucessoaee!');
 }
 
 public function updateStatus($id)
@@ -112,13 +112,7 @@ public function popular()
 
 
 
-public function destroyPost($id)
-{
-    $post = Post::findOrFail($id);
-    $post->delete();
 
-    return redirect()->back()->with('success', 'Post deletado com suces!');
-}
 
 
 
