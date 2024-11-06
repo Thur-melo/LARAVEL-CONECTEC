@@ -15,6 +15,8 @@ use App\Http\Controllers\seguirController;
 
 
 Route::get('/postagens', [RegisterController::class, 'showPostagens']) ->name('postagens');
+Route::post('/post/update/{postID}', [PostController::class, 'update'])->name('post.update');
+
 
 
 Route::delete('/adminPreferencias/{id}', [preferenciasController::class, 'destroy'])->name('preferenciasLista.destroy');

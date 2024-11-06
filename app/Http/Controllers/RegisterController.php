@@ -125,6 +125,28 @@ public function showHome(Request $request)
 
 
 
+    public function update(Request $request, $postID)
+    {
+        // Validação dos dados do formulário
+        $request->validate([
+            'texto' => 'required|string',
+            'fotoPost' => 'nullable|image|max:2048',
+        ]);
+    
+        // Encontrar o post pelo ID
+        $post = Post::findOrFail($postID);
+    
+        // Atualizar o conteúdo do post
+        $post->update([
+            'texto' => $request->input('texto'),
+            'fotoPost' => $request->file('fotoPost') ? $request->file('fotoPost')->store('posts') : $post->fotoPost,
+        ]);
+    
+        // Redirecionar com sucesso
+        return redirect()->route('postagens')->with('status', 'Post atualizado com sucesso!');
+    }
+    
+    
 
 
 

@@ -225,23 +225,22 @@ main .container .left{
 }
 
 .status{
-    border: 1px solid #3ad11b;
     border-radius: 25px;
-    background-color: #e6fdda;
-}
-
-.status span{
-    color: #207905;
+    background-color: transparent;
 }
 
 .status-ativo{
 background-color: #e6fdda;
   border: 1px solid #3ad11b;
+  color: #207905;
 }
 
 .status-desativado {
-    background-color: red; /* Cor para status desativado */
-    color: white; /* Ajuste conforme necessário */
+    background-color: #e49191;
+/* Cor para status desativado */
+    color: white;
+    border: 1px solid #ff0000;
+    color: rgb(122, 17, 17); /* Ajuste conforme necessário */
 }
 
 .headerTabela div:first-child, .question-row div:first-child {
