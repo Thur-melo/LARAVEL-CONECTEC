@@ -135,6 +135,11 @@ public function showHome(Request $request)
     
         // Encontrar o post pelo ID
         $post = Post::findOrFail($postID);
+
+        if ($request->hasFile('urlDoBanner')) {
+            $file = $request->file('urlDoBanner');
+            $profilePhotoUrl = $file->store('urlDoBanner', 'public');
+        } 
     
         // Atualizar o conteúdo do post
         $post->update([

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('modulo');
             $table->string('perfil');
             $table->string('urlDaFoto')->nullable();
-            $table->string('urlDoBanner')->nullable();
+            $table->string('urlDoBanner')->default('urlDoBanner/default-banner.jpg');
             $table->string('status')->default('Ativo');
             $table->rememberToken();
             $table->timestamps();

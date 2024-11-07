@@ -13,15 +13,19 @@
                 <form method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data" id="formPerfil">
                     @csrf
                     <div class="fundo">
-                        <img src="{{url('assets/img/fundo.jpg')}}" id="banner">
+                        <img src="{{ asset('storage/' . $user->urlDoBanner) }}" class="banner" id="bannerPreview"  alt="Prévia do Banner">
                     </div>
                     <div class="imgsEbtns">
+
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" class="profileImg" id="imagePreview" alt="Prévia da Imagem">
-                        <button type="button" id="btnEditBanner" class="btnModalEdit">
+
+                        <label for="urlDoBanner" id="btnEditBanner" class="btnModalEdit">
                             <span class="material-symbols-outlined">
                                 add_a_photo
-                            </span> </button>
+                            </span> </label>
+                            <input type="file" id="urlDoBanner" name="urlDoBanner" accept="image/*" onchange="previewBanner(event)" style="display: none;">
 
+                            
                         <label for="urlDaFoto" id="btnEditIcon" class="btnModalEdit"><span class="material-symbols-outlined">
                                 add_a_photo
                             </span></label>
@@ -101,6 +105,20 @@
 <script>
     function previewImage(event) {
         var image = document.getElementById('imagePreview');
+        var file = event.target.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                image.src = e.target.result;
+                image.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function previewBanner(event) {
+        var image = document.getElementById('bannerPreview');
         var file = event.target.files[0];
 
         if (file) {

@@ -206,10 +206,11 @@ main .container .left{
     height: 200px;
 }
 
-#banner{
+.banner{
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    
 }
 
 #icon{
@@ -311,4 +312,9 @@ main .container .left{
     padding: 5px;
     border-radius: 20px;
     width: 100px;
+    
+}
+
+#btnEditBanner{
+    cursor: pointer;
 }

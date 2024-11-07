@@ -93,7 +93,7 @@
             <div class="meio">
                 <div class="perfilContainer">
                     <div class="fundo">
-                        <img src="{{url('assets/img/fundo.jpg')}}" id="banner">
+                        <img src="{{ asset('storage/' . $user->urlDoBanner) }}" id="banner">
                     </div>
 
 

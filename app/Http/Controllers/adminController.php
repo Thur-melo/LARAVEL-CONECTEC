@@ -84,7 +84,6 @@ public function showadmin(){
 public function update(Request $request, string $id)
 {
     $profilePhotoUrl = 'urlDaFoto/default.jpg';
-
 // Atualiza o usuário com os dados validados
 $usuario = User::findOrFail($id);
 
@@ -99,14 +98,29 @@ $usuario = User::findOrFail($id);
           // Se não houver nova foto, mantém a URL existente
           $profilePhotoUrl = $usuario->urlDaFoto;
     }
-    
-    
 
+    if ($request->hasFile('urlDoBanner')) {
+        $file = $request->file('urlDoBanner');
+        $profileBannerUrl = $file->store('urlDoBanner', 'public');
+
+    } elseif ($request->input('deleteImg')){
+
+        $profileBannerUrl = 'urlDoBanner/default-banner.jpg';
+    } else {
+          // Se não houver nova foto, mantém a URL existente
+          $profileBannerUrl = $usuario->urlDoBanner;
+    }
+
+
+
+
+    $usuario->urlDoBanner= $profileBannerUrl;
 
 $usuario->urlDaFoto= $profilePhotoUrl;
 
 // Atualize os dados do usuário
-$usuario->update($request->except('urlDaFoto'));
+$usuario->update($request->except('urlDaFoto', 'urlDoBanner'));
+
 
 
 return redirect()->route('profile', ['id' => $usuario->id])->with('status', 'Usuário atualizado com sucesso');
