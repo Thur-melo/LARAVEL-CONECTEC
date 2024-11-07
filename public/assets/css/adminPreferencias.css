@@ -152,9 +152,9 @@ body {
     margin-top: 100px;
 }
 
-.card {
+.cardPreferencias {
     background-color: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -162,6 +162,9 @@ body {
     align-items: center;
     transition: transform 0.3s ease;
     cursor: pointer;
+    margin-left: 50px;
+    height: 120px;
+    width: 250px;
 }
 
 .card:hover {
@@ -375,18 +378,17 @@ tr:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 15px; /* Border radius aplicado */
     margin: 20px; /* Espaçamento em relação às bordas */
-    width: calc(100% - 310px); /* Ajuste para o espaçamento lateral */
-    left: 270px; /* Considerando a largura do menu lateral */
+    left: 320px; /* Considerando a largura do menu lateral */
     top: 5px;
     position: fixed;
     z-index: 10;
+    width: 81%;
 }
 
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 
 .buscar {
@@ -474,6 +476,7 @@ svg {
     border-radius: 12px;
     margin-top: 30px;
     text-align: center;
+    margin-left: 50px;
 }
 
 .bar {

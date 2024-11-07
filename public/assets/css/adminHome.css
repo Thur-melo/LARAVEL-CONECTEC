@@ -85,7 +85,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
     flex-direction: column;
     gap: 50px;
-    padding: 20px;
+    padding: 10px;
     
 }
 
@@ -380,4 +380,42 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+svg {
+    background: linear-gradient(135deg, #ffffff, #f4f4f9);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    margin-top: 30px;
+    margin-left: 130px; /* Move o SVG para a direita */
+    text-align: center;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+
+.logout:hover {
+    background-color: #ff0000; /* Cor de fundo azul claro ao passar o mouse */
+    color: white; /* Texto muda para branco */
+    cursor: pointer;
+    transform: translateX(5px); /* Leve animação de movimento ao passar o mouse */
+}
+.logout span {
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.logout {
+    font-size: 28px; /* Tamanho da fonte ajustado */
+    padding: 20px 20px;
+    color: #f4f4f4; /* Cor de texto mais escura para melhor legibilidade */
+    display: flex;
+    align-items: center;
+    border-radius: 10px; /* Botões com bordas arredondadas */
+    margin-bottom: 10px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Transições suaves */
 }

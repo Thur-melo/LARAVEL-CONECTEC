@@ -61,7 +61,7 @@
             <div class="cards">
 
                 <!-- Card "Usuários Totais" que agora abre o modal -->
-                <div class="card" id="btnTotal">
+                <div class="cardPreferencias" id="btnTotal">
                     <div class="box">
                         <h1>{{$qnt_preferencia}}</h1>
                         <h3>Preferências Totais</h3>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 
-                <div class="card" id="btnOutro">
+                <div class="cardPreferencias" id="btnOutro">
                     <div class="box">
                         <h1>{{$qnt_Outro}}</h1>
                         <h3>Preferências Outros</h3>
@@ -82,7 +82,7 @@
                 </div>
 
                 <!-- Outros cards -->
-                <div class="card" id="btnDS">
+                <div class="cardPreferencias" id="btnDS">
                     <div class="box">
                         <h1>{{$qnt_DS}}</h1>
                         <h3>Preferências DS</h3>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="card" id="btnNutri">
+                <div class="cardPreferencias" id="btnNutri">
                     <div class="box">
                         <h2>{{$qnt_Nutri}}</h2>
                         <h3>Preferências Nutrição</h3>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="card" id="btnADM">
+                <div class="cardPreferencias" id="btnADM">
                     <div class="box">
                         <h2>{{$qnt_ADM}}</h2>
                         <h3>Preferências ADM</h3>
