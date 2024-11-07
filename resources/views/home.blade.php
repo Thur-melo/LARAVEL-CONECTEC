@@ -44,7 +44,7 @@
                             <h3>Home</h3>
                         </a>
 
-                        <a class="menu-item " href="#">
+                        <a class="menu-item " href="{{ Route('explorar')}}">
                             <span><i class="fa-regular fa-compass"></i></span>
                             <h3>Explorar</h3>
                         </a>
@@ -171,7 +171,6 @@
                                 <a href="{{ route('comentarios', $post->id) }}">
                                     <button class="comentarioCotn">
                                         <i class="uil uil-comment"></i>
-                                        <span>{{ $post->coments()->count() }}</span>
                                     </button>
                                 </a>
                             </div>

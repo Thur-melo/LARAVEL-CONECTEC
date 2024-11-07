@@ -20,16 +20,17 @@ class Comentarios extends Model
         'status',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+   // Relacionamento com o Post
+   public function post()
+   {
+       return $this->belongsTo(Post::class, 'post_id', 'id');
+   }
 
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
-    }
-
+   // Relacionamento com o Usuário
+   public function user()
+   {
+       return $this->belongsTo(User::class, 'user_id', 'id');
+   }
 
 
 

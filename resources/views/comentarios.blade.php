@@ -115,12 +115,7 @@
             </div>
             <!-- Fim da seção de usuário -->
 
-            <!-- Início da div do tipo de conteúdo -->
-            <div class="tipoCont">
-                <div class="tipo-div">
-                    <p>{{ $post->tipo_post }}</p>
-                </div>
-            </div>
+       
             <!-- Fim da div do tipo de conteúdo -->
 
             <!-- Início da div de texto do post -->

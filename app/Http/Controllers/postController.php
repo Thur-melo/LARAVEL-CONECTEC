@@ -116,6 +116,40 @@ public function popular()
 
 
 
+public function showExplorar(Request $request)
+{
+    // Posts com mais curtidas
+    $postsCurtidas = Post::withCount('likes') // Conta os likes
+        ->where('status', 1)
+        ->orderBy('likes_count', 'desc') // Ordena por likes_count
+        ->take(5)
+        ->get();
+
+    // Posts com mais comentários
+    $postsComentarios = Post::withCount('comentarios') // Conta os comentários
+        ->where('status', 1)
+        ->orderBy('comentarios_count', 'desc') // Ordena por comentarios_count
+        ->take(5)
+        ->get();
+
+    // Posts aleatórios
+    $postsAleatorios = Post::inRandomOrder()->where('status', 1)->take(5)->get();
+
+    // Sugestões de usuários aleatórios
+    $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
+    
+    // Posts gerais (ordenados pela data de criação)
+    $posts = Post::with('user')->where('status', 1)->orderBy('created_at', 'desc')->get();
+
+    // Usuário autenticado
+    $user = Auth::user();
+
+    // Retorna a view com todas as variáveis necessárias
+    return view('explorar', compact('user', 'posts', 'postsCurtidas', 'postsAleatorios', 'usuariosSugestoes', 'postsComentarios'));
+}
+
+
+
 
 
 

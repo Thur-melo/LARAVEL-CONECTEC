@@ -93,3 +93,6 @@ Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update
 
 Route::post('/follow/{userId}', [seguirController::class, 'follow'])->name('follow');
 Route::post('/unfollow/{userId}', [seguirController::class, 'unfollow'])->name('unfollow');
+
+
+Route::get('/explorar', [PostController::class, 'showExplorar'])->name('explorar');

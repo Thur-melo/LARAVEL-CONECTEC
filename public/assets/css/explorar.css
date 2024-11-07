@@ -185,154 +185,101 @@ main .container .left{
     color: #bebebe;
 }
 
+/* feedExplorar */
 
-/*-------------- Perfil--------- */
-
-.meio .perfilContainer {
+.feedExplorar {
+    width: 800px;
+    height: 1010px;
     background: white;
-    border-radius: 1rem;
-    padding: 1rem;
-    padding-bottom: 0;
-    margin: 1rem 0;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    box-shadow: rgba(116, 116, 116, 0.315) 0px 2px 5px 0px;
-}
-
-
-
-.fundo{
-    width: 100%;
-    height: 200px;
-}
-
-.banner{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
-
-    
-}
-
-#banner{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
-
-    
-}
-
-#icon {
-    position: absolute;
-    top: 150px;
-    width: 13%;
-    margin-left: 2%;
-    height: auto;
-    border: 3px solid white;
-    border-radius: 50%;
-}
-
-.rowEditarPerfil {
-    display: flex;
-    justify-content: flex-end;
-    padding: 30px;
-}
-
-.username {
-    font-size: 2.5rem; /* Tamanho da fonte */
-    color: #333; /* Cor do texto */
-    font-weight: bold; /* Negrito */
- 
-}
-
-.arroba {
-    font-size: 1.0rem; /* Tamanho da fonte */
-    color: #8a8a8a; /* Cor do texto */
-    font-weight: bold; /* Negrito */
- 
-}
-.infoContainer {
-    padding: 10px;
-    padding-bottom: 0;
-}
-.bio{
-    width: 400px; /* Defina a largura desejada */
-    max-height: 110px; /* Limite de altura */
-    padding: 10px;
-    overflow-wrap: break-word; /* Permite quebra de palavras longas */
-    overflow: hidden; /* Oculta o conteúdo que excede a altura */
-    text-overflow: ellipsis; /* Adiciona reticências se o texto exceder */
-    display: -webkit-box; /* Para usar com -webkit-line-clamp */
-    -webkit-box-orient: vertical; 
-    -webkit-line-clamp: 5; /* Número de linhas a exibir */
-    
-}
-
-.bio p{
-    font-size: 16px; /* Tamanho da fonte */
-    color: #14171a; 
-}
-
-.footerPerfil{
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    overflow: hidden;
+    border-radius: 15px;
+    gap: 100px;
 }
-
-.itensData{
+  
+  .fileira {
+    margin-bottom: 40px;
+    max-height: 200px;
+}
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .scroll-container {
     display: flex;
-    flex-direction: row;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .post {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+
+  
 }
 
-.itensFollow{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
-
-
-.categoriaFooter{
-    height: 80px;
+  
+  .post img {
     width: 100%;
+    border-radius: 8px;
+    object-fit: contain;
+    max-height: 150px;
+    margin-top: 5px;
+}
+  
+  .post h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #555;
+  }
+  
+  .post p {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+  }
+  
+  .post:hover {
+    transform: translateY(-5px);
+  }
+  
+  .scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
+  }
+  
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #e0e0e0;
+  }
+  img.perfilPostImg {
+    max-width: 50px;
+    object-fit: contain;
+}
+
+.headerExplorar {
     display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    font-size: 20px;
-    align-items: end;
-}
-
-.categoria{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-    height: 40px;
-    border-bottom: #07beff solid 10px;    cursor: pointer;
-}
-
-.btn-edit{
-    background-color: white;
-    padding: 5px;
-    border-radius: 20px;
-    width: 100px;
-    
-}
-
-#btnEditBanner{
-    cursor: pointer;
-}
-
-.follow-btn {
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 7px 17px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
-    transition: all 0.3s ease; 
-    width: 100px;
+    gap: 20px;
+    max-width: 350px;
+    text-align: left;
+      /* Controle de texto */
+      white-space: nowrap;           /* Impede que o texto quebre em várias linhas */
+      overflow: hidden;              /* Esconde o conteúdo que ultrapassar os limites */
+      text-overflow: ellipsis;       /* Adiciona '...' quando o texto é cortado */
 }
