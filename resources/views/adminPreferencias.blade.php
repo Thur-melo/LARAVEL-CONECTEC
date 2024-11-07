@@ -39,7 +39,9 @@
             <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
             </a>
+            
         </ul>
+        
     </div>
 
     <!--final menu lateral -->
