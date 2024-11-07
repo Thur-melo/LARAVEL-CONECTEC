@@ -29,6 +29,11 @@
             <a href="{{ route('admin') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
+
+            
+            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
+            </a>
             <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
             </a> -->
