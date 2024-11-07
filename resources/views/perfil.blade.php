@@ -93,8 +93,8 @@
                         <img src="{{ asset('storage/' . $usuario->urlDoBanner) }}" id="banner">
                     </div>
 
-
-                    <img src="{{ asset('storage/' . $usuario->urlDaFoto) }}" class="profileImg" id="icon">
+                    
+                    <img src="{{ asset('storage/' . $usuario->urlDaFoto) }}"  id="icon">
 
 
                     <div class="infoContainer">

@@ -400,3 +400,15 @@ label{
     color: rgb(80, 80, 80);
     padding: 0.5rem;
 }
+
+.imgUser img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profileImgBio{
+    width: 500px;
+    border-radius: 50%;
+
+}

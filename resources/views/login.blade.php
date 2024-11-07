@@ -40,9 +40,9 @@
             <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" >
                 @csrf
                 <div class="adminCont">
-                <button class="admin" >
+                <a href="{{ route('loginAdm') }}"class="admin" >
                     <i class="fa-solid fa-user-tie" id="btn"></i>
-                </button>
+                </a>
 
                 </div>
                 <div class="logo-img">

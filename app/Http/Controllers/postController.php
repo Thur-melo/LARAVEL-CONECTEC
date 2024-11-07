@@ -16,23 +16,26 @@ class postController extends Controller
     
     {
         $profilePhotoPost = null;
-    
-        if ($request->hasFile('fotoPost')) {
-            $file = $request->file('fotoPost');
-            $profilePhotoPost = $file->store('fotoPost', 'public');
-        }
 
+    if ($request->hasFile('fotoPost')) {
+        $file = $request->file('fotoPost');
+        $profilePhotoPost = $file->store('fotoPost', 'public');
+    }
 
+    try {
         Post::create([
             'texto' => $request->input('texto'),
-            'user_id' => Auth::id(),  
-            'fotoPost' =>  $profilePhotoPost,
+            'user_id' => Auth::id(),
+            'fotoPost' => $profilePhotoPost,
             'tipo_post' => $request->input('tipo'),
+        ]);
 
-        
-     ]);
-
-     return redirect()->route('home')->with('status', 'Post registrado com sucesso');
+        // Redireciona com uma mensagem de sucesso
+        return redirect()->route('home')->with('status', 'Post registrado com sucesso');
+    } catch (\Exception $e) {
+        // Redireciona com uma mensagem de erro
+        return redirect()->route('home')->with('error', 'Erro ao registrar o post');
+    }
  }
  
 public function destroy($id)

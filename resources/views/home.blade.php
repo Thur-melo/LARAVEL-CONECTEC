@@ -123,7 +123,7 @@
                             </div>
                             <div class="info">
                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                                    <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fezz uma nova publicação</span></h3>
+                                    <h3>{{ '@' . $post->user->arroba }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
 
                                     <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
                                         <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
@@ -200,14 +200,14 @@
                     <div class="sugestoes">
 
                         <div class="infoUserCont">
-                            <a class="profileImgSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
+                            <div class="profileImgSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
                                  <img src="{{ asset('storage/' . $usuariosSuge->urlDaFoto) }}" alt="">
-                            </a>
+                            </div>
 
-                            <a class="inforUserSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
+                            <div class="inforUserSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
                                 <span>{{ $usuariosSuge->name }}</span>
                                 <span>{{ $usuariosSuge->modulo }} {{ $usuariosSuge->perfil }}</span>
-                            </av>
+            </div>
                         </div>
 
                         <div class="btnSeguirCont">
@@ -282,9 +282,35 @@
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if(session('status'))
+        <script>
+            Swal.fire({
+                title: "Sucesso!",
+                text: "{{ session('status') }}",
+                icon: "success",
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#07beff"
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                title: "Erro",
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+        </script>
+    @endif
+
+
 
     <!-- Modal de Confirmação -->
 
+    
 
     <script>
         function previewImage(event) {
