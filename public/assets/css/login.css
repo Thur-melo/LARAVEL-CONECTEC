@@ -1,8 +1,8 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-   font-family: 'Roboto';
+    font-family: 'Roboto';
 }
 
 body {
@@ -11,20 +11,21 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f7fb;
-    flex-direction: column  ;
+    background-image: url('/assets/img/backgroundLogin.png');
+        background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
 }
 
 .main-login {
     display: flex;
-    width:80%;
+    width: 80%;
     height: 90%;
     background-color: white;
     border-radius: 8px;
-    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
+    box-shadow: rgba(194, 214, 218, 0.315) 5px 5px 50px 50px;
     overflow: hidden;
 }
-
 .imagem-cont {
     flex: 1.5;
     display: flex;
@@ -37,8 +38,8 @@ body {
 
 .imagem-cont img {
     width: 100%;
-   height: 650px;
-   object-fit: cover;
+    height: 650px;
+    object-fit: cover;
     border-radius: 8px;
 }
 
@@ -51,22 +52,25 @@ body {
     align-items: center;
 }
 
-form{
+form {
     width: 100%;
 }
-label{
+
+label {
     font-size: 11.3pt;
     color: #3f3950;
     font-weight: 600;
 
 }
-.title-login{
+
+.title-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 15%;
 }
-.title-login span{
+
+.title-login span {
     color: #acacac;
 
 }
@@ -81,7 +85,7 @@ label{
 
 .grupo-inputs {
     width: 100%;
-   
+
 }
 
 .inputForm {
@@ -102,7 +106,7 @@ label{
     margin-top: 5px;
 }
 
-.inputText input::placeholder{
+.inputText input::placeholder {
     color: #d4d4d4;
     font-size: 9.9pt;
     font-weight: 600;
@@ -111,7 +115,7 @@ label{
 
 .button-login {
     width: 100%;
-  
+
     margin-top: 5%;
 }
 
@@ -125,7 +129,7 @@ label{
     border-radius: 4px;
     cursor: pointer;
     letter-spacing: 1px;
-    color:white;
+    color: white;
     font-size: 12pt;
     font-weight: 600;
 
@@ -144,7 +148,7 @@ label{
 .footer-login a {
     color: #07beff;
     text-decoration: none;
-    
+
 }
 
 .footer-login a:hover {
@@ -152,44 +156,47 @@ label{
 }
 
 
-.logo-img{
+.logo-img {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50px;
     margin-bottom: 14%;
-   
+
 
 }
 
-.logo-img img{
+.logo-img img {
     width: 250px;
-  
-   
+
+
     object-fit: cover;
 
 }
 
-.lineCont{
+.lineCont {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 5%;
     gap: 5px;
 }
-.line{
+
+.line {
     border: 1px solid #dbdbdb;
     width: 100%;
 }
 
-#ou{
+#ou {
     color: #c0c0c0;
 }
 
-.wave{
-   position: absolute;
+.wave {
+    position: absolute;
     width: 100%;
     height: 320px;
+<<<<<<< HEAD
+=======
     
   }
 
@@ -218,5 +225,6 @@ label{
     width: 100%;
     align-items: center;
     justify-content: flex-end;
+>>>>>>> 07ef666b627290434fb86a3af22782f7bde3e5b9
 
 }
