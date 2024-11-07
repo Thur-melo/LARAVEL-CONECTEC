@@ -26,7 +26,6 @@ body {
     box-shadow: rgba(194, 214, 218, 0.315) 5px 5px 50px 50px;
     overflow: hidden;
 }
-
 .imagem-cont {
     flex: 1.5;
     display: flex;
