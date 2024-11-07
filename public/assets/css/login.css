@@ -5,201 +5,190 @@
    font-family: 'Roboto';
 }
 
-body{
-    height: 100vh;
+body {
+    font-family: Arial, sans-serif;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f7fb;
+    flex-direction: column  ;
 }
 
-.loginCont {
-    align-items: center;
-    width: 600px;
-    margin-right: 100px;
-    height: 800px;
+.main-login {
     display: flex;
-    flex-direction: column;
-    border: 2px solid #d9d9d9;
-    padding: 20px;
-    border-radius: 15px;
-    justify-content: center;
-}
-.main{
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
+    width:80%;
+    height: 90%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
     overflow: hidden;
 }
 
-
-.logo h2{
-    font-size: 15pt;
-}
-
-.logo{
+.imagem-cont {
+    flex: 1.5;
     display: flex;
     align-items: center;
-    width: 90%;
-    
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+    background-color: #f7fdfc;
 }
-.logo i{
-    color: #00c9e9;
-    font-size: 25pt;
-    margin-right: 5px;
-    margin-bottom: 5px;
 
+.imagem-cont img {
+    width: 100%;
+   height: 650px;
+   object-fit: cover;
+    border-radius: 8px;
 }
-.logo{
 
+.login-cont {
+    flex: 1;
+    padding: 40px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-
-
-.tituloCadastro a{
-
-    text-decoration: none;
-    font-weight: bold;
-    color: #212529;
-
+form{
+    width: 100%;
 }
-
-.tituloCadastro h1{
-    font-size: 19pt;
+label{
+    font-size: 11.3pt;
+    color: #3f3950;
     font-weight: 600;
 
 }
+.title-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15%;
+}
+.title-login span{
+    color: #acacac;
 
-.tituloCadastro p{
-    color: #a9a9a9;
-    font-size: 10.5pt;
+}
+
+
+
+.title-login h2 {
+    font-size: 25pt;
+    color: #3f3950;
+    text-align: start;
 }
 
 .grupo-inputs {
-    display: flex;
-    flex-direction: column;
     width: 100%;
-    gap: 25px;
-    align-items: center;
-}
-.tituloCadastro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+   
 }
 
-.inputForm input {
-    width: 470px;
-    height: 60px;
+.inputForm {
+    margin-bottom: 20px;
+}
+
+.inputForm label {
+    font-size: 14px;
+    color: #666;
+}
+
+.inputText input {
+    width: 100%;
     padding: 10px;
-    border-radius: 7px;
-    border: 2px solid #d9d9d9;
-}
-
-
-.inputForm input::placeholder{
-    font-size: 9pt;
-    font-weight: 600;
-    color: #bbbbbb;
-
-}
-
-.inputForm label{
-    font-weight: 600;
-    font-size: 10.5pt;
-
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-    position: relative;
-    align-items: center;
-}
-
-.imgDireita img{
-    position: absolute;
-    top: 0;
-  left: 45%;
-  width: 50%;
-  z-index: 1;
-
-}
-
-.extraTitle h1{
-    font-size: 15pt;
-    font-weight: 600;
-}
-
-.extraTitle p{
-    font-size: 10.5pt;
-    color: #a9a9a9;
-}
-
-.botaoContinuar{
-    padding: 14px 7px;
-    border:none;
-    width: 80%;
-    border-radius: 7px;
-    font-size: 12pt;
-    color: white;
-    font-weight: 600;
-    background-color: #00c9e9;
-
-}
-
-.botaoLoginNav{
-    padding: 10px 30px;
-    border:none;
-    border-radius: 7px;
-    font-size: 12pt;
-    color: white;
-    font-weight: 600;
-    background-color: #00c9e9;
-}
-
-.headerLogo{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-}
-
-.botaoLogar {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-left: 15px;
-    width: 100%;
-}
-.botaoLogar button{
-    background-color: #00aaff;
-    color: #fff;
-    padding: 7px;
+    font-size: 16px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    border: none;
+    margin-top: 5px;
+}
+
+.inputText input::placeholder{
+    color: #d4d4d4;
+    font-size: 9.9pt;
     font-weight: 600;
+
+}
+
+.button-login {
+    width: 100%;
+  
+    margin-top: 5%;
+}
+
+.button-login button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    background-color: #07beff;
+    color: white;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    letter-spacing: 1px;
+    color:white;
+    font-size: 12pt;
+    font-weight: 600;
 
 }
 
-.imgCont{
-    width: 60%;
+.button-login button:hover {
+    background-color: #06abe7;
 }
 
-#logo {
-    height: auto;
+.footer-login {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #3f3950;
+}
+
+.footer-login a {
+    color: #07beff;
+    text-decoration: none;
+    
+}
+
+.footer-login a:hover {
+    text-decoration: underline;
+}
+
+
+.logo-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    margin-bottom: 14%;
+   
+
+}
+
+.logo-img img{
+    width: 250px;
+  
+   
+    object-fit: cover;
+
+}
+
+.lineCont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+    gap: 5px;
+}
+.line{
+    border: 1px solid #dbdbdb;
     width: 100%;
 }
 
-.footerLogin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 85%;
+#ou{
+    color: #c0c0c0;
 }
+
+.wave{
+   position: absolute;
+    width: 100%;
+    height: 320px;
+    
+  }

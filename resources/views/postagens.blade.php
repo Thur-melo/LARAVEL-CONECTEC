@@ -35,7 +35,7 @@
                             <h3>Home</h3>
                         </a>
 
-                        <a class="menu-item " href="{{Route('perfil')}}">
+                        <a class="menu-item " href="">
                             <span><i class="fa-regular fa-compass"></i></span>
                             <h3>Explorar</h3>
                         </a>
@@ -121,7 +121,7 @@
                             <div class="cor2"></div> <span>Rejeitado</span>
                         </div>
                         <div class="sumarios">
-                            <div class="cor3"></div> <span>Respondido</span>
+                            <div class="cor3"></div> <span>Respondido/comentado</span>
                         </div>
                     </div>
 

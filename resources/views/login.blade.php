@@ -30,35 +30,27 @@
 </nav> -->
 
 
-    <div class="main">
-        <div class="imgCont">
-            <img src="{{url('assets/img/img_login.png')}}" id="logo">
+<div class="main-login">
+        <div class="imagem-cont">
+                <img src="{{url('assets/img/img.png')}}">
+               
         </div>
-        <div class="loginCont" id="step1">
-            <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" id="loginForm">
+
+        <div class="login-cont">
+            <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" >
                 @csrf
-
-                <div class="logo">
-                    <div class="headerLogo">
-                        <img src="{{url('assets/img/logoConectecLogin.png')}}" id="logo">
-                    </div>
-
+                <div class="logo-img">
+                    <img src="{{url('assets/img/logoConectec.png')}}" alt="">
                 </div>
 
+                <div class="title-login">
+                    <h2>Entre</h2>
+                    <span>Faça o login para continuar </span>
+                </div>
                 @if(session()->has('success'))
 
                 {{ session()->get('success')}}
                 @endif
-
-                <div class="tituloCadastro">
-                    <h1>Entre na sua conta</h1>
-                    <p>Bem-vindo de volta, acesse conta para continuar.</p>
-                </div>
-
-                @error('error')
-                <span>{{ $message }} </span>
-                @enderror
-
                 <div class="grupo-inputs">
                     <div class="inputForm">
                         <label for="email">E-mail</label>
@@ -74,13 +66,31 @@
                         </div>
 
                     </div>
-                    <div class="footerLogin">
-                        <button class="botaoContinuar" type="submit">Entrar</button>
-                        <p>Não possui uma conta? <a href="{{ route('register') }}">Cadastre-se</a> | Entrar como <a href="{{ route('loginAdm') }}">Admin</a></p>
-                    </div>
-            </form>
+                    
+                    
+                </div>
 
+                
+
+                <div class="button-login">
+                    <button>Entrar</button>
+                </div>
+                <div class="lineCont">
+                    <div class="line"></div>
+                    <div id="ou">Ou</div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="footer-login">
+                    <span>Ainda não tem uma conta? <a href="{{ route('register')}}">Registre-se</a></span>
+                    
+                </div>
+                
+            </form>
+              
+               
         </div>
+    </div>
 
         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
             <div class="modal-dialog">
