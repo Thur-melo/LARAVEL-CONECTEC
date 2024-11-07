@@ -128,7 +128,7 @@
                     <div class="headerModal">
                         <h5 class="modal-title" id="postModalLabel">Editar Postagem</h5>
                         <div class="horasPost">
-                            <span class="voce">Você </span><span id="fez">pode editar o conteúdo </span><span class="voce" id="postHora"></span>
+                            <span class="voce">Você </span><span id="fez">pode editar o conteúdo públicado </span><span class="voce" id="postHora"></span>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

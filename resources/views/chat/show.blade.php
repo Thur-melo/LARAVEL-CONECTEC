@@ -28,7 +28,7 @@
 @include('partials.navbar')
 
 
-    <main>
+<main>
     <div class="container">
             <div class="left">
                 <div class="sidebar">
@@ -81,7 +81,30 @@
 
                 </div>
             </div>
-   
+
+            <div class="chat-container">
+                <div class="userTwo-container">
+                    <div class="profileImg">
+                        
+                    <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="">
+                    </div>
+                    <h1> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </h1>
+                </div>
+                <div class="messages">
+                    @foreach($messages as $message)
+                    <div class="message">{{ $message->user->name }}: {{ $message->message }}</div>
+                    @endforeach
+                </div>
+                <div class="input-container">
+                    <form action="{{ url('/conversations/' . $conversation->id . '/messages') }}" method="POST">
+                        @csrf
+                        <input type="text" name="message" placeholder="Sua mensagem" required>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="listaContainer">
             <div class="headerContatos">
                     <h1>Minhas Conversas</h1>
@@ -99,7 +122,7 @@
                     <div class="contato">
                         
 
-                    <a href="{{ route('chat.show', ['id' => $conversation->id]) }}">
+                    <a href="{{ url('/conversations/' . $conversation->id) }}">
                     <li>
                                 <div class="imgContato">
                                 <img src="{{ asset('storage/' . ($conversation->user_one_id === $user->id ? $conversation->userTwo->urlDaFoto : $conversation->userOne->urlDaFoto)) }}" class="imgLista" alt="">
@@ -116,40 +139,11 @@
 
                 </div>
             </div>
-            <div class="chat-container">
-                <div class="userTwo-container">
-                    <div class="profileImg">
-                        
-                    <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="">
-                    </div>
-                    <h1> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </h1>
-                </div>  
-                <div class="messages">
-                    @foreach($messages as $message)
-                    <div class="message">{{ $message->user->name }}: {{ $message->message }}</div>
-                    @endforeach
-                </div>
-                <div class="input-container">
-                    <form action="{{ url('/conversations/' . $conversation->id . '/messages') }}" method="POST">
-                        @csrf
-                        <input type="text" name="message" placeholder="Sua mensagem" required>
-                        <button type="submit">Enviar</button>
-                    </form>
-                </div>
-            </div>
-         
-
-            @include('partials.modalContato')
-
-
-
 
         </div>
-
-        </div>
+        @include('partials.modalContato')
     </main>
-       <!-- Bootstrap JS -->
-       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 </body>
 

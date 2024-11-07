@@ -28,6 +28,7 @@ main .container {
     gap: 3rem;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 main .container .left{
@@ -197,9 +198,11 @@ main .container .left{
 /* Estilos gerais */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f9f9f9;
     color: #333;
     padding: 20px;
+    background-image: url('/assets/img/backChat.png');
+    background-repeat: no-repeat;
+background-size: cover;
 }
 
 /* Título */
@@ -324,6 +327,7 @@ button:hover {
 
 .headerContatos h1{
     font-family: fangsong;
+    color: white;
 }
 
 .listaContainer {

@@ -88,17 +88,24 @@ class ChatController extends Controller
 
 public function storeMessage(Request $request, $conversationId)
 {
-        $request->validate(['message' => 'required']);
+    // Validação
+    $request->validate(['message' => 'required']);
 
+    // Encontra a conversa com base no ID
+    $conversation = Conversation::findOrFail($conversationId);
+
+    // Cria a nova mensagem associada à conversa
     Message::create([
-        'conversation_id' => $conversationId, // Inclua o conversation_id
+        'conversation_id' => $conversationId,  // Aqui, associamos a mensagem à conversa correta
         'user_id' => Auth::id(),
-        'username' => Auth::user()->name, // Use o nome do usuário autenticado
-        'message' => $request->message,
+        'username' => Auth::user()->name,  // Usa o nome do usuário autenticado
+        'message' => $request->message,  // O conteúdo da mensagem
     ]);
 
-    return redirect()->back();
+    // Após salvar a mensagem, redireciona de volta para a conversa
+    return redirect()->route('chat.show', ['id' => $conversationId]);
 }
+
 
 
 }
