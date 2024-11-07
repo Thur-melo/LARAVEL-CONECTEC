@@ -166,6 +166,7 @@
                     <a href="{{ route('comentarios', $post->id) }}">
                         <button class="comentarioCotn">
                             <i class="uil uil-comment"></i>
+                            <span>{{ $post->coments()->count() }}</span>
                         </button>
                     </a>
                 </div>

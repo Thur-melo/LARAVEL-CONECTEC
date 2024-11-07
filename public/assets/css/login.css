@@ -196,5 +196,26 @@ label {
     position: absolute;
     width: 100%;
     height: 320px;
+<<<<<<< HEAD
+=======
+    
+  }
+
+  .admin{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #06abe7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .adminCont{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+>>>>>>> 07ef666b627290434fb86a3af22782f7bde3e5b9
 
 }
