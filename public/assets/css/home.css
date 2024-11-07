@@ -268,6 +268,10 @@ main .container .left{
     max-width: 800px;
     
 }
+.right {
+    position: fixed;
+    right: 200px;
+}
 
 
 

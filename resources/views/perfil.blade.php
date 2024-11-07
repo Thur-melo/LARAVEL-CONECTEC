@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="categoriaFooter">
-                            <div class="categoria" onclick="mudarConteudo('meusPosts')">Meus Posts</div>
+                            <div class="categoria" onclick="mudarConteudo('meusPosts')">Postagens</div>
                         </div>
 
 
