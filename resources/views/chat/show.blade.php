@@ -11,13 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link
-        rel="stylesheet"
-        href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 
@@ -25,11 +21,11 @@
 
 <body>
 
-@include('partials.navbar')
+    @include('partials.navbar')
 
 
-<main>
-    <div class="container">
+    <main>
+        <div class="container">
             <div class="left">
                 <div class="sidebar">
                     <div class="sidebarList">
@@ -58,7 +54,7 @@
                             <h3>Chat</h3>
                         </a>
 
-                     
+
 
                     </div>
 
@@ -81,14 +77,19 @@
             <div class="chat-container">
                 <div class="userTwo-container">
                     <div class="profileImg">
-                        
-                    <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="">
+
+                        <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="">
                     </div>
                     <h1> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </h1>
                 </div>
                 <div class="messages">
                     @foreach($messages as $message)
-                    <div class="message">{{ $message->user->name }}: {{ $message->message }}</div>
+                    <div class="message" @if ($message->user->id === Auth::id())
+                        style="background-color: #b3bcff; display: flex;
+                        flex-direction: row-reverse;"
+                        @endif>
+                         {{ $message->message }}
+                    </div>
                     @endforeach
                 </div>
                 <div class="input-container">
@@ -102,12 +103,12 @@
 
 
             <div class="listaContainer">
-            <div class="headerContatos">
+                <div class="headerContatos">
                     <h1>Minhas Conversas</h1>
-                   
+
                 </div>
                 <div class="btnChat">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
                         Adicionar conversa
                     </button>
                 </div>
@@ -116,20 +117,20 @@
 
                     @foreach($conversations as $conversation)
                     <div class="contato">
-                        
 
-                    <a href="{{ url('/conversations/' . $conversation->id) }}">
-                    <li>
+
+                        <a href="{{ url('/conversations/' . $conversation->id) }}">
+                            <li>
                                 <div class="imgContato">
-                                <img src="{{ asset('storage/' . ($conversation->user_one_id === $user->id ? $conversation->userTwo->urlDaFoto : $conversation->userOne->urlDaFoto)) }}" class="imgLista" alt="">
+                                    <img src="{{ asset('storage/' . ($conversation->user_one_id === $user->id ? $conversation->userTwo->urlDaFoto : $conversation->userOne->urlDaFoto)) }}" class="imgLista" alt="">
                                 </div>
                                 <div class="nameContato">
-                                <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
+                                    <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
                                 </div>
 
-                               </li>
-                            </a>
-                       
+                            </li>
+                        </a>
+
                     </div>
                     @endforeach
 
