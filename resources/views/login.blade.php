@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{url('assets/css/login.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
@@ -40,9 +40,10 @@
             <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" >
                 @csrf
                 <div class="adminCont">
-                    <div class="admin">
-                        <i class="fa-solid fa-user-tie"></i>
-                    </div>
+                <button class="admin" >
+                    <i class="fa-solid fa-user-tie" id="btn"></i>
+                </button>
+
                 </div>
                 <div class="logo-img">
                     <img src="{{url('assets/img/logoConectec.png')}}" alt="">
@@ -78,7 +79,7 @@
                 
 
                 <div class="button-login">
-                    <button>Entrar</button>
+                    <button >Entrar</button>
                 </div>
                 <div class="lineCont">
                     <div class="line"></div>
@@ -114,8 +115,15 @@
             </div>
         </div>
 
+        <script>
+            tippy('#btn', {
+                content: 'aaaaaaaaa',
+            });
+        </script>
 
+        <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
 
+        
         <!-- Carregar jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

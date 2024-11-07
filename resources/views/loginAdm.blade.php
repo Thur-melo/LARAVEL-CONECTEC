@@ -6,7 +6,7 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{url('assets/css/login.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/loginAdm.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
 </head>
@@ -18,10 +18,9 @@
                 @csrf
 
                 <div class="logo">
-                    <div class="headerLogo">
-                        <i class="fa-brands fa-cloudversify"></i>
-                        <h2>Conectec</h2>
-                    </div>
+                <div class="logo-img">
+                    <img src="{{url('assets/img/logoConectec.png')}}" alt="">
+                </div>
                  
                 </div>
 
@@ -31,7 +30,7 @@
                 @endif
 
                 <div class="tituloCadastro">
-                    <h1>Entre na sua conta</h1>
+                    <h1>Entre na sua conta (Admin)</h1>
                     <p>Bem-vindo de volta, acesse  conta para continuar.</p>                   
                 </div>
 
@@ -60,7 +59,7 @@
                 
             </div>
 
-            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

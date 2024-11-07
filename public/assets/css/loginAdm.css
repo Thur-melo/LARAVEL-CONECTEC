@@ -1,0 +1,203 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+   font-family: 'Roboto';
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginCont{
+    align-items: center;
+   width: 50vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+
+.main{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+ 
+}
+
+
+
+.logo h2{
+    font-size: 15pt;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 10%;
+    
+}
+.logo i{
+    color: #00c9e9;
+    font-size: 25pt;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+}
+.logo{
+
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo img{
+
+    height: 100px;
+
+}
+
+.tituloCadastro a{
+
+    text-decoration: none;
+    font-weight: bold;
+    color: #212529;
+
+}
+
+.tituloCadastro h1{
+    font-size: 19pt;
+    font-weight: 600;
+
+}
+
+.tituloCadastro p{
+    color: #a9a9a9;
+    font-size: 10.5pt;
+}
+
+.grupo-inputs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+}
+
+.inputForm input{
+    width: 80%;
+    padding: 10px;
+    border-radius: 7px;
+    border: 2px solid #d9d9d9;
+
+}
+
+.inputForm input::placeholder{
+    font-size: 9pt;
+    font-weight: 600;
+    color: #bbbbbb;
+
+}
+
+.inputForm label{
+    font-weight: 600;
+    font-size: 10.5pt;
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 80%;
+    position: relative;
+}
+
+.imgDireita img{
+    position: absolute;
+    top: 0;
+  left: 45%;
+  width: 50%;
+  z-index: 1;
+
+}
+
+.extraTitle h1{
+    font-size: 15pt;
+    font-weight: 600;
+}
+
+.extraTitle p{
+    font-size: 10.5pt;
+    color: #a9a9a9;
+}
+
+.botaoContinuar{
+    padding: 14px 7px;
+    border:none;
+    width: 80%;
+    border-radius: 7px;
+    font-size: 12pt;
+    color: white;
+    font-weight: 600;
+    background-color: #00c9e9;
+
+}
+
+.botaoLoginNav{
+    padding: 10px 30px;
+    border:none;
+    border-radius: 7px;
+    font-size: 12pt;
+    color: white;
+    font-weight: 600;
+    background-color: #00c9e9;
+}
+
+.headerLogo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.botaoLogar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 15px;
+    width: 100%;
+}
+.botaoLogar button{
+    background-color: #00aaff;
+    color: #fff;
+    padding: 7px;
+    border-radius: 4px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.logo-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    margin-bottom: 14%;
+   
+
+}
+
+.logo-img img{
+    width: 250px;
+    object-fit: contain;
+
+}
