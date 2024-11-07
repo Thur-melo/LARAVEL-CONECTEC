@@ -84,7 +84,7 @@
                 <div class="cardsCont">
                     <div class="cardsPosta">
                         <div class="cardPosta">
-                            <h2>10</h2>
+                            <h2>{{$postsCount}}</h2>
                             <span>Perguntas</span>
                         </div>
                         <i class="fa-regular fa-images"></i>

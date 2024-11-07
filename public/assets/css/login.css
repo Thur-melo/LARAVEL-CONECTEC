@@ -192,3 +192,21 @@ label{
     height: 320px;
     
   }
+
+  .admin{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #06abe7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .adminCont{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+
+}

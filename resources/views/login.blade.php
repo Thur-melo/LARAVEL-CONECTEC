@@ -39,6 +39,11 @@
         <div class="login-cont">
             <form method="POST" action="{{url('login')}}" enctype="multipart/form-data" >
                 @csrf
+                <div class="adminCont">
+                    <div class="admin">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                </div>
                 <div class="logo-img">
                     <img src="{{url('assets/img/logoConectec.png')}}" alt="">
                 </div>
