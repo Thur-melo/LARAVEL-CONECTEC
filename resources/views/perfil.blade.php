@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{url('assets/css/profile.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/visitante.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/postPadrão.css')}}">
 
@@ -93,30 +93,31 @@
             <div class="meio">
                 <div class="perfilContainer">
                     <div class="fundo">
-                        <img src="{{ asset('storage/' . $user->urlDoBanner) }}" id="banner">
+                        <img src="{{ asset('storage/' . $usuario->urlDoBanner) }}" id="banner">
                     </div>
 
 
-                    <img src="{{ asset('storage/' . $user->urlDaFoto) }}" class="profileImg" id="icon">
+                    <img src="{{ asset('storage/' . $usuario->urlDaFoto) }}" class="profileImg" id="icon">
 
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
-                            <button type="button" class="btn-edit"
-                                data-bs-toggle="modal" data-bs-target="#profileModal">
-                                Editar Perfil
-                            </button>
+                        <button class="follow-btn" 
+                        data-user-id="{{ $usuario->id }}" 
+                        data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'unfollow' : 'follow' }}">
+                        {{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'Seguindo' : 'Seguir' }}
+                        </button>
 
 
                         </div>
                         <div class="rowNomeUser">
-                            <h1 class="username">{{ $user->name}}</h1>
-                            <p class="arroba"> {{ '@' . $user->arroba }} </p>
+                            <h1 class="username">{{ $usuario->name}}</h1>
+                            <p class="arroba"> {{ '@' . $usuario->arroba }} </p>
                         </div>
 
                         <div class="rowBio">
                             <div class="bio">
-                                <p>{{ $user->bio }}</p>
+                                <p>{{ $usuario->bio }}</p>
                             </div>
                         </div>
 
@@ -125,7 +126,7 @@
                                 <span class="material-symbols-outlined">
                                     calendar_month
                                 </span>
-                                <p>{{ $user->created_at->diffForHumans() }}</p>
+                                <p>{{ $usuario->created_at->diffForHumans() }}</p>
                             </div>
                             <div class="itensFollow">
                                 <p>{{$seguindo}} Seguindo</p>
@@ -144,28 +145,6 @@
 
 
                 <div id="resultado" class="resultado">
-                    <!-- O conteúdo será gerado aqui -->
-                </div>
-
-            </div>
-            @include ('partials.emAlta')
-        </div>
-
-
-
-    </main>
-    @include('partials.modalsair')
-    <!-- Modal de Confirmação -->
-
-
-
-    <script>
-        function mudarConteudo(tipo) {
-            const resultado = document.getElementById('resultado');
-            resultado.innerHTML = ''; // Limpa o conteúdo atual
-
-            if (tipo === 'meusPosts') { // Mude 'posts' para 'meusPosts'
-                resultado.innerHTML += `
                 @foreach($posts as $post)
                     @php
         $coresModulo = [
@@ -225,16 +204,18 @@
                             </div>
                         </div>
                     </div>
-                @endforeach`;
-            }
+                @endforeach                </div>
 
-            // Atualizar a classe active
-            const categorias = document.querySelectorAll('.categoria');
-            categorias.forEach(cat => cat.classList.remove('active'));
-            const clickedElement = document.querySelector(`.categoria[onclick*="${tipo}"]`);
-            clickedElement.classList.add('active');
-        }
-    </script>
+            </div>
+            @include ('partials.emAlta')
+        </div>
+
+
+
+    </main>
+    @include('partials.modalsair')
+    <!-- Modal de Confirmação -->
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
