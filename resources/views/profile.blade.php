@@ -41,7 +41,7 @@
                             <h3>Home</h3>
                         </a>
 
-                        <a class="menu-item ">
+                        <a class="menu-item " href="{{ Route('explorar')}}">
                             <span><i class="fa-regular fa-compass"></i></span>
                             <h3>Explorar</h3>
                         </a>

@@ -13,7 +13,7 @@
                     <p>Adicione novos contatos para começar a conversar.</p>
                     <form action="/conversations" method="POST">
                         @csrf
-                        <input type="text" name="username" placeholder="ID do usuário para conversar" required>
+                        <input type="text" name="username" placeholder="Digite o arroba do usuário para conversar" required>
                         <button type="submit" class="btn btn-primary">Iniciar Conversa</button>
                     </form>
                 </div>

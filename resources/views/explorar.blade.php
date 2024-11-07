@@ -40,7 +40,7 @@
                             <h3>Home</h3>
                         </a>
 
-                        <a class="menu-item " href="">
+                        <a class="menu-item active" href="">
                             <span><i class="fa-regular fa-compass"></i></span>
                             <h3>Explorar</h3>
                         </a>
@@ -95,14 +95,17 @@
                         <div class="scroll-container" id="curtidas">
                             @foreach($postsCurtidas as $post)
                             <div class="post">
-                                <div class="headerExplorar">
-                                                                    @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-
-                            <h3> {{ $post->texto }}
-                            </div>
-                                </h3>
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                            </div>
+                           
+                           <div class="headerExplorar">
+                                                               @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
+                                                               <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                       <h3> {{ $post->texto }}
+                       </div>
+                     
+                           </h3>
+                           <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                       </div>
+                       </a>
                             @endforeach
                         </div>
                     </div>
@@ -113,14 +116,17 @@
                         <div class="scroll-container" id="comentarios">
                             @foreach($postsComentarios as $post)
                             <div class="post">
+                           
                                 <div class="headerExplorar">
                                                                     @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-
+                                                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
                             <h3> {{ $post->texto }}
                             </div>
+                          
                                 </h3>
                                 <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
                             </div>
+                            </a>
                             @endforeach
                         </div>
 
@@ -131,14 +137,17 @@
                         <div class="scroll-container" id="aleatorios">
                             @foreach($postsAleatorios as $post)
                             <div class="post">
+                           
                                 <div class="headerExplorar">
                                                                     @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-
+                                                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
                             <h3> {{ $post->texto }}
                             </div>
+                          
                                 </h3>
                                 <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
                             </div>
+                            </a>
                             @endforeach
                         </div>
                     </div>

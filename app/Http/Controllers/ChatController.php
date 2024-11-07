@@ -25,13 +25,16 @@ class ChatController extends Controller
 
     public function createConversation(Request $request)
     {
-        $request->validate(['username' => 'required|string']);
+        // Validação dos dados de entrada
+        $request->validate([
+            'username' => 'required|string',
+        ]);
     
         // Busca o usuário pelo nome
-        $user = User::where('id', $request->username)->first();
+        $user = User::where('arroba', $request->username)->first();
     
         if (!$user) {
-            return redirect()->back()->withErrors(['id' => 'Usuário não encontrado.']);
+            return redirect()->back()->withErrors(['arroba' => 'Usuário não encontrado.']);
         }
     
         // Verifique se a conversa já existe
@@ -44,15 +47,9 @@ class ChatController extends Controller
         })->first();
     
         if ($existingConversation) {
+            // Se a conversa já existir, redireciona para a conversa existente
             return redirect()->route('chat.show', $existingConversation->id);
         }
-
-        $usermain = Auth::user();
-
-        $conversations = Conversation::where('user_one_id', Auth::id())
-            ->orWhere('user_two_id', Auth::id())
-            ->get();
-
     
         // Criar a nova conversa
         $conversation = Conversation::create([
@@ -60,8 +57,17 @@ class ChatController extends Controller
             'user_two_id' => $user->id,
         ]);
     
-        return redirect()->route('chat.show',  $conversation->id, compact('conversations', 'user'));
+        // Recuperar as conversas do usuário logado
+        $conversations = Conversation::where('user_one_id', Auth::id())
+            ->orWhere('user_two_id', Auth::id())
+            ->get();
+    
+        // Redirecionar para a conversa recém-criada e passar os dados necessários
+        return redirect()->route('chat.show', $conversation->id)
+                         ->with('conversations', $conversations)
+                         ->with('user', $user);
     }
+    
     
 
 

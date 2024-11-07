@@ -188,8 +188,8 @@ main .container .left{
 /* feedExplorar */
 
 .feedExplorar {
-    width: 800px;
-    height: 1010px;
+    min-width: 800px;
+    min-height: 1050px;
     background: white;
     max-width: 1200px;
     margin: 20px auto;
@@ -215,8 +215,10 @@ main .container .left{
   .scroll-container {
     display: flex;
     overflow-x: auto;
+    max-width: 750px;
     gap: 20px;
     padding: 10px;
+    white-space: nowrap;        /* Impede que o texto quebre em várias linhas */
   }
   
   .post {
