@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Hash;
 class adminController extends Controller
 {
     //public function showHome()
-public function showperfil($arroba) {
+public function showperfil($id) {
 
     
     // Buscar usuário
-    $usuario = User::where('arroba', $arroba)->firstOrFail();    
+    $usuario = User::findOrFail($id);
     $user = Auth::User();   
     $post = Post::all();
 

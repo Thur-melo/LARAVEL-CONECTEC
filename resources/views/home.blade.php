@@ -112,13 +112,13 @@
             <!-- Seção de informações do usuário -->
             <div class="user">
                 <div class="profileImg">
-                <a href="{{ route('perfil', ['arroba' => $post->user->arroba]) }}">
-                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
-                    </a>
+                @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
+                    
+                    
                 </div>
                 <div class="info">
                     <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
+                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fezz uma nova publicação</span></h3>
 
                         <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
                             <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>

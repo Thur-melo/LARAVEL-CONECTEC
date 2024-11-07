@@ -29,7 +29,7 @@ Route::get('/preferencias', [preferenciasController::class, 'showPreferencias'])
 Route::get('/', function () {
     return redirect('/login');
 });
-Route::get('/perfil/{arroba}', [AdminController::class, 'showPerfil'])->name('perfil');
+Route::get('/perfil/{id}', [adminController::class, 'showperfil'])->name('perfil');
 
 
 Route::post('/profile/user/{id}', [adminController::class, 'update'])->name('user.update');
