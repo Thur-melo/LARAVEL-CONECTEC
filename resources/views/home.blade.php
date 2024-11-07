@@ -44,7 +44,7 @@
                 <span><i class="fa-solid fa-house" ></i></span> <h3>Home</h3>
             </a>
 
-            <a class="menu-item " href="{{Route('perfil')}}" >
+            <a class="menu-item " href="#" >
             <span><i class="fa-regular fa-compass"></i></span> <h3>Explorar</h3>
             </a> 
             
@@ -112,8 +112,8 @@
             <!-- Seção de informações do usuário -->
             <div class="user">
                 <div class="profileImg">
-                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
-                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
+                <a href="{{ route('perfil', ['arroba' => $post->user->arroba]) }}">
+                <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
                     </a>
                 </div>
                 <div class="info">

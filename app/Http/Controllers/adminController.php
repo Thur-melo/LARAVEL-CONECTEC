@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Seguir;
 use Illuminate\Http\Request;
 use App\Models\Adm;
 use App\Models\PreferenciasLista;
@@ -13,10 +14,22 @@ use Illuminate\Support\Facades\Hash;
 class adminController extends Controller
 {
     //public function showHome()
-public function showperfil(){
-    $user = Auth::User();
+public function showperfil($arroba) {
 
-    return view('perfil', compact('user'));
+    
+    // Buscar usuário
+    $usuario = User::where('arroba', $arroba)->firstOrFail();    
+    $user = Auth::User();   
+    $post = Post::all();
+
+    // Buscar posts do user auth
+    $posts = Post::where('user_id', $usuario->id)->get();
+
+    // Contar seguidores e seguindo
+    $myseguidores = Seguir::where('seguindo_id', $usuario->id)->count();
+    $seguindo = Seguir::where('seguidor_id', $usuario->id)->count();
+
+    return view('perfil', compact('usuario', 'posts', 'user', 'myseguidores','seguindo'));
 }
 
 public function showprofile(){

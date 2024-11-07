@@ -29,8 +29,10 @@ Route::get('/preferencias', [preferenciasController::class, 'showPreferencias'])
 Route::get('/', function () {
     return redirect('/login');
 });
-Route::get('/perfil', [adminController::class, 'showperfil']) ->name('perfil');
-Route::post('/perfil/user/{id}', [adminController::class, 'update'])->name('user.update');
+Route::get('/perfil/{arroba}', [AdminController::class, 'showPerfil'])->name('perfil');
+
+
+Route::post('/profile/user/{id}', [adminController::class, 'update'])->name('user.update');
 Route::get('/profile/{id}', [profileController::class,'profile'])->name('profile');
 
 
