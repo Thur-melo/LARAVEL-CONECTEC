@@ -27,9 +27,11 @@
     <!--inicio menu lateral -->
 
     <div class="menu-lateral">
-        <div class="brand-name">
-            <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
-        </div>
+    <div class="brand-name">
+        <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
+    </div>
+
+    <div class="menu-content">
         <ul>
             <a href="{{ route('adminHome') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
@@ -37,12 +39,23 @@
             <a href="{{ route('admin') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
-            
-            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
-            </a>
+            <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
+            </a> -->
         </ul>
+
+        <!-- Botão de logout -->
+        <a href="{{ route('logout') }}" class="logout">
+           
+           <span class="material-icons" id="icons">logout</span>
+           <span>Sair</span>
+     
+   </a>
     </div>
+</div>
+
+  
+
 
     <!--final menu lateral -->
 
@@ -51,44 +64,40 @@
             <div class="cards">
 
                 <!-- Card Total de Posts com ação de abrir modal -->
-                <div class="card" id="openModalBtn">
+                <div class="card" style="border-left: 5px solid #00c9e9" id="openModalBtn">
                     <div class="box">
                         <h1>{{$qnt_posts}}</h1>
                         <h3>Total de posts</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" style="color: #111111;" id="icons-card">post_add</span>
                     </div>
                 </div>
 
-                <div class="card" id="openModalTypesBtn">
+                <div class="card" style="border-left: 5px solid #FED142" id="openModalTypesBtn">
                     <div class="box">
                         <h2>{{$qnt_tipos}}</h2>
                         <h3>Tipos de Post</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons"  id="icons-card">pending_actions</span>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #ff0000">
                     <div class="box">
                         <h1>{{$qnt_postInativos}}</h1>
                         <h3>Posts inativos</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: red;"> sentiment_dissatisfied</span>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #2DD683">
                     <div class="box">
                         <h2>{{$qnt_postAtivos}}</h2>
                         <h3>Posts Ativos</h3>
                     </div>
 
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: green">sentiment_satisfied</span>
                     </div>
                 </div>
 
@@ -111,35 +120,85 @@
         </div>
 
 
-        <svg width="600" height="350">
+     
+            <!-- Gráfico SVG -->
+            <div class="grafico-container">
 
-<text x="40" y="30">Quantidade de Post por curso</text>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                  google.charts.load('current', {'packages':['corechart']});
+                  google.charts.setOnLoadCallback(drawChart);
+            
+                  function drawChart() {
+            
+                    
+              var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['ativos',     1],
+      ['inativos',     1 ],
+      ['totais',  1],
+     
+    ]);
 
-<!-- Eixo Y -->
+    var options = {
+      title: 'Total de posts',
+      titleTextStyle: {
+        color: '#3e3e3e',  // Cor do título
+        fontSize: 20,       // Tamanho da fonte
+        bold: true          // Negrito
+      },
+      pieSliceText: 'percentage',  // Exibe o percentual dentro das fatias
+      pieSliceTextStyle: {
+        color: 'white',  // Cor do texto das fatias
+        fontSize: 14     // Tamanho do texto
+      },
+      colors: ['#2DD683', '#ff0000', '#00c9e9'],  // Cores das fatias
+      pieStartAngle: 270,  // Ângulo inicial
+      legend: {
+        position: 'bottom',  // Posiciona a legenda abaixo
+        alignment: 'center', // Alinha ao centro
+        textStyle: {
+          fontSize: 14,  // Tamanho da fonte da legenda
+          color: '#555'  // Cor do texto da legenda
+        }
+      },
+      backgroundColor: 'transparent',  // Remove o fundo do gráfico
+      chartArea: {
+        width: '90%', height: '90%',  // Ajuste da área do gráfico
+        backgroundColor: 'transparent'  // Garante que o fundo da área do gráfico seja transparente
+      }
+    };
+            
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            
+                    chart.draw(data, options);
+                  }
+                </script>
+             
+           
+                <div id="piechart" style="width: 900px; height: 500px; " ></div>
+                
+                <svg width="480" height="600">
+                    <text x="30" y="70" font-size="25" fill="black">Numero de Postagens no último mês</text>
 
-<!-- Eixo X -->
-<line x1="80" y1="280" x2="520" y2="280" class="axis" />
+                    <!-- Barras do gráfico -->
+                    <rect x="50" y="300" width="60" height="260" class="bar" />
+                    <rect x="160" y="260" width="60" height="300" class="bar" />
+                    <rect x="270" y="420" width="60" height="140" class="bar" />
+                    <rect x="380" y="375" width="60" height="190" class="bar" />
 
-<!-- Barras -->
-<rect x="100" y="160" width="60" height="120" class="bar1" style="color: green;" />
-<rect x="200" y="100" width="60" height="180" class="bar2" />
-<rect x="300" y="60" width="60" height="220" class="bar3" />
+                    <!-- Valores das barras -->
+                    <text x="70" y="290" font-size="14" fill="black" font-weight="bold">60</text>
+                    <text x="180" y="250" font-size="14" fill="black" font-weight="bold">80</text>
+                    <text x="290" y="410" font-size="14" fill="black" font-weight="bold">20</text>
+                    <text x="400" y="370" font-size="14" fill="black" font-weight="bold">50</text>
 
-
-<!-- Valores Acima das Barras -->
-<text x="130" y="150" class="value">40</text>
-<text x="230" y="90" class="value">60</text>
-<text x="330" y="50" class="value">80</text>
-
-
-<!-- Rótulos -->
-<text x="110" y="300" class="label">D.S</text>
-<text x="215" y="300" class="label">Nutrição</text>
-<text x="310" y="300" class="label">ADM</text>
-
-
-
-</svg>
+                    <!-- Rótulos dos meses -->
+                    <text x="60" y="580" font-size="14" fill="black">Julho</text>
+                    <text x="170" y="580" font-size="14" fill="black">Agosto</text>
+                    <text x="272" y="580" font-size="14" fill="black">Setembro</text>
+                    <text x="385" y="580" font-size="14" fill="black">Outubro</text>
+                </svg>
 
 
 

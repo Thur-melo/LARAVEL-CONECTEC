@@ -6,27 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADM - Análises</title>
 
-    <!-- icons -->
+    <!-- Estilos e ícones -->
     <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://unpkg.com/heroicons@1.0.0/dist/outline.js"></script>
-    <!--icons -->
-
-    <!-- font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- font -->
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
-
-    
 <body>
 
-    <!--inicio menu lateral -->
+    <!-- Menu lateral -->
     <div class="menu-lateral">
-        <div class="brand-name">
-            <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
-        </div>
+    <div class="brand-name">
+        <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
+    </div>
+
+    <div class="menu-content">
         <ul>
             <a href="{{ route('adminHome') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
@@ -34,76 +29,77 @@
             <a href="{{ route('admin') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
-            
-            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
-            </a>
+            <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
+            </a> -->
         </ul>
+
+        <!-- Botão de logout -->
+        <a href="{{ route('logout') }}" class="logout1">
+           
+           <span class="material-icons" id="icons">logout</span>
+           <span>Sair</span>
+     
+   </a>
     </div>
+</div>
+</div>
 
-    <!--final menu lateral -->
 
+    <!-- Conteúdo principal -->
     <div class="container">
-
-
         <div class="content">
             <div class="cards">
 
-                <!-- Card "Usuários Totais" que agora abre o modal -->
-                <div class="card" id="btnUsuariosTotais">
+                <!-- Card "Usuários Totais" -->
+                <div class="card" style="border-left: 5px solid #FED142" id="btnUsuariosTotais">
                     <div class="box">
                         <h1>{{$qnt_users}}</h1>
                         <h3>Usuários Totais</h3>
                     </div>
-                    <div class="icon-case">
-                    <span class="material-icons" id="icons-card" style="color: #111111;">groups_2</span>
-                    </div>
                 </div>
 
                 <!-- Outros cards -->
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #00B3FF">
                     <div class="box">
                         <h1>{{$qnt_alunos}}</h1>
                         <h3>Total de Aluno Ds</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: #0051ffce;"> <i class="fa-solid fa-user-tie"></i></span>
+                            <i class="fa-solid fa-user-tie"></i>
+                        </span>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #2DD683">
                     <div class="box">
                         <h2>{{$qnt_professores}}</h2>
                         <h3>Total de Aluno Nutrição</h3>
                     </div>
                     <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: #3ea043ec;"> <i class="fa-solid fa-user-graduate"></i></span>
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </span>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #FA8B3A">
                     <div class="box">
                         <h2>{{$qnt_outros}}</h2>
                         <h3>Total de Aluno ADM</h3>
                     </div>
-                    <div class="icon-case">
-                    <span class="material-icons" id="icons-card" style="color: #ff0000b0;"> <i class="fa-solid fa-user-tie"></i></span>
-                    </div>
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- Modal para "Usuários Totais" -->
             <div id="modalUsuarios" class="modal">
                 <div class="modal-content">
                     <span class="close" id="closeModal">&times;</span>
                     <h2>Usuários Totais</h2>
 
-            
-                    
-                    <!-- Tabela de Usuários no Modal -->
+                    <!-- Tabela de Usuários -->
                     <div class="tabela-usuarios">
                         @if($users->isEmpty())
-                        <h3>Sem Usuários Cadastrados</h3>
+                            <h3>Sem Usuários Cadastrados</h3>
                         @else
                         <table>
                             <thead>
@@ -115,8 +111,8 @@
                                     <th>Ações</th>
                                 </tr>
                             </thead>
-                            @foreach($users as $user)
                             <tbody>
+                                @foreach($users as $user)
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
@@ -143,73 +139,109 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
-                            @endforeach
-                            @endif
                         </table>
+                        @endif
                     </div>
                 </div>
             </div>
 
 
 
-        
-     
+            <!-- Gráfico SVG -->
+            <div class="grafico-container">
 
-       
-            <svg width="600" height="350">
-
-            <text x="40" y="30">Crescimento de Usúarios</text>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                  google.charts.load('current', {'packages':['corechart']});
+                  google.charts.setOnLoadCallback(drawChart);
             
-    <!-- Eixo Y -->
+                  function drawChart() {
+            
+                    
+              var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['DS',     33],
+      ['ADM',      33],
+      ['NUTRI',  33],
+     
+    ]);
 
-    <!-- Eixo X -->
-    <line x1="80" y1="280" x2="520" y2="280" class="axis" />
+    var options = {
+      title: 'Total de alunos por curso',
+      titleTextStyle: {
+        color: '#3e3e3e',  // Cor do título
+        fontSize: 20,       // Tamanho da fonte
+        bold: true          // Negrito
+      },
+      pieSliceText: 'percentage',  // Exibe o percentual dentro das fatias
+      pieSliceTextStyle: {
+        color: 'white',  // Cor do texto das fatias
+        fontSize: 14     // Tamanho do texto
+      },
+      colors: ['#2DD683', '#00B3FF', '#FA8B3A'],  // Cores das fatias
+      pieStartAngle: 270,  // Ângulo inicial
+      legend: {
+        position: 'bottom',  // Posiciona a legenda abaixo
+        alignment: 'center', // Alinha ao centro
+        textStyle: {
+          fontSize: 14,  // Tamanho da fonte da legenda
+          color: '#555'  // Cor do texto da legenda
+        }
+      },
+      backgroundColor: 'transparent',  // Remove o fundo do gráfico
+      chartArea: {
+        width: '90%', height: '90%',  // Ajuste da área do gráfico
+        backgroundColor: 'transparent'  // Garante que o fundo da área do gráfico seja transparente
+      }
+    };
+            
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            
+                    chart.draw(data, options);
+                  }
+                </script>
+             
+           
+                <div id="piechart" style="width: 900px; height: 500px; " ></div>
+                
+                <svg width="480" height="600">
+                    <text x="30" y="70" font-size="25" fill="black">Crescimento de Usuários</text>
 
-    <!-- Barras -->
-    <rect x="100" y="160" width="60" height="120" class="bar" />
-    <rect x="200" y="100" width="60" height="180" class="bar" />
-    <rect x="300" y="60" width="60" height="220" class="bar" />
-    <rect x="400" y="200" width="60" height="80" class="bar" />
-    <rect x="500" y="130" width="60" height="150" class="bar" />
+                    <!-- Barras do gráfico -->
+                    <rect x="50" y="300" width="60" height="260" class="bar" />
+                    <rect x="160" y="260" width="60" height="300" class="bar" />
+                    <rect x="270" y="420" width="60" height="140" class="bar" />
+                    <rect x="380" y="375" width="60" height="190" class="bar" />
 
-    <!-- Valores Acima das Barras -->
-    <text x="130" y="150" class="value">40</text>
-    <text x="230" y="90" class="value">60</text>
-    <text x="330" y="50" class="value">80</text>
-    <text x="430" y="190" class="value">20</text>
-    <text x="530" y="120" class="value">50</text>
+                    <!-- Valores das barras -->
+                    <text x="70" y="290" font-size="14" fill="black" font-weight="bold">60</text>
+                    <text x="180" y="250" font-size="14" fill="black" font-weight="bold">80</text>
+                    <text x="290" y="410" font-size="14" fill="black" font-weight="bold">20</text>
+                    <text x="400" y="370" font-size="14" fill="black" font-weight="bold">50</text>
 
-    <!-- Rótulos -->
-    <text x="110" y="300" class="label">Junho</text>
-    <text x="215" y="300" class="label">Julho</text>
-    <text x="310" y="300" class="label">Agosto</text>
-    <text x="410" y="300" class="label">Setembro</text>
-    <text x="510" y="300" class="label">Outubro</text>
-
-
-</svg>
-
-        </div>
+                    <!-- Rótulos dos meses -->
+                    <text x="60" y="580" font-size="14" fill="black">Julho</text>
+                    <text x="170" y="580" font-size="14" fill="black">Agosto</text>
+                    <text x="272" y="580" font-size="14" fill="black">Setembro</text>
+                    <text x="385" y="580" font-size="14" fill="black">Outubro</text>
+                </svg>
     </div>
-    
-    <!-- Script para abrir e fechar o modal -->
+
+    <!-- Scripts para o modal -->
     <script>
-        // Abrir o modal ao clicar no card "Usuários Totais"
         document.getElementById('btnUsuariosTotais').addEventListener('click', function () {
             document.getElementById('modalUsuarios').style.display = 'block';
         });
 
-        // Fechar o modal ao clicar no "x"
         document.getElementById('closeModal').addEventListener('click', function () {
             document.getElementById('modalUsuarios').style.display = 'none';
         });
 
-        // Fechar o modal ao clicar fora da área do modal
         window.onclick = function (event) {
-            var modal = document.getElementById('modalUsuarios');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+            if (event.target == document.getElementById('modalUsuarios')) {
+                document.getElementById('modalUsuarios').style.display = 'none';
             }
         }
     </script>
