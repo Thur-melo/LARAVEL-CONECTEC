@@ -46,6 +46,13 @@ class ChatController extends Controller
         if ($existingConversation) {
             return redirect()->route('chat.show', $existingConversation->id);
         }
+
+        $usermain = Auth::user();
+
+        $conversations = Conversation::where('user_one_id', Auth::id())
+            ->orWhere('user_two_id', Auth::id())
+            ->get();
+
     
         // Criar a nova conversa
         $conversation = Conversation::create([
@@ -53,7 +60,7 @@ class ChatController extends Controller
             'user_two_id' => $user->id,
         ]);
     
-        return redirect()->route('chat.show', $conversation->id);
+        return redirect()->route('chat.show',  $conversation->id, compact('conversations', 'user'));
     }
     
 

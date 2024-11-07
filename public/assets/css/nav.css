@@ -4,6 +4,7 @@ nav{
     padding: 10px 20px;
     position: fixed;
     top: 0;
+    left: 0;
     z-index: 10;
     background: white;
   
@@ -133,3 +134,5 @@ body{
 .nomesNav span:last-child{
     color: #0f1c59;
 }
+
+
