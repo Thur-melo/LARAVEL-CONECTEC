@@ -22,6 +22,7 @@ class User extends Authenticatable
         'status',
         'urlDaFoto',
         'bio',
+        'urlDoBanner'
     ];
 
     protected $hidden = [

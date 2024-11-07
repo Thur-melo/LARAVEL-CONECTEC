@@ -59,7 +59,7 @@
                 <span><i class="fa-regular fa-message"></i></span> <h3>Chat</h3>
             </a>
 
-            <a class="menu-item " href="{{Route('chat.list')}}">
+            <a class="menu-item "data-bs-toggle="modal" data-bs-target="#modalPost">
                 <span><i class="fa-regular fa-square-plus"></i></i></span> <h3>Criar</h3>
             </a>
 

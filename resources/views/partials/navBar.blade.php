@@ -152,7 +152,7 @@
                 </div>
             </form>
                 <div class="createBtn">
-               <button class="criarBtn"> <i class="fa-regular fa-square-plus"></i>Criar</button>
+               <button class="criarBtn"  data-bs-toggle="modal" data-bs-target="#modalPost"> <i class="fa-regular fa-square-plus"></i>Criar</button>
                     <div class="nomesNav">
                         <span>{{ $user->name}}</span>
                         <span>{{ $user->modulo}} {{ $user->perfil}} </span>

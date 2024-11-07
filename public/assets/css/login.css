@@ -15,6 +15,7 @@ body{
 .loginCont {
     align-items: center;
     width: 600px;
+    margin-right: 100px;
     height: 800px;
     display: flex;
     flex-direction: column;
@@ -41,7 +42,6 @@ body{
     display: flex;
     align-items: center;
     width: 90%;
-    margin-bottom: 10%;
     
 }
 .logo i{
@@ -189,7 +189,7 @@ form {
 }
 
 .imgCont{
-    width: 50%;
+    width: 60%;
 }
 
 #logo {

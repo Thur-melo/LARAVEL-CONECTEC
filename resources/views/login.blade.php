@@ -40,7 +40,7 @@
 
                 <div class="logo">
                     <div class="headerLogo">
-                        <img src="{{url('assets/img/logoConectec.png')}}" id="logo">
+                        <img src="{{url('assets/img/logoConectecLogin.png')}}" id="logo">
                     </div>
 
                 </div>
