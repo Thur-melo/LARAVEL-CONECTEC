@@ -174,9 +174,132 @@
                                     </button>
                                 </a>
                             </div>
+
+                            <div class="icons-group">
                             <div class="bookmark">
                                 <span><i class="uil uil-bookmark"></i></span>
                             </div>
+
+
+                                {{-- aqui --}}
+
+
+<!-- Link que abre o modal -->
+<a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+    <span class="material-symbols-outlined ">warning</span>
+</a>
+</div>
+
+<!-- Modal -->
+<div id="modal-denuncia" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Denunciar Post</h2>
+        <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
+        <input type="text" id="motivo" placeholder="Motivo da denúncia">
+        <div class="modal-footer">
+            <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+            <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
+        </div>
+        <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+        <input type="hidden" id="post-id" value="{{ $post->id }}">
+
+    </div>
+</div>
+
+<!-- Estilos para o modal -->
+<style>
+#motivo{
+    outline: none;
+    background-color: #eaeaea;
+    padding: 4px;
+    border-radius: 12px;
+    border: none;
+    
+}
+
+.icons-group{
+    display: flex;
+    justify-content: center
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Ajuste para 50% da largura */
+    max-width: 600px; /* Limite opcional de largura máxima */
+}
+
+.close {
+    color: #646464;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(49, 48, 48);
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+<!-- Scripts para abrir e fechar o modal -->
+<script>
+function openModal(postId) {
+    document.getElementById('modal-denuncia').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('modal-denuncia').style.display = 'none';
+}
+
+function confirmarDenuncia() {
+    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+    const postId = document.getElementById('post-id').value; // ID do post denunciado
+    const motivo = document.getElementById('motivo').value;  // Motivo da denúncia
+
+    fetch("{{ route('denunciar') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify({ user_id: userId, post_id: postId, motivo: motivo })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message); // Exibe a mensagem de sucesso
+        closeModal();        // Fecha o modal
+    })
+    .catch(error => {
+        console.error("Erro:", error);
+        alert("Ocorreu um erro ao registrar a denúncia.");
+    });
+}
+
+</script>
+
+
+                            {{-- aqui --}}
                         </div>
                         <!-- Fim dos botões de ação -->
                     </div>

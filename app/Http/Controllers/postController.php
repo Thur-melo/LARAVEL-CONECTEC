@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\Storage;
 class postController extends Controller
 {
 
-    
+    public function show($id)
+    {
+        $post = Post::with('user')->findOrFail($id); // Aqui você carrega o post com o usuário associado
+        return response()->json($post);
+    }
+                    
     public function postar(Request $request)
     
     {

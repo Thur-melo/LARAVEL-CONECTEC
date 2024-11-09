@@ -11,7 +11,11 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\seguirController;
+use App\Http\Controllers\DenunciaController;
 
+Route::post('/denunciar', [DenunciaController::class, 'store'])->name('denunciar');
+Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denuncias');
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 
 Route::get('/postagens', [RegisterController::class, 'showPostagens']) ->name('postagens');
