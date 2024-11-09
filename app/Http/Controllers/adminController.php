@@ -10,10 +10,19 @@ use Illuminate\Http\Request;
 use App\Models\Adm;
 use App\Models\PreferenciasLista;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Denuncia;
 
 class adminController extends Controller
 {
     //public function showHome()
+
+    public function showdenuncias()    {
+        // Obter todas as denúncias
+        $denuncias = Denuncia::with(['user', 'post'])->get();
+
+        // Retornar a view com os dados das denúncias
+        return view('AdminDenuncias', compact('denuncias'));
+    }
 public function showperfil($id) {
 
     
