@@ -95,76 +95,76 @@
                         <div class="scroll-container" id="curtidas">
                             @foreach($postsCurtidas as $post)
                             <div class="post">
-                           
-                           <div class="headerExplorar">
-                                                               @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-                                                               <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
-                       <h3> {{ $post->texto }}
-                       </div>
-                     
-                           </h3>
-                           <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                       </div>
-                       </a>
-                            @endforeach
-                        </div>
-                    </div>
-
-                      <!-- Seção para Posts com Mais Comentários -->
-                      <div class="fileira">
-                        <h2>Posts com Mais Comentários</h2>
-                        <div class="scroll-container" id="comentarios">
-                            @foreach($postsComentarios as $post)
-                            <div class="post">
-                           
-                                <div class="headerExplorar">
-                                                                    @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-                                                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
-                            <h3> {{ $post->texto }}
-                            </div>
-                          
-                                </h3>
                                 <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                            <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+                                              
+                                            </div>
+                                        </div>
+                                </div>
+
                             </div>
                             </a>
                             @endforeach
                         </div>
-
                     </div>
+
+                    <!-- Seção para Posts com Mais Comentários -->
+
                     <!-- Seção para Posts Aleatórios -->
                     <div class="fileira">
                         <h2>Para Você</h2>
                         <div class="scroll-container" id="aleatorios">
                             @foreach($postsAleatorios as $post)
                             <div class="post">
-                           
-                                <div class="headerExplorar">
-                                                                    @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-                                                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
-                            <h3> {{ $post->texto }}
-                            </div>
-                          
-                                </h3>
                                 <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                            <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+                                              
+                                            </div>
+                                        </div>
+                                </div>
+
                             </div>
                             </a>
                             @endforeach
                         </div>
                     </div>
 
-                  
+
 
 
                 </div>
             </div>
 
-            @include ('partials.emAlta')
 
     </main>
     @include('partials.modalsair')
     <!-- Modal de Confirmação -->
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>

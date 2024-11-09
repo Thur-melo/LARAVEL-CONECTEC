@@ -127,18 +127,18 @@ public function showExplorar(Request $request)
     $postsCurtidas = Post::withCount('likes') // Conta os likes
         ->where('status', 1)
         ->orderBy('likes_count', 'desc') // Ordena por likes_count
-        ->take(5)
+        ->take(4)
         ->get();
 
     // Posts com mais comentários
     $postsComentarios = Post::withCount('comentarios') // Conta os comentários
         ->where('status', 1)
         ->orderBy('comentarios_count', 'desc') // Ordena por comentarios_count
-        ->take(5)
+        ->take(4)
         ->get();
 
     // Posts aleatórios
-    $postsAleatorios = Post::inRandomOrder()->where('status', 1)->take(5)->get();
+    $postsAleatorios = Post::inRandomOrder()->where('status', 1)->take(4)->get();
 
     // Sugestões de usuários aleatórios
     $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
