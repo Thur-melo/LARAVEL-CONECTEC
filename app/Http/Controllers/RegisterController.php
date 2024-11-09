@@ -28,7 +28,7 @@ public function showPostagens()
     $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
     $user = Auth::user();
     $posts = Post::where('user_id', $user->id)->get();
-    $postsCount = $posts->count();
+    $postsCount = $posts->count(); 
     
     return view('postagens',compact('user', 'usuariosSugestoes', 'posts','postsCount'));
 }

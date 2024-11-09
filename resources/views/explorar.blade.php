@@ -88,7 +88,32 @@
 
             <div class="meio">
 
+
+
+
+
+
+
+
+            <form action="{{ route('home') }}" method="get">
+    <div class="fileiraPreferencias-container">
+        <button class="scroll-button" type="button" onclick="scrollHorizontal('left')">←</button>
+
+        <div class="fileiraPreferencias">
+            @foreach($preferenciasLista as $preferencia)
+                <button class="categoriaCard" name="s" value="{{ $preferencia->name }}" id="s">
+                    <h2>{{ $preferencia->name }}</h2>
+                </button>
+            @endforeach
+        </div>
+
+        <button class="scroll-button" type="button" onclick="scrollHorizontal('right')">→</button>
+    </div>
+</form>
+
                 <div class="feedExplorar">
+
+
                     <!-- Seção para Posts com mais Curtidas -->
                     <div class="fileira">
                         <h2>Posts com Mais Curtidas</h2>
@@ -104,12 +129,12 @@
                                             <h3> {{ $post->texto }} </h3>
                                             <p> {{"@" . $post->user->arroba}} </p>
                                             <div class="contsExplorar">
-                                            <div class="likes">
+                                                <div class="likes">
                                                     <i class="far fa-heart"></i>
                                                     <p class="likes-count">{{ $post->likes()->count() }}</p>
                                                 </div>
                                                 <p>{{ $post->created_at->diffForHumans() }}</p>
-                                              
+
                                             </div>
                                         </div>
                                 </div>
@@ -137,12 +162,12 @@
                                             <h3> {{ $post->texto }} </h3>
                                             <p> {{"@" . $post->user->arroba}} </p>
                                             <div class="contsExplorar">
-                                            <div class="likes">
+                                                <div class="likes">
                                                     <i class="far fa-heart"></i>
                                                     <p class="likes-count">{{ $post->likes()->count() }}</p>
                                                 </div>
                                                 <p>{{ $post->created_at->diffForHumans() }}</p>
-                                              
+
                                             </div>
                                         </div>
                                 </div>
@@ -164,7 +189,24 @@
     @include('partials.modalsair')
     <!-- Modal de Confirmação -->
 
+    <script>
+    function scrollHorizontal(direction) {
+        var container = document.querySelector('.fileiraPreferencias');
+        var scrollAmount = 200; // Quantidade de pixels a ser movida por vez
 
+        if (direction === 'right') {
+            container.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        } else if (direction === 'left') {
+            container.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>

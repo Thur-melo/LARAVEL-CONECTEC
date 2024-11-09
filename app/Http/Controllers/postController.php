@@ -5,7 +5,10 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Hashtag;
+use App\Models\PreferenciasLista;
 use Illuminate\Support\Facades\Storage;
+
 
 
 class postController extends Controller
@@ -13,31 +16,65 @@ class postController extends Controller
 
     
     public function postar(Request $request)
-    
     {
+        // Inicializa a variável para a foto
         $profilePhotoPost = null;
 
-    if ($request->hasFile('fotoPost')) {
-        $file = $request->file('fotoPost');
-        $profilePhotoPost = $file->store('fotoPost', 'public');
+        // Verifica se foi enviado um arquivo de foto
+        if ($request->hasFile('fotoPost')) {
+            $file = $request->file('fotoPost');
+            $profilePhotoPost = $file->store('fotoPost', 'public');
+        }
+
+        try {
+            // Cria o post
+            $post = Post::create([
+                'texto' => $request->input('texto'),
+                'user_id' => Auth::id(),
+                'fotoPost' => $profilePhotoPost,
+                'tipo_post' => $request->input('tipo'),
+            ]);
+
+           // Extrai as hashtags do conteúdo do post
+    $hashtags = $this->extractHashtags($request->input('texto'));
+
+
+
+          // Associa as hashtags ao post
+  $hashtags = $this->extractHashtags($request->input('texto'));
+
+    // Associa as hashtags ao post
+    foreach ($hashtags as $hashtagText) {
+        $hashtagText = ltrim($hashtagText, '#');
+        $hashtagText = strtolower($hashtagText);
+
+        // Verifica ou cria a hashtag
+        $hashtag = Hashtag::firstOrCreate(['hashtag' => $hashtagText]);
+
+        // Associa a hashtag ao post
+        $post->hashtags()->attach($hashtag);
     }
 
-    try {
-        Post::create([
-            'texto' => $request->input('texto'),
-            'user_id' => Auth::id(),
-            'fotoPost' => $profilePhotoPost,
-            'tipo_post' => $request->input('tipo'),
-        ]);
-
-        // Redireciona com uma mensagem de sucesso
-        return redirect()->route('home')->with('status', 'Post registrado com sucesso');
-    } catch (\Exception $e) {
-        // Redireciona com uma mensagem de erro
-        return redirect()->route('home')->with('error', 'Erro ao registrar o post');
+            
+            // Redireciona com uma mensagem de sucesso
+            return redirect()->route('home')->with('status', 'Post registrado com sucesso');
+        } catch (\Exception $e) {
+            // Redireciona com uma mensagem de erro
+            return redirect()->route('home')->with('error', 'Erro ao registrar o post');
+        }
     }
- }
- 
+
+    // Método para extrair hashtags do conteúdo do post
+    private function extractHashtags($content)
+    {
+        // Encontra todas as hashtags no texto usando regex (considerando #palavras com números e letras)
+        preg_match_all('/#(\w+)/', $content, $matches);
+        return $matches[0]; // Retorna as hashtags encontradas
+    }
+    
+
+
+
 public function destroy($id)
 {
     $post = Post::findOrFail($id);
@@ -144,8 +181,10 @@ public function showExplorar(Request $request)
     // Usuário autenticado
     $user = Auth::user();
 
+    $preferenciasLista = PreferenciasLista::all();
+
     // Retorna a view com todas as variáveis necessárias
-    return view('explorar', compact('user', 'posts', 'postsCurtidas', 'postsAleatorios', 'usuariosSugestoes', 'postsComentarios'));
+    return view('explorar', compact('user', 'posts', 'postsCurtidas', 'preferenciasLista', 'postsAleatorios', 'usuariosSugestoes', 'postsComentarios'));
 }
 
 

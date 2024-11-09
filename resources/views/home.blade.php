@@ -145,6 +145,8 @@
                         <!-- Texto do post -->
                         <div class="textoPost">
                             {{ $post->texto }}
+
+                            
                         </div>
                         <!-- Fim do texto do post -->
 
@@ -261,9 +263,10 @@
                         </div>
 
                         <select class="form-select" style="margin-top:10px" aria-label="Default select example" name="tipo">
-                            @foreach($preferenciasLista as $preferencia)
-                            <option value="{{ $preferencia->name }}">{{ $preferencia->name }}</option>
-                            @endforeach
+                            <option value="Duvida">Dúvida</option>
+                            <option value="Aula">Aula</option>
+                            <option value="Informacao">Informação</option>
+                            <option value="Estagio">Estágio</option>
                         </select>
                         <div class="previewModal">
                             <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">

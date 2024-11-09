@@ -49,7 +49,7 @@
         </ul>
 
         <!-- Botão de logout -->
-        <a href="{{ route('logout') }}" class="logout">
+        <a href="{{ route('login') }}" class="logout">
            
            <span class="material-icons" id="icons">logout</span>
            <span>Sair</span>
