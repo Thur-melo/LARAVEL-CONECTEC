@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Likes;
 use App\Models\Post;
+use App\Models\notificacoes;
 use Illuminate\Support\Facades\Auth;
+
 
 
 class likeController extends Controller
@@ -31,11 +33,23 @@ class likeController extends Controller
             ]);
             $likeStatus = 'liked';
         }
+
+       
+
+        
     
         // Retorna a contagem atualizada de likes e o status
         return response()->json([
             'likesCount' => $post->likes()->count(), // Conta o número total de likes
             'status' => $likeStatus
         ]);
+
+        notificacoes::create([
+            'usuario_id' => $post->user_id,
+            'tipo' => 'like',
+            'post_id' => $postId
+        ]);
+
+        return response()->json(['message' => 'Like registrado e notificação enviada']);
     }
 }    

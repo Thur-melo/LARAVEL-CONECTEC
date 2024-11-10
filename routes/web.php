@@ -12,6 +12,7 @@ use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
+use App\Http\Controllers\notificacaoController;
 
 Route::post('/denunciar', [DenunciaController::class, 'store'])->name('denunciar');
 Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denuncias');
@@ -100,3 +101,9 @@ Route::post('/unfollow/{userId}', [seguirController::class, 'unfollow'])->name('
 
 
 Route::get('/explorar', [PostController::class, 'showExplorar'])->name('explorar');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/notificacoes', [notificacaoController::class, 'index'])->name('notificacoes.index');
+    Route::post('/notificacoes/{id}/marcar-como-lida', [notificacaoController::class, 'marcarComoLida'])->name('notificacoes.marcarComoLida');
+});

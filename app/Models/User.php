@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return $this->perfil;
     }
+
+    public function notificacoes()
+{
+    return $this->hasMany(notificacoes::class, 'usuario_id');
+}
 }

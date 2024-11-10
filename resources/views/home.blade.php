@@ -49,9 +49,12 @@
                             <h3>Explorar</h3>
                         </a>
 
-                        <a class="menu-item ">
+                        <a class="menu-item"  href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
+                            @if($naoLidasCount > 0)
+                            <span >{{ $naoLidasCount }}</span>
+                            @endif
                         </a>
 
                         <a href="{{ Route('postagens')}}" class="menu-item">

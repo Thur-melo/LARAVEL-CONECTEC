@@ -39,6 +39,7 @@ public function showHome(Request $request)
     $user = Auth::user();
     $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
     $preferenciasLista = PreferenciasLista::all();
+    
 
     // Verifica se há uma pesquisa de postagens
     if ($request->has('s')) {
