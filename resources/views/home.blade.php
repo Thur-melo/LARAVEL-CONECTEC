@@ -101,6 +101,21 @@
                 </form>
                 <!-- Fim do formulário de criar post -->
 
+
+                <div>
+                    <!-- Resultados de usuários -->
+                    <h2>Usuários Encontrados</h2>
+                    @if($users->isEmpty())
+                    <p>Nenhum usuário encontrado.</p>
+                    @else
+                    <ul>
+                        @foreach ($users as $user)
+                        <li>{{ $user->name }} ({{ $user->email }})</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                  
+                </div>
                 <!-- Loop de postagens -->
                 @foreach($posts as $post)
 
@@ -146,7 +161,7 @@
                         <div class="textoPost">
                             {{ $post->texto }}
 
-                            
+
                         </div>
                         <!-- Fim do texto do post -->
 
@@ -178,127 +193,132 @@
                             </div>
 
                             <div class="icons-group">
-                            <div class="bookmark">
-                                <span><i class="uil uil-bookmark"></i></span>
-                            </div>
+                                <div class="bookmark">
+                                    <span><i class="uil uil-bookmark"></i></span>
+                                </div>
 
 
                                 {{-- aqui --}}
 
 
-<!-- Link que abre o modal -->
-<a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
-    <span class="material-symbols-outlined ">warning</span>
-</a>
-</div>
+                                <!-- Link que abre o modal -->
+                                <a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+                                    <span class="material-symbols-outlined ">warning</span>
+                                </a>
+                            </div>
 
-<!-- Modal -->
-<div id="modal-denuncia" class="modal" style="display: none;">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Denunciar Post</h2>
-        <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
-        <input type="text" id="motivo" placeholder="Motivo da denúncia">
-        <div class="modal-footer">
-            <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
-            <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
-        </div>
-        <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
-        <input type="hidden" id="post-id" value="{{ $post->id }}">
+                            <!-- Modal -->
+                            <div id="modal-denuncia" class="modal" style="display: none;">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Denunciar Post</h2>
+                                    <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
+                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
+                                    </div>
+                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" id="post-id" value="{{ $post->id }}">
 
-    </div>
-</div>
+                                </div>
+                            </div>
 
-<!-- Estilos para o modal -->
-<style>
-#motivo{
-    outline: none;
-    background-color: #eaeaea;
-    padding: 4px;
-    border-radius: 12px;
-    border: none;
-    
-}
+                            <!-- Estilos para o modal -->
+                            <style>
+                                #motivo {
+                                    outline: none;
+                                    background-color: #eaeaea;
+                                    padding: 4px;
+                                    border-radius: 12px;
+                                    border: none;
 
-.icons-group{
-    display: flex;
-    justify-content: center
-}
+                                }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+                                .icons-group {
+                                    display: flex;
+                                    justify-content: center
+                                }
 
-.modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%; /* Ajuste para 50% da largura */
-    max-width: 600px; /* Limite opcional de largura máxima */
-}
+                                .modal {
+                                    display: none;
+                                    position: fixed;
+                                    z-index: 1;
+                                    padding-top: 100px;
+                                    left: 0;
+                                    top: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    overflow: auto;
+                                    background-color: rgba(0, 0, 0, 0.4);
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
 
-.close {
-    color: #646464;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+                                .modal-content {
+                                    background-color: #fefefe;
+                                    padding: 20px;
+                                    border: 1px solid #888;
+                                    width: 50%;
+                                    /* Ajuste para 50% da largura */
+                                    max-width: 600px;
+                                    /* Limite opcional de largura máxima */
+                                }
 
-.close:hover,
-.close:focus {
-    color: rgb(49, 48, 48);
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
+                                .close {
+                                    color: #646464;
+                                    float: right;
+                                    font-size: 28px;
+                                    font-weight: bold;
+                                }
 
-<!-- Scripts para abrir e fechar o modal -->
-<script>
-function openModal(postId) {
-    document.getElementById('modal-denuncia').style.display = 'flex';
-}
+                                .close:hover,
+                                .close:focus {
+                                    color: rgb(49, 48, 48);
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                }
+                            </style>
 
-function closeModal() {
-    document.getElementById('modal-denuncia').style.display = 'none';
-}
+                            <!-- Scripts para abrir e fechar o modal -->
+                            <script>
+                                function openModal(postId) {
+                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                }
 
-function confirmarDenuncia() {
-    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
-    const postId = document.getElementById('post-id').value; // ID do post denunciado
-    const motivo = document.getElementById('motivo').value;  // Motivo da denúncia
+                                function closeModal() {
+                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                }
 
-    fetch("{{ route('denunciar') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-        },
-        body: JSON.stringify({ user_id: userId, post_id: postId, motivo: motivo })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message); // Exibe a mensagem de sucesso
-        closeModal();        // Fecha o modal
-    })
-    .catch(error => {
-        console.error("Erro:", error);
-        alert("Ocorreu um erro ao registrar a denúncia.");
-    });
-}
+                                function confirmarDenuncia() {
+                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
+                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
 
-</script>
+                                    fetch("{{ route('denunciar') }}", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                user_id: userId,
+                                                post_id: postId,
+                                                motivo: motivo
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            alert(data.message); // Exibe a mensagem de sucesso
+                                            closeModal(); // Fecha o modal
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            alert("Ocorreu um erro ao registrar a denúncia.");
+                                        });
+                                }
+                            </script>
 
 
                             {{-- aqui --}}
@@ -308,6 +328,7 @@ function confirmarDenuncia() {
                 </div>
                 @endforeach
                 <!-- Fim do loop de postagens -->
+
             </div>
             @include ('partials.emAlta')
 
@@ -325,13 +346,13 @@ function confirmarDenuncia() {
 
                         <div class="infoUserCont">
                             <div class="profileImgSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
-                                 <img src="{{ asset('storage/' . $usuariosSuge->urlDaFoto) }}" alt="">
+                                <img src="{{ asset('storage/' . $usuariosSuge->urlDaFoto) }}" alt="">
                             </div>
 
                             <div class="inforUserSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
                                 <span>{{ $usuariosSuge->name }}</span>
                                 <span>{{ $usuariosSuge->modulo }} {{ $usuariosSuge->perfil }}</span>
-            </div>
+                            </div>
                         </div>
 
                         <div class="btnSeguirCont">
@@ -408,34 +429,34 @@ function confirmarDenuncia() {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @if(session('status'))
-        <script>
-            Swal.fire({
-                title: "Sucesso!",
-                text: "{{ session('status') }}",
-                icon: "success",
-                confirmButtonText: "Ok",
-                confirmButtonColor: "#07beff"
-            });
-        </script>
+    @if(session('status'))
+    <script>
+        Swal.fire({
+            title: "Sucesso!",
+            text: "{{ session('status') }}",
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#07beff"
+        });
+    </script>
     @endif
 
     @if(session('error'))
-        <script>
-            Swal.fire({
-                title: "Erro",
-                text: "{{ session('error') }}",
-                icon: "error",
-                confirmButtonText: "Ok"
-            });
-        </script>
+    <script>
+        Swal.fire({
+            title: "Erro",
+            text: "{{ session('error') }}",
+            icon: "error",
+            confirmButtonText: "Ok"
+        });
+    </script>
     @endif
 
 
 
     <!-- Modal de Confirmação -->
 
-    
+
 
     <script>
         function previewImage(event) {

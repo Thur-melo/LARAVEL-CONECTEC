@@ -44,12 +44,24 @@ public function showHome(Request $request)
     $preferenciasLista = PreferenciasLista::all();
 
     // Verifica se há uma pesquisa de postagens
-    if ($request->has('s')) {
-        $posts = Post::search($request->input('s'));  // Supondo que você tenha implementado um escopo de busca
-    } else {
-
+    $searchTerm = $request->input('s'); 
         
-       
+        
+
+            
+        if ($searchTerm) {
+            // Buscar usuários
+            $users = User::where('name', 'like', '%' . $searchTerm . '%')
+            ->orWhere('email', 'like', '%' . $searchTerm . '%')
+            ->paginate(4);  // Adiciona paginação de 10 usuários por página
+            
+            // Buscar posts
+            $posts = Post::where('texto', 'like', '%' . $searchTerm . '%')
+                ->orWhere('texto', 'like', '%' . $searchTerm . '%')
+                ->get();
+        } else {
+        
+            $users = [];
     // 1. Postagens dos usuários seguidos
     $followedPosts = Post::whereIn('user_id', $user->seguindo()->pluck('seguindo_id'))
     ->with(['user', 'hashtags', 'likes'])
@@ -86,7 +98,7 @@ $feedPosts = $followedPosts->merge($hashtagPosts)->merge($popularPosts)->unique(
 $posts = $feedPosts;
     }
 
-    return view('home', compact('user', 'posts', 'preferenciasLista', 'usuariosSugestoes'));
+    return view('home', compact('user', 'users', 'posts', 'preferenciasLista', 'usuariosSugestoes', 'searchTerm'));
 }
 
 public function getHashtagsByCurso(User $user)
