@@ -61,8 +61,7 @@ public function showHome(Request $request)
                 ->get();
         } else {
         
-            $users = [];
-    // 1. Postagens dos usuários seguidos
+            $users = collect();     // 1. Postagens dos usuários seguidos
     $followedPosts = Post::whereIn('user_id', $user->seguindo()->pluck('seguindo_id'))
     ->with(['user', 'hashtags', 'likes'])
     ->orderByDesc('created_at')
