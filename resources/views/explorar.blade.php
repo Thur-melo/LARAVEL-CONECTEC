@@ -100,7 +100,7 @@
         <button class="scroll-button" type="button" onclick="scrollHorizontal('left')">←</button>
 
         <div class="fileiraPreferencias">
-            @foreach($likedHashtags as $preferencia)
+            @foreach($preferenciasLista as $preferencia)
                 <button class="categoriaCard" name="s" value="{{ $preferencia->name }}" id="s">
                     <h2>{{ $preferencia->hashtag }}</h2>
                 </button>

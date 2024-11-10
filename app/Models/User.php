@@ -44,10 +44,11 @@ class User extends Authenticatable
     }
 
     
-    public function seguindo(): BelongsToMany
+    public function seguindo()
     {
         return $this->belongsToMany(User::class, 'seguidores', 'seguidor_id', 'seguindo_id');
     }
+    
 
     public function seguidores(): BelongsToMany
     {
