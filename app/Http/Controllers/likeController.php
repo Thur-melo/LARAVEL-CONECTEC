@@ -34,15 +34,8 @@ class likeController extends Controller
             $likeStatus = 'liked';
         }
 
-       
-
-        
-    
         // Retorna a contagem atualizada de likes e o status
-        return response()->json([
-            'likesCount' => $post->likes()->count(), // Conta o número total de likes
-            'status' => $likeStatus
-        ]);
+       
 
         notificacoes::create([
             'usuario_id' => $post->user_id,
@@ -50,6 +43,10 @@ class likeController extends Controller
             'post_id' => $postId
         ]);
 
-        return response()->json(['message' => 'Like registrado e notificação enviada']);
+        return response()->json([
+            'likesCount' => $post->likes()->count(), // Conta o número total de likes
+            'status' => $likeStatus,
+            'message' => 'Like registrado e notificação enviada'
+        ]);
     }
 }    

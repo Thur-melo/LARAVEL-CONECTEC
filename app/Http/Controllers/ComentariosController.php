@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Comentarios;
+use App\Models\notificacoes;
 
 class ComentariosController extends Controller
 {
@@ -34,19 +35,28 @@ class ComentariosController extends Controller
         return view('comentarios', compact('post', 'comentarios', 'user', 'sortOrder'));
     }
 
-    public function comentar(Request $request, $postId)
+    public function comentar(Request $request, $postId,)
     {
         // dd($request->all());
+        $post = Post::findOrFail($postId);
         // Criação do comentário
         Comentarios::create([
             'texto' => $request->input('texto'),
             'user_id' => Auth::id(), // ID do usuário que está comentando
             'post_id' => $postId, // Referência ao post
         ]);
+
+        notificacoes::create([
+            'usuario_id' => $post->user_id,
+            'tipo' => 'comentario',
+            'post_id' => $postId
+        ]);
     
         // return redirect()->route('comentarios')->with('status', 'Comentário registrado com sucesso');
 
         return redirect()->route('comentarios', ['id' => $postId])->with('status', 'Comentário registrado com sucesso');
+
+      
     }
    
       
