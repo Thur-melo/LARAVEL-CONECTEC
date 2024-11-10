@@ -100,9 +100,9 @@
         <button class="scroll-button" type="button" onclick="scrollHorizontal('left')">←</button>
 
         <div class="fileiraPreferencias">
-            @foreach($preferenciasLista as $preferencia)
+            @foreach($likedHashtags as $preferencia)
                 <button class="categoriaCard" name="s" value="{{ $preferencia->name }}" id="s">
-                    <h2>{{ $preferencia->name }}</h2>
+                    <h2>{{ $preferencia->hashtag }}</h2>
                 </button>
             @endforeach
         </div>
@@ -151,7 +151,7 @@
                     <div class="fileira">
                         <h2>Para Você</h2>
                         <div class="scroll-container" id="aleatorios">
-                            @foreach($postsAleatorios as $post)
+                            @foreach($postrecomendados as $post)
                             <div class="post">
                                 <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
 
