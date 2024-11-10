@@ -73,14 +73,15 @@ foreach ($hashtags as $hashtagText) {
         }
     }
 
-    // Método para extrair hashtags do conteúdo do post
-    private function extractHashtags($content)
-    {
-        // Encontra todas as hashtags no texto usando regex (considerando #palavras com números e letras)
-        preg_match_all('/#(\w+)/', $content, $matches);
-        return $matches[0]; // Retorna as hashtags encontradas
-    }
+// Método para extrair hashtags do conteúdo do post
+private function extractHashtags($content)
+{
+    // Encontra todas as hashtags no texto, considerando letras, números, acentos e o "ç"
+    preg_match_all('/#([\p{L}\p{N}_]+)/u', $content, $matches);
     
+    return $matches[0]; // Retorna as hashtags encontradas
+}
+
 
 
 
@@ -165,6 +166,8 @@ public function popular()
 public function showExplorar(Request $request)
 {
 
+    $posts = Post::all();
+
     $user =  Auth::user();
     // Posts com mais curtidas
     $postsCurtidas = Post::withCount('likes') // Conta os likes
@@ -180,48 +183,45 @@ public function showExplorar(Request $request)
         ->take(4)
         ->get();
 
-       // 1. Postagens dos usuários seguidos
-       $followedPosts = Post::whereIn('user_id', $user->seguindo()->pluck('seguindo_id'))
-       ->with(['user', 'hashtags', 'likes'])
-       ->orderByDesc('created_at')
-       ->get();
+      
+    // 1. Postagens dos usuários seguidos
+    $followedPosts = Post::whereIn('user_id', $user->seguindo()->pluck('seguindo_id'))
+    ->with(['user', 'hashtags', 'likes'])
+    ->orderByDesc('created_at')
+    ->get();
 
-    // 2. Postagens com hashtags relacionadas ao curso do usuário
-    $hashtagsCurso = $this->getHashtagsByCurso($user);
+ // 2. Postagens com hashtags relacionadas ao curso do usuário
+ $hashtagsCurso = $this->getHashtagsByCurso($user);
 
-    $hashtagPosts = collect();
-      // Criando uma coleção vazia inicialmente
+ $hashtagPosts = collect();
+   // Criando uma coleção vazia inicialmente
 
-    if ($hashtagsCurso->isNotEmpty()) {
-        // Busca postagens que tenham as hashtags associadas ao curso do usuário
-        $hashtagPosts = Post::whereHas('hashtags', function ($query) use ($hashtagsCurso) {
-            $query->whereIn('hashtags.hashtag', $hashtagsCurso->pluck('hashtag'));  // Ajuste aqui
-        })
-        ->with(['user', 'hashtags', 'likes'])
-        ->orderByDesc('created_at')
-        ->get();
-    }
+ if ($hashtagsCurso->isNotEmpty()) {
+     // Busca postagens que tenham as hashtags associadas ao curso do usuário
+     $hashtagPosts = Post::whereHas('hashtags', function ($query) use ($hashtagsCurso) {
+         $query->whereIn('hashtags.hashtag', $hashtagsCurso->pluck('hashtag'));  // Ajuste aqui
+     })
+     ->with(['user', 'hashtags', 'likes'])
+     ->orderByDesc('created_at')
+     ->get();
+ }
 
 
-   // 3. Postagens populares (baseadas em curtidas)
-   $popularPosts = Post::withCount('likes')
-       ->orderByDesc('likes_count')
-       ->take(10)
-       ->get();
+// 3. Postagens populares (baseadas em curtidas)
+$popularPosts = Post::withCount('likes')
+    ->orderByDesc('likes_count')
+    ->take(10)
+    ->get();
 
-   // 4. Juntar tudo e remover postagens duplicadas
-   $feedPosts = $followedPosts->merge($hashtagPosts)->merge($popularPosts)->unique('id');
+// 4. Juntar tudo e remover postagens duplicadas
+$feedPosts = $hashtagPosts->merge($popularPosts)->merge($followedPosts)->unique('id');
 
-   // 5. Ordenar o feed pela data de criação
-   $posts = $feedPosts;
+// 5. Ordenar o feed pela data de criação
+$postrecomendados = $feedPosts;
 
-    // Usuário autenticado
-    $user = Auth::user();
-
-    $preferenciasLista = PreferenciasLista::all();
-
+$preferenciasLista = PreferenciasLista::all();
     // Retorna a view com todas as variáveis necessárias
-    return view('explorar', compact('user', 'posts', 'postsCurtidas', 'preferenciasLista', 'postrecomendados', 'likedHashtags', 'usuariosSugestoes', 'postsComentarios'));
+    return view('explorar', compact('user', 'posts', 'postsCurtidas', 'preferenciasLista', 'postrecomendados',  'postsComentarios'));
 }
 
 
@@ -231,7 +231,7 @@ public function getHashtagsByCurso(User $user)
     $hashtagsPorCurso = [
         'Ds' => ['programacao', 'laravel', 'php'],
         'Nutri' => ['nutricao', 'saude', 'alimentacao'],
-        'Adm' => ['gestao', 'administração', 'marketing'],
+        'Adm' => ['gestao', 'administracao', 'marketing'],
     ];
 
     // Verifique o perfil do usuário e retorne as hashtags associadas
