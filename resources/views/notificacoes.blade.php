@@ -92,6 +92,7 @@
         </div>
 
         <div class="msgLista">
+        @if(count($notificacoes) > 0)
         @foreach($notificacoes as $notificacao)
         
             <div class="msg">
@@ -140,6 +141,9 @@
             </div>
           
             @endforeach
+            @else
+                <p class="semNotificacoes">Nenhuma notificação disponível.</p>
+            @endif
             
         </div>
                 
