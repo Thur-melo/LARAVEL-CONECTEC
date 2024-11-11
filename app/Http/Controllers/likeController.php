@@ -40,6 +40,7 @@ class likeController extends Controller
         notificacoes::create([
             'usuario_id' => $post->user_id,
             'tipo' => 'like',
+            'interacao_user_id' => $user->id,
             'post_id' => $postId
         ]);
 

@@ -48,6 +48,7 @@ class ComentariosController extends Controller
 
         notificacoes::create([
             'usuario_id' => $post->user_id,
+            'interacao_user_id' => Auth::id(),
             'tipo' => 'comentario',
             'post_id' => $postId
         ]);
