@@ -14,6 +14,7 @@ class notificacoes extends Model
     protected $fillable = [
         'usuario_id',
         'tipo',
+        'interacao_user_id',
         'post_id',
         'lido'
     ];
@@ -22,6 +23,11 @@ class notificacoes extends Model
     {
         return $this->belongsTo(User::class, 'usuario_id');
     }
+
+    public function interacaoUsuario()
+{
+    return $this->belongsTo(User::class, 'interacao_user_id'); // Usuário que fez a interação (like/comentário)
+}
 
     public function post()
     {

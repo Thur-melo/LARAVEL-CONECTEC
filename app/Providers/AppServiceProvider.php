@@ -21,9 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('*', function ($view) {
+        View::composer(['*'], function ($view) {
             if (Auth::check()) {
-                $naoLidasCount = Auth::user()->notificacoes()->where('lido', false)->count();
+                // Carregar notificações
+                $notificacoes = Auth::user()->notificacoes()->orderBy('created_at', 'desc')->get();
+                $naoLidasCount = $notificacoes->where('lido', false)->count();
+    
+                // Passar as variáveis para a view
+                $view->with('notificacoes', $notificacoes);
                 $view->with('naoLidasCount', $naoLidasCount);
             }
         });

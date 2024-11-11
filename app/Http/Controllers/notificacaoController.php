@@ -10,10 +10,12 @@ use App\Models\notificacoes;
 class notificacaoController extends Controller
 {
     public function index()
+
     {
+        $user = auth()->user();
         $notificacoes = Auth::user()->notificacoes()->orderBy('created_at', 'desc')->get();
         $naoLidasCount = $notificacoes->where('lido', false)->count();
-        return view('notificacoes', compact('notificacoes', 'naoLidasCount'));
+        return view('notificacoes', compact('notificacoes', 'naoLidasCount', 'user'));
     }
 
     public function marcarComoLida($id)
@@ -25,4 +27,19 @@ class notificacaoController extends Controller
         }
         return redirect()->back();
     }
+
+    public function destroy($id)
+{
+    try {
+        
+        $notificacao = notificacoes::findOrFail($id);
+        $notificacao->delete();
+
+        
+        return response()->json(['success' => true, 'message' => 'Notificação excluída com sucesso']);
+    } catch (Exception $e) {
+       
+        return response()->json(['success' => false, 'message' => 'Erro ao excluir a notificação'], 500);
+    }
+}
 }

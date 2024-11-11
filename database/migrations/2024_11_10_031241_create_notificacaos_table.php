@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('notificacoes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usuario_id');
+            $table->foreignId('interacao_user_id')->constrained('users')->onDelete('cascade'); // Usuário que interagiu com o post
+
             $table->enum('tipo', ['comentario', 'like']);
             $table->unsignedBigInteger('post_id');
             $table->boolean('lido')->default(false);

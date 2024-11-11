@@ -1,0 +1,213 @@
+.main .container .right{
+    height: max-content;
+    position: sticky;
+    top: -18rem;
+    bottom: 0;
+}
+
+
+.notiCont{
+    background: white;
+    border-radius: 1rem;
+    padding:1rem;
+    
+    
+    
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
+}
+
+
+.headerNoti h2{
+    text-align: start;
+    font-size: 16pt;
+    font-weight: 600;
+    color: #3f3950
+    
+
+}
+ .headerNoti a{
+    font-size: 10.9pt;
+    color: #07beff;
+
+}
+
+ .headerNoti {
+    margin-bottom: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.msg{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #cecece8a;
+   
+   
+}
+
+.msgInfors{
+    margin-left: 2%;
+    width: 100%;
+}
+
+.msgTexto span:first-child{
+    font-weight: 600;
+    color: #3f3950;
+
+
+}
+
+
+.msgTexto{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+
+}
+
+.msgTexto small{
+    margin: 0;
+}
+.msgLista{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+   
+
+}
+.msgUserFoto{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.msgUserFoto img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.msgHora{
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+
+.icone{
+    
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.icone i{
+    color: rgb(255, 255, 255);
+    font-size: 9pt;
+
+}
+
+.curtida-icone {
+    background-color: rgb(238, 77, 77); /* Cor de fundo vermelha para curtidas */
+}
+
+.comentario-icone {
+    background-color: rgba(92, 92, 248, 0.699); /* Cor de fundo azul para comentários */
+}
+
+.verTudo{
+    background-color:#07beff;
+    color: white;
+    
+    border: none;
+    border-radius: 25px;
+    padding: 5px;
+
+}
+
+.post-foto{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+   
+}
+.spanTexto{
+    font-size: 12pt;
+    color: #3f3950;
+
+}
+
+.meuPostInfos{
+    display: flex;
+    align-items: center;
+    gap:4px;
+
+
+}
+
+
+.infosDoPost{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.post-texto {
+    margin: 0;
+    font-size: 12pt;
+    color: #aaaaaa;
+    /* ajuste o tamanho conforme necessário */
+}
+
+.notiCont::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem vertical */
+}
+
+/* Cor do fundo da barra de rolagem */
+.notiCont::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do fundo da barra */
+    border-radius: 10px;
+}
+
+/* Cor e estilo do thumb (a parte que se move) */
+.notiCont::-webkit-scrollbar-thumb {
+    background-color: #888; /* Cor da barra */
+    border-radius: 10px; /* Deixa a barra arredondada */
+    border: 2px solid #f1f1f1; /* Espaço entre a barra e o fundo */
+}
+
+/* Cor do thumb ao passar o mouse */
+.notiCont::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Cor da barra ao passar o mouse */
+}
+
+.iconeLixeira{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #bb2f0d;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgb(250, 217, 217);
+}
+
+.iconeLixeira i{
+    font-size: 12pt;
+    color: rgb(253, 0, 0);
+
+}

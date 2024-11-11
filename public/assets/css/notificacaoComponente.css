@@ -1,0 +1,117 @@
+.main .container .right{
+    height: max-content;
+    position: sticky;
+    top: -18rem;
+    bottom: 0;
+}
+.right .notiCont{
+    background: white;
+    border-radius: 1rem;
+    padding:1rem;
+    width: 400px;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
+}
+
+
+.right .headerNoti h2{
+    text-align: start;
+    font-size: 16pt;
+    font-weight: 600;
+    color: #3f3950
+    
+
+}
+.right .headerNoti a{
+    font-size: 10.9pt;
+    color: #07beff;
+
+}
+
+.right .headerNoti {
+    margin-bottom: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.msg{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.msgInfors{
+    margin-left: 2%;
+    width: 100%;
+}
+
+.msgTexto span:first-child{
+    font-weight: 600;
+    color: #3f3950;
+
+
+}
+
+.msgTexto span:last-child{
+    font-size: 11.5pt;
+    color: #4d4d4d;
+
+}
+
+.msgLista{
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+
+}
+
+.msgUserFoto img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.msgHora{
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+
+.icone{
+    
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.icone i{
+    color: rgb(255, 255, 255);
+    font-size: 8pt;
+
+}
+
+.curtida-icone {
+    background-color: rgb(238, 77, 77); /* Cor de fundo vermelha para curtidas */
+}
+
+.comentario-icone {
+    background-color: rgba(92, 92, 248, 0.699); /* Cor de fundo azul para comentários */
+}
+
+.verTudo{
+    background-color:#07beff;
+    color: white;
+    
+    border: none;
+    border-radius: 25px;
+    padding: 5px;
+
+}

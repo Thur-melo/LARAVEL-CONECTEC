@@ -358,8 +358,9 @@
                 <!-- Fim do loop de postagens -->
 
             </div>
+            
             @include ('partials.emAlta')
-
+                                
 
 
             <div class="amigosCont">
