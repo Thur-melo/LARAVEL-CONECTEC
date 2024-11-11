@@ -14,16 +14,19 @@ class BuscarUsuariosController extends Controller // Renomeando a classe
         $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
 
         $user = Auth::user();
-        // Obter o termo de busca da requisição
-        $search = $request->input('search');
+       // Verifica se há uma pesquisa de postagens
+       $searchTerm = $request->input('s'); 
+        
+        
 
-        // Buscar usuários com o termo fornecido
-        $users = User::where('name', 'like', '%' . $search . '%')
-            ->orWhere('arroba', 'like', '%' . $search . '%')
-            ->get();
+            
+           // Buscar usuários
+           $users = User::where('name', 'like', '%' . $searchTerm . '%')
+           ->orWhere('email', 'like', '%' . $searchTerm . '%')
+           ->get(); 
 
         // Retornar a view com os usuários encontrados e o termo de busca
-        return view('users', compact('users', 'user', 'search', 'usuariosSugestoes'));
+        return view('users', compact('users', 'user', 'searchTerm', 'usuariosSugestoes'));
     }
 
 

@@ -136,7 +136,7 @@
 
                         @endforeach
                         <!-- Link para ver todos os usuários com a busca -->
-                        <a href="{{ route('buscar.usuarios', ['search' => request('search')]) }}">
+                        <a href="{{ route('buscar.usuarios', ['s' => request('s')]) }}">
                             <h6>Ver todos</h6>
                         </a>
                     </div>
