@@ -94,6 +94,7 @@
 
             <div class="meio">
                 <!-- Formulário de criar post -->
+                @if($users->isEmpty())
                 <form class="criarPost">
                     <div class="profileImgPost">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
@@ -107,9 +108,9 @@
 
                 <div>
                     <!-- Resultados de usuários -->
-                    @if($users->isEmpty())
+                   
                     @else
-
+                    <div>
                     <div class="userSearch">
                         <h3>Usuários</h3>
                         @foreach ($users as $user)
