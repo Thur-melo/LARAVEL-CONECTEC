@@ -1,4 +1,4 @@
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,151 +6,92 @@
 }
 
 body {
-    background-color: #E6E9EE;
-    color: #333;
-    overflow: hidden;
+    background-color: #E6E9EE ;
 }
-.menu-lateral {
+
+/* CSS sidebar inicio */
+
+.sidebar{
     position: fixed;
-    background: #212121;
-    width: 17vw;
-    min-height: 100vh;
-    box-shadow: 1px 1px 1px rgba(53, 51, 51, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transition: all 0.3s ease; /* Transição suave */
-    border-radius:  0px, 0px ,10px ,10px ;
+    width: 300px;
+    height: 100%;
+    background-color: #111111;
+    color: #fff;
     display: flex;
     flex-direction: column;
-    padding: 20px;
 }
 
-.menu-lateral .brand-name {
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px; /* Espaçamento abaixo do logotipo */
+.logo-sidebar{
+    display: block;
+    width: 270px;
+    margin: 0 auto;
 }
 
-
-
-.menu-lateral ul {
+.sidebar ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+   
 }
 
-.menu-lateral li {
-    font-size: 22px; /* Tamanho da fonte ajustado */
-    padding: 15px 10px;
-    color: #f4f4f4; /* Cor de texto mais escura para melhor legibilidade */
-    display: flex;
-    align-items: center;
-    border-radius: 10px; /* Botões com bordas arredondadas */
-    margin-bottom: 10px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Transições suaves */
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    text-align: justify;
+    font-size: 25px;
+    padding: 15px 30px; 
+    width: 80%; 
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 400;
+    margin-left: 30px;
+    border-radius: 20px;        
 }
 
-.menu-lateral li a {
-    text-decoration: none; /* Remove o sublinhado dos links */
-    color: inherit; /* Herda a cor do item de menu */
-    width: 100%; /* Faz com que o link ocupe toda a área do botão */
-    display: flex;
-    align-items: center;
-}
-
-.menu-lateral li:hover {
+.sidebar ul li a:hover {
     background-color: #00aaff; /* Cor de fundo azul claro ao passar o mouse */
     color: white; /* Texto muda para branco */
     cursor: pointer;
     transform: translateX(5px); /* Leve animação de movimento ao passar o mouse */
 }
 
-.menu-lateral li.active {
-    background-color: #00aaff; /* Destaque para o item ativo */
-    color: white;
-    font-weight: bold;
+.sidebar ul li.logout {
+    margin-top: 150%;
 }
 
-.menu-lateral li:active {
-    transform: scale(0.95); /* Efeito de clique */
+.sidebar ul li.logout a {
+    color: #e74c3c;
+    border-radius: 20px;
+    transition:  0.3s;
 }
 
-.menu-lateral li span {
-    margin-left: 10px;
-    font-weight: 500;
+
+.sidebar ul li.logout a:hover{
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 20px;
+    transition:  0.3s;
 }
 
-.menu-footer {
-    margin-top: auto;
-    text-align: center;
-    color: #333;
-    font-size: 0.9rem;
+.sidebar ul li a .material-icons {
+    margin-right: 0;             
+    padding: 0;                  
+    font-size: 24px;      
+    vertical-align: middle;            
 }
 
-.menu-footer a {
-    color: #00aaff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
+/* CSS sidebar fim */
 
-.menu-footer a:hover {
-    color: #005f80; /* Tom mais escuro de azul ao passar o mouse */
-}
-
-/* Efeito de sombras para realçar o menu */
-.menu-lateral:hover {
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada no hover */
-}
-
+/* CSS conteudo dashboard inicio  */
 
 .container {
-    margin-left: 270px;
-    padding: 20px;
-
-}
-
-.header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 310px;
 }
 
-.header .buscar input {
-    padding: 10px;
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-}
-
-.header .usuario img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.botaoLogar button {
-    padding: 10px 20px;
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.botaoLogar button:hover {
-    background-color: #055c87;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+.containerCards {
+    display: flex;
+    flex-direction: row;
     margin-top: 70px;
 }
 
@@ -160,397 +101,163 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     transition: transform 0.3s ease;
     cursor: pointer;
-    margin-left: 50px;
-    height: 120px;
-    width: 330px;
+    margin-left: 30px;
+    height: 125px;
+    width: 360px;
+    color: #fff;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    flex-direction: column;
+}
+
+.card h1 {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.card h3 {
+    font-weight: 300;
+    font-size: 30px;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05); /* Aumenta o card em 5% */
+    filter: brightness(1.1); /* Aumenta o brilho em 10% */
+  }
+
+.containerTabelaUsers1 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
 }
 
-.card .box h1, .card .box h2 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    color: #2C3E50;
-}
-
-.card .box h3 {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-}
-
-.card .icon-case span {
-    font-size: 3rem;
-    color: #00aaff;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    justify-content: center;
-    align-items: center;
-   
-}
-
-.modal-content {
+.tabelaUsers1 {
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 60%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-   
-}
-
-.modal .close {
-    font-size: 2rem;
-    color: #333;
-    cursor: pointer;
-    float: right;
-}
-
-
-.tabela-usuarios {
-    margin: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.tabela-usuarios {
-    margin: 20px;
-    font-family: Arial, sans-serif;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-.statusDiv {
-    display: flex;
-    gap: 10px;
-}
-
-.btnStatus {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#btnDesativa {
-    background-color: #e74c3c; /* Vermelho para desativar */
-}
-
-#btnAtiva {
-    background-color: #2ecc71; /* Verde para ativar */
-}
-
-#btnDesativa:hover {
-    background-color: #c0392b;
-}
-
-#btnAtiva:hover {
-    background-color: #27ae60;
-}
-
-
-.statusDiv {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* Espaçamento entre os botões */
-}
-
-/* Estilos para o modal */
-.modal {
-    display: none; /* Escondido por padrão */
-    position: fixed;
-    z-index: 100; /* Colocar o modal acima de tudo */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Habilita rolagem se necessário */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 800px; /* Largura máxima do modal */
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Estilo para a tabela no modal */
-.modal table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 12px; /* Bordas arredondadas mais suaves */
-    overflow: hidden; /* Oculta bordas arredondadas */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra da tabela mais pronunciada */
-    font-family: 'Arial', sans-serif; /* Fonte mais moderna */
-}
-
-.modal table th,
-.modal table td {
-    border: 1px solid #e0e0e0; /* Borda mais clara para um visual limpo */
-    padding: 16px; /* Maior espaçamento interno */
-    transition: background-color 0.3s, transform 0.2s; /* Transições suaves para hover */
-}
-
-.modal table th {
-    background-color: #00aaff; /* Azul moderno para o cabeçalho */
-    color: white; /* Texto branco */
-    text-align: left;
-    font-weight: 600; /* Negrito para destacar o cabeçalho */
-}
-
-.modal table tr:nth-child(even) {
-    background-color: #f6f6f6; /* Cor de fundo mais clara para linhas pares */
-}
-
-.modal table tr:hover {
-    background-color: #e0f7fa; /* Azul suave ao passar o mouse */
-    transform: scale(1.01); /* Pequena transformação para destaque ao passar o mouse */
-}
-
-.modal table tr:last-child td {
-    border-bottom: none; /* Remove a borda inferior da última linha */
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    position: fixed;
-    width: calc(100% - 250px); /* Considera a largura do menu lateral */
-    left: 250px; /* Alinha após o menu lateral */
-    top: 0;
-    z-index: 10;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 15px; /* Border radius aplicado */
-    margin: 20px; /* Espaçamento em relação às bordas */
-    width: calc(100% - 310px); /* Ajuste para o espaçamento lateral */
-    left: 270px; /* Considerando a largura do menu lateral */
-    top: 5px;
-    position: fixed;
-    z-index: 10;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.buscar {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.buscar .search-bar {
     padding: 15px;
-    width: 500px; /* Tamanho da barra de pesquisa */
-    border: 1px solid #ccc;
-    border-radius: 8px; /* Border radius na barra de pesquisa */
-    outline: none;
-}
-
-.usuario {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.usuario .user-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.usuario .botoes {
-    display: flex;
-    gap: 10px; /* Espaçamento entre os botões */
-}
-
-.usuario .btn-usuario, .btn-adm {
-    padding: 10px 10px;
-    background-color: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 8px; /* Border radius nos botões */
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.usuario .btn-usuario:hover, .btn-adm:hover {
-    background-color: #00aaff;
-}
-a {
-    text-decoration: none; 
-}
-
-svg {
-    background: linear-gradient(135deg, #ffffff, #f4f4f9);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
-    margin-top: 30px;
-    margin-left: 150px; /* Move o SVG para a direita */
-    text-align: center;
-}
-
-
-.bar {
-    fill: #00aaff;
-    rx: 5;
-    ry: 5;
-    transition: fill 0.3s, height 0.3s;
-}
-
-.bar:hover {
-    fill: #055c87;
-}
-
-.bar1 {
-    fill: #0051ffec;
-    rx: 5;
-    ry: 5;
-    transition: fill 0.3s, height 0.3s;
-    cursor: pointer;
-}
-
-.bar1:hover {
-    fill: #0051ffce;
-}
-
-.bar2 {
-    fill: #3ea043ec;
-    rx: 5;
-    ry: 5;
-    transition: fill 0.3s, height 0.3s;
-    cursor: pointer;
-}
-
-.bar2:hover {
-    fill: #3ea043cb;
-}
-
-.bar3 {
-    fill: #ff0000b0;
-    rx: 5;
-    ry: 5;
-    transition: fill 0.3s, height 0.3s;
-    cursor: pointer;
-}
-
-.bar3:hover {
-    fill: #ff00009c;
-}
-
-
-.label, .value {
-    font-size: 13px;
-    fill: #555;
-}
-
-.axis {
-    stroke-width: 3;
-    stroke: #ccc;
-}
-
-.value {
-    text-anchor: middle;
-    font-weight: bold;
-    fill: #222;
-}
-
-
-.grafico-container {
-    display: flex;
-    gap: 100px;
-    margin-top: 10px; /* Ajuste do espaçamento acima */
-    flex-direction: row;
-}
-
-.logout1 {
-    font-size: 28px;
-    padding: 20px 20px;
-    color: #f4f4f4;
-    display: flex;
-    align-items: center;
     border-radius: 10px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    margin-top: 545px; /* Posiciona o botão de logout no final do menu */
-}
-
-.logout1:hover {
-    background-color: #ff0000; /* Cor de fundo azul claro ao passar o mouse */
-    color: white; /* Texto muda para branco */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
     cursor: pointer;
-    transform: translateX(5px); /* Leve animação de movimento ao passar o mouse */
-}
-.logout1 span {
-    font-size: 18px;
-    margin-right: 12px;
+    margin-left: 30px;
+    height: 300px;
+    width: 1140px;
 }
 
+/* inicio tabelaUsers2 */
+
+.containerTabelaUsers2 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+/* Estilo da Tabela */
+.tabelaUsers2 {
+    overflow-y: auto;  /* Habilita rolagem */
+    max-height: 320px;  /* Define altura máxima */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white; /* Adicionando fundo para o contêiner */
+    margin-left: 30px;
+width: 1140px;
+
+}
+
+/* Estilo da tabela dentro da .tabelaUsers2 */
+.tabelaUsers2 table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Estilo das células */
+.tabelaUsers2 th, 
+.tabelaUsers2 td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.tabelaUsers2 th {
+    background-color: #00aaff; /* Cor de fundo do cabeçalho */
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    position: sticky;  /* Cabeçalho fixo */
+    top: 0;  /* Fixa o cabeçalho no topo */
+    z-index: 1;  /* Garante que o cabeçalho fique acima das linhas */
+    background-color: #00aaff;  /* Garantir que o fundo seja visível */
+}
+
+.tabelaUsers2 td {
+    background-color: #f9f9f9;
+    font-size: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+.tabelaUsers2 tr:hover td {
+    background-color: #e8f5ff;
+}
+
+.tabelaUsers2 td:first-child {
+    font-weight: bold;
+    color: #007bbd;
+}
+
+.tabelaUsers2 tr:last-child td {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
+/* Estilo da barra de rolagem */
+.tabelaUsers2::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tabelaUsers2::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.tabelaUsers2::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 8px;
+    border: 2px solid #f1f1f1;
+}
+
+.tabelaUsers2::-webkit-scrollbar-thumb:hover {
+    background-color: #007bbd;
+}
+
+
+/* fim tabelaUsers2 */
+
+
+.containerTabelaUser3 {
+    display: flex;
+    flex-direction: column;
+    position: absolute; /* Posiciona a tabela User 3 de forma absoluta */
+    top: 70px; /* Move a tabela para o topo da página */
+    right: 20px; /* Alinha a tabela à direita */
+}
+
+.tabelaUsers3 {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: 820px;
+    width: 350px;
+}
+
+.tabelaUsers3 canvas {
+    width: 100% !important;   /* Garante que o gráfico ocupe toda a largura disponível */
+    height: 400px;            /* Ajuste de altura do gráfico */
+}

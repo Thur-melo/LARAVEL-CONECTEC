@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
+
+
 </head>
 <body>
 
@@ -30,7 +33,10 @@
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
             
-    
+            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
+                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
+            </a>
+
             <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
             </a>
@@ -56,6 +62,8 @@
                         <th>Motivo</th>
                         <th>Status</th>
                         <th>Data da Denúncia</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                <!-- Tabela de Denúncias -->
@@ -72,6 +80,24 @@
                         <td>{{ $denuncia->motivo }}</td>
                         <td>{{ ucfirst($denuncia->status) }}</td>
                         <td>{{ $denuncia->created_at->format('d/m/Y H:i') }}</td>
+                        <td>
+                            <form action="{{route('posts.destroy', $denuncia->post->id)}}" method="POST" onsubmit="return confirm('tem certeza que deseja excluir este post?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn" id="excluirPost" >Excluir Post</button>
+
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ route('user.off', $denuncia->user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn" id="btnDesativa"
+                                    onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
+                                    Desativar usuário
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

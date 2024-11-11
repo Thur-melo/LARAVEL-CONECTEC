@@ -564,6 +564,37 @@ main .container .left{
     word-wrap: break-word;
 }
 
+/* Buscar usuário */
+.userSearch {
+    display: flex;
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+
+.usersLista {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.usersImg img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
 @media screen and (max-width: 1024px){
     .container{
         width: 96%;

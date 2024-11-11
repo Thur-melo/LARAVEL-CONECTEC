@@ -107,15 +107,33 @@
 
                 <div>
                     <!-- Resultados de usuários -->
-                    <h2>Usuários Encontrados</h2>
                     @if($users->isEmpty())
-                    <p>Nenhum usuário encontrado.</p>
                     @else
-                    <ul>
+                      
+                        <div class="userSearch">
+                        <h3>Usuários</h3>
                         @foreach ($users as $user)
-                        <li>{{ $user->name }} ({{ $user->email }})</li>
+                        <div class="usersLista">
+                        <div class="usersImg">
+                        <a href="{{ route('perfil', ['id' => $user->id]) }}"> <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                        </div>
+                        <div class="info">
+                       <h3>{{ $user->name }}</h3>
+                       
+                       <p>{{ "@". $user->arroba}} </p>
+                       </div>
+                       <div class="btnSeguirCont">
+                            <button class="follow-btn"
+                                data-user-id="{{ $user->id }}"
+                                data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'unfollow' : 'follow' }}">
+                                {{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'Seguindo' : 'Seguir' }}
+                            </button>
+
+                        </div>
+                        </div>
+                        
                         @endforeach
-                    </ul>
+                        </div>
                     @endif
                   
                 </div>
