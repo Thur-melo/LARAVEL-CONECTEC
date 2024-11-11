@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\BuscarUsuariosController;
 use App\Http\Controllers\ComentariosController;
+
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
@@ -50,9 +52,12 @@ Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.de
 Route::patch('/posts/{id}/aprovar', [PostController::class, 'updateStatus'])->name('posts.desativar');  
 Route::patch('/posts/{id}/desativar', [PostController::class, 'updateAtiva'])->name('posts.aprovar'); 
 
-Route::get('/home', [RegisterController::class, 'showHome']) ->name('home');
+Route::get('/home', [RegisterController::class, 'showHome'])->name('home');
 
 Route::post('/home', [PostController::class, 'postar']); 
+
+Route::get('/users', [BuscarUsuariosController::class, 'buscarUsuarios'])->name('buscar.usuarios');
+
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
