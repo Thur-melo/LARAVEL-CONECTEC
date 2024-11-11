@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{url('assets/css/adminPreferencias.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://unpkg.com/heroicons@1.0.0/dist/outline.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
+
     <!--icons -->
 
     <!-- font -->
@@ -35,11 +37,14 @@
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
             
-    
+            
             <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
             </a>
             
+            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
+                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
+            </a>
         </ul>
         
     </div>

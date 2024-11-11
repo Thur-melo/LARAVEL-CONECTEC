@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
 </head>
 
 <body>
@@ -38,7 +39,7 @@
             </a>
 
             <a href="{{ route('denuncias') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>denuncias </span> </li>
+                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
             </a>
             <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
