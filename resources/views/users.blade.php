@@ -94,7 +94,6 @@
 
             <div class="meio">
                 <!-- Formulário de criar post -->
-                @if($users->isEmpty())
                 <form class="criarPost">
                     <div class="profileImgPost">
                         <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
@@ -108,9 +107,13 @@
 
                 <div>
                     <!-- Resultados de usuários -->
-                   
+                    @if($users->isEmpty())
+
+
+
+                    
                     @else
-                    <div>
+
                     <div class="userSearch">
                         <h3>Usuários</h3>
                         @foreach ($users as $user)
@@ -136,225 +139,10 @@
                         </div>
 
                         @endforeach
-                        <!-- Link para ver todos os usuários com a busca -->
-                        <a href="{{ route('buscar.usuarios', ['s' => request('s')]) }}">
-                            <h6>Ver todos</h6>
-                        </a>
-                    </div>
                     @endif
 
                 </div>
-                <!-- Loop de postagens -->
-                @foreach($posts as $post)
-
-                @php
-                $coresModulo = [
-                '1º' => '#CD4642',
-                '2º' => '#5169B1',
-                '3º' => '#64B467',
-                ];
-                @endphp
-
-                <div class="feeds">
-                    <div class="feed">
-                        <!-- Seção de informações do usuário -->
-                        <div class="user">
-                            <div class="profileImg">
-                                @if(isset($post->user->id)) <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a> @else {{ dd($post->user) }} @endif
-
-
-                            </div>
-                            <div class="info">
-                                <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                                    <h3>{{ '@' . $post->user->arroba }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
-
-                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
-                                    </div>
-                                </div>
-                                <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
-                            </div>
-                        </div>
-                        <!-- Fim da seção de informações do usuário -->
-
-                        <!-- Tipo de post -->
-                        <!-- <div class="tipoCont">
-                <div class="tipo-div">
-                    <p>{{ $post->tipo_post }}</p>
-                </div>
-            </div>  -->
-                        <!-- Fim do tipo de post -->
-
-                        <!-- Texto do post -->
-                        <div class="textoPost">
-                            {{ $post->texto }}
-
-
-                        </div>
-                        <!-- Fim do texto do post -->
-
-                        <!-- Imagem do post -->
-                        <div class="imgPost">
-                            <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                            </a>
-                        </div>
-                        <!-- Fim da imagem do post -->
-
-                        <!-- Botões de ação (Curtir, Comentar, Salvar) -->
-                        <div class="action-button">
-                            <div class="interaction-button">
-                                <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
-                                    @if($post->likes()->where('user_id', Auth::id())->exists())
-                                    <i class="fas fa-heart liked"></i>
-                                    @else
-                                    <i class="far fa-heart"></i>
-                                    @endif
-                                </span>
-                                <span class="likes-count">{{ $post->likes()->count() }}</span>
-
-                                <a href="{{ route('comentarios', $post->id) }}">
-                                    <button class="comentarioCotn">
-                                        <i class="uil uil-comment"></i>
-                                    </button>
-                                </a>
-                            </div>
-
-                            <div class="icons-group">
-                                <div class="bookmark">
-                                    <span><i class="uil uil-bookmark"></i></span>
-                                </div>
-
-
-                                {{-- aqui --}}
-
-
-                                <!-- Link que abre o modal -->
-                                <a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
-                                    <span class="material-symbols-outlined ">warning</span>
-                                </a>
-                            </div>
-
-                            <!-- Modal -->
-                            <div id="modal-denuncia" class="modal" style="display: none;">
-                                <div class="modal-content">
-                                    <span class="close" onclick="closeModal()">&times;</span>
-                                    <h2>Denunciar Post</h2>
-                                    <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
-                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
-                                    <div class="modal-footer">
-                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
-                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
-                                    </div>
-                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
-                                    <input type="hidden" id="post-id" value="{{ $post->id }}">
-
-                                </div>
-                            </div>
-
-                            <!-- Estilos para o modal -->
-                            <style>
-                                #motivo {
-                                    outline: none;
-                                    background-color: #eaeaea;
-                                    padding: 4px;
-                                    border-radius: 12px;
-                                    border: none;
-
-                                }
-
-                                .icons-group {
-                                    display: flex;
-                                    justify-content: center
-                                }
-
-                                .modal {
-                                    display: none;
-                                    position: fixed;
-                                    z-index: 1;
-                                    padding-top: 100px;
-                                    left: 0;
-                                    top: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    overflow: auto;
-                                    background-color: rgba(0, 0, 0, 0.4);
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                }
-
-                                .modal-content {
-                                    background-color: #fefefe;
-                                    padding: 20px;
-                                    border: 1px solid #888;
-                                    width: 50%;
-                                    /* Ajuste para 50% da largura */
-                                    max-width: 600px;
-                                    /* Limite opcional de largura máxima */
-                                }
-
-                                .close {
-                                    color: #646464;
-                                    float: right;
-                                    font-size: 28px;
-                                    font-weight: bold;
-                                }
-
-                                .close:hover,
-                                .close:focus {
-                                    color: rgb(49, 48, 48);
-                                    text-decoration: none;
-                                    cursor: pointer;
-                                }
-                            </style>
-
-                            <!-- Scripts para abrir e fechar o modal -->
-                            <script>
-                                function openModal(postId) {
-                                    document.getElementById('modal-denuncia').style.display = 'flex';
-                                }
-
-                                function closeModal() {
-                                    document.getElementById('modal-denuncia').style.display = 'none';
-                                }
-
-                                function confirmarDenuncia() {
-                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
-                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
-                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
-
-                                    fetch("{{ route('denunciar') }}", {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                            },
-                                            body: JSON.stringify({
-                                                user_id: userId,
-                                                post_id: postId,
-                                                motivo: motivo
-                                            })
-                                        })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            alert(data.message); // Exibe a mensagem de sucesso
-                                            closeModal(); // Fecha o modal
-                                        })
-                                        .catch(error => {
-                                            console.error("Erro:", error);
-                                            alert("Ocorreu um erro ao registrar a denúncia.");
-                                        });
-                                }
-                            </script>
-
-
-                            {{-- aqui --}}
-                        </div>
-                        <!-- Fim dos botões de ação -->
-                    </div>
-                </div>
-                @endforeach
+           
                 <!-- Fim do loop de postagens -->
 
             </div>

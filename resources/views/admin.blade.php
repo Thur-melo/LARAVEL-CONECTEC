@@ -56,6 +56,25 @@
             <li><a href="#">Úsuario</a></li>
             <li><a href="#">Postagens</a></li>
             <li><a href="#">Postagens</a></li>
+            <li class="logout">
+                <a href="#">Logout <span class="material-icons" style="font-size: 32px;">logout</span></a>
+            </li>
+            </a>
+            <a href="{{ route('admin') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
+            </a>
+
+            
+            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
+            </a>
+
+            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
+                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
+            </a>
+            <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
+            </a> -->
         </ul>
     </div>
     <!-- sidebar fim -->
