@@ -106,4 +106,7 @@ Route::get('/explorar', [PostController::class, 'showExplorar'])->name('explorar
 Route::middleware(['auth'])->group(function () {
     Route::get('/notificacoes', [notificacaoController::class, 'index'])->name('notificacoes.index');
     Route::post('/notificacoes/{id}/marcar-como-lida', [notificacaoController::class, 'marcarComoLida'])->name('notificacoes.marcarComoLida');
+    Route::delete('/notificacoes/{id}/delete', [notificacaoController::class, 'destroy'])->name('notificacoes.destroy');
 });
+
+

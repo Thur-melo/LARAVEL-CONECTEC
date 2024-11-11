@@ -1,184 +1,223 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificações Dropdown</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        /* Estilo básico para o sino de notificações */
-        .notification-wrapper {
-            position: relative;
-            display: inline-block;
-        }
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url('assets/css/notificacao.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
 
-        .notification-icon {
-            font-size: 24px;
-            cursor: pointer;
-            position: relative;
-        }
 
-        /* Badge (contador de notificações) */
-        .notification-icon .badge {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            padding: 3px 6px;
-            font-size: 12px;
-        }
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
-        /* Dropdown de notificações */
-        .notification-dropdown {
-            display: none;
-            position: absolute;
-            top: 30px;
-            right: 0;
-            width: 350px;
-            max-height: 400px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
-            z-index: 1000;
-        }
-
-        /* Mostra o dropdown quando o ícone é clicado */
-        .notification-wrapper.active .notification-dropdown {
-            display: block;
-        }
-
-        /* Cabeçalho do dropdown */
-        .notification-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #f0f0f0;
-            font-weight: bold;
-        }
-
-        /* Estilo de cada notificação */
-        .notification-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .notification-item:last-child {
-            border-bottom: none;
-        }
-
-        /* Imagem de perfil */
-        .notification-item .msgUserFoto img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        /* Texto e hora */
-        .notification-item .msgInfors {
-            flex-grow: 1;
-        }
-
-        .notification-item .msgTexto {
-            font-size: 14px;
-            color: #333;
-        }
-
-        .notification-item .msgHora {
-            font-size: 12px;
-            color: #888;
-        }
-
-        /* Ícone de tipo de notificação */
-        .notification-item .icone {
-            font-size: 18px;
-            margin-left: 10px;
-        }
-
-        /* Botão Ver Todas */
-        .see-all {
-            display: block;
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .see-all:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link
+        rel="stylesheet"
+        href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
-<div class="notification-wrapper">
-    <!-- Ícone do Sino -->
-    <div class="notification-icon" onclick="toggleDropdown()">
-        <i class="fa fa-bell"></i>
-        <span class="badge">3</span>
-    </div>
 
-    <!-- Dropdown de Notificações -->
-    <div class="notification-dropdown">
-        <!-- Cabeçalho do Dropdown -->
-        <div class="notification-header">
-            <span>Notificações</span>
-            <a href="#" style="font-size: 14px; color: #007bff; text-decoration: none;">Marcar como lidas</a>
+<body>
+    @include('partials.navbar')
+    @php
+    use Illuminate\Support\Str;
+@endphp
+
+    <main>
+        <div class="container">
+            <div class="left">
+                <div class="sidebar">
+                    <div class="sidebarList">
+
+                        <a href="{{ Route('home')}}" class="menu-item ">
+                            <span><i class="fa-solid fa-house"></i></span>
+                            <h3>Home</h3>
+                        </a>
+
+                        <a class="menu-item " href="{{ Route('explorar')}}">
+                            <span><i class="fa-regular fa-compass"></i></span>
+                            <h3>Explorar</h3>
+                        </a>
+
+                        <a class="menu-item ">
+                            <span><i class="fa-regular fa-bell"></i></span>
+                            <h3>Notificações</h3>
+                        </a>
+
+                        <a href="{{ Route('postagens')}}" class="menu-item active">
+                            <span><i class="fa-regular fa-images"></i></span>
+                            <h3>Postagens</h3>
+                        </a>
+                        <a class="menu-item " href="{{Route('chat.list')}}">
+                            <span><i class="fa-regular fa-message"></i></span>
+                            <h3>Chat</h3>
+                        </a>
+
+                    
+
+
+                    </div>
+
+                    <a href="{{ route('profile', ['id' => $user->id]) }}" class="menu-item">
+                        <div class="imgPerfilSide">
+                            <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
+                            <div class="sidePerfilNames">
+                                <h3>{{$user->name }}</h3>
+                                <span class="arrobaSide">{{ '@'. $user->arroba}}</span>
+                            </div>
+                        </div>
+                    </a>
+
+
+                </div>
+            </div>
+
+
+
+            <!-------------------------------------------  Minhas perguntas -------------------------------------------------------------------------------------->
+
+            <div class="meio">
+            <div class="notiCont">
+        <!-- Cabeçalho de "Em Alta" -->
+        <div class="headerNoti">
+            <h2>Notificações</h2>
+            <a href="">Marcar como lidas</a>
         </div>
 
-        <!-- Lista de Notificações -->
-        <div class="notification-item">
-            <div class="msgUserFoto">
-                <img src="path_to_image.jpg" alt="Foto do usuário">
+        <div class="msgLista">
+        @foreach($notificacoes as $notificacao)
+        
+            <div class="msg">
+            
+                <div class="msgUserFoto">
+                <div class="icone 
+                        {{ $notificacao->tipo == 'comentario' ? 'comentario-icone' : '' }} 
+                        {{ $notificacao->tipo == 'like' ? 'curtida-icone' : '' }}">
+                        
+                        @if ($notificacao->tipo == 'comentario')
+                            <i class="fa-solid fa-comment"></i> 
+                        @elseif ($notificacao->tipo == 'like')
+                            <i class="fa-solid fa-heart"></i> 
+                        @endif
+                    </div>
+                    <img src="{{ asset('storage/' . $notificacao->interacaoUsuario->urlDaFoto) }}" alt="">
+                </div>
+                <div class="msgInfors">
+
+
+                    
+                    <div class="msgTexto">
+                        <span>{{$notificacao->interacaoUsuario->arroba}}</span>
+                        
+                        @if($notificacao->tipo === 'like')
+                                    <span class="spanTexto">Curtiu a sua publicação</span>
+                                @elseif($notificacao->tipo === 'comentario')
+                                    <span class="spanTexto">Comentou na sua publicação.</span>
+                                    
+                                @endif
+                                <span class="post-texto">"{{ Str::limit($notificacao->post->texto, 20, '...') }}"</span>
+                    </div>
+                    
+                    
+
+                    <div class="msgHora">
+                    <small>{{ $notificacao->created_at->diffForHumans() }}</small>
+                    <div class="iconeLixeira" data-id="{{$notificacao->id}}">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                    
+                    </div>
+                </div>
+
+                
             </div>
-            <div class="msgInfors">
-                <div class="msgTexto"><strong>@usuario</strong> comentou no seu post!</div>
-                <div class="msgHora">há 2 horas</div>
-            </div>
-            <div class="icone">
-                <i class="fa fa-comment text-primary"></i>
-            </div>
+          
+            @endforeach
+            
         </div>
-
-        <div class="notification-item">
-            <div class="msgUserFoto">
-                <img src="path_to_image.jpg" alt="Foto do usuário">
+                
             </div>
-            <div class="msgInfors">
-                <div class="msgTexto"><strong>@usuario</strong> deu um like no seu post!</div>
-                <div class="msgHora">há 1 hora</div>
-            </div>
-            <div class="icone">
-                <i class="fa fa-heart text-danger"></i>
-            </div>
-        </div>
 
-        <!-- Botão Ver Todas -->
-        <a href="#" class="see-all">Ver todas</a>
-    </div>
-</div>
 
-<script>
-    // Função para abrir e fechar o dropdown
-    function toggleDropdown() {
-        document.querySelector('.notification-wrapper').classList.toggle('active');
-    }
 
-    // Fechar o dropdown ao clicar fora dele
-    document.addEventListener('click', function(event) {
-        const notificationWrapper = document.querySelector('.notification-wrapper');
-        if (!notificationWrapper.contains(event.target)) {
-            notificationWrapper.classList.remove('active');
-        }
+    </main>
+
+
+ 
+
+    
+
+    <!-- Script para os MODAIS LEGAIS tmnc bootrape -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Script para os MODAIS LEGAIS tmnc bootrape -->
+
+
+    <script>document.addEventListener('DOMContentLoaded', function() {
+    const deleteIcons = document.querySelectorAll('.iconeLixeira');
+
+    deleteIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const notificationId = this.getAttribute('data-id');
+
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você quer realmente excluir esta notificação?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/notificacoes/${notificationId}/delete`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                'Excluído!',
+                                'A notificação foi excluída.',
+                                'success'
+                            );
+                            this.closest('.msg ').remove(); // Opcional: remove o elemento da interface
+                        } else {
+                            Swal.fire(
+                                'Erro!',
+                                data.message,
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Erro!',
+                            'Ocorreu um erro ao excluir a notificação.',
+                            'error'
+                        );
+                    });
+                }
+            });
+        });
     });
+});
 </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
+
 </html>
