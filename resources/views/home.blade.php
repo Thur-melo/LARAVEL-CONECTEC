@@ -49,9 +49,12 @@
                             <h3>Explorar</h3>
                         </a>
 
-                        <a class="menu-item ">
+                        <a class="menu-item"  href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
+                            @if($naoLidasCount > 0)
+                            <span >{{ $naoLidasCount }}</span>
+                            @endif
                         </a>
 
                         <a href="{{ Route('postagens')}}" class="menu-item">
@@ -101,6 +104,39 @@
                 </form>
                 <!-- Fim do formulário de criar post -->
 
+
+                <div>
+                    <!-- Resultados de usuários -->
+                    @if($users->isEmpty())
+                    @else
+                      
+                        <div class="userSearch">
+                        <h3>Usuários</h3>
+                        @foreach ($users as $user)
+                        <div class="usersLista">
+                        <div class="usersImg">
+                        <a href="{{ route('perfil', ['id' => $user->id]) }}"> <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                        </div>
+                        <div class="info">
+                       <h3>{{ $user->name }}</h3>
+                       
+                       <p>{{ "@". $user->arroba}} </p>
+                       </div>
+                       <div class="btnSeguirCont">
+                            <button class="follow-btn"
+                                data-user-id="{{ $user->id }}"
+                                data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'unfollow' : 'follow' }}">
+                                {{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'Seguindo' : 'Seguir' }}
+                            </button>
+
+                        </div>
+                        </div>
+                        
+                        @endforeach
+                        </div>
+                    @endif
+                  
+                </div>
                 <!-- Loop de postagens -->
                 @foreach($posts as $post)
 
@@ -145,6 +181,8 @@
                         <!-- Texto do post -->
                         <div class="textoPost">
                             {{ $post->texto }}
+
+
                         </div>
                         <!-- Fim do texto do post -->
 
@@ -174,15 +212,144 @@
                                     </button>
                                 </a>
                             </div>
-                            <div class="bookmark">
-                                <span><i class="uil uil-bookmark"></i></span>
+
+                            <div class="icons-group">
+                                <div class="bookmark">
+                                    <span><i class="uil uil-bookmark"></i></span>
+                                </div>
+
+
+                                {{-- aqui --}}
+
+
+                                <!-- Link que abre o modal -->
+                                <a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+                                    <span class="material-symbols-outlined ">warning</span>
+                                </a>
                             </div>
+
+                            <!-- Modal -->
+                            <div id="modal-denuncia" class="modal" style="display: none;">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Denunciar Post</h2>
+                                    <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
+                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
+                                    </div>
+                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" id="post-id" value="{{ $post->id }}">
+
+                                </div>
+                            </div>
+
+                            <!-- Estilos para o modal -->
+                            <style>
+                                #motivo {
+                                    outline: none;
+                                    background-color: #eaeaea;
+                                    padding: 4px;
+                                    border-radius: 12px;
+                                    border: none;
+
+                                }
+
+                                .icons-group {
+                                    display: flex;
+                                    justify-content: center
+                                }
+
+                                .modal {
+                                    display: none;
+                                    position: fixed;
+                                    z-index: 1;
+                                    padding-top: 100px;
+                                    left: 0;
+                                    top: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    overflow: auto;
+                                    background-color: rgba(0, 0, 0, 0.4);
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .modal-content {
+                                    background-color: #fefefe;
+                                    padding: 20px;
+                                    border: 1px solid #888;
+                                    width: 50%;
+                                    /* Ajuste para 50% da largura */
+                                    max-width: 600px;
+                                    /* Limite opcional de largura máxima */
+                                }
+
+                                .close {
+                                    color: #646464;
+                                    float: right;
+                                    font-size: 28px;
+                                    font-weight: bold;
+                                }
+
+                                .close:hover,
+                                .close:focus {
+                                    color: rgb(49, 48, 48);
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                            <!-- Scripts para abrir e fechar o modal -->
+                            <script>
+                                function openModal(postId) {
+                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                }
+
+                                function closeModal() {
+                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                }
+
+                                function confirmarDenuncia() {
+                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
+                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
+
+                                    fetch("{{ route('denunciar') }}", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                user_id: userId,
+                                                post_id: postId,
+                                                motivo: motivo
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            alert(data.message); // Exibe a mensagem de sucesso
+                                            closeModal(); // Fecha o modal
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            alert("Ocorreu um erro ao registrar a denúncia.");
+                                        });
+                                }
+                            </script>
+
+
+                            {{-- aqui --}}
                         </div>
                         <!-- Fim dos botões de ação -->
                     </div>
                 </div>
                 @endforeach
                 <!-- Fim do loop de postagens -->
+
             </div>
             @include ('partials.emAlta')
 
@@ -200,13 +367,13 @@
 
                         <div class="infoUserCont">
                             <div class="profileImgSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
-                                 <img src="{{ asset('storage/' . $usuariosSuge->urlDaFoto) }}" alt="">
+                                <img src="{{ asset('storage/' . $usuariosSuge->urlDaFoto) }}" alt="">
                             </div>
 
                             <div class="inforUserSuge" href="{{ route('perfil', ['id' => $usuariosSuge->id]) }}">
                                 <span>{{ $usuariosSuge->name }}</span>
                                 <span>{{ $usuariosSuge->modulo }} {{ $usuariosSuge->perfil }}</span>
-            </div>
+                            </div>
                         </div>
 
                         <div class="btnSeguirCont">
@@ -261,9 +428,10 @@
                         </div>
 
                         <select class="form-select" style="margin-top:10px" aria-label="Default select example" name="tipo">
-                            @foreach($preferenciasLista as $preferencia)
-                            <option value="{{ $preferencia->name }}">{{ $preferencia->name }}</option>
-                            @endforeach
+                            <option value="Duvida">Dúvida</option>
+                            <option value="Aula">Aula</option>
+                            <option value="Informacao">Informação</option>
+                            <option value="Estagio">Estágio</option>
                         </select>
                         <div class="previewModal">
                             <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">
@@ -282,34 +450,34 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @if(session('status'))
-        <script>
-            Swal.fire({
-                title: "Sucesso!",
-                text: "{{ session('status') }}",
-                icon: "success",
-                confirmButtonText: "Ok",
-                confirmButtonColor: "#07beff"
-            });
-        </script>
+    @if(session('status'))
+    <script>
+        Swal.fire({
+            title: "Sucesso!",
+            text: "{{ session('status') }}",
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#07beff"
+        });
+    </script>
     @endif
 
     @if(session('error'))
-        <script>
-            Swal.fire({
-                title: "Erro",
-                text: "{{ session('error') }}",
-                icon: "error",
-                confirmButtonText: "Ok"
-            });
-        </script>
+    <script>
+        Swal.fire({
+            title: "Erro",
+            text: "{{ session('error') }}",
+            icon: "error",
+            confirmButtonText: "Ok"
+        });
+    </script>
     @endif
 
 
 
     <!-- Modal de Confirmação -->
 
-    
+
 
     <script>
         function previewImage(event) {

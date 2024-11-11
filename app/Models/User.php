@@ -44,10 +44,11 @@ class User extends Authenticatable
     }
 
     
-    public function seguindo(): BelongsToMany
+    public function seguindo()
     {
         return $this->belongsToMany(User::class, 'seguidores', 'seguidor_id', 'seguindo_id');
     }
+    
 
     public function seguidores(): BelongsToMany
     {
@@ -58,5 +59,28 @@ class User extends Authenticatable
     {
         return $this->hasMany(Likes::class);
     }
+    public function hashtags()
+    {
+        // Relacionamento com Hashtag através da tabela intermediária 'post_hashtag'
+        return $this->belongsToMany(Hashtag::class, 'post_hashtag', 'post_id', 'hashtag_id')
+                    ->withTimestamps();
+    }
 
+    /**
+     * Método para retornar as hashtags associadas às postagens do usuário.
+     */
+    public function likedHashtags()
+    {
+        return $this->belongsToMany(Hashtag::class, 'post_hashtags', 'post_id', 'hashtag_id')
+                    ->distinct();
+    }
+    public function getCursoAttribute()
+    {
+        return $this->perfil;
+    }
+
+    public function notificacoes()
+{
+    return $this->hasMany(notificacoes::class, 'usuario_id');
+}
 }

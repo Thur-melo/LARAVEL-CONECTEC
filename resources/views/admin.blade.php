@@ -16,6 +16,7 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
+<<<<<<< HEAD
             <li><a href="#">Inicio</a></li>
             <li><a href="#">Úsuario</a></li>
             <li><a href="#">Postagens</a></li>
@@ -23,6 +24,26 @@
             <li class="logout">
                 <a href="#">Logout <span class="material-icons" style="font-size: 32px;">logout</span></a>
             </li>
+=======
+            <a href="{{ route('adminHome') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
+            </a>
+            <a href="{{ route('admin') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
+            </a>
+
+            
+            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
+            </a>
+
+            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>denuncias </span> </li>
+            </a>
+            <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
+                <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
+            </a> -->
+>>>>>>> 4e5de6e63ea844a83be442be2389a3ce73f09a06
         </ul>
     </div>
     <!-- sidebar fim -->
