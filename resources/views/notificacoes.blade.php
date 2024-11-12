@@ -113,28 +113,42 @@
                         <div class="msgUserFoto">
                             <div class="icone 
                                 {{ $notificacao->tipo == 'comentario' ? 'comentario-icone' : '' }} 
-                                {{ $notificacao->tipo == 'like' ? 'curtida-icone' : '' }}">
+                                {{ $notificacao->tipo == 'like' ? 'curtida-icone' : '' }}
+                                 {{ $notificacao->tipo == 'seguido' ? 'seguido-icone' : '' }}">
                                 
                                 @if ($notificacao->tipo == 'comentario')
                                     <i class="fa-solid fa-comment"></i> 
                                 @elseif ($notificacao->tipo == 'like')
-                                    <i class="fa-solid fa-heart"></i> 
+                                    <i class="fa-solid fa-heart"></i>
+                                    @else ($notificacao->tipo == 'seguido') 
+                                    <i class="fa-solid fa-person-walking"></i>
                                 @endif
                             </div>
                             <img src="{{ asset('storage/' . $notificacao->interacaoUsuario->urlDaFoto) }}" alt="">
                         </div>
 
                         <div class="msgInfors">
-                            <a class="msgTexto" href="{{ route('comentarios', $notificacao->post->id) }}">
+                            <a class="msgTexto" href="
+                                @if($notificacao->tipo == 'like' || $notificacao->tipo == 'comentario')
+                                 {{ route('comentarios', $notificacao->post->id) }}
+                                @elseif($notificacao->tipo === 'seguido')
+                                 {{ route('perfil', ['id' => $notificacao->interacao_user_id]) }}
+                                 @endif 
+                            ">
                                 <span>{{$notificacao->interacaoUsuario->arroba}}</span>
                                 
                                 @if($notificacao->tipo === 'like')
                                     <span class="spanTexto">Curtiu a sua publicação</span>
                                 @elseif($notificacao->tipo === 'comentario')
                                     <span class="spanTexto">Comentou na sua publicação.</span>
+                                    @else ($notificacao->tipo == 'seguido') 
+                                    <span class="spanTexto">Começou a seguir você.</span>
                                 @endif
                                 
+
+                                @if($notificacao->tipo == 'like' || $notificacao->tipo == 'comentario')
                                 <span class="post-texto">"{{ Str::limit($notificacao->post->texto, 20, '...') }}"</span>
+                                @endif
                             </a>
 
                             <div class="msgHora">

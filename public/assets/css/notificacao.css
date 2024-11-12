@@ -129,6 +129,17 @@
     background-color: rgba(92, 92, 248, 0.699); /* Cor de fundo azul para comentários */
 }
 
+.seguido-icone{
+    background-color: rgb(161, 248, 135); /* Cor de fundo azul para comentários */
+
+
+} 
+
+.seguido-icone i{
+    font-size:10.8pt ;
+
+}
+
 .verTudo{
     background-color:#07beff;
     color: white;
