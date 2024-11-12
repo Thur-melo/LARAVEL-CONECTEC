@@ -140,7 +140,7 @@ body {
     display: flex;
     align-items: center;
     transition: transform 0.3s ease;
-    cursor: pointer;
+    /* cursor: pointer; */
     margin-left: 30px;
     height: 300px;
     width: 1140px;
@@ -260,4 +260,44 @@ width: 1140px;
 .tabelaUsers3 canvas {
     width: 100% !important;   /* Garante que o gráfico ocupe toda a largura disponível */
     height: 400px;            /* Ajuste de altura do gráfico */
+}
+
+.tbDenuncias{
+    width: 600px;
+}
+
+.containerTabela{
+    width: 100%;
+}
+
+.btn{
+    color: white;
+    font-size: 13px;
+}
+#btnDesativa {
+    background-color: #e74c3c; /* Vermelho para desativar */
+    color: white;
+    font-size: 13px;
+}
+
+#btnDesativa:hover {
+    background-color: #95362b;
+}
+
+#btnAtiva{
+    background-color: #00aaff;
+    color: white;
+    font-size: 13px;
+}
+#btnAtiva:hover {
+    background-color: #2483b3;
+}
+
+#relevar{
+    background-color: rgb(41, 139, 41);
+    color: white;
+    font-size: 13px;
+}
+#relevar:hover {
+    background-color: rgb(36, 97, 36);
 }

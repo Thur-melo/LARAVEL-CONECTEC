@@ -24,5 +24,9 @@ class DenunciaUsuario extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function userDenunciado()
+    {
+        return $this->belongsTo(User::class, 'user_denunciado_id');
+    }
 
 }

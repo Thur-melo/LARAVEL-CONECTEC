@@ -8,6 +8,19 @@ use App\Models\DenunciaUsuario;
 
 class DenunciaController extends Controller
 {
+
+    public function deletarDenuncia($id)
+{
+    // Encontra a denúncia pelo ID
+    $denuncia = DenunciaUsuario::findOrFail($id);
+    
+    // Exclui a denúncia do banco de dados
+    $denuncia->delete();
+    
+    // Retorna uma resposta JSON para confirmar a exclusão
+    return response()->json(['message' => 'Denúncia excluída com sucesso.']);
+}
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

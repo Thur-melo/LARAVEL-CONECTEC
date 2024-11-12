@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Estilo básico para o modal */
         .modal {
@@ -111,8 +112,154 @@
     <div class="container">
         <div class="containerTabelaUsers1">
             <div class="tabelaUsers1">
-                <div>
-                    <canvas id="myPieChart"></canvas>
+                <canvas id="myPieChart"></canvas>
+                <div class="containerTabela">
+                    <table class="tbDenuncias">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuário denunciado</th>
+                                <th>Motivo</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($denunciasUser as $denuncia)
+                                <tr>
+                                    <td>{{ $denuncia->id }}</td>
+                                    <td>{{ $denuncia->userDenunciado->name }}</td> <!-- Nome do usuário denunciado -->
+
+                                    <td>{{ $denuncia->motivo }}</td>
+                                    <td>{{ $denuncia->status }}</td>
+                                    <td>                            <form action="{{ route('user.off', $denuncia->userDenunciado->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn" id="btnDesativa"
+                                            onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
+                                            Desativar usuário
+                                        </button>
+                                    </form></td>
+
+                                    <td>       
+                                        <button class="btn" id="btnAtiva" onclick="ativarUsuario({{ $denuncia->userDenunciado->id }})">
+                                        Ativar
+                                        </button>
+                                    </td>
+
+                                    
+                                        <td>
+                                            <!-- Botão de excluir denúncia -->
+                                            <button onclick="deletarDenuncia({{ $denuncia->id }})" class="btn " id="relevar">relevar</button>
+                                        </td>
+                                    
+                                </tr>
+                            @endforeach
+                            <script>
+                                // Função para ativar usuário
+                                function ativarUsuario(userId) {
+                                    if (confirm("Tem certeza que deseja ativar este usuário?")) {
+                                        fetch("{{ url('/admin') }}/" + userId, {
+                                            method: "PATCH",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                // Aqui você pode passar qualquer dado adicional necessário
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            alert(data.message); // Mensagem de sucesso
+                                            // Opcional: Atualizar a tabela ou redirecionar
+                                            location.reload(); // Recarrega a página para refletir a ativação
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            alert("Ocorreu um erro ao ativar o usuário.");
+                                        });
+                                    }
+                                }
+
+                                function deletarDenuncia(denunciaId) {
+                                    if (confirm("Tem certeza que deseja excluir esta denúncia?")) {
+                                        fetch("{{ url('/denuncia') }}/" + denunciaId, {
+                                            method: "DELETE",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            alert(data.message); // Exibe a mensagem de sucesso
+                                            location.reload(); // Recarrega a página para refletir a exclusão
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            alert("Ocorreu um erro ao excluir a denúncia.");
+                                        });
+                                    }
+                                }
+
+                            </script>
+
+                            
+                        </tbody>
+                    </table>
+                    <style>
+                        .tbDenuncias {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 20px 0;
+                            font-family: Arial, sans-serif;
+                        }
+                    
+                        .tbDenuncias th, .tbDenuncias td {
+                            padding: 6px;
+                            text-align: left;
+                            border: 1px solid #ddd;
+                        }
+                    
+                        .tbDenuncias th {
+                            background-color: #4989dc;
+                            color: white;
+                            font-size: 16px;
+                        }
+                    
+                        .tbDenuncias tr:nth-child(even) {
+                            background-color: #f2f2f2; /* Cor de fundo alternada para as linhas */
+                        }
+                    
+
+                        .tbDenuncias td {
+                            font-size: 14px;
+                        }
+                    
+                        .tbDenuncias td, .tbDenuncias th {
+                            text-align: center;
+                        }
+                    
+                        /* Botão de ação para cada linha */
+                        .tbDenuncias .btn-action {
+                            padding: 5px 10px;
+                            background-color: #007bff;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            text-align: center;
+                        }
+                    
+                        .tbDenuncias .btn-action:hover {
+                            background-color: #0056b3;
+                        }
+                    </style>
+                    
+                    
                 </div>
             </div>
         </div>

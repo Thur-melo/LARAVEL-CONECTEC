@@ -16,6 +16,7 @@ use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\notificacaoController;
 
+Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
 Route::post('/denunciarUser', [DenunciaController::class, 'storeUser'])->name('denunciarUser');
 
 

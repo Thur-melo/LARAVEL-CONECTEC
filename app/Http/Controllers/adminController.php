@@ -11,6 +11,7 @@ use App\Models\Adm;
 use App\Models\PreferenciasLista;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Denuncia;
+use App\Models\DenunciaUsuario;
 
 class adminController extends Controller
 {
@@ -92,6 +93,9 @@ public function showadmin(){
     $qnt_outros = User::where('perfil', 'outros')-> count();
     $users = User::all();
     $usersAtivo = User::where('status', 1)-> get();
+    // $denunciasUser = DenunciaUsuario::all();
+    $denunciasUser = DenunciaUsuario::with('user')->get();
+
 
     
 
@@ -99,8 +103,11 @@ public function showadmin(){
 
     // $qnt_pendentes = Post::where('status', 1)-> count();
 
-    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros' ));
+    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros', 'denunciasUser' ));
 }
+
+// Relacionamento com o usuário denunciado
+
 
 
 public function update(Request $request, string $id)
@@ -237,15 +244,18 @@ public function desativaUser($id)
 
 
 
-    public function AtivaUser($id)
-    {
-        
-        $user = User::findOrFail($id); // Encontre o User$user pelo ID
-        $user->status = 'Ativo'; // Muda o status para 2
-        $user->save(); // Salva as alterações
-    
-        return redirect()->route('admin')->with('success', 'Status do post atualizado para 1!');
-    }
+public function AtivaUser(Request $request, $id)
+{
+    // Encontra o usuário pelo ID ou retorna erro 404
+    $user = User::findOrFail($id);
+
+    // Atualiza o status do usuário para 'Ativo'
+    $user->status = 'Ativo';
+    $user->save(); // Salva as alterações no banco de dados
+
+    // Retorna uma resposta JSON de sucesso
+    return response()->json(['message' => 'Usuário ativado com sucesso']);
+}
 
 
     public function destroyPost($id)
