@@ -53,10 +53,10 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Úsuario</a></li>
-            <li><a href="#">Postagens</a></li>
-            <li><a href="#">Postagens</a></li>
+            <li><a href="{{ route('admin') }}">Inicio</a></li>
+            <li><a href="{{ route('admin') }}">Úsuarios</a></li>
+            <li><a href="{{ route('adminHome') }}">Postagens</a></li>
+            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li class="logout">
                 <a href="#">Logout <span class="material-icons" style="font-size: 32px;">logout</span></a>
             </li>

@@ -269,7 +269,7 @@
 
                     </div>
 
-                </div>
+
 
 
                 <div id="resultado" class="resultado">
@@ -333,9 +333,10 @@
                         </div>
                     </div>
                 @endforeach                </div>
-
             </div>
+
             @include ('partials.emAlta')
+        </div>
         </div>
 
 
