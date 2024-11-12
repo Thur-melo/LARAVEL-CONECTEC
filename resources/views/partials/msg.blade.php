@@ -21,10 +21,11 @@
         <div class="msgLista">
         @foreach($notificacoes->take(3) as $notificacao)
         
-            <div class="msg">
+            <a class="msg" >
                 <div class="msgUserFoto">
                     <img src="{{ asset('storage/' . $notificacao->interacaoUsuario->urlDaFoto) }}" alt="">
                 </div>
+                
                 <div class="msgInfors">
                     <div class="msgTexto">
                         <span>{{$notificacao->interacaoUsuario->arroba}}</span>
@@ -51,10 +52,10 @@
                 </div>
 
                 
-            </div>
+            </a>
           
             @endforeach
-            <button class="verTudo">Ver todas</button>
+            
         </div>
        
         <!-- Fim do Cabeçalho de "Em Alta" -->

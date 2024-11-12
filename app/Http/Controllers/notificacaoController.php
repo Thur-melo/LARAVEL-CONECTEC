@@ -41,5 +41,18 @@ class notificacaoController extends Controller
        
         return response()->json(['success' => false, 'message' => 'Erro ao excluir a notificação'], 500);
     }
+
+    
+}
+
+
+
+public function marcarTodasComoLidas()
+{
+    
+    auth()->user()->notificacoes()->update(['lido' => true]);
+
+    // Redirecione de volta para a página de notificações com uma mensagem de sucesso
+    return redirect()->back()->with('status', 'Todas as notificações foram marcadas como lidas.');
 }
 }

@@ -46,7 +46,8 @@
     margin: 0;
     padding: 5px;
     border-bottom: 1px solid #cecece8a;
-   
+    text-decoration: none;
+
    
 }
 
@@ -67,6 +68,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    text-decoration: none;
     
 
 }
@@ -209,5 +211,24 @@
 .iconeLixeira i{
     font-size: 12pt;
     color: rgb(253, 0, 0);
+
+}
+
+.iconeOlho{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #0d778a;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgb(206, 247, 250);
+
+}
+
+.iconeOlho i{
+    font-size: 13pt;
+    color: rgb(10, 170, 175);
 
 }
