@@ -104,6 +104,138 @@
                         {{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'Seguindo' : 'Seguir' }}
                         </button>
 
+                        
+                                {{-- aqui --}}
+
+
+                                <!-- Link que abre o modal -->
+                                <a href="javascript:void(0);" onclick="openModal({{ $user->id }})">
+                                    <span class="material-symbols-outlined ">warning</span>
+                                </a>
+                            </div>
+
+                            <!-- Modal -->
+                            <div id="modal-denuncia" class="modal" style="display: none;">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Denunciar Usuário</h2>
+                                    <p>Deseja realmente denunciar o usuário {{ $usuario->name }}?</p>
+                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
+                                    </div>
+                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" id="user_denunciado_id" value="{{ $usuario->id }}">
+
+                                </div>
+                            </div>
+
+                            <!-- Estilos para o modal -->
+                            {{-- <style>
+                                #motivo {
+                                    outline: none;
+                                    background-color: #eaeaea;
+                                    padding: 4px;
+                                    border-radius: 12px;
+                                    border: none;
+
+                                }
+
+                                .icons-group {
+                                    display: flex;
+                                    justify-content: center
+                                }
+
+                                .modal {
+                                    display: none;
+                                    position: fixed;
+                                    z-index: 1;
+                                    padding-top: 100px;
+                                    left: 0;
+                                    top: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    overflow: auto;
+                                    background-color: rgba(0, 0, 0, 0.4);
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .modal-content {
+                                    background-color: #fefefe;
+                                    padding: 20px;
+                                    border: 1px solid #888;
+                                    width: 50%;
+                                    /* Ajuste para 50% da largura */
+                                    max-width: 600px;
+                                    /* Limite opcional de largura máxima */
+                                }
+
+                                .close {
+                                    color: #646464;
+                                    float: right;
+                                    font-size: 28px;
+                                    font-weight: bold;
+                                }
+
+                                .close:hover,
+                                .close:focus {
+                                    color: rgb(49, 48, 48);
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                }
+                            </style> --}}
+
+                            <!-- Scripts para abrir e fechar o modal -->
+                            <script>
+                                function openModal(postId) {
+                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                }
+
+                                function closeModal() {
+                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                }
+
+                                function confirmarDenuncia() {
+                                    const userId = document.getElementById('user-id').value;
+                                    const user_denunciado_id = document.getElementById('user_denunciado_id').value;
+                                    const motivo = document.getElementById('motivo').value;
+
+                                    fetch("{{ route('denunciarUser') }}", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                        },
+                                        body: JSON.stringify({
+                                            user_id: userId,
+                                            user_denunciado_id: user_denunciado_id,
+                                            motivo: motivo
+                                        })
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.message) {
+                                            alert(data.message);
+                                            closeModal();
+                                        } else {
+                                            console.error("Erro nos dados:", data); // Verifique o conteúdo do erro
+                                            alert("Ocorreu um erro ao registrar a denúncia.");
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error("Erro:", error); // Exibe o erro completo
+                                        alert("Ocorreu um erro ao registrar a denúncia.");
+                                    });
+                                }
+
+                            </script>
+
+
+                            {{-- aqui --}}
+
 
                         </div>
                         <div class="rowNomeUser">

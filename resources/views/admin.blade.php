@@ -9,6 +9,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilo básico para o modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,7 +91,7 @@
                 <h1>0</h1>
                 <h3>Úsuarios Bloqueados</h3>
             </div>
-            <div class="card" style="background: linear-gradient(to bottom right, #444444, #555555);">                
+            <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #444444, #555555);">                
                 <h1>0</h1>
                 <h3>Úsuarios em análise</h3>
             </div>
@@ -63,12 +99,167 @@
     </div>
     <!-- cards dashboard fim -->
 
+    <!-- Modal -->
+    <div id="modalAnalise" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Usuários em Análise</h2>
+            <p>Informações sobre os usuários que estão aguardando análise.</p>
+        </div>
+    </div>
+
     <!-- TabelaUsers dashboard inicio -->
     <div class="container">
         <div class="containerTabelaUsers1">
             <div class="tabelaUsers1">
-                <div>
-                    <canvas id="myPieChart"></canvas>
+                <canvas id="myPieChart"></canvas>
+                <div class="containerTabela">
+                    <table class="tbDenuncias">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuário denunciado</th>
+                                <th>Motivo</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($denunciasUser as $denuncia)
+                                <tr>
+                                    <td>{{ $denuncia->id }}</td>
+                                    <td>{{ $denuncia->userDenunciado->name }}</td> <!-- Nome do usuário denunciado -->
+
+                                    <td>{{ $denuncia->motivo }}</td>
+                                    <td>{{ $denuncia->status }}</td>
+                                    <td>                            <form action="{{ route('user.off', $denuncia->userDenunciado->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn" id="btnDesativa"
+                                            onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
+                                            Desativar usuário
+                                        </button>
+                                    </form></td>
+
+                                    <td>       
+                                        <button class="btn" id="btnAtiva" onclick="ativarUsuario({{ $denuncia->userDenunciado->id }})">
+                                        Ativar
+                                        </button>
+                                    </td>
+
+                                    
+                                        <td>
+                                            <!-- Botão de excluir denúncia -->
+                                            <button onclick="deletarDenuncia({{ $denuncia->id }})" class="btn " id="relevar">relevar</button>
+                                        </td>
+                                    
+                                </tr>
+                            @endforeach
+                            <script>
+                                // Função para ativar usuário
+                                function ativarUsuario(userId) {
+                                    if (confirm("Tem certeza que deseja ativar este usuário?")) {
+                                        fetch("{{ url('/admin') }}/" + userId, {
+                                            method: "PATCH",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                // Aqui você pode passar qualquer dado adicional necessário
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            alert(data.message); // Mensagem de sucesso
+                                            // Opcional: Atualizar a tabela ou redirecionar
+                                            location.reload(); // Recarrega a página para refletir a ativação
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            alert("Ocorreu um erro ao ativar o usuário.");
+                                        });
+                                    }
+                                }
+
+                                function deletarDenuncia(denunciaId) {
+                                    if (confirm("Tem certeza que deseja excluir esta denúncia?")) {
+                                        fetch("{{ url('/denuncia') }}/" + denunciaId, {
+                                            method: "DELETE",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            }
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            alert(data.message); // Exibe a mensagem de sucesso
+                                            location.reload(); // Recarrega a página para refletir a exclusão
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            alert("Ocorreu um erro ao excluir a denúncia.");
+                                        });
+                                    }
+                                }
+
+                            </script>
+
+                            
+                        </tbody>
+                    </table>
+                    <style>
+                        .tbDenuncias {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 20px 0;
+                            font-family: Arial, sans-serif;
+                        }
+                    
+                        .tbDenuncias th, .tbDenuncias td {
+                            padding: 6px;
+                            text-align: left;
+                            border: 1px solid #ddd;
+                        }
+                    
+                        .tbDenuncias th {
+                            background-color: #4989dc;
+                            color: white;
+                            font-size: 16px;
+                        }
+                    
+                        .tbDenuncias tr:nth-child(even) {
+                            background-color: #f2f2f2; /* Cor de fundo alternada para as linhas */
+                        }
+                    
+
+                        .tbDenuncias td {
+                            font-size: 14px;
+                        }
+                    
+                        .tbDenuncias td, .tbDenuncias th {
+                            text-align: center;
+                        }
+                    
+                        /* Botão de ação para cada linha */
+                        .tbDenuncias .btn-action {
+                            padding: 5px 10px;
+                            background-color: #007bff;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            text-align: center;
+                        }
+                    
+                        .tbDenuncias .btn-action:hover {
+                            background-color: #0056b3;
+                        }
+                    </style>
+                    
+                    
                 </div>
             </div>
         </div>
@@ -88,49 +279,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>@vinisilva</td>
-                            <td>100</td>
-                            <td>1</td>
-                            <td>Ativo</td>
-                            <td>DS</td>
-                        </tr>
-                        <tr>
-                            <td>@Hygorwanderley</td>
-                            <td>80</td>
-                            <td>2</td>
-                            <td>Bloqueado</td>
-                            <td>Nutri</td>
-                        </tr>
-                        <tr>
-                            <td>@mariaeduarda</td>
-                            <td>60</td>
-                            <td>3</td>
-                            <td>Ativo</td>
-                            <td>ADM</td>
-                        </tr>
-                        <tr>
-                            <td>@tutudanado</td>
-                            <td>40</td>
-                            <td>4</td>
-                            <td>Ativo</td>
-                            <td>DS</td>
-                        </tr>
-                        <tr>
-                            <td>@ronnisilva</td>
-                            <td>20</td>
-                            <td>5</td>
-                            <td>Ativo</td>
-                            <td>DS</td>
-                        </tr>
-                        <tr>
-                            <td>@ronnisilva</td>
-                            <td>20</td>
-                            <td>5</td>
-                            <td>Ativo</td>
-                            <td>DS</td>
-                        </tr>
-                        <!-- Adicione mais linhas conforme necessário -->
+                        <tr><td>@vinisilva</td><td>100</td><td>1</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@Hygorwanderley</td><td>80</td><td>2</td><td>Bloqueado</td><td>Nutri</td></tr>
+                        <tr><td>@mariaeduarda</td><td>60</td><td>3</td><td>Ativo</td><td>ADM</td></tr>
+                        <tr><td>@tutudanado</td><td>40</td><td>4</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@ronnisilva</td><td>20</td><td>5</td><td>Ativo</td><td>DS</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -138,116 +291,79 @@
     </div>
 
     <div class="container">
-    <div class="containerTabelaUser3">
-        <div class="tabelaUsers3">
-            <canvas id="myBarChart" style="width: 100%; height: 700px;"></canvas> <!-- Ajustando o tamanho -->
+        <div class="containerTabelaUser3">
+            <div class="tabelaUsers3">
+                <canvas id="myBarChart" style="width: 100%; height: 700px;"></canvas>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- TabelaUsers dashboard fim -->
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctxPie = document.getElementById('myPieChart').getContext('2d');
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['DS', 'ADM', 'NUTRI'],
+                datasets: [{
+                    label: 'Distribuição de Cores',
+                    data: [30, 20, 15],
+                    backgroundColor: ['#111111', '#151855', '#0BBDFF'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Distribuição de Cursos', font: { size: 18 }},
+                    legend: { position: 'bottom' },
+                    tooltip: { callbacks: { label: function(tooltipItem) { return tooltipItem.label + ': ' + tooltipItem.raw + '%'; } }}
+                }
+            }
+        });
+
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Usuário 1', 'Usuário 2', 'Usuário 3', 'Usuário 4', 'Usuário 5'],
+                datasets: [{ label: 'Número de Seguidores', data: [100, 80, 60, 40, 20], backgroundColor: '#0BBDFF', borderColor: '#111111', borderWidth: 1, barThickness: 40, barPercentage: 0.5, categoryPercentage: 0.5 }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                scales: {
+                    x: { beginAtZero: true, max: 120, grid: { display: false }},
+                    y: { beginAtZero: true, grid: { display: false }}
+                },
+                plugins: {
+                    title: { display: true, text: 'Seguidores dos Usuários', font: { size: 18 }},
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: function(tooltipItem) { return tooltipItem.label + ': ' + tooltipItem.raw + ' seguidores'; } }}
+                }
+            }
+        });
+
+        // Funções do Modal
+        const modal = document.getElementById("modalAnalise");
+        const cardEmAnalise = document.getElementById("cardEmAnalise");
+        const closeModal = document.getElementsByClassName("close")[0];
+
+        cardEmAnalise.addEventListener("click", function() {
+            modal.style.display = "flex";
+        });
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctxPie = document.getElementById('myPieChart').getContext('2d');
-
-    new Chart(ctxPie, {
-        type: 'pie',  // Tipo de gráfico: pizza
-        data: {
-            labels: ['DS', 'ADM', 'NUTRI'],  // Rótulos das fatias
-            datasets: [{
-                label: 'Distribuição de Cores',
-                data: [30, 20, 15],  // Dados que correspondem a cada fatia
-                backgroundColor: [  // Cores das fatias
-                    '#111111',  
-                    '#151855',  
-                    '#0BBDFF',  
-                ],
-            }]
-        },
-        options: {
-            responsive: true,  // Faz com que o gráfico seja responsivo
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Distribuição de Cursos',  // Título do gráfico
-                    font: {
-                        size: 18  // Tamanho da fonte do título
-                    }
-                },
-                legend: {
-                    position: 'bottom',  // Posição da legenda (mover para baixo)
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + '%';  // Formatar os rótulos do tooltip
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // Gráfico de Barras
-    const ctx = document.getElementById('myBarChart').getContext('2d');
-
-new Chart(ctx, {
-    type: 'bar',  // Tipo de gráfico: barras
-    data: {
-        labels: ['Usuário 1', 'Usuário 2', 'Usuário 3', 'Usuário 4', 'Usuário 5'], // Rótulos para o eixo Y
-        datasets: [{
-            label: 'Número de Seguidores', // Título da série de dados
-            data: [100, 80, 60, 40, 20],  // Dados para cada usuário
-            backgroundColor: '#0BBDFF',  // Cor de fundo das barras
-            borderColor: '#111111',      // Cor da borda das barras
-            borderWidth: 1,              // Largura da borda
-            barThickness: 40,            // Espessura das barras
-            barPercentage: 0.5,          // Diminui o espaço entre as barras
-            categoryPercentage: 0.5     // Ajuste para diminuir ainda mais o espaço entre as categorias
-        }]
-    },
-    options: {
-        responsive: true,  // Torna o gráfico responsivo
-        indexAxis: 'y',    // Gráfico horizontal
-        scales: {
-            x: {
-                beginAtZero: true,  // Começa o eixo X a partir de 0
-                max: 120,           // Limite superior para o eixo X
-                grid: {             // Remove a grade do fundo
-                    display: false
-                }
-            },
-            y: {
-                beginAtZero: true,  // Começa o eixo Y a partir de 0
-                grid: {             // Remove a grade do fundo
-                    display: false
-                }
-            }
-        },
-        plugins: {
-            title: {
-                display: true,
-                text: 'Seguidores dos Usuários',  // Título do gráfico
-                font: {
-                    size: 18
-                }
-            },
-            legend: {
-                display: false,  // Não exibe a legenda
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        return tooltipItem.label + ': ' + tooltipItem.raw + ' seguidores'; // Formato do tooltip
-                    }
-                }
-            }
-        }
-    }
-});
-</script>
 
 </html>
