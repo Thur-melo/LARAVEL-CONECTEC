@@ -95,63 +95,57 @@
 
 
 
-            <form action="{{ route('home') }}" method="get">
-    <div class="fileiraPreferencias-container">
-        <button class="scroll-button" type="button" onclick="scrollHorizontal('left')">←</button>
+                <div class="fileiraPreferencias-container">
+                    <button class="scroll-button" type="button" onclick="scrollHorizontal('left')">←</button>
 
-        <div class="fileiraPreferencias">
-            @foreach($preferenciasLista as $preferencia)
-                <button class="categoriaCard" name="s" value="{{ $preferencia->name }}" id="s">
-                    <h2>{{ $preferencia->hashtag }}</h2>
-                </button>
-            @endforeach
-        </div>
+                    <div class="fileiraPreferencias">
+                        <button class="categoriaCard active" onclick="mudarConteudo('all')">
+                            <h2>all</h2>
+                        </button>
 
-        <button class="scroll-button" type="button" onclick="scrollHorizontal('right')">→</button>
-    </div>
-</form>
+                        <button class="categoriaCard" onclick="mudarConteudo('emalta')">
+                            <h2>Em Alta</h2>
+                        </button>
+
+                        <button class="categoriaCard" onclick="mudarConteudo('ads')">
+                            <h2>Desenvolvimento de Sistemas</h2>
+                        </button>
+
+                        <button class="categoriaCard" onclick="mudarConteudo('nutri')">
+                            <h2>Nutrição</h2>
+                        </button>
+
+                        <button class="categoriaCard" onclick="mudarConteudo('adm')">
+                            <h2>Administração</h2>
+                        </button>
+
+                        <form action="{{ route('home') }}" method="get">
+                            @foreach($hashtags as $hashtag)
+                            <button class="categoriaCard" name="s" value="{{ '#' . $hashtag->hashtag }}" type="submit">
+                                <h2>{{ $hashtag->hashtag }}</h2> <!-- Supondo que 'hashtag' seja o campo que contém o nome da hashtag -->
+                            </button>
+                            @endforeach
+                        </form>
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <button class="scroll-button" type="button" onclick="scrollHorizontal('right')">→</button>
+                </div>
 
                 <div class="feedExplorar">
 
 
                     <!-- Seção para Posts com mais Curtidas -->
-                    <div class="fileira">
-                        <h2>Posts com Mais Curtidas</h2>
-                        <div class="scroll-container" id="curtidas">
-                            @foreach($postsCurtidas as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
-                                        <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
-                                        </div>
-                                </div>
-
-                            </div>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <!-- Seção para Posts com Mais Comentários -->
-
-                    <!-- Seção para Posts Aleatórios -->
-                    <div class="fileira">
-                        <h2>Para Você</h2>
-                        <div class="scroll-container" id="aleatorios">
-                            @foreach($postrecomendados as $post)
+                    <div class="scroll-container" id="curtidas">
+                        <div id="resultado" class="resultado">
+                            @foreach($posts as $post)
                             <div class="post">
                                 <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
 
@@ -189,23 +183,167 @@
     @include('partials.modalsair')
     <!-- Modal de Confirmação -->
 
-    <script>
-    function scrollHorizontal(direction) {
-        var container = document.querySelector('.fileiraPreferencias');
-        var scrollAmount = 200; // Quantidade de pixels a ser movida por vez
 
-        if (direction === 'right') {
-            container.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        } else if (direction === 'left') {
-            container.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
+
+
+    <script>
+        function mudarConteudo(tipo) {
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = ''; // Limpa o conteúdo atual
+
+            if (tipo === 'all') { // Mude 'posts' para 'meusPosts'
+                resultado.innerHTML += `
+                  @foreach($posts as $post)
+                            <div class="post">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                                <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                            </a>
+                            @endforeach`;
+            } else if (tipo === 'emalta') {
+                resultado.innerHTML = `   @foreach($postsCurtidas as $post)
+                            <div class="post">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                                <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                            </a>
+                            @endforeach`;
+            } else if (tipo === 'ads') {
+                resultado.innerHTML += ` @foreach($postsAds as $post)
+                            <div class="post">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                                <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                            </a>
+                            @endforeach`;
+            } else if (tipo === 'nutri') {
+                resultado.innerHTML += ` @foreach($postsNutri as $post)
+                            <div class="post">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                                <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                            </a>
+                            @endforeach`;
+            } else if (tipo === 'adm') {
+                resultado.innerHTML += ` @foreach($postsAdm as $post)
+                            <div class="post">
+                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+
+                                <div class="headerExplorar">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                                        <div class="infosExplorar">
+                                            <h3> {{ $post->texto }} </h3>
+                                            <p> {{"@" . $post->user->arroba}} </p>
+                                            <div class="contsExplorar">
+                                                <div class="likes">
+                                                    <i class="far fa-heart"></i>
+                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
+                                                </div>
+                                                <p>{{ $post->created_at->diffForHumans() }}</p>
+
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                            </a>
+                            @endforeach`;
+            }
+
+            // Atualizar a classe active
+            const categorias = document.querySelectorAll('.categoriaCard');
+            categorias.forEach(cat => cat.classList.remove('active'));
+            const clickedElement = document.querySelector(`.categoriaCard[onclick*="${tipo}"]`);
+            clickedElement.classList.add('active');
         }
-    }
+    </script>
+
+    <script>
+        function scrollHorizontal(direction) {
+            var container = document.querySelector('.fileiraPreferencias');
+            var scrollAmount = 200; // Quantidade de pixels a ser movida por vez
+
+            if (direction === 'right') {
+                container.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else if (direction === 'left') {
+                container.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

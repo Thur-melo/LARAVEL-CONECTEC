@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="categoriaFooter">
-                            <div class="categoria" onclick="mudarConteudo('meusPosts')">Meus Posts</div>
+                            <div class="categoria active" onclick="mudarConteudo('meusPosts')">Meus Posts</div>
                             <div class="categoria" onclick="mudarConteudo('salvos')">Salvos</div>
                             <div class="categoria " onclick="mudarConteudo('curtidas')">Curtidas</div>
                         </div>
@@ -143,8 +143,67 @@
 
 
                 <div id="resultado" class="resultado">
-                    <!-- O conteúdo será gerado aqui -->
-                </div>
+                @foreach($posts as $post)
+                    @php
+        $coresModulo = [
+            '1º' => '#CD4642',
+            '2º' => '#5169B1',
+            '3º' => '#64B467',
+        ];
+    @endphp
+                    <div class="feeds">
+                        <div class="feed">
+                            <div class="user">
+                                <div class="profileImg">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
+                                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                            <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+
+                            <div class="textoPost">{{ $post->texto ?? 'Post não disponível' }}</div>
+
+                            @if($post->fotoPost)
+                                <div class="imgPost">
+                                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                                    </a>
+                                </div>
+                            @endif
+
+                            <div class="action-button">
+                                <div class="interaction-button">
+                                    <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
+                                        @if($post->likes()->where('user_id', Auth::id())->exists())
+                                            <i class="fas fa-heart liked"></i>
+                                        @else
+                                            <i class="far fa-heart"></i>
+                                        @endif
+                                    </span>
+                                    <span class="likes-count">{{ $post->likes()->count() }}</span>
+                                    <a href="{{ route('comentarios', $post->id) }}">
+                                        <button class="comentarioCotn">
+                                            <i class="uil uil-comment"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="bookmark">
+                                    <span><i class="uil uil-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
             </div>
             @include ('partials.emAlta')

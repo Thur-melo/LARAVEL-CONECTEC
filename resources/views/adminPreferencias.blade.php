@@ -37,14 +37,15 @@
                 <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
             </a>
             
+            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
+                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
+            </a>
             
             <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
                 <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
             </a>
             
-            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
-                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
-            </a>
+
         </ul>
         
     </div>
