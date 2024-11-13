@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\SalvosController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,6 +30,11 @@ class Post extends Model
     public function likes()
     {
         return $this->hasMany(Likes::class, 'post_id', 'id');
+    }
+
+    public function salvos()
+    {
+        return $this->hasMany(salvos::class, 'post_id', 'id');
     }
 
     // Relacionamento com os comentários (tabela comentarios)
