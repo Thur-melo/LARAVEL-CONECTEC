@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
     </head>
 
 
@@ -27,7 +26,7 @@
             <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
-            s
+            
             <li class="logout">
                 <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
@@ -39,9 +38,13 @@
     </div>
     <!-- sidebar fim -->
     <div class="container">
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Pesquisar usuários...">
-        </div>
+       <form method="GET" action="{{ route('admin') }}">
+    <div class="search-bar">
+        <input type="text" name="search" id="search" placeholder="Pesquisar usuários..." value="{{ old('search') }}">
+        <button type="submit">Pesquisar</button> <!-- Botão de pesquisa -->
+    </div>
+</form>
+
     </div>
     <!-- cards dashboard inicio -->
     <div class="container">
@@ -245,7 +248,7 @@
                 labels: ['DS', 'ADM', 'NUTRI'],
                 datasets: [{
                     label: 'Distribuição de Cores',
-                    data: [30, 20, 15],
+                    data: [{{$porcentagem_ads}}, {{$porcentagem_adm}}, {{$porcentagem_nutri}}],
                     backgroundColor: ['#111111', '#151855', '#0BBDFF'],
                 }]
             },
@@ -273,20 +276,27 @@
             }
         });
 
+
+      
         const ctx = document.getElementById('myBarChart').getContext('2d');
+
+        // Montar rótulos e dados a partir de $topUsers
+        const labels = @json($topUsers->pluck('name')); // Nomes dos usuários
+        const data = @json($topUsers->pluck('seguidores_count')); // Contagem de seguidores
+
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Usuário 1', 'Usuário 2', 'Usuário 3', 'Usuário 4', 'Usuário 5'],
+                labels: labels,
                 datasets: [{
                     label: 'Número de Seguidores',
-                    data: [100, 80, 60, 40, 20],
+                    data: data,
                     backgroundColor: '#0BBDFF',
                     borderColor: '#111111',
                     borderWidth: 1,
                     barThickness: 40,
-                    barPercentage: 0.5,
-                    categoryPercentage: 0.5
+                    barPercentage: 10,
+                    categoryPercentage: 10
                 }]
             },
             options: {
@@ -295,13 +305,11 @@
                 scales: {
                     x: {
                         beginAtZero: true,
-                        max: 120,
                         grid: {
                             display: false
                         }
                     },
                     y: {
-                        beginAtZero: true,
                         grid: {
                             display: false
                         }
@@ -310,7 +318,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Seguidores dos Usuários',
+                        text: 'Top 10 Usuários com Mais Seguidores',
                         font: {
                             size: 18
                         }

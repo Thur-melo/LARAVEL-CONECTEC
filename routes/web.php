@@ -82,7 +82,7 @@ Route::post('/registerAdm', [adminController::class, 'registerAdm']);
 Route::get('/loginAdm', [adminController::class, 'showLoginAdmForm'])->name('loginAdm');
 Route::post('/loginAdm', [adminController::class, 'loginAdm']);
 
-
+Route::get('/admin/buscar', [BuscarUsuariosController::class, 'buscarUsuariosAdmin'])->name('buscarUsuariosAdmin');
 Route::delete('/admin/{id}', [adminController::class, 'desativaUser'])->name('user.off');
 Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.ativa');
 
