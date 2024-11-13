@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/homeDenuncia.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
 
 
@@ -233,19 +234,21 @@
 
 
                                 <!-- Link que abre o modal -->
-                                <a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
-                                    <span class="material-symbols-outlined ">warning</span>
+                                <a class="iconDenuncia" href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+                                    <span class="material-symbols-outlined">
+                                        emergency_home
+                                        </span>
                                 </a>
                             </div>
 
                             <!-- Modal -->
-                            <div id="modal-denuncia" class="modal" style="display: none;">
-                                <div class="modal-content">
+                            <div id="modal1-denuncia" class="modal1" style="display: none;">
+                                <div class="modal1-content">
                                     <span class="close" onclick="closeModal()">&times;</span>
                                     <h2>Denunciar Post</h2>
                                     <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
                                     <input type="text" id="motivo" placeholder="Motivo da denúncia">
-                                    <div class="modal-footer">
+                                    <div class="modal1-footer">
                                         <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
                                         <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
                                     </div>
@@ -255,71 +258,16 @@
                                 </div>
                             </div>
 
-                            <!-- Estilos para o modal -->
-                            <style>
-                                #motivo {
-                                    outline: none;
-                                    background-color: #eaeaea;
-                                    padding: 4px;
-                                    border-radius: 12px;
-                                    border: none;
 
-                                }
-
-                                .icons-group {
-                                    display: flex;
-                                    justify-content: center
-                                }
-
-                                .modal {
-                                    display: none;
-                                    position: fixed;
-                                    z-index: 1;
-                                    padding-top: 100px;
-                                    left: 0;
-                                    top: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    overflow: auto;
-                                    background-color: rgba(0, 0, 0, 0.4);
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                }
-
-                                .modal-content {
-                                    background-color: #fefefe;
-                                    padding: 20px;
-                                    border: 1px solid #888;
-                                    width: 50%;
-                                    /* Ajuste para 50% da largura */
-                                    max-width: 600px;
-                                    /* Limite opcional de largura máxima */
-                                }
-
-                                .close {
-                                    color: #646464;
-                                    float: right;
-                                    font-size: 28px;
-                                    font-weight: bold;
-                                }
-
-                                .close:hover,
-                                .close:focus {
-                                    color: rgb(49, 48, 48);
-                                    text-decoration: none;
-                                    cursor: pointer;
-                                }
-                            </style>
 
                             <!-- Scripts para abrir e fechar o modal -->
                             <script>
                                 function openModal(postId) {
-                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                    document.getElementById('modal1-denuncia').style.display = 'flex';
                                 }
 
                                 function closeModal() {
-                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                    document.getElementById('modal1-denuncia').style.display = 'none';
                                 }
 
                                 function confirmarDenuncia() {

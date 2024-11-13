@@ -1,15 +1,16 @@
+
 <!doctype html>
 <html lang="en">
 
+<head>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Menu-principal</title>
     <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
+</head>
     <style>
         /* Estilo básico para o modal */
         .modal {
@@ -53,29 +54,13 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
-            <li><a href="{{ route('admin') }}">Inicio</a></li>
-            <li><a href="{{ route('admin') }}">Úsuarios</a></li>
-            <li><a href="{{ route('adminHome') }}">Postagens</a></li>
+            <li><a href="#">Inicio</a></li>
+            <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
             <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li class="logout">
-                <a href="#">Logout <span class="material-icons" style="font-size: 32px;">logout</span></a>
-            </li>
-            </a>
-            <a href="{{ route('admin') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
-            </a>
-
-            
-            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
-            </a>
-
-            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
-                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
-            </a>
-            <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
-            </a> -->
+    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+</li>
         </ul>
     </div>
     <!-- sidebar fim -->
@@ -121,9 +106,6 @@
                                 <th>Usuário denunciado</th>
                                 <th>Motivo</th>
                                 <th>Status</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -367,3 +349,18 @@
 </body>
 
 </html>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Menu-principal</title>
+    <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
+   
+</head>
+
+<body>

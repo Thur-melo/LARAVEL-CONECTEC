@@ -233,6 +233,81 @@ width: 1140px;
     background-color: #007bbd;
 }
 
+/* Estilo da tabela de denúncias */
+.tbDenuncias {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.tbDenuncias th, .tbDenuncias td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tbDenuncias th {
+    background-color: #4989dc;
+    color: white;
+    font-size: 16px;
+}
+
+.tbDenuncias tr:nth-child(even) {
+    background-color: #f2f2f2; /* Cor de fundo alternada para as linhas */
+}
+
+.tbDenuncias td {
+    font-size: 14px;
+}
+
+/* Botões de ação para cada linha */
+.tbDenuncias .btn {
+    padding: 8px 12px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.tbDenuncias #btnDesativa {
+    background-color: #ca1f13;
+}
+
+.tbDenuncias #btnDesativa:hover {
+    background-color: #a3180f;
+}
+
+.tbDenuncias #btnAtiva {
+    background-color: #4caf50;
+}
+
+.tbDenuncias #btnAtiva:hover {
+    background-color: #3e8e41;
+}
+
+.tbDenuncias #relevar {
+    background-color: #ffa500;
+}
+
+.tbDenuncias #relevar:hover {
+    background-color: #e59400;
+}
+
+.flex-container {
+    display: flex;
+    gap: 20px; /* Espaçamento entre o gráfico e a tabela */
+}
+
+.flex-item {
+    flex: 1; /* Faz com que cada item use metade do espaço disponível */
+}
+
+
 
 /* fim tabelaUsers2 */
 
