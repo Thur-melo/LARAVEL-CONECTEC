@@ -98,6 +98,9 @@
                 <div class="perfilContainer">
                     <div class="fundo">
                         <img src="{{ asset('storage/' . $usuario->urlDoBanner) }}" id="banner">
+                        <a href="javascript:void(0);" onclick="openModal({{ $user->id }})">
+                                <span class="material-symbols-outlined iconDenuncia">warning</span>
+                            </a>
                     </div>
 
 
@@ -106,6 +109,16 @@
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
+                        <form action="/conversations" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="username" value="{{ $usuario->arroba }}">
+                                <button type="submit" class="btnChat">
+                                    <span class="material-symbols-outlined">
+                                        forum
+                                    </span>
+                                </button>
+                            </form>
+
                             <button class="follow-btn"
                                 data-user-id="{{ $usuario->id }}"
                                 data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'unfollow' : 'follow' }}">
@@ -117,22 +130,12 @@
 
 
                             <!-- Link que abre o modal -->
-                            <a href="javascript:void(0);" onclick="openModal({{ $user->id }})">
-                                <span class="material-symbols-outlined iconDenuncia">warning</span>
-                            </a>
 
 
 
 
-                            <form action="/conversations" method="POST" style="display: inline;">
-                                @csrf
-                                <input type="hidden" name="username" value="{{ $usuario->arroba }}">
-                                <button type="submit" class="btnChat">
-                                    <span class="material-symbols-outlined">
-                                        forum
-                                    </span>
-                                </button>
-                            </form>
+
+
 
                         </div>
 
@@ -161,6 +164,8 @@
                                     padding: 4px;
                                     border-radius: 12px;
                                     border: none;
+                                    height: 40px;
+                                    padding: 0px 10px 0px 10px;
 
                                 }
 
