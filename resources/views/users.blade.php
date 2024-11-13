@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{url('assets/css/users.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/user.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
 
 
