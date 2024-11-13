@@ -390,6 +390,7 @@ main .container .left{
     align-items: center;
     font-size: 1.4rem;
     margin: 0.6rem;
+   
 }
 
 .info h3{
@@ -544,6 +545,16 @@ main .container .left{
     font-size: 15pt;
     cursor: pointer;
 
+}
+
+.salvo-btn i{
+    color: #000; /* Cor padrão do ícone não curtido */
+    transition: color 0.3s ease, transform 0.3s ease; /* Suaviza a troca de cor e tamanho */
+}
+
+.salvo-btn.salvo i {
+    color: rgb(255, 251, 0); /* Cor do ícone curtido */
+    transform: scale(1.9); /* Aumenta o tamanho do ícone ao curtir */
 }
 
 

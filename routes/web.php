@@ -8,7 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\BuscarUsuariosController;
 use App\Http\Controllers\ComentariosController;
-
+use App\Http\Controllers\SalvosController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
@@ -101,6 +101,7 @@ Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'
 
 
 Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->middleware('auth');
+Route::post('/posts/{id}/salvo', [SalvosController::class, 'toggleSalvo'])->middleware('auth');
 Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
  
 
