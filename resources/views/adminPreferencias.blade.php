@@ -51,7 +51,6 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
-            <li><a href="#">Inicio</a></li>
             <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
             <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
             <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
@@ -78,7 +77,7 @@
             <div class="hover-text">Editar Preferências Totais</div>
             </div>
 
-            <div class="card" id="btncadastroPreferencia" style="background-color: #151855;">
+            <div class="card" id="btncadastroPreferencia" style="background-color: #444444;">
             <h1>{{$qnt_Outro}}</h1>
             <h3>Preferências Outros</h3>
             <div class="hover-text">Editar</div>
@@ -90,13 +89,13 @@
             <div class="hover-text">Editar</div>
             </div>
 
-            <div class="card" id="btncadastroPreferencia" style="background-color: #388E3C   ;">      
+            <div class="card" id="btncadastroPreferencia" style="background-color: #FF8C00   ;">      
             <h1>{{$qnt_Nutri}}</h1>
             <h3>Preferências Nutrição</h3>
             <div class="hover-text">Editar</div>
             </div>
 
-            <div class="card" id="btncadastroPreferencia" style="background-color: #1E2A61 xa   ;">            
+            <div class="card" id="btncadastroPreferencia" style="background-color: #388E3C  ;">            
             <h1>{{$qnt_ADM}}</h1>
             <h3>Preferências ADM</h3>
             <div class="hover-text">Editar </div>
@@ -117,8 +116,8 @@
                 @php
                     $cursosEspecificos = ['D.S', 'Nutrição', 'ADM', 'Outro'];
                     $coresBarras = [
-                        'D.S' => '#0051ffec',
-                        'Nutrição' => '#3ea043ec',
+                        'D.S' => '#444444',
+                        'Nutrição' => '#FF8C00',
                         'ADM' => '#ff0000b0',
                         'Outro' => '#686A6C',
                     ];

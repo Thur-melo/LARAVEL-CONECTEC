@@ -10,41 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
 </head>
-    <style>
-        /* Estilo básico para o modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            width: 400px;
-            text-align: center;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    
+      
 </head>
 
 <body>
@@ -53,17 +20,24 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Úsuario</a></li>
-            <li><a href="#">Postagens</a></li>
-            <li><a href="#">Postagens</a></li>
-            <li class="logout">
+            <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
+            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
+               
+                <li class="logout">
     <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+
+</li>
+
 </li>
         </ul>
     </div>
     <!-- sidebar fim -->
-
+     <div class="container">
+    <div class="search-bar">
+    <input type="text" id="search" placeholder="Pesquisar usuários...">
+    </div>
+    </div>
     <!-- cards dashboard inicio -->
     <div class="container">
         <div class="containerCards">
@@ -83,14 +57,8 @@
     </div>
     <!-- cards dashboard fim -->
 
-    <!-- Modal -->
-    <div id="modalAnalise" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Usuários em Análise</h2>
-            <p>Informações sobre os usuários que estão aguardando análise.</p>
-        </div>
-    </div>
+ 
+  
 
     <!-- TabelaUsers dashboard inicio -->
     <div class="container">
@@ -205,19 +173,19 @@
                         <tr>
                             <th>Usuário</th>
                             <th>Seguidores</th>
-                            <th>Posição</th>
+                            
                             <th>Status</th>
                             <th>Curso</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>@vinisilva</td><td>100</td><td>1</td><td>Ativo</td><td>DS</td></tr>
-                        <tr><td>@Hygorwanderley</td><td>80</td><td>2</td><td>Bloqueado</td><td>Nutri</td></tr>
-                        <tr><td>@mariaeduarda</td><td>60</td><td>3</td><td>Ativo</td><td>ADM</td></tr>
-                        <tr><td>@tutudanado</td><td>40</td><td>4</td><td>Ativo</td><td>DS</td></tr>
-                        <tr><td>@ronnisilva</td><td>20</td><td>5</td><td>Ativo</td><td>DS</td></tr>
-                        <tr><td>@tutudanado</td><td>40</td><td>4</td><td>Ativo</td><td>DS</td></tr>
-                        <tr><td>@ronnisilva</td><td>20</td><td>5</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@vinisilva</td><td>100</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@Hygorwanderley</td><td>80</td><td>Bloqueado</td><td>Nutri</td></tr>
+                        <tr><td>@mariaeduarda</td><td>60</td><td>Ativo</td><td>ADM</td></tr>
+                        <tr><td>@tutudanado</td><td>40</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@ronnisilva</td><td>20</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@tutudanado</td><td>40</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@ronnisilva</td><td>20</td><td>Ativo</td><td>DS</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -279,24 +247,7 @@
             }
         });
 
-        // Funções do Modal
-        const modal = document.getElementById("modalAnalise");
-        const cardEmAnalise = document.getElementById("cardEmAnalise");
-        const closeModal = document.getElementsByClassName("close")[0];
 
-        cardEmAnalise.addEventListener("click", function() {
-            modal.style.display = "flex";
-        });
-
-        closeModal.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
     </script>
 </body>
 
