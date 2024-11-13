@@ -78,7 +78,7 @@
             <div class="hover-text">Editar Preferências Totais</div>
             </div>
 
-            <div class="card" id="btncadastroPreferencia" style="background-color: #444444;">
+            <div class="card" id="btncadastroPreferencia" style="background-color: #151855;">
             <h1>{{$qnt_Outro}}</h1>
             <h3>Preferências Outros</h3>
             <div class="hover-text">Editar</div>
@@ -96,7 +96,7 @@
             <div class="hover-text">Editar</div>
             </div>
 
-            <div class="card" id="btncadastroPreferencia" style="background-color: #FF8C00   ;">            
+            <div class="card" id="btncadastroPreferencia" style="background-color: #1E2A61 xa   ;">            
             <h1>{{$qnt_ADM}}</h1>
             <h3>Preferências ADM</h3>
             <div class="hover-text">Editar </div>
@@ -117,10 +117,10 @@
                 @php
                     $cursosEspecificos = ['D.S', 'Nutrição', 'ADM', 'Outro'];
                     $coresBarras = [
-                        'D.S' => '#1E2A61',
-                        'Nutrição' => '#388E3C',
-                        'ADM' => '#FF8C00',
-                        'Outro' => '#444444',
+                        'D.S' => '#0051ffec',
+                        'Nutrição' => '#3ea043ec',
+                        'ADM' => '#ff0000b0',
+                        'Outro' => '#686A6C',
                     ];
                 @endphp
 

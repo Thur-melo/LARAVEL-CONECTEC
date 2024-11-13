@@ -42,6 +42,9 @@ public function showHome(Request $request)
     $seguindo = $user->seguindo; 
     $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
     $preferenciasLista = PreferenciasLista::all();
+      // Inicia a consulta para posts
+      $postsQuery = Post::with(['hashtags', 'likes', 'comentarios'])
+      ->where('status', 1); // Filtra posts com status 1
     
 
     // Verifica se há uma pesquisa de postagens
@@ -62,41 +65,57 @@ public function showHome(Request $request)
                 ->get();
         } else {
         
-            $users = collect();     // 1. Postagens dos usuários seguidos
-    $followedPosts = Post::whereIn('user_id', $user->seguindo()->pluck('seguindo_id'))
-    ->with(['user', 'hashtags', 'likes'])
-    ->orderByDesc('created_at')
-    ->get();
+            $users = collect();   
+// Obtém os IDs dos usuários que o usuário está seguindo
+$seguindoIds = $user->seguindo()->pluck('seguindo_id'); // Se "seguindo_id" é a coluna que contém os IDs dos usuários seguidos
 
- // 2. Postagens com hashtags relacionadas ao curso do usuário
- $hashtagsCurso = $this->getHashtagsByCurso($user);
+// Obtém as hashtags dos posts que o usuário curtiu
+$likedHashtags = $user->likes()
+    ->with('post.hashtags') // Carrega as hashtags dos posts curtidos
+    ->get()
+    ->pluck('post.hashtags.*.id') // Plana para obter uma lista única de IDs de hashtags
+    ->flatten()
+    ->unique();
 
- $hashtagPosts = collect();
-   // Criando uma coleção vazia inicialmente
+// Inicia a consulta para obter todos os posts
+$postsQuery = Post::with(['hashtags', 'likes', 'comentarios']) // Inclui hashtags, likes e comentários
+    ->where('status', 1); // Filtra posts com status 1
 
- if ($hashtagsCurso->isNotEmpty()) {
-     // Busca postagens que tenham as hashtags associadas ao curso do usuário
-     $hashtagPosts = Post::whereHas('hashtags', function ($query) use ($hashtagsCurso) {
-         $query->whereIn('hashtags.hashtag', $hashtagsCurso->pluck('hashtag'));  // Ajuste aqui
-     })
-     ->with(['user', 'hashtags', 'likes'])
-     ->orderByDesc('created_at')
-     ->get();
- }
-
-
-// 3. Postagens populares (baseadas em curtidas)
-$popularPosts = Post::withCount('likes')
-    ->orderByDesc('likes_count')
-    ->take(10)
-    ->get();
-
-// 4. Juntar tudo e remover postagens duplicadas
-$feedPosts = $followedPosts->merge($hashtagPosts)->merge($popularPosts)->unique('id');
-
-// 5. Ordenar o feed pela data de criação
-$posts = $feedPosts;
+// Cria uma condição para incluir posts apenas de usuários seguidos ou posts relevantes
+$postsQuery->where(function($query) use ($seguindoIds, $likedHashtags, $user) {
+    // Adiciona posts de usuários que o usuário está seguindo
+    if ($seguindoIds->isNotEmpty()) {
+        $query->whereIn('user_id', $seguindoIds);
     }
+
+    // Adiciona posts com hashtags que o usuário curtiu
+    if ($likedHashtags->isNotEmpty()) {
+        $query->orWhereHas('hashtags', function($subQuery) use ($likedHashtags) {
+            $subQuery->whereIn('hashtags.id', $likedHashtags);
+        });
+    }
+
+    // Adiciona posts de usuários com o mesmo perfil/curso que o usuário autenticado
+    $query->orWhereHas('user', function($subQuery) use ($user) {
+        $subQuery->where('perfil', $user->perfil); // Filtra usuários pelo perfil/curso do usuário autenticado
+    });
+});
+
+// Ordena os posts
+// Monta a cláusula de prioridade apenas se houver IDs seguidos
+if ($seguindoIds->isNotEmpty()) {
+    $posts = $postsQuery->select('posts.*')
+        ->orderByRaw('CASE WHEN user_id IN (' . $seguindoIds->implode(',') . ') THEN 0 ELSE 1 END') // Coloca posts dos seguidos no topo
+        ->orderBy('created_at', 'desc') // Ordena do mais recente para o mais antigo
+        ->paginate(10); // Paginação para controle de performance
+} else {
+    // Se não houver IDs seguidos, apenas ordene por data de criação
+    $posts = $postsQuery->select('posts.*')
+        ->orderBy('created_at', 'desc') // Ordena do mais recente para o mais antigo
+        ->paginate(10); // Paginação para controle de performance
+}
+        }
+
 
     return view('home', compact('user', 'users', 'posts', 'preferenciasLista', 'usuariosSugestoes', 'searchTerm'));
 }

@@ -51,10 +51,13 @@
 
                         <a class="menu-item" href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
-                            <h3>Notificações</h3>
-                            @if($naoLidasCount > 0)
-                            <span>{{ $naoLidasCount }}</span>
-                            @endif
+                            <h3>Notificações  @if($naoLidasCount > 0)
+                                <span class="badge rounded-pill text-bg-danger">
+                                    {{ $naoLidasCount }}
+                                    
+                                </span>
+                            @endif</h3>
+                            
                         </a>
 
                         <a href="{{ Route('postagens')}}" class="menu-item">

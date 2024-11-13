@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\notificacoes;
 
 class seguirController extends Controller
 {
@@ -18,6 +19,12 @@ class seguirController extends Controller
         // Verifica se o usuário atual já está seguindo o usuário a ser seguido
         if (!$user->seguindo()->where('seguindo_id', $userToFollow->id)->exists()) {
             $user->seguindo()->attach($userToFollow->id);
+
+            $userToFollow->notificacoes()->create([
+                'interacao_user_id' => $user->id, 
+                'tipo' => 'seguido',              
+                'lido' => false                   
+            ]);
         }
     
         return response()->json(['status' => 'followed']);

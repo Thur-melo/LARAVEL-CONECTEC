@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->foreignId('interacao_user_id')->constrained('users')->onDelete('cascade'); // Usuário que interagiu com o post
 
-            $table->enum('tipo', ['comentario', 'like']);
-            $table->unsignedBigInteger('post_id');
+            $table->enum('tipo', ['comentario', 'like', 'seguido']);
+            $table->unsignedBigInteger('post_id')->nullable();
             $table->boolean('lido')->default(false);
             $table->timestamps();
 
