@@ -249,7 +249,7 @@
                 datasets: [{
                     label: 'Distribuição de Cores',
                     data: [{{$porcentagem_ads}}, {{$porcentagem_adm}}, {{$porcentagem_nutri}}],
-                    backgroundColor: ['#111111', '#151855', '#0BBDFF'],
+                    backgroundColor: ['#3497c2', '#151855', '#0BBDFF'],
                 }]
             },
             options: {

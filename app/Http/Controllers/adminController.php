@@ -24,6 +24,7 @@ class adminController extends Controller
         // Retornar a view com os dados das denúncias
         return view('AdminDenuncias', compact('denuncias'));
     }
+
 public function showperfil($id) {
 
     
@@ -74,7 +75,7 @@ public function showPerguntas() {
 
 
         
-   
+           $denuncias = Denuncia::with(['user', 'post'])->get();
  
 
 
@@ -82,7 +83,7 @@ public function showPerguntas() {
     $users = User::all();
 
 
-    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_postTipo',  'qnt_postCursos', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos', 'qnt_tipos', 'preferenciasLista'));
+    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_postTipo',  'qnt_postCursos', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos', 'qnt_tipos', 'preferenciasLista', 'denuncias'));
 }
 
     public function showadmin(Request $request)
