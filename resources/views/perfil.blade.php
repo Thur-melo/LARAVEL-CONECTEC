@@ -109,8 +109,33 @@
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
+<<<<<<< HEAD
+                            <a >
+                            <i class="material-symbols-outlined iconeChat2" href="{{ url('/conversations' . $user->id) }}">
+                                chat
+                            </i>
+                        <button class="follow-btn" 
+                        data-user-id="{{ $usuario->id }}" 
+                        data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'unfollow' : 'follow' }}">
+                        {{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'Seguindo' : 'Seguir' }}
+                        </button>
+
+                        <style>
+                        .iconeChat2{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: rgb(21, 88, 155);
+                            margin-right: 8px;
+                            font-size: 1.9rem;
+                        }</style>
+                                {{-- aqui --}}
 
 
+                                <!-- Link que abre o modal -->
+
+                            </div>
+=======
                             <button class="follow-btn"
                                 data-user-id="{{ $usuario->id }}"
                                 data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'unfollow' : 'follow' }}">
@@ -119,7 +144,7 @@
 
 
                             {{-- aqui --}}
-
+>>>>>>> caea3ccb858b60dfc7d93c41c7b7c97fde49819a
 
 
                             <!-- Link que abre o modal -->
@@ -202,11 +227,7 @@
 =======
                             </div>
                         </div>
-
-
-
-                        <!-- Scripts para abrir e fechar o modal -->
-                        <script>
+<script>
                             function openModal(postId) {
                                 document.getElementById('modal-denuncia').style.display = 'flex';
                             }
