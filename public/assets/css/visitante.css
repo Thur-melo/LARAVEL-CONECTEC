@@ -251,9 +251,14 @@ main .container .left{
 
 .rowEditarPerfil {
     display: flex;
-    justify-content: flex-end;
     padding: 30px;
+<<<<<<< HEAD
     
+=======
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+>>>>>>> caea3ccb858b60dfc7d93c41c7b7c97fde49819a
 }
 
 
@@ -363,3 +368,19 @@ main .container .left{
     transition: all 0.3s ease; 
     width: 100px;
 }
+
+.interaction-button {
+    cursor: pointer;
+}
+
+.btnChat{
+display: contents;
+transition: all 0.3s ease; 
+border-radius: 50%;
+}
+
+.btnChat :hover{
+    border-radius: 50%;
+
+    background-color: #a7a7a71f;
+    }

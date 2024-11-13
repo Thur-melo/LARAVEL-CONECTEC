@@ -33,10 +33,10 @@
     <main>
         <div class="container">
             <div class="left">
-                <div class="sidebar">
+            <div class="sidebar">
                     <div class="sidebarList">
 
-                        <a href="{{ Route('home')}}" class="menu-item">
+                        <a href="{{ Route('home')}}" class="menu-item ">
                             <span><i class="fa-solid fa-house"></i></span>
                             <h3>Home</h3>
                         </a>
@@ -46,9 +46,12 @@
                             <h3>Explorar</h3>
                         </a>
 
-                        <a class="menu-item ">
+                        <a class="menu-item" href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
+                            @if($naoLidasCount > 0)
+                            <span>{{ $naoLidasCount }}</span>
+                            @endif
                         </a>
 
                         <a href="{{ Route('postagens')}}" class="menu-item">
@@ -60,8 +63,7 @@
                             <h3>Chat</h3>
                         </a>
 
-                     
-
+                  
 
                     </div>
 

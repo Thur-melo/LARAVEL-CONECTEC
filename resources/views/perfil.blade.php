@@ -37,7 +37,7 @@
                 <div class="sidebar">
                     <div class="sidebarList">
 
-                        <a href="{{ Route('home')}}" class="menu-item">
+                        <a href="{{ Route('home')}}" class="menu-item ">
                             <span><i class="fa-solid fa-house"></i></span>
                             <h3>Home</h3>
                         </a>
@@ -46,9 +46,13 @@
                             <span><i class="fa-regular fa-compass"></i></span>
                             <h3>Explorar</h3>
                         </a>
-                        <a class="menu-item ">
+
+                        <a class="menu-item" href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
+                            @if($naoLidasCount > 0)
+                            <span>{{ $naoLidasCount }}</span>
+                            @endif
                         </a>
 
                         <a href="{{ Route('postagens')}}" class="menu-item">
@@ -60,12 +64,15 @@
                             <h3>Chat</h3>
                         </a>
 
-                       
+                        <a class="menu-item " data-bs-toggle="modal" data-bs-target="#modalPost">
+                            <span><i class="fa-regular fa-square-plus"></i></i></span>
+                            <h3>Criar</h3>
+                        </a>
 
 
                     </div>
 
-                    <a href="{{ route('profile', ['id' => $user->id]) }}" class="menu-item ">
+                    <a href="{{ route('profile', ['id' => $user->id]) }}" class="menu-item">
                         <div class="imgPerfilSide">
                             <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
                             <div class="sidePerfilNames">
@@ -96,55 +103,60 @@
                         </a>
                     </div>
 
-                    
-                    <img src="{{ asset('storage/' . $usuario->urlDaFoto) }}"  id="icon">
+
+                    <img src="{{ asset('storage/' . $usuario->urlDaFoto) }}" id="icon">
 
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
-                            <a >
-                            <i class="material-symbols-outlined iconeChat2" href="{{ url('/conversations' . $user->id) }}">
-                                chat
-                            </i>
-                        <button class="follow-btn" 
-                        data-user-id="{{ $usuario->id }}" 
-                        data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'unfollow' : 'follow' }}">
-                        {{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'Seguindo' : 'Seguir' }}
-                        </button>
-
-                        <style>
-                        .iconeChat2{
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            color: rgb(21, 88, 155);
-                            margin-right: 8px;
-                            font-size: 1.9rem;
-                        }</style>
-                                {{-- aqui --}}
 
 
-                                <!-- Link que abre o modal -->
+                            <button class="follow-btn"
+                                data-user-id="{{ $usuario->id }}"
+                                data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'unfollow' : 'follow' }}">
+                                {{ Auth::user()->seguindo()->where('seguindo_id', $usuario->id)->exists() ? 'Seguindo' : 'Seguir' }}
+                            </button>
 
-                            </div>
 
-                            <!-- Modal -->
-                            <div id="modal-denuncia" class="modal" style="display: none;">
-                                <div class="modal-content">
-                                    <span class="close" onclick="closeModal()">&times;</span>
-                                    <h2>Denunciar Usuário</h2>
-                                    <p>Deseja realmente denunciar o usuário {{ $usuario->name }}?</p>
-                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
-                                    <div class="modal-footer">
-                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
-                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
-                                    </div>
-                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
-                                    <input type="hidden" id="user_denunciado_id" value="{{ $usuario->id }}">
+                            {{-- aqui --}}
 
+
+
+                            <!-- Link que abre o modal -->
+                            <a href="javascript:void(0);" onclick="openModal({{ $user->id }})">
+                                <span class="material-symbols-outlined ">warning</span>
+                            </a>
+
+
+
+
+                            <form action="/conversations" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="username" value="{{ $usuario->arroba }}">
+                                <button type="submit" class="btnChat">
+                                    <span class="material-symbols-outlined">
+                                        forum
+                                    </span>
+                                </button>
+                            </form>
+
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="modal-denuncia" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeModal()">&times;</span>
+                                <h2>Denunciar Usuário</h2>
+                                <p>Deseja realmente denunciar o usuário {{ $usuario->name }}?</p>
+                                <input type="text" id="motivo" placeholder="Motivo da denúncia">
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+                                    <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
                                 </div>
-                            </div>
+                                <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" id="user_denunciado_id" value="{{ $usuario->id }}">
 
+<<<<<<< HEAD
 
                
                            
@@ -187,22 +199,105 @@
                             <div class="categoria" onclick="mudarConteudo('meusPosts')">Postagens</div>
                         </div>
             
+=======
+                            </div>
+                        </div>
+
+
+
+                        <!-- Scripts para abrir e fechar o modal -->
+                        <script>
+                            function openModal(postId) {
+                                document.getElementById('modal-denuncia').style.display = 'flex';
+                            }
+
+                            function closeModal() {
+                                document.getElementById('modal-denuncia').style.display = 'none';
+                            }
+
+                            function confirmarDenuncia() {
+                                const userId = document.getElementById('user-id').value;
+                                const user_denunciado_id = document.getElementById('user_denunciado_id').value;
+                                const motivo = document.getElementById('motivo').value;
+
+                                fetch("{{ route('denunciarUser') }}", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                        },
+                                        body: JSON.stringify({
+                                            user_id: userId,
+                                            user_denunciado_id: user_denunciado_id,
+                                            motivo: motivo
+                                        })
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.message) {
+                                            alert(data.message);
+                                            closeModal();
+                                        } else {
+                                            console.error("Erro nos dados:", data); // Verifique o conteúdo do erro
+                                            alert("Ocorreu um erro ao registrar a denúncia.");
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error("Erro:", error); // Exibe o erro completo
+                                        alert("Ocorreu um erro ao registrar a denúncia.");
+                                    });
+                            }
+                        </script>
+
+
+                        {{-- aqui --}}
+>>>>>>> caea3ccb858b60dfc7d93c41c7b7c97fde49819a
 
 
                     </div>
+                    <div class="rowNomeUser">
+                        <h1 class="username">{{ $usuario->name}}</h1>
+                        <p class="arroba"> {{ '@' . $usuario->arroba }} </p>
+                    </div>
+
+                    <div class="rowBio">
+                        <div class="bio">
+                            <p>{{ $usuario->bio }}</p>
+                        </div>
+                    </div>
+
+                    <div class="footerPerfil">
+                        <div class="itensData">
+                            <span class="material-symbols-outlined">
+                                calendar_month
+                            </span>
+                            <p>{{ $usuario->created_at->diffForHumans() }}</p>
+                        </div>
+                        <div class="itensFollow">
+                            <p>{{$seguindo}} Seguindo</p>
+                            <p>{{$myseguidores}} Seguidores</p>
+                        </div>
+                    </div>
+
+                    <div class="categoriaFooter">
+                        <div class="categoria" onclick="mudarConteudo('meusPosts')">Postagens</div>
+                    </div>
+
+
+                </div>
 
 
 
 
                 <div id="resultado" class="resultado">
-                @foreach($posts as $post)
+                    @foreach($posts as $post)
                     @php
-        $coresModulo = [
-            '1º' => '#CD4642',
-            '2º' => '#5169B1',
-            '3º' => '#64B467',
-        ];
-    @endphp
+                    $coresModulo = [
+                    '1º' => '#CD4642',
+                    '2º' => '#5169B1',
+                    '3º' => '#64B467',
+                    ];
+                    @endphp
                     <div class="feeds">
                         <div class="feed">
                             <div class="user">
@@ -225,20 +320,20 @@
                             <div class="textoPost">{{ $post->texto ?? 'Post não disponível' }}</div>
 
                             @if($post->fotoPost)
-                                <div class="imgPost">
-                                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                                    </a>
-                                </div>
+                            <div class="imgPost">
+                                <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                                </a>
+                            </div>
                             @endif
 
                             <div class="action-button">
                                 <div class="interaction-button">
                                     <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
                                         @if($post->likes()->where('user_id', Auth::id())->exists())
-                                            <i class="fas fa-heart liked"></i>
+                                        <i class="fas fa-heart liked"></i>
                                         @else
-                                            <i class="far fa-heart"></i>
+                                        <i class="far fa-heart"></i>
                                         @endif
                                     </span>
                                     <span class="likes-count">{{ $post->likes()->count() }}</span>
@@ -254,7 +349,8 @@
                             </div>
                         </div>
                     </div>
-                @endforeach                </div>
+                    @endforeach
+                </div>
             </div>
 
             @include ('partials.emAlta')
