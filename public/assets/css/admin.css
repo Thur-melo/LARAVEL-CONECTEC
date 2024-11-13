@@ -154,6 +154,7 @@ body {
 .containerTabelaUsers1 {
     display: flex;
     margin-top: 40px;
+    /* overflow-y: scroll; permite scroll apenas vertical */
 }
 
 .tabelaUsers1 {
@@ -341,6 +342,7 @@ body {
     background-color: #007bbd;
 }
 
+
 /* fim tabelaUsers2 */
 .containerTabelaUser3 {
     display: flex;
@@ -361,14 +363,20 @@ body {
 }
 
 .tabelaUsers3 canvas {
-    width: 100% !important;
-    height: 400px;
+    width: 100% !important;   /* Garante que o gráfico ocupe toda a largura disponível */
+    height: 400px;            /* Ajuste de altura do gráfico */
 }
 
-/* estilo de botões */
-#btnDesativa,
-#btnAtiva,
-#relevar {
+.tbDenuncias{
+    width: 600px;
+}
+
+.containerTabela{
+    width: 100%;
+}
+
+.btn{
+    color: white;
     font-size: 13px;
     padding: 5px 10px;
     border: none;

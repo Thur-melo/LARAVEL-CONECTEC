@@ -47,10 +47,10 @@ main .container .left{
 }
 
 
-.badge{
+/* .badge{
     
 
-}
+} */
 
 .left .sidebar{
     margin-top: 1rem;
@@ -621,7 +621,11 @@ main .container .left{
         display: none;
     }
 
-   
+    .pbio{
+        padding: 10px;
+    }
+
+    /* ESTILOS DO MODAL------------- */
 
     
 

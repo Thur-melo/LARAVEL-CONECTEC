@@ -57,6 +57,7 @@ public function showHome(Request $request)
             // Buscar usuários
             $users = User::where('name', 'like', '%' . $searchTerm . '%')
             ->orWhere('email', 'like', '%' . $searchTerm . '%')
+            ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
             ->paginate(4);  // Adiciona paginação de 10 usuários por página
             
             // Buscar posts

@@ -153,7 +153,7 @@
                         </div>
 
                         <!-- Estilos para o modal -->
-                        {{-- <style>
+                        <style>
                                 #motivo {
                                     outline: none;
                                     background-color: #eaeaea;
@@ -207,7 +207,7 @@
                                     text-decoration: none;
                                     cursor: pointer;
                                 }
-                            </style> --}}
+                            </style> 
 
                         <!-- Scripts para abrir e fechar o modal -->
                         <script>

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -20,11 +21,11 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
-            <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
-            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
-            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
-               
-                <li class="logout">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Úsuario</a></li>
+            <li><a href="#">Postagens</a></li>
+            <li><a href="#">Postagens</a></li>
+            <li class="logout">
     <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
 </li>
@@ -73,6 +74,9 @@
                                 <th>Usuário denunciado</th>
                                 <th>Motivo</th>
                                 <th>Status</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -252,21 +256,3 @@
 </body>
 
 </html>
-
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Menu-principal</title>
-    <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
-   
-</head>
-
-<body>
-
-
-    
