@@ -237,8 +237,10 @@ main .container .left{
 
 .rowEditarPerfil {
     display: flex;
-    justify-content: flex-end;
     padding: 30px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
 }
 
 .username {
@@ -337,3 +339,19 @@ main .container .left{
     transition: all 0.3s ease; 
     width: 100px;
 }
+
+.interaction-button {
+    cursor: pointer;
+}
+
+.btnChat{
+display: contents;
+transition: all 0.3s ease; 
+border-radius: 50%;
+}
+
+.btnChat :hover{
+    border-radius: 50%;
+
+    background-color: #a7a7a71f;
+    }
