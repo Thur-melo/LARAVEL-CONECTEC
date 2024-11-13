@@ -117,7 +117,7 @@
 
                             <!-- Link que abre o modal -->
                             <a href="javascript:void(0);" onclick="openModal({{ $user->id }})">
-                                <span class="material-symbols-outlined ">warning</span>
+                                <span class="material-symbols-outlined iconDenuncia">warning</span>
                             </a>
 
 
