@@ -26,20 +26,11 @@
             <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
         </div>
         <ul>
-            <a href="{{ route('adminHome') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
-            </a>
-            <a href="{{ route('admin') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
-            </a>
-            
-            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
-                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
-            </a>
+        <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
+            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
+            <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
-            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
-            </a>
             
         </ul>
         
