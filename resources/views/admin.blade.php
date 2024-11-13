@@ -49,15 +49,15 @@
     <!-- cards dashboard inicio -->
     <div class="container">
         <div class="containerCards">
-            <div class="card" style="background: linear-gradient(to bottom right, #111111, #222222);">
+            <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$qnt_users}}</h1>
                 <h3>Úsuarios Totais</h3>
             </div>
-            <div class="card" style="background: linear-gradient(to bottom right, #ca1f13, #ee4b37);">
+            <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>0</h1>
                 <h3>Úsuarios Bloqueados</h3>
             </div>
-            <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #444444, #555555);">
+            <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$qnt_pendentes}}</h1>
                 <h3>Úsuarios em análise</h3>
             </div>
@@ -73,6 +73,9 @@
         <div class="containerTabelaUsers1">
             <div class="tabelaUsers1">
                 <canvas id="myPieChart"></canvas>
+                </div>
+
+                
                 <div class="containerTabela">
                     <table class="tbDenuncias">
                         <thead>
@@ -173,7 +176,6 @@
                     </table>
 
                 </div>
-            </div>
         </div>
     </div>
 
