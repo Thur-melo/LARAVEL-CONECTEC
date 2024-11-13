@@ -232,6 +232,92 @@ width: 1140px;
 .tabelaUsers2::-webkit-scrollbar-thumb:hover {
     background-color: #007bbd;
 }
+.tbDenuncias {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+}
+
+.tbDenuncias th, .tbDenuncias td {
+    padding: 15px 20px; /* Padding similar ao da tabela .tabelaUsers2 */
+    text-align: left;
+    font-size: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tbDenuncias th {
+    background-color: #00aaff; /* Cor de fundo do cabeçalho similar */
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tbDenuncias td {
+    background-color: #f9f9f9;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.tbDenuncias tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tbDenuncias tr:hover td {
+    background-color: #e8f5ff; /* Efeito hover */
+}
+
+.tbDenuncias td:first-child {
+    font-weight: bold;
+    color: #007bbd;
+}
+
+.tbDenuncias tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilo do botão de ação */
+.tbDenuncias .btn-action {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.tbDenuncias .btn-action:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da barra de rolagem */
+.tbDenuncias::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tbDenuncias::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.tbDenuncias::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 8px;
+    border: 2px solid #f1f1f1;
+}
+
+.tbDenuncias::-webkit-scrollbar-thumb:hover {
+    background-color: #007bbd;
+}
 
 
 /* fim tabelaUsers2 */

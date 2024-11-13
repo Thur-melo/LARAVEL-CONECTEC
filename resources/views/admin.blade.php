@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Menu-principal</title>
     <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
+</head>
     <style>
         /* Estilo básico para o modal */
         .modal {
@@ -54,28 +54,12 @@
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
             <li><a href="#">Inicio</a></li>
-            <li><a href="#">Úsuario</a></li>
-            <li><a href="#">Postagens</a></li>
-            <li><a href="#">Postagens</a></li>
+            <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
+            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li class="logout">
-                <a href="#">Logout <span class="material-icons" style="font-size: 32px;">logout</span></a>
-            </li>
-            </a>
-            <a href="{{ route('admin') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
-            </a>
-
-            
-            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
-            </a>
-
-            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
-                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
-            </a>
-            <!-- <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>Preferências</span> </li>
-            </a> -->
+    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+</li>
         </ul>
     </div>
     <!-- sidebar fim -->
@@ -121,9 +105,6 @@
                                 <th>Usuário denunciado</th>
                                 <th>Motivo</th>
                                 <th>Status</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -210,56 +191,7 @@
                             
                         </tbody>
                     </table>
-                    <style>
-                        .tbDenuncias {
-                            width: 100%;
-                            border-collapse: collapse;
-                            margin: 20px 0;
-                            font-family: Arial, sans-serif;
-                        }
-                    
-                        .tbDenuncias th, .tbDenuncias td {
-                            padding: 6px;
-                            text-align: left;
-                            border: 1px solid #ddd;
-                        }
-                    
-                        .tbDenuncias th {
-                            background-color: #4989dc;
-                            color: white;
-                            font-size: 16px;
-                        }
-                    
-                        .tbDenuncias tr:nth-child(even) {
-                            background-color: #f2f2f2; /* Cor de fundo alternada para as linhas */
-                        }
-                    
-
-                        .tbDenuncias td {
-                            font-size: 14px;
-                        }
-                    
-                        .tbDenuncias td, .tbDenuncias th {
-                            text-align: center;
-                        }
-                    
-                        /* Botão de ação para cada linha */
-                        .tbDenuncias .btn-action {
-                            padding: 5px 10px;
-                            background-color: #007bff;
-                            color: white;
-                            border: none;
-                            border-radius: 5px;
-                            cursor: pointer;
-                            text-align: center;
-                        }
-                    
-                        .tbDenuncias .btn-action:hover {
-                            background-color: #0056b3;
-                        }
-                    </style>
-                    
-                    
+                   
                 </div>
             </div>
         </div>
@@ -282,6 +214,8 @@
                         <tr><td>@vinisilva</td><td>100</td><td>1</td><td>Ativo</td><td>DS</td></tr>
                         <tr><td>@Hygorwanderley</td><td>80</td><td>2</td><td>Bloqueado</td><td>Nutri</td></tr>
                         <tr><td>@mariaeduarda</td><td>60</td><td>3</td><td>Ativo</td><td>ADM</td></tr>
+                        <tr><td>@tutudanado</td><td>40</td><td>4</td><td>Ativo</td><td>DS</td></tr>
+                        <tr><td>@ronnisilva</td><td>20</td><td>5</td><td>Ativo</td><td>DS</td></tr>
                         <tr><td>@tutudanado</td><td>40</td><td>4</td><td>Ativo</td><td>DS</td></tr>
                         <tr><td>@ronnisilva</td><td>20</td><td>5</td><td>Ativo</td><td>DS</td></tr>
                     </tbody>
@@ -367,3 +301,21 @@
 </body>
 
 </html>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Menu-principal</title>
+    <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
+   
+</head>
+
+<body>
+
+
+    

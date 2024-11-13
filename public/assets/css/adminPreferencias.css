@@ -9,182 +9,245 @@ body {
     background-color: #f4f6f9;
     color: #333;
 }
-.menu-lateral {
+
+
+.sidebar{
     position: fixed;
-    background: #212121;
-    width: 17vw;
-    min-height: 100vh;
-    box-shadow: 1px 1px 1px rgba(53, 51, 51, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transition: all 0.3s ease; /* Transição suave */
-    border-radius:  0px, 0px ,10px ,10px ;
+    width: 300px;
+    height: 100%;
+    background-color: #111111;
+    color: #fff;
     display: flex;
     flex-direction: column;
-    padding: 20px;
 }
 
-.menu-lateral .brand-name {
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px; /* Espaçamento abaixo do logotipo */
+.logo-sidebar{
+    display: block;
+    width: 270px;
+    margin: 0 auto;
 }
 
-
-
-.menu-lateral ul {
+.sidebar ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+   
 }
 
-.menu-lateral li {
-    font-size: 22px; /* Tamanho da fonte ajustado */
-    padding: 15px 10px;
-    color: #f4f4f4; /* Cor de texto mais escura para melhor legibilidade */
-    display: flex;
-    align-items: center;
-    border-radius: 10px; /* Botões com bordas arredondadas */
-    margin-bottom: 10px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Transições suaves */
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    text-align: justify;
+    font-size: 25px;
+    padding: 15px 30px; 
+    width: 80%; 
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 400;
+    margin-left: 30px;
+    border-radius: 20px;        
 }
 
-.menu-lateral li a {
-    text-decoration: none; /* Remove o sublinhado dos links */
-    color: inherit; /* Herda a cor do item de menu */
-    width: 100%; /* Faz com que o link ocupe toda a área do botão */
-    display: flex;
-    align-items: center;
-}
-
-.menu-lateral li:hover {
+.sidebar ul li a:hover {
     background-color: #00aaff; /* Cor de fundo azul claro ao passar o mouse */
     color: white; /* Texto muda para branco */
     cursor: pointer;
     transform: translateX(5px); /* Leve animação de movimento ao passar o mouse */
 }
 
-.menu-lateral li.active {
-    background-color: #00aaff; /* Destaque para o item ativo */
-    color: white;
-    font-weight: bold;
+.sidebar ul li.logout {
+    margin-top: 150%;
 }
 
-.menu-lateral li:active {
-    transform: scale(0.95); /* Efeito de clique */
+.sidebar ul li.logout a {
+    color: #e74c3c;
+    border-radius: 20px;
+    transition:  0.3s;
 }
 
-.menu-lateral li span {
-    margin-left: 10px;
-    font-weight: 500;
+
+.sidebar ul li.logout a:hover{
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 20px;
+    transition:  0.3s;
 }
 
-.menu-footer {
-    margin-top: auto;
+.sidebar ul li a .material-icons {
+    margin-right: 0;             
+    padding: 0;                  
+    font-size: 24px;      
+    vertical-align: middle;            
+}
+
+.sidebar ul li.logout {
+    margin-top: 150%;
+}
+
+.sidebar ul li.logout a {
+    color: #e74c3c;
+    border-radius: 20px;
+    transition:  0.3s;
+}
+
+
+.sidebar ul li.logout a:hover{
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 20px;
+    transition:  0.3s;
+}
+
+.sidebar ul li a .material-icons {
+    margin-right: 0;             
+    padding: 0;                  
+    font-size: 24px;      
+    vertical-align: middle;            
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+}
+
+.icon-logout {
+    font-size: 45px; /* Aumente o tamanho conforme necessário */
+    margin-left: 2px; /* Ajuste o espaço entre o texto e o ícone */
+    vertical-align: middle;
+}
+
+
+/* Centralização e margem para o botão e gráfico */
+.svg-container {
     text-align: center;
-    color: #333;
-    font-size: 0.9rem;
 }
-
-.menu-footer a {
-    color: #00aaff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.menu-footer a:hover {
-    color: #005f80; /* Tom mais escuro de azul ao passar o mouse */
-}
-
-/* Efeito de sombras para realçar o menu */
-.menu-lateral:hover {
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada no hover */
-}
-
 
 .container {
-    margin-left: 270px;
-    padding: 20px;
-}
-
-.header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 310px;
 }
 
-.header .buscar input {
-    padding: 10px;
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
+.containerCards {
+    display: flex;
+    flex-direction: column;
+    position: absolute; /* Posiciona a tabela User 3 de forma absoluta */
+    top: 70px; /* Move a tabela para o topo da página */
+    right: 20px; /* Alinha a tabela à direita */
+    gap: 30px;
 }
 
-.header .usuario img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.botaoLogar button {
-    padding: 10px 20px;
-    background-color: #1ABC9C;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.botaoLogar button:hover {
-    background-color: #16a085;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 100px;
-}
-
-.cardPreferencias {
+.card {
     background-color: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     transition: transform 0.3s ease;
     cursor: pointer;
-    margin-left: 50px;
-    height: 120px;
-    width: 250px;
+    height: 125px;
+    width: 360px;
+    color: #fff;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    flex-direction: column;
+    gap: 10px;
+    left: 20px;
+}
+
+
+.card {
+    /* Estilos do card permanecem os mesmos */
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: 125px;
+    width: 360px;
+    color: #fff;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semitransparente */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 20px;
+    border-radius: 10px;
+    pointer-events: none; /* Impede interferência ao clicar */
+}
+
+.card:hover .hover-text {
+    opacity: 1; /* Mostra o texto ao passar o mouse */
+}
+
+.card h1 {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.card h3 {
+    font-weight: 300;
+    font-size: 30px;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05); /* Aumenta o card em 5% */
+    filter: brightness(1.1); /* Aumenta o brilho em 10% */
+    
+  }
+
+  .svg-container {
+    display: flex;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    max-width: 100%;
+    overflow: auto;
 }
 
-.card .box h1, .card .box h2 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    color: #2C3E50;
+/* Estilização do SVG */
+.svg-container svg {
+    width: 1000px;
+    height: 500px;
 }
 
-.card .box h3 {
-    font-size: 1.2rem;
-    color: #7f8c8d;
+/* Estilos das barras */
+.svg-container .bar {
+    transition: fill 0.3s ease;
 }
 
-.card .icon-case span {
-    font-size: 3rem;
-    color: #1ABC9C;
+/* Estilo das legendas, valores e título */
+.svg-container .title {
+    font-size: 24px;
+    font-weight: bold;
+    text-anchor: middle;
+    fill: #333;
+}
+
+.svg-container .label, .svg-container .value {
+    font-size: 18px;
+    font-weight: 500;
+    fill: #333;
+    font-family: 'Roboto', sans-serif;
+    text-anchor: middle;
+}
+
+/* Efeito ao passar o mouse */
+.svg-container .bar:hover {
+    fill-opacity: 0.8;
 }
 
 .modal {
@@ -354,90 +417,6 @@ tr:hover {
     background-color: #f2f2f2;
     text-align: left;
 }
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    position: fixed;
-    width: calc(100% - 250px); /* Considera a largura do menu lateral */
-    left: 250px; /* Alinha após o menu lateral */
-    top: 0;
-    z-index: 10;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 15px; /* Border radius aplicado */
-    margin: 20px; /* Espaçamento em relação às bordas */
-    left: 320px; /* Considerando a largura do menu lateral */
-    top: 5px;
-    position: fixed;
-    z-index: 10;
-    width: 81%;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.buscar {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.buscar .search-bar {
-    padding: 15px;
-    width: 500px; /* Tamanho da barra de pesquisa */
-    border: 1px solid #ccc;
-    border-radius: 8px; /* Border radius na barra de pesquisa */
-    outline: none;
-}
-
-.usuario {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.usuario .user-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.usuario .botoes {
-    display: flex;
-    gap: 10px; /* Espaçamento entre os botões */
-}
-
-.usuario .btn-usuario, .btn-adm {
-    padding: 10px 10px;
-    background-color: #00c9e9;
-    color: white;
-    border: none;
-    border-radius: 8px; /* Border radius nos botões */
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.usuario .btn-usuario:hover, .btn-adm:hover {
-    background-color: #00c9e9;
-}
-a {
-    text-decoration: none; 
-}
 
 #cadastroPreferencia {
     margin: 20px auto; /* Centraliza o formulário na página */
@@ -474,8 +453,7 @@ svg {
     background: linear-gradient(135deg, #ffffff, #f4f4f9);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    margin-top: 30px;
-    text-align: center;
+    margin-top: 230px;
     margin-left: 50px;
 }
 
