@@ -1,12 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
+/* post */
 
-body {
-    background-color: #E6E9EE ;
+.postAvatar img{
+    border-radius: 50%;
+    height: 40px;
 }
 
 .container {
@@ -276,12 +272,13 @@ body {
     height: 36px;
 }
 
-.filtro select:hover {
-    border-color: #007bbd;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.filtro select:focus {
-    border-color: #00aaff;
-    box-shadow: 0 0 4px rgba(0, 170, 255, 0.5);
+.logout {
+    font-size: 28px; /* Tamanho da fonte ajustado */
+    padding: 20px 20px;
+    color: #f4f4f4; /* Cor de texto mais escura para melhor legibilidade */
+    display: flex;
+    align-items: center;
+    border-radius: 10px; /* Botões com bordas arredondadas */
+    margin-bottom: 10px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Transições suaves */
 }

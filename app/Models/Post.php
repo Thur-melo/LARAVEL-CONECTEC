@@ -37,6 +37,7 @@ class Post extends Model
         return $this->hasMany(Comentarios::class, 'post_id', 'id');  // Verifique a chave estrangeira correta
     }
 
+
     public static function search($searchTerm)
     {
         return self::where('texto', 'like', "%{$searchTerm}%")->get();
