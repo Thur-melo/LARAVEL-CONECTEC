@@ -1,4 +1,3 @@
-
 /* NAVBAR ----------------------------------------------------------------*/
 *{
     padding: 0;
@@ -200,25 +199,11 @@ main .container .left{
 }
 
 
-/* ronnie */
+
 .fundo{
     width: 100%;
     height: 200px;
-    position: relative;
 }
-
-.iconDenuncia{
-    position: absolute;
-    top: 0; /* Alinha o elemento ao topo */
-    right: 0;
-    margin-right: 10px;
-    margin-top: 10px;
-    
-}
-
-
-
-/* \ronnie */
 
 .banner{
     width: 100%;
@@ -252,32 +237,17 @@ main .container .left{
 .rowEditarPerfil {
     display: flex;
     padding: 30px;
-<<<<<<< HEAD
-    
-=======
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
->>>>>>> caea3ccb858b60dfc7d93c41c7b7c97fde49819a
 }
-
-
 
 .username {
     font-size: 2.5rem; /* Tamanho da fonte */
     color: #333; /* Cor do texto */
     font-weight: bold; /* Negrito */
-
-    
+ 
 }
-
-.rowNomeUser {
-    display: flex;
-    justify-content: space-between;
-
-}
-
-
 
 .arroba {
     font-size: 1.0rem; /* Tamanho da fonte */

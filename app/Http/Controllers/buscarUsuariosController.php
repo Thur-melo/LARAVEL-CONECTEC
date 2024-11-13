@@ -20,10 +20,11 @@ class BuscarUsuariosController extends Controller // Renomeando a classe
         
 
             
-            // Buscar usuários
-            $users = User::where('name', 'like', '%' . $searchTerm . '%')
-            ->orWhere('email', 'like', '%' . $searchTerm . '%')
-            ->get(); 
+           // Buscar usuários
+           $users = User::where('name', 'like', '%' . $searchTerm . '%')
+           ->orWhere('email', 'like', '%' . $searchTerm . '%')
+           ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
+           ->get(); 
 
         // Retornar a view com os usuários encontrados e o termo de busca
         return view('users', compact('users', 'user', 'searchTerm', 'usuariosSugestoes'));
