@@ -30,16 +30,7 @@
 <!-- cards inicio -->
 
 <div class="container">
-        <div class="containerCards">
-            <div class="card" style="background: linear-gradient(to bottom right, #111111, #222222);">
-                <h1>0</h1>
-                <h3>Curtidas Totais</h3>
-            </div>
-            <div class="card" style="background: linear-gradient(to bottom right, #ca1f13, #ee4b37);">                
-                <h1>0</h1>
-                <h3>Seguidores Totais</h3>
-            </div>
-        </div>
+
     </div>
 
     <div class="container">
@@ -127,7 +118,57 @@
     <div class="container">
         <div class="containerTabelaUser3">
             <div class="tabelaUsers3">
-                
+                <div class="search-container">
+                    <input type="text" placeholder="Buscar..." class="search-input">
+                    <button class="search-button">
+                        <i class="material-symbols-outlined">search</i>
+                    </button>
+                </div>
+<style>/* Estilo geral do contêiner */
+    .search-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        padding: 5px;
+        background-color: #ffffff;
+        height: 40px;
+    }
+    
+    /* Estilo do campo de entrada */
+    .search-input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 25px 0 0 25px;
+        outline: none;
+        background-color: transparent;
+    }
+    
+    /* Estilo do botão de pesquisa */
+    .search-button {
+        border: none;
+        background-color: blue;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 5px 10px;
+        font-size: 20px;
+        color: #333;
+    }
+    
+    .search-button i {
+        font-size: 24px;
+    }
+    
+    /* Efeito de hover para o botão */
+    .search-button:hover {
+        color: #007bff;
+    }
+    </style>                
             </div>
         </div>
     </div>

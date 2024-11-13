@@ -102,7 +102,8 @@
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
-                            <i class="material-symbols-outlined  iconeChat2">
+                            <a >
+                            <i class="material-symbols-outlined iconeChat2" href="{{ url('/conversations' . $user->id) }}">
                                 chat
                             </i>
                         <button class="follow-btn" 

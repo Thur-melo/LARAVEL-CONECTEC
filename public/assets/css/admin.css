@@ -130,6 +130,7 @@ body {
     display: flex;
     flex-direction: row;
     margin-top: 40px;
+    /* overflow-y: scroll; permite scroll apenas vertical */
 }
 
 .tabelaUsers1 {
@@ -429,6 +430,7 @@ width: 1140px;
 
 .containerTabela{
     width: 100%;
+
 }
 
 .btn{

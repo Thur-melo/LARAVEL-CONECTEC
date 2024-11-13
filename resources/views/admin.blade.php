@@ -106,6 +106,9 @@
                                 <th>Usuário denunciado</th>
                                 <th>Motivo</th>
                                 <th>Status</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
