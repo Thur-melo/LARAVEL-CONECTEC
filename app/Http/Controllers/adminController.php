@@ -88,23 +88,26 @@ public function showPerguntas() {
 public function showadmin(){
     // $user = Auth::User();
     $qnt_users = User::all()-> count();
-    $qnt_alunos = User::where('perfil', 'Aluno')-> count();
-    $qnt_professores = User::where('perfil', 'professor')-> count();
-    $qnt_outros = User::where('perfil', 'outros')-> count();
     $users = User::all();
     $usersAtivo = User::where('status', 1)-> get();
-    // $denunciasUser = DenunciaUsuario::all();
-    $denunciasUser = DenunciaUsuario::with('user')->get();
+    $denunciasUser = DenunciaUsuario::with('user')->where('status', 'pendente')->get();
+    $qnt_pendentes = DenunciaUsuario::with('user')->where('status', 'pendente')->count();
+    $qnt_bloqueados = DenunciaUsuario::with('user')->where('status', 'bloqueados')->count();
 
 
-    
+
+       // Contar seguidores para cada usuário
+       $seguidoresCounts = Seguir::select('seguindo_id', DB::raw('count(*) as count'))
+       ->groupBy('seguindo_id')
+       ->pluck('count', 'seguindo_id');
 
     // $qnt_aprovados = Post::where('status', 2)-> count();
 
-    // $qnt_pendentes = Post::where('status', 1)-> count();
 
-    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros', 'denunciasUser' ));
+    return view('admin', compact('qnt_users','qnt_pendentes','seguidoresCounts', 'usersAtivo', 'users','qnt_bloqueados', 'denunciasUser' ));
 }
+
+
 
 // Relacionamento com o usuário denunciado
 
@@ -236,7 +239,7 @@ public function desativaUser($id)
 {
     
     $user = User::findOrFail($id); // Encontre o User$user pelo ID
-    $user->status = 'Off'; // Muda o status para 2
+    $user->status = 'inativo'; // Muda o status para 2
     $user->save(); // Salva as alterações
 
     return redirect()->route('admin')->with('success', 'Status do post atualizado para 2!');
