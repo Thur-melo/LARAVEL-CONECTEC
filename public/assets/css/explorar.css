@@ -331,6 +331,8 @@ main .container .left{
     border: none;
 }
 
+
+
 .categoriaCard.active{
     height: 40px;
     background: #07beff;
