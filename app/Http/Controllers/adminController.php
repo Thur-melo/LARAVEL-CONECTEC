@@ -325,30 +325,26 @@ public function showLoginAdmForm()
 
 
     
+// Função para desativar o usuário
 public function desativaUser($id)
 {
-    
-    $user = User::findOrFail($id); // Encontre o User$user pelo ID
-    $user->status = 'inativo'; // Muda o status para 2
+    $user = User::findOrFail($id); // Encontra o usuário pelo ID
+    $user->status = 'inativo'; // Muda o status para 'inativo'
     $user->save(); // Salva as alterações
 
-    return redirect()->route('admin')->with('success', 'Status do post atualizado para 2!');
+    return response()->json(['message' => 'Usuário desativado com sucesso!']);
 }
 
-
-
+// Função para ativar o usuário
 public function AtivaUser(Request $request, $id)
 {
-    // Encontra o usuário pelo ID ou retorna erro 404
-    $user = User::findOrFail($id);
+    $user = User::findOrFail($id); // Encontra o usuário pelo ID
+    $user->status = 'ativo'; // Muda o status para 'ativo'
+    $user->save(); // Salva as alterações
 
-    // Atualiza o status do usuário para 'Ativo'
-    $user->status = 'Ativo';
-    $user->save(); // Salva as alterações no banco de dados
-
-    // Retorna uma resposta JSON de sucesso
     return response()->json(['message' => 'Usuário ativado com sucesso']);
 }
+
 
 
     public function destroyPost($id)
