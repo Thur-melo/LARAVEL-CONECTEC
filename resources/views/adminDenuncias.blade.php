@@ -49,7 +49,9 @@
     <h2>Usuários denunciados</h2>
     
     <div class="tabela">
-
+        @if($denunciasUser->isEmpty())
+            <p class="semDenuncias">Nenhuma denúncia encontrada.</p>
+        @else
         <table class="tabelaUsers2">
             <thead>
                 <tr>
@@ -83,7 +85,7 @@
                 @endforeach
             </tbody>
         </table>
-
+@endif
         
         <script>
             // Função para alternar entre ativar e desativar o status do usuário
@@ -146,7 +148,7 @@
     <h2>Posts denunciados</h2>
     <div class="tabela">
         @if($denuncias->isEmpty())
-            <p>Nenhuma denúncia encontrada.</p>
+            <p class="semDenuncias">Nenhuma denúncia encontrada.</p>
         @else
             <table class="tabelaUsers2 table-striped">
                 <thead>
@@ -187,13 +189,14 @@
                                 </form>
                             </td>
                             <td>
-                                <form id="desativaUsuarioForm{{ $denuncia->user->id }}" onsubmit="event.preventDefault(); desativarUsuario({{ $denuncia->user->id }});">
+                                <form id="relevarDenunciaForm{{ $denuncia->id }}" onsubmit="event.preventDefault(); relevarDenuncia({{ $denuncia->id }});">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn" id="btnDesativa" onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
-                                        Desativar usuário
+                                    <button type="submit" class="btn" id="relevar" onclick="return confirm('Tem certeza que deseja relevar esta denúncia?')">
+                                        Relevar
                                     </button>
                                 </form>
+                                
                             </td>
                         </tr>
                     @endforeach
@@ -202,49 +205,34 @@
         @endif
     </div>
     <script>
-        // Função para desativar o usuário via requisição AJAX
-        function desativarUsuario(userId) {
-            // Confirmação do usuário
-            if (confirm('Tem certeza que deseja Desativar este usuário?')) {
-                // Envia a requisição para desativar o usuário
-                fetch(`/user/off/${userId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao desativar o usuário');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Exibe uma mensagem no console (opcional)
-                    console.log(data.message);
-                    
-                    // Recarrega a página para refletir a alteração
-                    location.reload();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Não foi possível desativar o usuário. Tente novamente.');
-                });
+// Função para excluir a denúncia via requisição AJAX
+function relevarDenuncia(denunciaId) {
+    if (confirm('Tem certeza que deseja relevar esta denúncia?')) {
+        fetch(`/denuncia/${denunciaId}/relevar`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
             }
-        }
-    </script>
-    <script>
-        // Adiciona um listener para o evento de envio do formulário de ativação/desativação do post
-        document.querySelectorAll('form[action*="posts.toggleStatus"]').forEach(form => {
-            form.addEventListener('submit', function() {
-                // Recarrega a página após o envio do formulário
-                setTimeout(() => {
-                    location.reload();
-                }, 500); // Pequeno delay para garantir que a ação foi concluída antes do reload
-            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao relevar a denúncia');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message);
+            location.reload(); // Recarrega a página para refletir a alteração
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Não foi possível relevar a denúncia. Tente novamente.');
         });
-    </script>
+    }
+}
+
+</script>
                <style>
 .container{
     padding-left: 150px;
