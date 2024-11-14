@@ -154,7 +154,6 @@ body {
 .containerTabelaUsers1 {
     display: flex;
     margin-top: 40px;
-    /* overflow-y: scroll; permite scroll apenas vertical */
 }
 
 .tabelaUsers1 {
@@ -166,6 +165,7 @@ body {
     transition: transform 0.3s ease;
     margin-left: 30px;
     height: 300px;
+    align-items: flex-end;
 }
 
 /* inicio tabelaUsers2 */
@@ -341,7 +341,6 @@ body {
     background-color: #007bbd;
 }
 
-
 /* fim tabelaUsers2 */
 .containerTabelaUser3 {
     display: flex;
@@ -367,46 +366,12 @@ body {
 }
 
 .tbDenuncias{
- 
-        width: 100%;
-        border-collapse: collapse;
-        border-radius: 8px;
-        overflow: hidden;
-
+    width: 600px;
 }
 
-.containerTabela {
-    max-height: 320px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    margin-left: 30px;
-    width: 800px;
-    overflow: auto;
+.containerTabela{
+    width: 100%;
 }
-
-
-/* Estilo da barra de rolagem */
-.containerTabela::-webkit-scrollbar {
-    width: 10px;
-}
-
-.containerTabela::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 8px;
-}
-
-.containerTabela::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 8px;
-    border: 2px solid #f1f1f1;
-}
-
-.containerTabela::-webkit-scrollbar-thumb:hover {
-    background-color: #007bbd;
-}
-
-
 
 .btn{
     color: white;

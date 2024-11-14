@@ -164,15 +164,39 @@ public function showPerguntas() {
       ->orderBy('seguidores_count', 'DESC')
       ->limit(10)
       ->get();
-    
+
+      $maisPost = User::withCount('posts')
+      ->orderBy('posts_count', 'desc')
+      ->take(3)
+      ->get();
+  
+  // Prepare dados para a view
+  $userNamesPost = $maisPost->pluck('arroba')->map(function ($arroba) {
+    return '@' . $arroba; // Adiciona '@' a cada nome
+})->toArray(); // Nomes dos usuários
+  $userPostCounts = $maisPost->pluck('posts_count')->toArray(); 
 
 
+// Controller
+$maisComments = User::withCount('comentarios')
+    ->orderBy('comentarios_count', 'desc')
+    ->take(3)
+    ->get();
+
+// Extrair contagens de comentários
+$userPostCounts = $maisComments->pluck('comentarios_count')->toArray();
+
+// Extrair nomes dos usuários com '@'
+$userNamesComment = $maisComments->pluck('arroba')->map(function ($arroba) {
+    return '@' . $arroba; // Adiciona '@' a cada nome
+})->toArray();
         // Passar os dados para a view
         return view('admin', compact('qnt_users', 'qnt_pendentes', 'seguidoresCounts', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
-        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'porcentagem_ads','porcentagem_adm','porcentagem_nutri', 'topUsers'));
+        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'porcentagem_ads','porcentagem_adm','porcentagem_nutri', 'topUsers', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
     }
 
 
+    
 
 
 // Relacionamento com o usuário denunciado

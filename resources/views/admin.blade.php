@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
 
 
@@ -21,14 +23,14 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
+
             <li><a href="{{ route('admin') }}">Úsuario</a></li>
             <li><a href="{{ route('adminHome') }}">Postagens</a></li>
             <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
-            
             <li class="logout">
-                <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
             </li>
 
@@ -41,7 +43,6 @@
        <form method="GET" action="{{ route('admin') }}">
     <div class="search-bar">
         <input type="text" name="search" id="search" placeholder="Pesquisar usuários..." value="{{ old('search') }}">
-        <button type="submit">Pesquisar</button> <!-- Botão de pesquisa -->
     </div>
 </form>
 
@@ -59,7 +60,7 @@
             </div>
             <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$qnt_pendentes}}</h1>
-                <h3>Úsuarios em análise</h3>
+                <h3>Úsuarios ativos</h3>
             </div>
         </div>
     </div>
@@ -73,108 +74,15 @@
         <div class="containerTabelaUsers1">
             <div class="tabelaUsers1">
                 <canvas id="myPieChart"></canvas>
+                
                 </div>
 
-                
-                <div class="containerTabela">
-                    <table class="tbDenuncias">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Usuário denunciado</th>
-                                <th>Motivo</th>
-                                <th>Status</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($denunciasUser as $denuncia)
-                            <tr>
-                                <td>{{ $denuncia->id }}</td>
-                                <td>{{ $denuncia->userDenunciado->name }}</td> <!-- Nome do usuário denunciado -->
-
-                                <td>{{ $denuncia->motivo }}</td>
-                                <td>{{ $denuncia->status }}</td>
-                                <td>
-                                    <form action="{{ route('user.off', $denuncia->userDenunciado->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn" id="btnDesativa"
-                                            onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
-                                            Desativar usuário
-                                        </button>
-                                    </form>
-                                </td>
-
-                                <td>
-                                    <button class="btn" id="btnAtiva" onclick="ativarUsuario({{ $denuncia->userDenunciado->id }})">
-                                        Ativar
-                                    </button>
-                                </td>
-
-
-                                <td>
-                                    <!-- Botão de excluir denúncia -->
-                                    <button onclick="deletarDenuncia({{ $denuncia->id }})" class="btn " id="relevar">relevar</button>
-                                </td>
-
-                            </tr>
-                            @endforeach
-                            <script>
-                                // Função para ativar usuário
-                                function ativarUsuario(userId) {
-                                    if (confirm("Tem certeza que deseja ativar este usuário?")) {
-                                        fetch("{{ url('/admin') }}/" + userId, {
-                                                method: "PATCH",
-                                                headers: {
-                                                    "Content-Type": "application/json",
-                                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                                },
-                                                body: JSON.stringify({
-                                                    // Aqui você pode passar qualquer dado adicional necessário
-                                                })
-                                            })
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                alert(data.message); // Mensagem de sucesso
-                                                // Opcional: Atualizar a tabela ou redirecionar
-                                                location.reload(); // Recarrega a página para refletir a ativação
-                                            })
-                                            .catch(error => {
-                                                console.error("Erro:", error);
-                                                alert("Ocorreu um erro ao ativar o usuário.");
-                                            });
-                                    }
-                                }
-
-                                function deletarDenuncia(denunciaId) {
-                                    if (confirm("Tem certeza que deseja excluir esta denúncia?")) {
-                                        fetch("{{ url('/denuncia') }}/" + denunciaId, {
-                                                method: "DELETE",
-                                                headers: {
-                                                    "Content-Type": "application/json",
-                                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                                }
-                                            })
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                alert(data.message); // Exibe a mensagem de sucesso
-                                                location.reload(); // Recarrega a página para refletir a exclusão
-                                            })
-                                            .catch(error => {
-                                                console.error("Erro:", error);
-                                                alert("Ocorreu um erro ao excluir a denúncia.");
-                                            });
-                                    }
-                                }
-                            </script>
-
-
-                        </tbody>
-                    </table>
-
+                <div class="tabelaUsers1">
+                <canvas id="userPostsChart" width="350" height="200"></canvas>       
+                     </div>
+             
+                <div class="tabelaUsers1">
+                <canvas id="userPostsChart2" width="350" height="200"></canvas>       
                 </div>
         </div>
     </div>
@@ -339,6 +247,125 @@
             }
         });
     </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const ctx = document.getElementById('userPostsChart').getContext('2d');
+        
+        // Passando dados do PHP para o JavaScript
+        const userNamesComment = @json($userNamesComment); // Nomes dos usuários
+        const userPostCounts = @json($userPostCounts); // Contagem de comentários
+        
+        const userPostsChart = new Chart(ctx, {
+            type: 'bar', // Tipo do gráfico
+            data: {
+                labels: userNamesComment, // Rótulos dos usuários
+                datasets: [{
+                    label: 'Usuários com maior Número de Comentários', // Rótulo da série de dados
+                    data: userPostCounts, // Dados do gráfico (número de comentários por usuário)
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)', // Cor de fundo da barra 1
+                        'rgba(153, 102, 255, 0.2)', // Cor de fundo da barra 2
+                        'rgba(255, 159, 64, 0.2)'  // Cor de fundo da barra 3
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)', // Cor da borda da barra 1
+                        'rgba(153, 102, 255, 1)', // Cor da borda da barra 2
+                        'rgba(255, 159, 64, 1)'  // Cor da borda da barra 3
+                    ],
+                    borderWidth: 1 // Largura da borda
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true, // Começar o eixo Y a partir do zero
+                        title: {
+                            display: true,
+                            text: 'Número de Comentários'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Usuários'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`; // Personaliza o texto do tooltip
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const ctx = document.getElementById('userPostsChart2').getContext('2d');
+        
+        // Passando dados do PHP para o JavaScript
+        const userNamesPost = @json($userNamesPost); // Nomes dos usuários
+        const userPostCounts = @json($userPostCounts); // Contagem de posts
+        
+        const userPostsChart2 = new Chart(ctx, {
+            type: 'bar', // Tipo do gráfico
+            data: {
+                labels: userNamesPost, // Rótulos dos usuários
+                datasets: [{
+                    label: 'Usuários com maior Número de Posts', // Rótulo da série de dados
+                    data: userPostCounts, // Dados do gráfico (número de posts por usuário)
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)', // Cor de fundo da barra 1
+                        'rgba(153, 102, 255, 0.2)', // Cor de fundo da barra 2
+                        'rgba(255, 159, 64, 0.2)'  // Cor de fundo da barra 3
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)', // Cor da borda da barra 1
+                        'rgba(153, 102, 255, 1)', // Cor da borda da barra 2
+                        'rgba(255, 159, 64, 1)'  // Cor da borda da barra 3
+                    ],
+                    borderWidth: 1 // Largura da borda
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true, // Começar o eixo Y a partir do zero
+                        title: {
+                            display: true,
+                            text: 'Número de Posts'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Usuários'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`; // Personaliza o texto do tooltip
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@ use App\Models\Post;
 use App\Models\Likes;
 use App\Models\Hashtag;
 use App\Models\Seguir;
-
+use Carbon\Carbon;
 
 use App\Models\preferenciasLista;
 
@@ -42,84 +42,86 @@ public function showHome(Request $request)
     $seguindo = $user->seguindo; 
     $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
     $preferenciasLista = PreferenciasLista::all();
-      // Inicia a consulta para posts
-      $postsQuery = Post::with(['hashtags', 'likes', 'comentarios'])
-      ->where('status', 1); // Filtra posts com status 1
-    
+
+    // Inicia a consulta para posts
+    $postsQuery = Post::with(['hashtags', 'likes', 'comentarios'])
+        ->where('status', 1); // Filtra posts com status 1
 
     // Verifica se há uma pesquisa de postagens
     $searchTerm = $request->input('s'); 
-        
-        
 
-            
-        if ($searchTerm) {
-            // Buscar usuários
-            $users = User::where('name', 'like', '%' . $searchTerm . '%')
+    // Se houver um termo de pesquisa, executa a busca
+    if ($searchTerm) {
+        // Buscar usuários
+        $users = User::where('name', 'like', '%' . $searchTerm . '%')
             ->orWhere('email', 'like', '%' . $searchTerm . '%')
             ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
-            ->paginate(4);  // Adiciona paginação de 10 usuários por página
-            
-            // Buscar posts
-            $posts = Post::where('texto', 'like', '%' . $searchTerm . '%')
-                ->orWhere('texto', 'like', '%' . $searchTerm . '%')
-                ->get();
-        } else {
+            ->paginate(4);  // Adiciona paginação de 4 usuários por página
         
-            $users = collect();   
-// Obtém os IDs dos usuários que o usuário está seguindo
-$seguindoIds = $user->seguindo()->pluck('seguindo_id'); // Se "seguindo_id" é a coluna que contém os IDs dos usuários seguidos
+        // Buscar posts
+        $posts = Post::where('texto', 'like', '%' . $searchTerm . '%')->paginate(10); // Pagina os posts
+    } else {
+        $users = collect(); // Inicializa a coleção de usuários se não houver pesquisa
 
-// Obtém as hashtags dos posts que o usuário curtiu
-$likedHashtags = $user->likes()
-    ->with('post.hashtags') // Carrega as hashtags dos posts curtidos
-    ->get()
-    ->pluck('post.hashtags.*.id') // Plana para obter uma lista única de IDs de hashtags
-    ->flatten()
-    ->unique();
+        // Obtém o timestamp de um minuto atrás
+        $oneMinuteAgo = Carbon::now()->subMinute();
 
-// Inicia a consulta para obter todos os posts
-$postsQuery = Post::with(['hashtags', 'likes', 'comentarios']) // Inclui hashtags, likes e comentários
-    ->where('status', 1); // Filtra posts com status 1
+        // Obtém os IDs dos usuários que o usuário está seguindo
+        $seguindoIds = $user->seguindo()->pluck('seguindo_id'); // IDs dos usuários seguidos
 
-// Cria uma condição para incluir posts apenas de usuários seguidos ou posts relevantes
-$postsQuery->where(function($query) use ($seguindoIds, $likedHashtags, $user) {
-    // Adiciona posts de usuários que o usuário está seguindo
-    if ($seguindoIds->isNotEmpty()) {
-        $query->whereIn('user_id', $seguindoIds);
-    }
+        // Obtém as hashtags dos posts que o usuário curtiu
+        $likedHashtags = $user->likes()
+            ->with('post.hashtags') // Carrega as hashtags dos posts curtidos
+            ->get()
+            ->pluck('post.hashtags.*.id') // Plana para obter uma lista única de IDs de hashtags
+            ->flatten()
+            ->unique();
 
-    // Adiciona posts com hashtags que o usuário curtiu
-    if ($likedHashtags->isNotEmpty()) {
-        $query->orWhereHas('hashtags', function($subQuery) use ($likedHashtags) {
-            $subQuery->whereIn('hashtags.id', $likedHashtags);
-        });
-    }
+        // Inicia a consulta para obter todos os posts, excluindo o post recente do usuário
+        $postsQuery->where('user_id', '!=', $user->id) // Exclui posts do usuário autenticado
+            ->where(function($query) use ($seguindoIds, $likedHashtags, $user) {
+                // Adiciona posts de usuários que o usuário está seguindo
+                if ($seguindoIds->isNotEmpty()) {
+                    $query->whereIn('user_id', $seguindoIds);
+                }
 
-    // Adiciona posts de usuários com o mesmo perfil/curso que o usuário autenticado
-    $query->orWhereHas('user', function($subQuery) use ($user) {
-        $subQuery->where('perfil', $user->perfil); // Filtra usuários pelo perfil/curso do usuário autenticado
-    });
-});
+                // Adiciona posts com hashtags que o usuário curtiu
+                if ($likedHashtags->isNotEmpty()) {
+                    $query->orWhereHas('hashtags', function($subQuery) use ($likedHashtags) {
+                        $subQuery->whereIn('hashtags.id', $likedHashtags);
+                    });
+                }
 
-// Ordena os posts
-// Monta a cláusula de prioridade apenas se houver IDs seguidos
-if ($seguindoIds->isNotEmpty()) {
-    $posts = $postsQuery->select('posts.*')
-        ->orderByRaw('CASE WHEN user_id IN (' . $seguindoIds->implode(',') . ') THEN 0 ELSE 1 END') // Coloca posts dos seguidos no topo
-        ->orderBy('created_at', 'desc') // Ordena do mais recente para o mais antigo
-        ->paginate(10); // Paginação para controle de performance
-} else {
-    // Se não houver IDs seguidos, apenas ordene por data de criação
-    $posts = $postsQuery->select('posts.*')
-        ->orderBy('created_at', 'desc') // Ordena do mais recente para o mais antigo
-        ->paginate(10); // Paginação para controle de performance
-}
+                // Adiciona posts de usuários com o mesmo perfil/curso que o usuário autenticado
+                $query->orWhereHas('user', function($subQuery) use ($user) {
+                    $subQuery->where('perfil', $user->perfil); // Filtra usuários pelo perfil/curso do usuário autenticado
+                });
+            });
+
+        // Consulta para pegar o post do usuário autenticado que foi criado há um minuto
+        $userRecentPost = Post::with(['hashtags', 'likes', 'comentarios'])
+            ->where('user_id', $user->id)
+            ->whereBetween('created_at', [$oneMinuteAgo, Carbon::now()])
+            ->where('status', 1) // Filtra por status 1
+            ->first(); // Pega o primeiro post (se existir)
+
+        // Obtem todos os posts relevantes, excluindo o post recente do usuário
+        $posts = $postsQuery->select('posts.*')
+            ->orderBy('created_at', 'desc') // Ordena do mais recente para o mais antigo
+            ->paginate(10); // Paginação para controle de performance
+
+        // Se o post recente do usuário existir, adicione-o no topo da lista
+        if ($userRecentPost) {
+            // Verifica se o post recente já está na lista de posts
+            if (!$posts->contains('id', $userRecentPost->id)) {
+                $posts->prepend($userRecentPost); // Adiciona o post recente ao topo
+            }
         }
-
+    }
 
     return view('home', compact('user', 'users', 'posts', 'preferenciasLista', 'usuariosSugestoes', 'searchTerm'));
 }
+
 
 public function getHashtagsByCurso(User $user)
 {
