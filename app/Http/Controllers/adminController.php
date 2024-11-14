@@ -104,7 +104,12 @@ public function showPerguntas() {
 
         // Verifica se há uma pesquisa de postagens
     $searchTerm = $request->input('search'); 
-        
+
+    //contar
+    $usuariosInativos = User::where('status', 'inativo')->count();
+    $usuariosAtivos = User::where('status', 'Ativo')->count();
+    $users = User::all();// Contar total de usuários
+
         
 
             
@@ -119,7 +124,6 @@ public function showPerguntas() {
 
 
     }else{
-        $users = User::all();// Contar total de usuários
        
     }
     $qnt_users = User::count();
@@ -192,7 +196,7 @@ $userNamesComment = $maisComments->pluck('arroba')->map(function ($arroba) {
 })->toArray();
         // Passar os dados para a view
         return view('admin', compact('qnt_users', 'qnt_pendentes', 'seguidoresCounts', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
-        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'porcentagem_ads','porcentagem_adm','porcentagem_nutri', 'topUsers', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
+        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'porcentagem_ads','porcentagem_adm','porcentagem_nutri', 'topUsers','usuariosInativos', 'usuariosAtivos', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
     }
 
 
@@ -286,9 +290,6 @@ public function registerAdm(Request $request)
 
     
 
-     
- 
-
 }
 
 
@@ -321,7 +322,15 @@ public function showLoginAdmForm()
 }
 
 
+public function desativaUserDenuncias($id)
+{
+    
+    $user = User::findOrFail($id); // Encontre o User$user pelo ID
+    $user->status = 'inativo'; // Muda o status para 2
+    $user->save(); // Salva as alterações
 
+    return redirect()->route('denuncias')->with('success', 'Status do user atualizado para inativo!');
+}
 
 
     
@@ -332,7 +341,9 @@ public function desativaUser($id)
     $user->status = 'inativo'; // Muda o status para 'inativo'
     $user->save(); // Salva as alterações
 
+
     return response()->json(['message' => 'Usuário desativado com sucesso!']);
+
 }
 
 // Função para ativar o usuário
@@ -342,7 +353,9 @@ public function AtivaUser(Request $request, $id)
     $user->status = 'ativo'; // Muda o status para 'ativo'
     $user->save(); // Salva as alterações
 
+
     return response()->json(['message' => 'Usuário ativado com sucesso']);
+
 }
 
 

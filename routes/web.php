@@ -16,6 +16,7 @@ use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\notificacaoController;
 
+Route::delete('/denuncias/{id}', [adminController::class, 'desativaUserDenuncias'])->name('user.off.Denuncias');
 // busca
 Route::get('/denuncia/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
 

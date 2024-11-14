@@ -55,11 +55,11 @@
                 <h3>Úsuarios Totais</h3>
             </div>
             <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
-                <h1>0</h1>
-                <h3>Úsuarios Bloqueados</h3>
+                <h1>{{$usuariosInativos}}</h1>
+                <h3>Úsuarios Inativos</h3>
             </div>
             <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #fff, #fff);">
-                <h1>{{$qnt_pendentes}}</h1>
+                <h1>{{$usuariosAtivos}}</h1>
                 <h3>Úsuarios ativos</h3>
             </div>
         </div>
@@ -111,9 +111,14 @@
                             <td>{{ $user->status }}</td>
                             <td>{{ $user->perfil }}</td>
                             <td>
-                                <button class="btn" id="btnAtiva" onclick="ativarUsuario({{ $user->id }})">
-                                    Ativar
-                                </button>
+                            <form action="{{ route('user.ativa', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit" class="btn" id="btnAtiva"
+                                        onclick="return confirm('Tem certeza que deseja Ativar este usuário?')">
+                                        Ativar
+                                    </button>
+                                </form>
                             </td>
                           
 
