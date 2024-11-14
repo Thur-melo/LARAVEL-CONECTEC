@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
     </head>
 
 
@@ -22,10 +21,19 @@
     <div class="sidebar">
         <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
+<<<<<<< HEAD
             <li><a href="#">Inicio</a></li>
             <li><a href="#">Úsuario</a></li>
             <li><a href="#">Postagens</a></li>
             <li><a href="#">Postagens</a></li>
+=======
+            <li><a href="{{ route('admin') }}">Úsuario</a></li>
+            <li><a href="{{ route('adminHome') }}">Postagens</a></li>
+            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
+            <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
+
+            
+>>>>>>> a63e4ff5bc6e31cb261ab7230ab6ecc632d21773
             <li class="logout">
     <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
@@ -37,22 +45,26 @@
     </div>
     <!-- sidebar fim -->
     <div class="container">
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Pesquisar usuários...">
-        </div>
+       <form method="GET" action="{{ route('admin') }}">
+    <div class="search-bar">
+        <input type="text" name="search" id="search" placeholder="Pesquisar usuários..." value="{{ old('search') }}">
+        <button type="submit">Pesquisar</button> <!-- Botão de pesquisa -->
+    </div>
+</form>
+
     </div>
     <!-- cards dashboard inicio -->
     <div class="container">
         <div class="containerCards">
-            <div class="card" style="background: linear-gradient(to bottom right, #111111, #222222);">
+            <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$qnt_users}}</h1>
                 <h3>Úsuarios Totais</h3>
             </div>
-            <div class="card" style="background: linear-gradient(to bottom right, #ca1f13, #ee4b37);">
+            <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>0</h1>
                 <h3>Úsuarios Bloqueados</h3>
             </div>
-            <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #444444, #555555);">
+            <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$qnt_pendentes}}</h1>
                 <h3>Úsuarios em análise</h3>
             </div>
@@ -68,6 +80,9 @@
         <div class="containerTabelaUsers1">
             <div class="tabelaUsers1">
                 <canvas id="myPieChart"></canvas>
+                </div>
+
+                
                 <div class="containerTabela">
                     <table class="tbDenuncias">
                         <thead>
@@ -168,7 +183,6 @@
                     </table>
 
                 </div>
-            </div>
         </div>
     </div>
 
@@ -243,8 +257,8 @@
                 labels: ['DS', 'ADM', 'NUTRI'],
                 datasets: [{
                     label: 'Distribuição de Cores',
-                    data: [30, 20, 15],
-                    backgroundColor: ['#111111', '#151855', '#0BBDFF'],
+                    data: [{{$porcentagem_ads}}, {{$porcentagem_adm}}, {{$porcentagem_nutri}}],
+                    backgroundColor: ['#3497c2', '#151855', '#0BBDFF'],
                 }]
             },
             options: {
@@ -271,20 +285,27 @@
             }
         });
 
+
+      
         const ctx = document.getElementById('myBarChart').getContext('2d');
+
+        // Montar rótulos e dados a partir de $topUsers
+        const labels = @json($topUsers->pluck('name')); // Nomes dos usuários
+        const data = @json($topUsers->pluck('seguidores_count')); // Contagem de seguidores
+
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Usuário 1', 'Usuário 2', 'Usuário 3', 'Usuário 4', 'Usuário 5'],
+                labels: labels,
                 datasets: [{
                     label: 'Número de Seguidores',
-                    data: [100, 80, 60, 40, 20],
+                    data: data,
                     backgroundColor: '#0BBDFF',
                     borderColor: '#111111',
                     borderWidth: 1,
                     barThickness: 40,
-                    barPercentage: 0.5,
-                    categoryPercentage: 0.5
+                    barPercentage: 10,
+                    categoryPercentage: 10
                 }]
             },
             options: {
@@ -293,13 +314,11 @@
                 scales: {
                     x: {
                         beginAtZero: true,
-                        max: 120,
                         grid: {
                             display: false
                         }
                     },
                     y: {
-                        beginAtZero: true,
                         grid: {
                             display: false
                         }
@@ -308,7 +327,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Seguidores dos Usuários',
+                        text: 'Top 10 Usuários com Mais Seguidores',
                         font: {
                             size: 18
                         }

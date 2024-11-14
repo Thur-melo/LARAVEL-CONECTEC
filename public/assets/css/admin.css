@@ -131,7 +131,7 @@ body {
     margin-left: 30px;
     height: 125px;
     width: 360px;
-    color: #fff;
+    color: black;
     transition: transform 0.3s ease, filter 0.3s ease;
     flex-direction: column;
 }
@@ -165,7 +165,6 @@ body {
     transition: transform 0.3s ease;
     margin-left: 30px;
     height: 300px;
-    width: 1140px;
 }
 
 /* inicio tabelaUsers2 */
@@ -357,7 +356,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     height: 820px;
-    width: 350px;
+    width: 400px;
 }
 
 .tabelaUsers3 canvas {

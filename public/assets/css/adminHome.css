@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #E6E9EE ;
+    background-color: #E6E9EE;
 }
 
 .container {
@@ -16,48 +16,51 @@ body {
 
 /* CSS sidebar inicio */
 
-.sidebar{
+.sidebar {
     position: fixed;
     width: 300px;
     height: 100%;
-    background-color: #111111;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     display: flex;
     flex-direction: column;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.logo-sidebar{
+.logo-sidebar {
     display: block;
     width: 270px;
     margin: 0 auto;
+    margin-top: 30px;
 }
 
 .sidebar ul {
     list-style-type: none;
     padding: 0;
-   
 }
 
 .sidebar ul li a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
     text-align: justify;
     font-size: 25px;
-    padding: 15px 30px; 
-    width: 60%; 
+    padding: 15px 30px;
+    width: 60%;
     display: block;
     border-radius: 4px;
     transition: background-color 0.3s;
     font-weight: 400;
     margin-left: 30px;
-    border-radius: 20px;        
+    border-radius: 20px;
 }
 
 .sidebar ul li a:hover {
-    background-color: #00aaff; 
-    color: white; 
+    background-color: #00aaff;
+    color: white;
     cursor: pointer;
-    transform: translateX(5px); 
+    transform: translateX(5px);
 }
 
 .sidebar ul li.logout {
@@ -67,22 +70,21 @@ body {
 .sidebar ul li.logout a {
     color: #e74c3c;
     border-radius: 20px;
-    transition:  0.3s;
+    transition: 0.3s;
 }
 
-
-.sidebar ul li.logout a:hover{
+.sidebar ul li.logout a:hover {
     background-color: #e74c3c;
     color: #fff;
     border-radius: 20px;
-    transition:  0.3s;
+    transition: 0.3s;
 }
 
 .sidebar ul li a .material-icons {
-    margin-right: 0;             
-    padding: 0;                  
-    font-size: 24px;      
-    vertical-align: middle;            
+    margin-right: 0;
+    padding: 0;
+    font-size: 24px;
+    vertical-align: middle;
 }
 
 .logout {
@@ -91,18 +93,17 @@ body {
 }
 
 .icon-logout {
-    font-size: 45px; /* Aumente o tamanho conforme necessário */
-    margin-left: 2px; /* Ajuste o espaço entre o texto e o ícone */
+    font-size: 45px;
+    margin-left: 2px;
     vertical-align: middle;
 }
 
 /* css cards inicio */
 
-
 .containerCards {
     display: flex;
     flex-direction: row;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 
 .card {
@@ -115,10 +116,11 @@ body {
     cursor: pointer;
     margin-left: 30px;
     height: 150px;
-    width: 360px;
-    color: #fff;
+    width: 340px;
+    color: #000;
     transition: transform 0.3s ease, filter 0.3s ease;
     flex-direction: column;
+    border-left: #007bbd 10px solid;
 }
 
 .card h1 {
@@ -132,40 +134,60 @@ body {
 }
 
 .card:hover {
-    transform: scale(1.05); /* Aumenta o card em 5% */
-    filter: brightness(1.1); /* Aumenta o brilho em 10% */
-  }
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
 
-  /* css cards fim */
+/* --------------------------------- */
 
-  /* css inicio tabela user 2 */
-
-  .containerTabelaUsers2 {
+.containerCards2 {
     display: flex;
     flex-direction: row;
-    margin-top: 40px;
+    margin-top: 70px;
 }
 
-.tabelaUsers2 {
-    overflow-y: auto;  
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.card2 {
     background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    transition: transform 0.3s ease;
+    cursor: pointer;
     margin-left: 30px;
-    margin-top: 30px;
-    height: 400px;
-    width: 750px;
-
+    height: 200px;
+    width: 340px;
+    color: #000;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    flex-direction: column;
+    border-left: #007bbd 10px solid;
 }
 
-  /* css fim tabela user 2 */
+.card2 h1 {
+    font-weight: 500;
+    font-size: 40px;
+}
 
-  .containerTabelaUser3 {
+.card2 h3 {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.card2:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* css cards fim */
+
+/* css tabela user 2 */
+
+.containerTabelaUser3 {
     display: flex;
     flex-direction: column;
-    position: absolute; /* Posiciona a tabela User 3 de forma absoluta */
-    top: 70px; /* Move a tabela para o topo da página */
-    right: 20px; /* Alinha a tabela à direita */
+    position: absolute;
+    top: 70px;
+    right: 20px;
 }
 
 .tabelaUsers3 {
@@ -177,9 +199,62 @@ body {
     transition: transform 0.3s ease;
     cursor: pointer;
     height: 840px;
-    width: 700px;
+    width: 450px;
 }
 
+.filtrotbuser3 {
+    display: flex;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+.filtrotbuser3 label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #007bbd;
+    margin-right: 8px;
+}
+
+.filtrotbuser3 select {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #007bbd;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 200px;
+    height: 36px;
+}
+
+.filtrotbuser3 select:hover {
+    border-color: #007bbd;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filtrotbuser3 select:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 4px rgba(0, 170, 255, 0.5);
+}
+
+.containerTabelaUsers2 {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 50px;
+}
+
+.tabelaUsers2 {
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-left: 40px;
+    height: 350px;
+    width: 1050px;
+}
 
 .tabelaUsers2 table {
     width: 100%;
@@ -188,24 +263,23 @@ body {
     overflow: hidden;
 }
 
-
-.tabelaUsers2 th, 
+.tabelaUsers2 th,
 .tabelaUsers2 td {
     padding: 15px 20px;
     text-align: left;
 }
 
 .tabelaUsers2 th {
-    background-color: #00aaff; 
+    background-color: #00aaff;
     color: #ffffff;
     font-weight: 500;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
-    position: sticky;  
-    top: 0; 
-    z-index: 1;  
-    background-color: #00aaff; 
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #00aaff;
 }
 
 .tabelaUsers2 td {
@@ -247,12 +321,14 @@ body {
     background-color: #007bbd;
 }
 
-/* Estilo do Filtro */
+/* Estilo do Filtro e Search Bar Alinhados */
+
 .filtro {
     display: flex;
     align-items: center;
-    margin-left: 30px;
     margin-bottom: 10px;
+    gap: 20px;
+    width: 100%;
 }
 
 .filtro label {
@@ -285,3 +361,85 @@ body {
     border-color: #00aaff;
     box-shadow: 0 0 4px rgba(0, 170, 255, 0.5);
 }
+
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; /* Coloque o valor desejado aqui */
+    margin-left: 50px;
+}
+
+.search-bar input {
+    width: 450px;
+    height: 40px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #007bbd;
+    border-right: none; /* Remove a borda direita para unir com o botão */
+    border-radius: 20px 0 0 20px; /* Arredonda apenas os cantos esquerdo superior e inferior */
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #0BBDFF;
+}
+
+.search-bar button {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 16px;
+    background-color: #007bbd;
+    color: #fff;
+    border: 1px solid #007bbd;
+    border-radius: 0 20px 20px 0; /* Arredonda apenas os cantos direito superior e inferior */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #005f8d;
+    box-shadow: 0 0 5px rgba(0, 91, 141, 0.5);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+/* Conteúdo do Modal */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* O botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+

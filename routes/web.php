@@ -8,7 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\BuscarUsuariosController;
 use App\Http\Controllers\ComentariosController;
-
+use App\Http\Controllers\SalvosController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\likeController;
 use App\Http\Controllers\profileController;
@@ -82,7 +82,7 @@ Route::post('/registerAdm', [adminController::class, 'registerAdm']);
 Route::get('/loginAdm', [adminController::class, 'showLoginAdmForm'])->name('loginAdm');
 Route::post('/loginAdm', [adminController::class, 'loginAdm']);
 
-
+Route::get('/admin/buscar', [BuscarUsuariosController::class, 'buscarUsuariosAdmin'])->name('buscarUsuariosAdmin');
 Route::delete('/admin/{id}', [adminController::class, 'desativaUser'])->name('user.off');
 Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.ativa');
 
@@ -101,6 +101,7 @@ Route::get('/conversations', [ChatController::class, 'index'])->name('chat.list'
 
 
 Route::post('/posts/{id}/like', [LikeController::class, 'toggleLike'])->middleware('auth');
+Route::post('/posts/{id}/salvo', [SalvosController::class, 'toggleSalvo'])->middleware('auth');
 Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
  
 
