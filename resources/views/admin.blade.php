@@ -55,11 +55,11 @@
                 <h3>Úsuarios Totais</h3>
             </div>
             <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
-                <h1>0</h1>
-                <h3>Úsuarios Bloqueados</h3>
+                <h1>{{$usuariosInativos}}</h1>
+                <h3>Úsuarios Inativos</h3>
             </div>
             <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #fff, #fff);">
-                <h1>{{$qnt_pendentes}}</h1>
+                <h1>{{$usuariosAtivos}}</h1>
                 <h3>Úsuarios ativos</h3>
             </div>
         </div>
@@ -111,9 +111,14 @@
                             <td>{{ $user->status }}</td>
                             <td>{{ $user->perfil }}</td>
                             <td>
-                                <button class="btn" id="btnAtiva" onclick="ativarUsuario({{ $user->id }})">
-                                    Ativar
-                                </button>
+                            <form action="{{ route('user.ativa', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit" class="btn" id="btnAtiva"
+                                        onclick="return confirm('Tem certeza que deseja Ativar este usuário?')">
+                                        Ativar
+                                    </button>
+                                </form>
                             </td>
                           
 
@@ -158,7 +163,7 @@
                 labels: ['DS', 'ADM', 'NUTRI'],
                 datasets: [{
                     label: 'Distribuição de Cores',
-                    data: [{{$porcentagem_ads}}, {{$porcentagem_adm}}, {{$porcentagem_nutri}}],
+                    data: [{{$qnt_users_ads}}, {{$qnt_users_adm}}, {{$qnt_users_nutri}}],
                     backgroundColor: ['#3497c2', '#151855', '#0BBDFF'],
                 }]
             },
@@ -178,7 +183,7 @@
                     tooltip: {
                         callbacks: {
                             label: function(tooltipItem) {
-                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                                return tooltipItem.label + ': ' + tooltipItem.raw ;
                             }
                         }
                     }

@@ -105,6 +105,10 @@ body {
     flex-direction: row;
     margin-top: 30px;
 }
+.card2 {
+    display: flex;
+    justify-content: flex-end;
+}
 
 .card {
     background-color: white;
@@ -139,11 +143,10 @@ body {
 }
 
 /* --------------------------------- */
-
 .containerCards2 {
     display: flex;
     flex-direction: row;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 
 .card2 {
@@ -152,15 +155,13 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
+    flex-direction: column;
     transition: transform 0.3s ease;
     cursor: pointer;
     margin-left: 30px;
-    height: 200px;
+    height: 300px; /* Aumentado para acomodar o gráfico */
     width: 340px;
     color: #000;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    flex-direction: column;
-    border-left: #007bbd 10px solid;
 }
 
 .card2 h1 {
@@ -176,6 +177,11 @@ body {
 .card2:hover {
     transform: scale(1.05);
     filter: brightness(1.1);
+}
+
+canvas {
+    margin-top: 20px; /* Espaçamento para o gráfico */
+    height: 150px; /* Ajuste de altura para o gráfico */
 }
 
 /* css cards fim */
@@ -243,7 +249,7 @@ body {
     display: flex;
     flex-direction: row;
     position: relative;
-    top: 50px;
+    top: 30px;
 }
 
 .tabelaUsers2 {
@@ -252,7 +258,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: white;
     margin-left: 40px;
-    height: 350px;
+    height: 310px;
     width: 1050px;
 }
 
@@ -413,7 +419,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
     padding-top: 60px;
@@ -421,11 +427,16 @@ body {
 
 /* Conteúdo do Modal */
 .modal-content {
+    position: relative;
     background-color: #fff;
-    margin: 5% auto;
+    margin: auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 80%;
+    max-width: 1000px;
+    max-height: 80%;
+    overflow-y: auto; /* Para rolar o conteúdo se necessário */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* O botão de fechar */

@@ -1,50 +1,155 @@
-<!-- resources/views/denuncias/index.blade.php -->
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todas as Denúncias</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Menu-principal</title>
+    <link rel="stylesheet" href="{{url('assets/css/adminHome.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/adminDenuncias.css')}}">
-    <link rel="stylesheet" href="{{url('assets/css/postagens.css')}}">
-    <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
 <body>
-
-       <!--inicio menu lateral -->
-       <div class="menu-lateral">
-        <div class="brand-name">
-            <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
-        </div>
+    <div class="main">
+    
+   <!-- sidebar inicio -->
+   <div class="sidebar">
+        <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
         <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
             <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
             <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
-            
+
+               
+                <li class="logout">
+    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+
+</li>
+
+</li>
         </ul>
+    </div>
+    <!-- sidebar fim -->
+
+<!-- cards inicio -->
+
+<div class="container">
+    <div class="busca">
+        <input type="text" class="inputBusca" id="inputBusca" placeholder="Buscar denúncia..." onkeyup="buscarDenuncias()">
+        <i class="fa-solid fa-magnifying-glass ico"></i>
+    </div>
+    
+    <h2>Usuários denunciados</h2>
+    
+    <div class="tabela">
+
+        <table class="tabelaUsers2">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuário denunciado</th>
+                    <th>Motivo</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($denunciasUser as $denuncia)
+                <tr>
+                    <td>{{ $denuncia->id }}</td>
+                    <td>{{ $denuncia->userDenunciado->name }}</td>
+                    <td>{{ $denuncia->motivo }}</td>
+                    <td>{{ $denuncia->userDenunciado->status }}</td>
+                    <td>
+                        <!-- Botão de Ativar/Desativar -->
+                        <button class="btn" id="btnAtivaDesativa"
+                        onclick="toggleStatusUsuario({{ $denuncia->userDenunciado->id }}, '{{ $denuncia->userDenunciado->status }}')">
+                        {{ (strtolower($denuncia->userDenunciado->status) === 'ativo') ? 'Desativar' : 'Ativar' }}
+                    </button>
+                    </td>
+                    <td>
+                        <!-- Botão de excluir denúncia -->
+                        <button onclick="deletarDenuncia({{ $denuncia->id }})" class="btn" id="relevar">Relevar</button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
         
+        <script>
+            // Função para alternar entre ativar e desativar o status do usuário
+            function toggleStatusUsuario(userId, statusAtual) {
+                const novaAcao = statusAtual === 'ativo' ? 'Desativar' : 'Ativar';
+                const confirmMessage = `Tem certeza que deseja ${novaAcao.toLowerCase()} este usuário?`;
+        
+                if (confirm(confirmMessage)) {
+                    const url = statusAtual === 'ativo'
+                        ? `{{ url('/admin/desativar-usuario') }}/${userId}` // Usando a rota de desativar
+                        : `{{ url('/admin/ativar-usuario') }}/${userId}`; // Usando a rota de ativar
+        
+                    fetch(url, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.message); // Mensagem de sucesso
+                            location.reload(); // Recarrega a página para refletir a alteração do status do usuário
+                        })
+                        .catch(error => {
+                            console.error("Erro:", error);
+                            alert("Ocorreu um erro ao alterar o status do usuário.");
+                        });
+                }
+            }
+        
+            // Função para deletar uma denúncia
+            function deletarDenuncia(denunciaId) {
+                if (confirm("Tem certeza que deseja relevar esta denúncia?")) {
+                    fetch(`{{ url('/denuncia') }}/${denunciaId}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.message); // Exibe a mensagem de sucesso
+                            location.reload(); // Recarrega a página para refletir a exclusão
+                        })
+                        .catch(error => {
+                            console.error("Erro:", error);
+                            alert("Ocorreu um erro ao relevar a denúncia.");
+                        });
+                }
+            }
+        </script>
+        
+        
+        
+
     </div>
 
-    <!--final menu lateral -->
-
-    <div class="container ">
-        <h1>Todas as Denúncias</h1>
+    <h2>Posts denunciados</h2>
+    <div class="tabela">
+     
 
         @if($denuncias->isEmpty())
             <p>Nenhuma denúncia encontrada.</p>
         @else
-            <table class="table table-striped">
+            <table class="tabelaUsers2 table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -172,50 +277,103 @@
     }
 </script>
 
-<style>
+{{-- fim modal --}}
 
+<script>
+function buscarDenuncias() {
+    const buscaTermo = document.getElementById('inputBusca').value;
 
-    /* Estilo do Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    // Envia a busca para o servidor via AJAX
+    fetch(`{{ route('denuncia.buscar') }}?termo=${buscaTermo}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Exibe as denúncias filtradas nas tabelas
+        atualizarTabelasDenuncias(data.denunciasUser, data.denunciasPosts);
+    })
+    .catch(error => {
+        console.error("Erro ao buscar denúncias:", error);
+    });
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;  /* Largura do modal ajustada para 50% */
-    max-width: 900px;  /* Largura máxima de 900px */
-    min-width: 400px;  /* Largura mínima de 400px */
+function atualizarTabelasDenuncias(denunciasUser, denunciasPosts) {
+    // Atualize as tabelas de denúncias de usuários
+    const tabelaUsuarios = document.querySelector('.tabelaUsers2');
+    tabelaUsuarios.innerHTML = ""; // Limpa a tabela antes de adicionar os resultados
+
+    denunciasUser.forEach(denuncia => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${denuncia.id}</td>
+            <td>${denuncia.userDenunciado.name}</td>
+            <td>${denuncia.motivo}</td>
+            <td>${denuncia.userDenunciado.status}</td>
+            <td>
+                <button class="btn" onclick="toggleStatusUsuario(${denuncia.userDenunciado.id}, '${denuncia.userDenunciado.status}')">
+                    ${denuncia.userDenunciado.status === 'ativo' ? 'Desativar' : 'Ativar'}
+                </button>
+            </td>
+            <td>
+                <button onclick="deletarDenuncia(${denuncia.id})" class="btn">Relevar</button>
+            </td>
+        `;
+        tabelaUsuarios.appendChild(row);
+    });
+
+    // Atualize a tabela de denúncias de posts
+    const tabelaPosts = document.querySelector('.tabelaUsers2');
+    tabelaPosts.innerHTML = ""; // Limpa a tabela de posts
+
+    denunciasPosts.forEach(denuncia => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${denuncia.id}</td>
+            <td>${denuncia.user.name}</td>
+            <td>
+                <a href="javascript:void(0);" onclick="abrirModalPost(${denuncia.post.id})">
+                    ${denuncia.post.titulo ?? 'Ver Post'}
+                </a>
+            </td>
+            <td>${denuncia.motivo}</td>
+            <td>${denuncia.status}</td>
+            <td>${denuncia.created_at}</td>
+            <td>
+                <form action="{{ route('posts.destroy', $denuncia->post->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn" id="excluirPost">Excluir Post</button>
+</form>
+
+            </td>
+            <td>
+                <form action="{{ route('user.off', $denuncia->user->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn" id="btnDesativa" onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
+        Desativar usuário
+    </button>
+</form>
+
+            </td>
+        `;
+        tabelaPosts.appendChild(row);
+    });
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+    
+</script>
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+</div>
 
-</style>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</div>
+
+
 </body>
 </html>

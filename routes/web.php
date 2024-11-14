@@ -16,9 +16,24 @@ use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\notificacaoController;
 
+// busca
+Route::get('/denuncia/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
+
+
+// Rota para desativar o usuário
+Route::post('/admin/desativar-usuario/{id}', [AdminController::class, 'desativaUser'])->name('admin.desativarUsuario');
+// Rota para ativar o usuário
+Route::post('/admin/ativar-usuario/{id}', [AdminController::class, 'AtivaUser'])->name('admin.ativarUsuario');
+Route::post('/denuncia/desativar/{userId}', [DenunciaController::class, 'desativarUsuario'])->name('user.desativar');
+Route::post('/denuncia/ativar/{userId}', [DenunciaController::class, 'ativarUsuario'])->name('user.ativar');
+Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
+
+
+Route::post('/denuncia/desativar/{userId}', [DenunciaController::class, 'desativarUsuario'])->name('user.desativar');
+Route::post('/denuncia/ativar/{userId}', [DenunciaController::class, 'ativarUsuario'])->name('user.ativar');
+
 Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
 Route::post('/denunciarUser', [DenunciaController::class, 'storeUser'])->name('denunciarUser');
-
 
 Route::post('/denunciar', [DenunciaController::class, 'store'])->name('denunciar');
 Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denuncias');
@@ -85,6 +100,7 @@ Route::post('/loginAdm', [adminController::class, 'loginAdm']);
 Route::get('/admin/buscar', [BuscarUsuariosController::class, 'buscarUsuariosAdmin'])->name('buscarUsuariosAdmin');
 Route::delete('/admin/{id}', [adminController::class, 'desativaUser'])->name('user.off');
 Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.ativa');
+
 
 Route::get('/posts/{id}/comentarios', [ComentariosController::class, 'showcomentarios'])->name('comentarios.show');
 Route::get('/comentarios/{id}', [ComentariosController::class, 'showcomentarios'])->name('comentarios');

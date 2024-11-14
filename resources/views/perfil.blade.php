@@ -226,37 +226,43 @@
                             }
 
                             function confirmarDenuncia() {
-                                const userId = document.getElementById('user-id').value;
-                                const user_denunciado_id = document.getElementById('user_denunciado_id').value;
-                                const motivo = document.getElementById('motivo').value;
+    const userId = document.getElementById('user-id').value; // ID do usuário que está fazendo a denúncia
+    const user_denunciado_id = document.getElementById('user_denunciado_id').value; // ID do usuário denunciado
+    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
 
-                                fetch("{{ route('denunciarUser') }}", {
-                                        method: "POST",
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                        },
-                                        body: JSON.stringify({
-                                            user_id: userId,
-                                            user_denunciado_id: user_denunciado_id,
-                                            motivo: motivo
-                                        })
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.message) {
-                                            alert(data.message);
-                                            closeModal();
-                                        } else {
-                                            console.error("Erro nos dados:", data); // Verifique o conteúdo do erro
-                                            alert("Ocorreu um erro ao registrar a denúncia.");
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error("Erro:", error); // Exibe o erro completo
-                                        alert("Ocorreu um erro ao registrar a denúncia.");
-                                    });
-                            }
+    // Verifique se os dados estão sendo capturados corretamente
+    console.log(userId, user_denunciado_id, motivo);  // Isso ajudará a debugar os valores
+
+    fetch("{{ route('denunciarUser') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            user_denunciado_id: user_denunciado_id,
+            motivo: motivo
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);  // Exibe a mensagem de sucesso
+            closeModal();  // Fecha o modal
+        } else {
+            console.error("Erro nos dados:", data);  // Verifique o conteúdo do erro
+            alert("Ocorreu um erro ao registrar a denúncia.");
+        }
+    })
+    .catch(error => {
+        console.error("Erro:", error);  // Exibe o erro completo
+        alert("Ocorreu um erro ao registrar a denúncia.");
+    });
+}
+
+
+
                         </script>
 
 

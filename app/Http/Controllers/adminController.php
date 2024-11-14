@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Seguir;
 use Illuminate\Http\Request;
 use App\Models\Adm;
+use App\Models\Hashtag;
 use App\Models\PreferenciasLista;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Denuncia;
@@ -18,11 +19,23 @@ class adminController extends Controller
     //public function showHome()
 
     public function showdenuncias()    {
+
+        $users = User::all();
         // Obter todas as denúncias
         $denuncias = Denuncia::with(['user', 'post'])->get();
 
+        $usersAtivo = User::where('status', 1)->get();
+
+        // Carregar denúncias pendentes com eager loading
+        $denunciasUser = DenunciaUsuario::with('user')->where('status', 'pendente')->get();
+
+        // Contar o número de denúncias pendentes e bloqueadas
+        $qnt_pendentes = $denunciasUser->count();
+        $qnt_bloqueados = DenunciaUsuario::where('status', 'bloqueados')->count();
+
         // Retornar a view com os dados das denúncias
-        return view('AdminDenuncias', compact('denuncias'));
+        return view('AdminDenuncias', compact('denuncias','qnt_pendentes', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
+        'users'));
     }
 
 public function showperfil($id) {
@@ -50,49 +63,60 @@ public function showprofile(){
 }
 
 public function showPerguntas() {
+    $users = User::all();
+    $posts = Post::all();
+    $qnt_post = Post::all()->count();
 
-    $user = Auth::user();
-    $posts = Post::orderBy('created_at', 'desc')->get(); 
-    $qnt_posts = Post::all()-> count();
-    $qnt_tipos = PreferenciasLista::all()-> count();
-    $preferenciasLista = PreferenciasLista::all();
-
-    $qnt_postTipo = Post::select('tipo_post', DB::raw('count(*) as total'))
-    ->groupBy('tipo_post')
-    ->get()
-    ->keyBy('tipo_post');
-
-    $qnt_postCursos = PreferenciasLista::select('curso', DB::raw('count(*) as total'))
-        ->groupBy('curso')
-        ->get()
-        ->keyBy('curso');
-
-    $qnt_aula = Post::where('tipo_post', 'Aula')-> count();
-    $qnt_duvida = Post::where('tipo_post', 'Duvida')-> count();
-    $qnt_estagios = Post::where('tipo_post', 'Estagios')-> count();
-    $qnt_postInativos = Post::where('status', 2)-> count();
-    $qnt_postAtivos = Post::where('status', 1)-> count();
+    //ativos e inativous count
+    $postAtivos = Post::where('status', '1')->count();
+    $postInativos = Post::where('status', '2')->count();
 
 
-        
-           $denuncias = Denuncia::with(['user', 'post'])->get();
+
+    //grafico pizza
+         // qnt por curso
+         $postsAds = Post::whereHas('user', function ($query) {
+            $query->where('perfil', 'Ds'); // Filtra usuários com perfil 'ads'
+        })->inRandomOrder()->count();
+
+        $postsNutri = Post::whereHas('user', function ($query) {
+            $query->where('perfil', 'Nutri'); // Filtra usuários com perfil 'ads'
+        })->inRandomOrder()->count();
+
+        $postsAdm = Post::whereHas('user', function ($query) {
+            $query->where('perfil', 'Adm'); // Filtra usuários com perfil 'ads'
+        })->inRandomOrder()->count();
  
 
+             // Consulta para obter as 6 hashtags com mais posts
+             $topHashtags = Hashtag::withCount('posts') // Conta os posts relacionados
+             ->orderBy('posts_count', 'desc') // Ordena pelo número de posts
+             ->limit(6) // Limita a 6 resultados
+             ->get(); // Executa a consulta e obtém os resultados
 
 
-    $users = User::all();
+// Extrair contagens de post
+$hashtagsPostCounts = $topHashtags->pluck('posts_count')->toArray();
+
+// Extrair nomes das hashtags
+$hashtagsNames = $topHashtags->pluck('hashtag')->toArray();
 
 
-    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_postTipo',  'qnt_postCursos', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos', 'qnt_tipos', 'preferenciasLista', 'denuncias'));
+    return view('adminHome', compact( 'users', 'posts', 'postAtivos', 'postInativos', 'postsAds', 'postsAdm', 'postsNutri', 'topHashtags','hashtagsPostCounts','hashtagsNames'));
 }
 
-    public function showadmin(Request $request)
+    public function showadmin(Request $request) 
     {
 
 
         // Verifica se há uma pesquisa de postagens
     $searchTerm = $request->input('search'); 
-        
+
+    //contar
+    $usuariosInativos = User::where('status', 'inativo')->count();
+    $usuariosAtivos = User::where('status', 'Ativo')->count();
+    $users = User::all();// Contar total de usuários
+
         
 
             
@@ -107,7 +131,6 @@ public function showPerguntas() {
 
 
     }else{
-        $users = User::all();// Contar total de usuários
        
     }
     $qnt_users = User::count();
@@ -115,17 +138,6 @@ public function showPerguntas() {
         $qnt_users_ads = User::where('perfil', 'Ds')->count();
         $qnt_users_adm = User::where('perfil', 'Adm')->count();
         $qnt_users_nutri = User::where('perfil', 'Nutri')->count();
-
-    // Calcular porcentagens
-    $porcentagem_ads = 0;
-    $porcentagem_adm = 0;
-    $porcentagem_nutri = 0;
-
-    if ($qnt_users > 0) { // Para evitar divisão por zero
-        $porcentagem_ads = ($qnt_users_ads / $qnt_users) * 100;
-        $porcentagem_adm = ($qnt_users_adm / $qnt_users) * 100;
-        $porcentagem_nutri = ($qnt_users_nutri / $qnt_users) * 100;
-    }
 
         // Obter todos os usuários ativos
         $usersAtivo = User::where('status', 1)->get();
@@ -180,7 +192,7 @@ $userNamesComment = $maisComments->pluck('arroba')->map(function ($arroba) {
 })->toArray();
         // Passar os dados para a view
         return view('admin', compact('qnt_users', 'qnt_pendentes', 'seguidoresCounts', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
-        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'porcentagem_ads','porcentagem_adm','porcentagem_nutri', 'topUsers', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
+        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'topUsers','usuariosInativos', 'usuariosAtivos', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
     }
 
 
@@ -274,9 +286,6 @@ public function registerAdm(Request $request)
 
     
 
-     
- 
-
 }
 
 
@@ -311,32 +320,43 @@ public function showLoginAdmForm()
 
 
 
-
-    
-public function desativaUser($id)
+public function desativaUserDenuncias($id)
 {
     
     $user = User::findOrFail($id); // Encontre o User$user pelo ID
     $user->status = 'inativo'; // Muda o status para 2
     $user->save(); // Salva as alterações
 
-    return redirect()->route('admin')->with('success', 'Status do post atualizado para 2!');
+    return redirect()->route('denuncias')->with('success', 'Status do user atualizado para inativo!');
 }
 
 
 
+    
+// Função para desativar o usuário
+public function desativaUser($id)
+{
+    $user = User::findOrFail($id); // Encontra o usuário pelo ID
+    $user->status = 'inativo'; // Muda o status para 'inativo'
+    $user->save(); // Salva as alterações
+
+
+    return response()->json(['message' => 'Usuário desativado com sucesso!']);
+
+}
+
+// Função para ativar o usuário
 public function AtivaUser(Request $request, $id)
 {
-    // Encontra o usuário pelo ID ou retorna erro 404
-    $user = User::findOrFail($id);
+    $user = User::findOrFail($id); // Encontra o usuário pelo ID
+    $user->status = 'ativo'; // Muda o status para 'ativo'
+    $user->save(); // Salva as alterações
 
-    // Atualiza o status do usuário para 'Ativo'
-    $user->status = 'Ativo';
-    $user->save(); // Salva as alterações no banco de dados
 
-    // Retorna uma resposta JSON de sucesso
     return response()->json(['message' => 'Usuário ativado com sucesso']);
+
 }
+
 
 
     public function destroyPost($id)
