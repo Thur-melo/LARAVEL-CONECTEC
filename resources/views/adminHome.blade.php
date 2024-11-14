@@ -63,14 +63,13 @@
     <div class="container">
         <div class="containerCards2">
         <div class="card2" >                
-<canvas id="myPieChart" width="500" height="500"></canvas>
+<canvas id="myPieChart" width="200" height="200"></canvas>
             </div>
-            <div class="card2" id="cardEmAnalise">                
-                <h1>0</h1>
-                <h3>Posts em análise</h3>
+            <div class="card2" >                
+            <canvas id="myChart"></canvas>
             </div>
 
-           <div class="card" id="cardModal">
+           <div class="card2" id="cardModal">
     <h1>Modal</h1>
     <h3>#</h3>
 </div>
@@ -80,27 +79,9 @@
     <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2>Conteúdo do Modal</h2>
-    <p>Este é um exemplo de conteúdo que pode ser exibido no modal.</p>
-  </div>
-</div>
-
-<!-- cards fim -->
-
-<div class="container">
-        <div class="containerTabelaUsers2">
+    <div class="containerTabelaUsers2">
             <div class="tabelaUsers2">
             <div>
-
-            <div class="filtro">
-    <label for="filter">Ordenar por:</label>
-    <select id="filter">
-        <option value="recentes">Mais Recentes</option>
-        <option value="antigos">Mais Antigos</option>
-        <option value="seguidos">Mais Seguidos</option>
-    </select>
-   
-</div>
 </div>
 
 <table>
@@ -163,6 +144,57 @@
             </div>
         </div>
     </div>
+  </div>
+</div>
+
+<!-- cards fim -->
+
+<div class="container">
+        <div class="containerTabelaUsers2">
+            <div class="tabelaUsers2">
+            <div>
+
+            <div class="filtro">
+    <label for="filter">Ordenar por:</label>
+    <select id="filter">
+        <option value="recentes">Mais Recentes</option>
+        <option value="antigos">Mais Antigos</option>
+        <option value="seguidos">Mais Seguidos</option>
+    </select>
+   
+</div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Usuário</th>
+            <th>Likes</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@vinisilva</td>
+            <td>1000</td>
+            <td>14/11/2024</td>
+            <td>?</td>
+        </tr>
+      
+        <tr>
+            <td>@Hygorsilva</td>
+            <td>999</td>
+            <td>14/11/2024</td>
+            <td>?</td>
+        </tr>
+           
+    </tbody>
+</table>
+
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="containerTabelaUser3">
@@ -215,6 +247,29 @@
                 }
             }
         });
+
+     
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
 
         var modal = document.getElementById("myModal");
 
