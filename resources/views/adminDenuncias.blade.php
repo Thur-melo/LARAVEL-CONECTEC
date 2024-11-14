@@ -4,8 +4,6 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Menu-principal</title>
-    {{-- <link rel="stylesheet" href="{{url('assets/css/Home.css')}}"> --}}
-    <link rel="stylesheet" href="{{url('assets/css/adminHome.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/adminDenuncias.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -14,10 +12,11 @@
 
 
 </head>
-<body>
+<body style="background-color: #E6E9EE;">
     <div class="main">
     
    <!-- sidebar inicio -->
+   <div class="sidebar">
    <div class="sidebar">
         <img src="{{url('assets/img/logoConectec.png')}}" class="logo-sidebar" alt="">
         <ul>
@@ -28,7 +27,7 @@
 
                
                 <li class="logout">
-    <a href="{{ route('login') }}">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+                <a href="{{ route('login') }}">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
 </li>
 
@@ -67,7 +66,7 @@
                 @foreach($denunciasUser as $denuncia)
                 <tr>
                     <td>{{ $denuncia->id }}</td>
-                    <td>{{ $denuncia->userDenunciado->name }}</td>
+                    <td>{{'@'. $denuncia->userDenunciado->arroba }}</td>
                     <td>{{ $denuncia->motivo }}</td>
                     <td>{{ $denuncia->userDenunciado->status }}</td>
                     <td>

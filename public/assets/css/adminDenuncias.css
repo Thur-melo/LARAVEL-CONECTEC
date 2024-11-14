@@ -1,5 +1,6 @@
 body {
     background-color: #E6E9EE;
+    background: #E6E9EE;
 }
 
 /* ESTILOS DO MODAL */
@@ -469,7 +470,7 @@ h1{
     max-height: 600px;
 }
 
-.feed {
+.feed { 
     width: 100%;
     max-height: 900px;
     background: #ffffff;

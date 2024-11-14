@@ -51,7 +51,7 @@
             </div>
             <div class="card" id="cardEmAnalise">                
                 <h1>{{$postInativos}}</h1>
-                <h3>Posts Bloqueados </h3>
+                <h3>Posts Inativos </h3>
             </div>
 
             <div class="card" id="cardEmAnalise" >                
