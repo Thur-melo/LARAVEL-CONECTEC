@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
@@ -18,7 +19,8 @@ class adminController extends Controller
 {
     //public function showHome()
 
-    public function showdenuncias()    {
+    public function showdenuncias()
+    {
 
         $users = User::all();
         // Obter todas as denúncias
@@ -34,48 +36,106 @@ class adminController extends Controller
         $qnt_bloqueados = DenunciaUsuario::where('status', 'bloqueados')->count();
 
         // Retornar a view com os dados das denúncias
-        return view('AdminDenuncias', compact('denuncias','qnt_pendentes', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
-        'users'));
+        return view('AdminDenuncias', compact(
+            'denuncias',
+            'qnt_pendentes',
+            'usersAtivo',
+            'denunciasUser',
+            'qnt_bloqueados',
+            'users'
+        ));
     }
 
-public function showperfil($id) {
+    public function showperfil($id)
+    {
 
+
+        // Buscar usuário
+        $usuario = User::findOrFail($id);
+        $user = Auth::User();
+        $post = Post::all();
+
+        // Buscar posts do user auth
+        $posts = Post::where('user_id', $usuario->id)->get();
+
+        // Contar seguidores e seguindo
+        $myseguidores = Seguir::where('seguindo_id', $usuario->id)->count();
+        $seguindo = Seguir::where('seguidor_id', $usuario->id)->count();
+
+        return view('perfil', compact('usuario', 'posts', 'user', 'myseguidores', 'seguindo'));
+    }
+
+    public function showprofile()
+    {
+        $user = Auth::User();
+
+        return view('profile', compact('user'));
+    }
+
+    public function showPerguntas(Request $request)
+    {
+
+        // Verifica se há uma pesquisa de postagens
+        $searchTerm = $request->input('search');
+
+        if ($searchTerm) {
+
+
+            // Buscar posts
+            $posts = Post::where('texto', 'like', '%' . $searchTerm . '%')
+            ->orWhereHas('user', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%') // Pesquisa pelo nome do usuário
+                      ->orWhere('arroba', 'like', '%' . $searchTerm . '%') // Pesquisa pela arroba do usuário
+                      ->orWhere('email', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhere('id', $searchTerm) // Comparar diretamente o id
+            ->orWhereDate('created_at', '=', $searchTerm) // Comparar datas diretamente
+            ->get();
+        
+        } else {
+            
+  // Obter o valor do filtro
+        $filter = $request->input('filter', 'todos'); 
+                    $posts = [];
     
-    // Buscar usuário
-    $usuario = User::findOrFail($id);
-    $user = Auth::User();   
-    $post = Post::all();
-
-    // Buscar posts do user auth
-    $posts = Post::where('user_id', $usuario->id)->get();
-
-    // Contar seguidores e seguindo
-    $myseguidores = Seguir::where('seguindo_id', $usuario->id)->count();
-    $seguindo = Seguir::where('seguidor_id', $usuario->id)->count();
-
-    return view('perfil', compact('usuario', 'posts', 'user', 'myseguidores','seguindo'));
-}
-
-public function showprofile(){
-    $user = Auth::User();
-
-    return view('profile', compact('user'));
-}
-
-public function showPerguntas() {
-    $users = User::all();
-    $posts = Post::all();
-    $qnt_post = Post::all()->count();
-
-    //ativos e inativous count
-    $postAtivos = Post::where('status', '1')->count();
-    $postInativos = Post::where('status', '2')->count();
+            switch ($filter) {
+                case 'recentes':
+                    $posts = Post::orderBy('created_at', 'desc')->get();
+                    break;
+                case 'antigos':
+                    $posts = Post::orderBy('created_at', 'asc')->get();
+                    break;
+                case 'curtidos':
+                    $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->get();
+                    break;
+                case 'comentados':
+                    $posts = Post::withCount('comentarios')->orderBy('comentarios_count', 'desc')->get();
+                    break;
+                case 'inativos':
+                    // Exemplo de lógica para posts inativos (defina sua própria lógica)
+                    $posts = Post::where('status', 2)->get();
+                    break;
+                case 'todos':
+                default:
+                    $posts = Post::all();
+                    break;
+            }
+        }
 
 
 
-    //grafico pizza
-         // qnt por curso
-         $postsAds = Post::whereHas('user', function ($query) {
+        $users = User::all();
+        $qnt_post = Post::all()->count();
+
+        //ativos e inativous count
+        $postAtivos = Post::where('status', '1')->count();
+        $postInativos = Post::where('status', '2')->count();
+
+
+
+        //grafico pizza
+        // qnt por curso
+        $postsAds = Post::whereHas('user', function ($query) {
             $query->where('perfil', 'Ds'); // Filtra usuários com perfil 'ads'
         })->inRandomOrder()->count();
 
@@ -86,54 +146,51 @@ public function showPerguntas() {
         $postsAdm = Post::whereHas('user', function ($query) {
             $query->where('perfil', 'Adm'); // Filtra usuários com perfil 'ads'
         })->inRandomOrder()->count();
- 
-
-             // Consulta para obter as 6 hashtags com mais posts
-             $topHashtags = Hashtag::withCount('posts') // Conta os posts relacionados
-             ->orderBy('posts_count', 'desc') // Ordena pelo número de posts
-             ->limit(6) // Limita a 6 resultados
-             ->get(); // Executa a consulta e obtém os resultados
 
 
-// Extrair contagens de post
-$hashtagsPostCounts = $topHashtags->pluck('posts_count')->toArray();
+        // Consulta para obter as 6 hashtags com mais posts
+        $topHashtags = Hashtag::withCount('posts') // Conta os posts relacionados
+            ->orderBy('posts_count', 'desc') // Ordena pelo número de posts
+            ->limit(6) // Limita a 6 resultados
+            ->get(); // Executa a consulta e obtém os resultados
 
-// Extrair nomes das hashtags
-$hashtagsNames = $topHashtags->pluck('hashtag')->toArray();
+
+        // Extrair contagens de post
+        $hashtagsPostCounts = $topHashtags->pluck('posts_count')->toArray();
+
+        // Extrair nomes das hashtags
+        $hashtagsNames = $topHashtags->pluck('hashtag')->toArray();
 
 
-    return view('adminHome', compact( 'users', 'posts', 'postAtivos', 'postInativos', 'postsAds', 'postsAdm', 'postsNutri', 'topHashtags','hashtagsPostCounts','hashtagsNames'));
-}
+        return view('adminHome', compact('users', 'posts', 'postAtivos', 'postInativos', 'postsAds', 'postsAdm', 'postsNutri', 'topHashtags', 'hashtagsPostCounts', 'hashtagsNames'));
+    }
 
-    public function showadmin(Request $request) 
+    public function showadmin(Request $request)
     {
 
 
         // Verifica se há uma pesquisa de postagens
-    $searchTerm = $request->input('search'); 
+        $searchTerm = $request->input('search');
 
-    //contar
-    $usuariosInativos = User::where('status', 'inativo')->count();
-    $usuariosAtivos = User::where('status', 'Ativo')->count();
-    $users = User::all();// Contar total de usuários
-
-        
-
-            
-    if ($searchTerm) {
+        //contar
+        $usuariosInativos = User::where('status', 'inativo')->count();
+        $usuariosAtivos = User::where('status', 'Ativo')->count();
+        $users = User::all(); // Contar total de usuários
 
 
-  // Buscar usuários
-  $users = User::where('name', 'like', '%' . $searchTerm . '%')
-  ->orWhere('email', 'like', '%' . $searchTerm . '%')
-  ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
-  ->get(); 
 
 
-    }else{
-       
-    }
-    $qnt_users = User::count();
+        if ($searchTerm) {
+
+
+            // Buscar usuários
+            $users = User::where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('email', 'like', '%' . $searchTerm . '%')
+                ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
+                ->get();
+        } else {
+        }
+        $qnt_users = User::count();
         // qnt por curso
         $qnt_users_ads = User::where('perfil', 'Ds')->count();
         $qnt_users_adm = User::where('perfil', 'Adm')->count();
@@ -157,216 +214,219 @@ $hashtagsNames = $topHashtags->pluck('hashtag')->toArray();
 
 
 
-      // Obtém os 10 usuários com mais seguidores
-      $topUsers = User::select('users.id', 'users.name', DB::raw('COUNT(seguidores.id) as seguidores_count'))
-      ->leftJoin('seguidores', 'seguidores.seguindo_id', '=', 'users.id')
-      ->groupBy('users.id', 'users.name') // Adiciona 'users.name' na cláusula GROUP BY
-      ->orderBy('seguidores_count', 'DESC')
-      ->limit(10)
-      ->get();
+        // Obtém os 10 usuários com mais seguidores
+        $topUsers = User::select('users.id', 'users.name', DB::raw('COUNT(seguidores.id) as seguidores_count'))
+            ->leftJoin('seguidores', 'seguidores.seguindo_id', '=', 'users.id')
+            ->groupBy('users.id', 'users.name') // Adiciona 'users.name' na cláusula GROUP BY
+            ->orderBy('seguidores_count', 'DESC')
+            ->limit(10)
+            ->get();
 
-      $maisPost = User::withCount('posts')
-      ->orderBy('posts_count', 'desc')
-      ->take(3)
-      ->get();
-  
-  // Prepare dados para a view
-  $userNamesPost = $maisPost->pluck('arroba')->map(function ($arroba) {
-    return '@' . $arroba; // Adiciona '@' a cada nome
-})->toArray(); // Nomes dos usuários
-  $userPostCounts = $maisPost->pluck('posts_count')->toArray(); 
+        $maisPost = User::withCount('posts')
+            ->orderBy('posts_count', 'desc')
+            ->take(3)
+            ->get();
+
+        // Prepare dados para a view
+        $userNamesPost = $maisPost->pluck('arroba')->map(function ($arroba) {
+            return '@' . $arroba; // Adiciona '@' a cada nome
+        })->toArray(); // Nomes dos usuários
+        $userPostCounts = $maisPost->pluck('posts_count')->toArray();
 
 
-// Controller
-$maisComments = User::withCount('comentarios')
-    ->orderBy('comentarios_count', 'desc')
-    ->take(3)
-    ->get();
+        // Controller
+        $maisComments = User::withCount('comentarios')
+            ->orderBy('comentarios_count', 'desc')
+            ->take(3)
+            ->get();
 
-// Extrair contagens de comentários
-$userPostCounts = $maisComments->pluck('comentarios_count')->toArray();
+        // Extrair contagens de comentários
+        $userPostCounts = $maisComments->pluck('comentarios_count')->toArray();
 
-// Extrair nomes dos usuários com '@'
-$userNamesComment = $maisComments->pluck('arroba')->map(function ($arroba) {
-    return '@' . $arroba; // Adiciona '@' a cada nome
-})->toArray();
+        // Extrair nomes dos usuários com '@'
+        $userNamesComment = $maisComments->pluck('arroba')->map(function ($arroba) {
+            return '@' . $arroba; // Adiciona '@' a cada nome
+        })->toArray();
         // Passar os dados para a view
-        return view('admin', compact('qnt_users', 'qnt_pendentes', 'seguidoresCounts', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
-        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'topUsers','usuariosInativos', 'usuariosAtivos', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
+        return view('admin', compact(
+            'qnt_users',
+            'qnt_pendentes',
+            'seguidoresCounts',
+            'usersAtivo',
+            'denunciasUser',
+            'qnt_bloqueados',
+            'users',
+            'qnt_users_ads',
+            'qnt_users_adm',
+            'qnt_users_nutri',
+            'topUsers',
+            'usuariosInativos',
+            'usuariosAtivos',
+            'maisPost',
+            'userPostCounts',
+            'userNamesComment',
+            'userNamesPost',
+            'userPostCounts'
+        ));
     }
 
 
-    
-
-
-// Relacionamento com o usuário denunciado
 
 
 
-public function update(Request $request, string $id)
-{
-    $profilePhotoUrl = 'urlDaFoto/default.jpg';
-// Atualiza o usuário com os dados validados
-$usuario = User::findOrFail($id);
+    // Relacionamento com o usuário denunciado
 
-    if ($request->hasFile('urlDaFoto')) {
-        $file = $request->file('urlDaFoto');
-        $profilePhotoUrl = $file->store('urlDaFoto', 'public');
 
-    } elseif ($request->input('deleteImg')){
 
+    public function update(Request $request, string $id)
+    {
         $profilePhotoUrl = 'urlDaFoto/default.jpg';
-    } else {
-          // Se não houver nova foto, mantém a URL existente
-          $profilePhotoUrl = $usuario->urlDaFoto;
+        // Atualiza o usuário com os dados validados
+        $usuario = User::findOrFail($id);
+
+        if ($request->hasFile('urlDaFoto')) {
+            $file = $request->file('urlDaFoto');
+            $profilePhotoUrl = $file->store('urlDaFoto', 'public');
+        } elseif ($request->input('deleteImg')) {
+
+            $profilePhotoUrl = 'urlDaFoto/default.jpg';
+        } else {
+            // Se não houver nova foto, mantém a URL existente
+            $profilePhotoUrl = $usuario->urlDaFoto;
+        }
+
+        if ($request->hasFile('urlDoBanner')) {
+            $file = $request->file('urlDoBanner');
+            $profileBannerUrl = $file->store('urlDoBanner', 'public');
+        } elseif ($request->input('deleteImg')) {
+
+            $profileBannerUrl = 'urlDoBanner/default-banner.jpg';
+        } else {
+            // Se não houver nova foto, mantém a URL existente
+            $profileBannerUrl = $usuario->urlDoBanner;
+        }
+
+
+
+
+        $usuario->urlDoBanner = $profileBannerUrl;
+
+        $usuario->urlDaFoto = $profilePhotoUrl;
+
+        // Atualize os dados do usuário
+        $usuario->update($request->except('urlDaFoto', 'urlDoBanner'));
+
+
+
+        return redirect()->route('profile', ['id' => $usuario->id])->with('status', 'Usuário atualizado com sucesso');
     }
 
-    if ($request->hasFile('urlDoBanner')) {
-        $file = $request->file('urlDoBanner');
-        $profileBannerUrl = $file->store('urlDoBanner', 'public');
 
-    } elseif ($request->input('deleteImg')){
 
-        $profileBannerUrl = 'urlDoBanner/default-banner.jpg';
-    } else {
-          // Se não houver nova foto, mantém a URL existente
-          $profileBannerUrl = $usuario->urlDoBanner;
+
+
+
+    public function registerAdm(Request $request)
+
+    {
+
+
+        $profilePhotoUrl = null;
+
+        if ($request->hasFile('urlDaFoto')) {
+            $file = $request->file('urlDaFoto');
+            $profilePhotoUrl = $file->store('urlDaFoto', 'public');
+        }
+
+        Adm::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'urlDaFoto' => $profilePhotoUrl,
+            'perfil' => $request->input('role'),
+
+        ]);
+
+        return redirect()->route('loginAdm')->with([
+            'status' => 'Usuário registrado com sucesso',
+            'showModal' => true,
+        ]);
+    }
+
+
+    public function loginAdm(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        // Buscando o administrador pelo email
+        $adm = Adm::where('email', $credentials['email'])->first();
+
+        // Verificando se o administrador existe e a senha está correta
+        if ($adm && Hash::check($credentials['password'], $adm->password)) {
+            // Autenticar o usuário
+            Auth::login($adm);
+
+            return redirect()->route('admin')->with(['success' => 'Logou']);
+        }
+
+        return redirect()->route('loginAdm')->withErrors(['error' => 'Email ou senha errada']);
+    }
+
+    public function showAdmForm()
+    {
+        return view('registerAdm');
+    }
+
+    public function showLoginAdmForm()
+    {
+        return view('loginAdm');
     }
 
 
 
 
-    $usuario->urlDoBanner= $profileBannerUrl;
+    public function desativaUserDenuncias($id)
+    {
 
-$usuario->urlDaFoto= $profilePhotoUrl;
+        $user = User::findOrFail($id); // Encontre o User$user pelo ID
+        $user->status = 'inativo'; // Muda o status para 2
+        $user->save(); // Salva as alterações
 
-// Atualize os dados do usuário
-$usuario->update($request->except('urlDaFoto', 'urlDoBanner'));
-
-
-
-return redirect()->route('profile', ['id' => $usuario->id])->with('status', 'Usuário atualizado com sucesso');
-}
-
-
-
-
-
-
-public function registerAdm(Request $request)
-
-{
-    
-
-    $profilePhotoUrl = null;
-
-    if ($request->hasFile('urlDaFoto')) {
-        $file = $request->file('urlDaFoto');
-        $profilePhotoUrl = $file->store('urlDaFoto', 'public');
+        return redirect()->route('denuncias')->with('success', 'Status do user atualizado para inativo!');
     }
 
-    Adm::create([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'password' => $request->input('password'),
-        'urlDaFoto' => $profilePhotoUrl,
-        'perfil' => $request->input('role'),
-       
-    ]);
-
-    return redirect()->route('loginAdm')->with([
-        'status' => 'Usuário registrado com sucesso',
-        'showModal' => true,
-    ]);
-
-    
-    
 
 
 
-    
+    // Função para desativar o usuário
+    public function desativaUser($id)
+    {
+        $user = User::findOrFail($id); // Encontra o usuário pelo ID
+        $user->status = 'inativo'; // Muda o status para 'inativo'
+        $user->save(); // Salva as alterações
 
-}
 
-
-public function loginAdm(Request $request)
-{
-    $credentials = $request->only('email', 'password');
-
-    // Buscando o administrador pelo email
-    $adm = Adm::where('email', $credentials['email'])->first();
-
-    // Verificando se o administrador existe e a senha está correta
-    if ($adm && Hash::check($credentials['password'], $adm->password)) {
-        // Autenticar o usuário
-        Auth::login($adm);
-        
-        return redirect()->route('admin')->with(['success' => 'Logou']);
+        return response()->json(['message' => 'Usuário desativado com sucesso!']);
     }
 
-    return redirect()->route('loginAdm')->withErrors(['error' => 'Email ou senha errada']);
-}
-
-public function showAdmForm()
-{
-    return view('registerAdm');
-}
-
-public function showLoginAdmForm()
-{
-    return view('loginAdm');
-}
+    // Função para ativar o usuário
+    public function AtivaUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id); // Encontra o usuário pelo ID
+        $user->status = 'ativo'; // Muda o status para 'ativo'
+        $user->save(); // Salva as alterações
 
 
-
-
-public function desativaUserDenuncias($id)
-{
-    
-    $user = User::findOrFail($id); // Encontre o User$user pelo ID
-    $user->status = 'inativo'; // Muda o status para 2
-    $user->save(); // Salva as alterações
-
-    return redirect()->route('denuncias')->with('success', 'Status do user atualizado para inativo!');
-}
-
-
-
-    
-// Função para desativar o usuário
-public function desativaUser($id)
-{
-    $user = User::findOrFail($id); // Encontra o usuário pelo ID
-    $user->status = 'inativo'; // Muda o status para 'inativo'
-    $user->save(); // Salva as alterações
-
-
-    return response()->json(['message' => 'Usuário desativado com sucesso!']);
-
-}
-
-// Função para ativar o usuário
-public function AtivaUser(Request $request, $id)
-{
-    $user = User::findOrFail($id); // Encontra o usuário pelo ID
-    $user->status = 'ativo'; // Muda o status para 'ativo'
-    $user->save(); // Salva as alterações
-
-
-    return response()->json(['message' => 'Usuário ativado com sucesso']);
-
-}
+        return response()->json(['message' => 'Usuário ativado com sucesso']);
+    }
 
 
 
     public function destroyPost($id)
-{
-    $post = Post::findOrFail($id);
-    $post->delete();
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
 
-    return redirect()->back()->with('success', 'Post deletado com sucesso!');
+        return redirect()->back()->with('success', 'Post deletado com sucesso!');
+    }
 }
-
-}
-
-

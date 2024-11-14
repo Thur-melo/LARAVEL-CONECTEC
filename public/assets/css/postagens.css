@@ -235,6 +235,13 @@ background-color: #e6fdda;
   color: #207905;
 }
 
+.status-respondido{
+    background-color: #83d7f5;
+      border: 1px solid #72bdd8;
+      color: white;
+    }
+    
+
 .status-desativado {
     background-color: #e49191;
 /* Cor para status desativado */
