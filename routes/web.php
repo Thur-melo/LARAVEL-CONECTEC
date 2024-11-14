@@ -16,10 +16,18 @@ use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\notificacaoController;
 
+
+
+Route::post('/denuncia/desativar/{userId}', [DenunciaController::class, 'desativarUsuario'])->name('user.desativar');
+Route::post('/denuncia/ativar/{userId}', [DenunciaController::class, 'ativarUsuario'])->name('user.ativar');
+Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
+
+
+Route::post('/denuncia/desativar/{userId}', [DenunciaController::class, 'desativarUsuario'])->name('user.desativar');
+Route::post('/denuncia/ativar/{userId}', [DenunciaController::class, 'ativarUsuario'])->name('user.ativar');
+
 Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
 Route::post('/denunciarUser', [DenunciaController::class, 'storeUser'])->name('denunciarUser');
-
-
 Route::post('/denunciar', [DenunciaController::class, 'store'])->name('denunciar');
 Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denuncias');
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');

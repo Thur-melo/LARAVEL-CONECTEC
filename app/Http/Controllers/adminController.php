@@ -18,11 +18,23 @@ class adminController extends Controller
     //public function showHome()
 
     public function showdenuncias()    {
+
+        $users = User::all();
         // Obter todas as denúncias
         $denuncias = Denuncia::with(['user', 'post'])->get();
 
+        $usersAtivo = User::where('status', 1)->get();
+
+        // Carregar denúncias pendentes com eager loading
+        $denunciasUser = DenunciaUsuario::with('user')->where('status', 'pendente')->get();
+
+        // Contar o número de denúncias pendentes e bloqueadas
+        $qnt_pendentes = $denunciasUser->count();
+        $qnt_bloqueados = DenunciaUsuario::where('status', 'bloqueados')->count();
+
         // Retornar a view com os dados das denúncias
-        return view('AdminDenuncias', compact('denuncias'));
+        return view('AdminDenuncias', compact('denuncias','qnt_pendentes', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
+        'users'));
     }
 
 public function showperfil($id) {
