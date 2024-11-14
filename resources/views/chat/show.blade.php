@@ -80,19 +80,49 @@
 
             <div class="chat-container">
                 <div class="userTwo-container">
-                    <div class="profileImg">
-
+                    <div class="infosUserChat">
                         <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="">
+                        <div class="infosUser">
+                            <h1 class="nomeChat"> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </h1>
+                        
+                        <div class="online">
+                            <div class="bolinha"></div>
+                            <span>Online</span>
+                        </div>
+                        </div>
+                        
                     </div>
-                    <h1> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </h1>
+                    <div class="iconsChat">
+                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-video"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    
+                </div>
+
+                    
                 </div>
                 <div class="messages">
                     @foreach($messages as $message)
-                    <div class="message" @if ($message->user->id === Auth::id())
-                        style="background-color: #b3bcff; display: flex;
-                        flex-direction: row-reverse;"
-                        @endif>
-                         {{ $message->message }}
+                    <div class="message {{ $message->user->id === Auth::id() ? 'user-message' : 'other-message' }}">
+                        
+                    @if($message->user->id !== Auth::id())
+                    <div class="imgInfo">
+                        
+                         <img src="{{ asset($conversation->user_one_id === $user->id ? 'storage/' . $conversation->userTwo->urlDaFoto : 'storage/' . $conversation->userOne->urlDaFoto) }}" alt="Foto de Perfil" class="profile-pic">
+                         <span>{{$conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }}</span>
+                         <span id="horaMsg">{{ $message->created_at->format('H:i') }}</span>
+                    </div>
+                    @endif
+                        
+                         
+                    @if($message->user->id !== Auth::id())
+                        <div class="msg">
+                         <span>{{ $message->message }}</span>
+                         </div>
+                    @else
+                    <span>{{ $message->message }}</span>
+                    @endif     
+                         
                     </div>
                     @endforeach
                 </div>
@@ -108,14 +138,13 @@
 
             <div class="listaContainer">
                 <div class="headerContatos">
-                    <h1>Minhas Conversas</h1>
+                    <h1>Chat</h1>
+                    <button data-bs-toggle="modal" data-bs-target="#profileModal" class="addUser">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
 
                 </div>
-                <div class="btnChat">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        Adicionar 
-                    </button>
-                </div>
+                
 
                 <div class="conversationsLista">
 
@@ -131,7 +160,7 @@
                                 </div>
                                     <div class="infosContato">
                                     <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
-                                    <span id="nome">{{$conversation->userTwo->name}}</span>
+                                    <span id="nome">{{$conversation->userTwo->arroba}}</span>
 
                                     <div class="horasMsgContato"><span id="horaMsgConta">5:14</span></div>
                                 </div>

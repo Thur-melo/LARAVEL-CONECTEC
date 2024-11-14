@@ -86,9 +86,11 @@ class ChatController extends Controller
         abort(403); // Acesso negado
     }
 
+    $ultimaMensagem = $conversation->messages()->orderBy('created_at', 'desc')->first();
+
     $messages = $conversation->messages; // Isso deve retornar as mensagens
 
-    return view('chat.show', compact('conversation','conversations', 'messages', 'user'));
+    return view('chat.show', compact('conversation','conversations', 'messages', 'user','ultimaMensagem'));
 }
 
 

@@ -18,16 +18,74 @@
     padding: 15px;
     overflow-y: auto;
     max-height: 90%; /* Ajuste a altura conforme necessário */
+    margin: 5px 0;
+    border-radius: 10px;
+   
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
 }
 
 .messages .message {
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #f1f1f1;
+
     border-radius: 5px;
     max-width: 100%;
     direction: ltr; /* Retorna a direção do texto das mensagens para a esquerda */
 }
+
+.message.user-message {
+    background-color: #69a0f3;
+    align-self: flex-end;
+    color: white;
+}
+
+.message.other-message {
+   /* Mesma cor de fundo para consistência */
+    align-self: flex-start; /* Alinha a mensagem à esquerda */
+    color: #000;
+}
+
+.profile-pic {
+    width: 40px; /* Largura da imagem */
+    height: 40px; /* Altura da imagem */
+    border-radius: 50%; /* Torna a imagem circular */
+     /* Espaço entre a imagem e o texto */
+    margin-bottom: 10px; /* Move a imagem um pouco para cima */
+}
+.msg{
+    background-color: #e9e9e9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+
+
+.imgInfo span{
+    margin: 0;
+    color: #3f3950;
+    font-weight: 600;
+    font-size: 10.5pt;
+    margin-left:5px;
+}
+.imgInfo{
+    display: flex;
+    align-items:center;
+    justify-content: flex-start;
+}
+
+#horaMsg{
+    color: #bebebe;
+    font-size: 9.5pt;
+    font-weight: normal;
+
+}
+
+
+
 
 .input-container {
     display: flex;
@@ -70,10 +128,13 @@
 .userTwo-container {
     display: flex;
     align-items: center;
-    padding: 10px;
-    background-color: #f1f1f1;
+    justify-content: space-between;
+    padding: 10px 25px;
+    background-color: white;
+    width: 100%;
     gap: 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e9e9e9;
+    
 }
 
 /* Lista de conversas */
@@ -110,3 +171,63 @@ align-items: center;
 gap: 30px;
 padding: 10px;
 }
+
+.nomeChat{
+    font-weight: 600;
+    font-size: 13pt;
+    margin: 0;
+
+}
+
+.infosUserChat{
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+}
+.infosUserChat img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.infosUser{
+    display: flex;
+    flex-direction: column;
+    color: #3f3950;
+}
+
+.online{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+}
+
+.online span{
+    font-size: 10pt;
+    color: #8b8b8b;
+
+}
+.bolinha{
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.iconsChat{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.iconsChat i{
+    color:#3f3950 ;
+    font-size: 15pt;
+
+}
+
+
+
