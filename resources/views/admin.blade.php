@@ -163,7 +163,7 @@
                 labels: ['DS', 'ADM', 'NUTRI'],
                 datasets: [{
                     label: 'Distribuição de Cores',
-                    data: [{{$porcentagem_ads}}, {{$porcentagem_adm}}, {{$porcentagem_nutri}}],
+                    data: [{{$qnt_users_ads}}, {{$qnt_users_adm}}, {{$qnt_users_nutri}}],
                     backgroundColor: ['#3497c2', '#151855', '#0BBDFF'],
                 }]
             },
@@ -183,7 +183,7 @@
                     tooltip: {
                         callbacks: {
                             label: function(tooltipItem) {
-                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                                return tooltipItem.label + ': ' + tooltipItem.raw ;
                             }
                         }
                     }

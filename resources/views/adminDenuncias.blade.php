@@ -80,7 +80,7 @@
                             </form>
                         </td>
                         <td>
-                            <form action="{{ route('user.off', $denuncia->user->id) }}" method="POST">
+                            <form action="{{ route('user.off.Denuncias', $denuncia->user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn" id="btnDesativa"

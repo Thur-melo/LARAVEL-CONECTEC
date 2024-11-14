@@ -19,7 +19,8 @@ use App\Http\Controllers\notificacaoController;
 Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
 Route::post('/denunciarUser', [DenunciaController::class, 'storeUser'])->name('denunciarUser');
 
-
+    
+Route::delete('/denuncias/{id}', [adminController::class, 'desativaUserDenuncias'])->name('user.off.Denuncias');
 Route::post('/denunciar', [DenunciaController::class, 'store'])->name('denunciar');
 Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denuncias');
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
@@ -85,6 +86,7 @@ Route::post('/loginAdm', [adminController::class, 'loginAdm']);
 Route::get('/admin/buscar', [BuscarUsuariosController::class, 'buscarUsuariosAdmin'])->name('buscarUsuariosAdmin');
 Route::delete('/admin/{id}', [adminController::class, 'desativaUser'])->name('user.off');
 Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.ativa');
+
 
 Route::get('/posts/{id}/comentarios', [ComentariosController::class, 'showcomentarios'])->name('comentarios.show');
 Route::get('/comentarios/{id}', [ComentariosController::class, 'showcomentarios'])->name('comentarios');
