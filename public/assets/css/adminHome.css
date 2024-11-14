@@ -206,6 +206,8 @@ canvas {
     cursor: pointer;
     height: 840px;
     width: 450px;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
 .filtrotbuser3 {
@@ -295,6 +297,7 @@ canvas {
     transition: background-color 0.2s ease;
 }
 
+
 .tabelaUsers2 tr:hover td {
     background-color: #e8f5ff;
 }
@@ -306,6 +309,10 @@ canvas {
 
 .tabelaUsers2 tr:last-child td {
     border-bottom: none;
+    word-break: break-all;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    max-width: 50px;
 }
 
 .tabelaUsers2::-webkit-scrollbar {
@@ -454,3 +461,96 @@ canvas {
     cursor: pointer;
 }
 
+
+
+/* possts */
+
+
+.profileImg img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.meio .feed .user {
+    display: flex;
+    gap: 1rem;
+}
+.info {
+    width: 100%;
+}
+.user {
+    display: flex;
+    gap: 5px;
+}
+
+.info p {
+    font-size: 9.5pt;
+    color: #554f66;
+    font-weight: 500;
+}
+.info h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    margin: 0;
+    color: #3f3950;
+}
+.publiSpan {
+    color: #bebebe;
+    font-size: 9.5pt;
+    font-weight: 500;
+}
+.modulo-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4px 10px;
+    border-radius: 25px;
+    height: 100%;
+    box-shadow: rgba(110, 110, 110, 0.315) 0px 2px 5px 0px;
+}
+.modulo-div p {
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    color: white;
+    font-weight: 600;
+    font-size: 9pt;
+}
+
+.textoPost {
+    font-size: 18px;
+    color: #555;
+    margin: 0;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-height: 2.8em;
+    word-wrap: break-word;
+}
+.imgPost {
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0.7rem 0;
+    max-width: 300px;
+    max-height: 200px;
+    object-fit: contain;
+}
+.feed {
+    width: 400px;
+    max-height: 400px;
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 8px;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
+}

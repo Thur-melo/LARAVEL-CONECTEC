@@ -21,20 +21,20 @@
 
     <!-- sidebar inicio -->
     <div class="sidebar">
-        <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
+        <img src="{{url('assets/img/logoConectec.png')}}" class="logo-sidebar" alt="">
         <ul>
-
-            <li><a href="{{ route('admin') }}">Úsuario</a></li>
-            <li><a href="{{ route('adminHome') }}">Postagens</a></li>
-            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
+        <li><a href= "{{ route('admin') }}" >Usuário</a></li>
+            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
-            <li class="logout">
+
+               
+                <li class="logout">
     <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
-            </li>
+</li>
 
-            </li>
+</li>
         </ul>
     </div>
     </div>
@@ -52,15 +52,15 @@
         <div class="containerCards">
             <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$qnt_users}}</h1>
-                <h3>Úsuarios Totais</h3>
+                <h3>Usuário Totais</h3>
             </div>
             <div class="card" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$usuariosInativos}}</h1>
-                <h3>Úsuarios Inativos</h3>
+                <h3>Usuário Inativos</h3>
             </div>
             <div class="card" id="cardEmAnalise" style="background: linear-gradient(to bottom right, #fff, #fff);">
                 <h1>{{$usuariosAtivos}}</h1>
-                <h3>Úsuarios ativos</h3>
+                <h3>Usuário ativos</h3>
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
 
                         @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->name }}</td>
+                            <td>{{'@'. $user->arroba }}</td>
                             <td>{{ $seguidoresCounts[$user->id] ?? 0 }}</td> <!-- Exibe o número de seguidores ou 0 se não houver -->
                             <td>{{ $user->status }}</td>
                             <td>{{ $user->perfil }}</td>
@@ -172,7 +172,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Distribuição de Cursos',
+                        text: 'Distribuição de Usuários',
                         font: {
                             size: 18
                         }

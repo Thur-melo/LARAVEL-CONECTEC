@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentarios;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Likes;
 use App\Models\Hashtag;
+use App\Models\salvos;
 use App\Models\Seguir;
 use Carbon\Carbon;
 
@@ -33,8 +35,11 @@ public function showPostagens()
     $user = Auth::user();
     $posts = Post::where('user_id', $user->id)->get();
     $postsCount = $posts->count(); 
+    $numComentarios = Comentarios::where('user_id', $user)->count();
+    $numSalvos = salvos::where('user_id', $user)->count();
+
     
-    return view('postagens',compact('user', 'usuariosSugestoes', 'posts','postsCount'));
+    return view('postagens',compact('user', 'usuariosSugestoes', 'posts','postsCount','numComentarios','numSalvos'));
 }
 public function showHome(Request $request)
 {
@@ -108,7 +113,7 @@ public function showHome(Request $request)
         // Obtem todos os posts relevantes, excluindo o post recente do usuário
         $posts = $postsQuery->select('posts.*')
             ->orderBy('created_at', 'desc') // Ordena do mais recente para o mais antigo
-            ->paginate(10); // Paginação para controle de performance
+            ->paginate(20); // Paginação para controle de performance
 
         // Se o post recente do usuário existir, adicione-o no topo da lista
         if ($userRecentPost) {

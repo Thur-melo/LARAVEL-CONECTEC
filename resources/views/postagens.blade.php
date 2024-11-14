@@ -27,7 +27,7 @@
     <main>
         <div class="container">
             <div class="left">
-            <div class="sidebar">
+                <div class="sidebar">
                     <div class="sidebarList">
 
                         <a href="{{ Route('home')}}" class="menu-item ">
@@ -57,7 +57,7 @@
                             <h3>Chat</h3>
                         </a>
 
-                        <a class="menu-item "  href="{{ Route('home')}}"  >
+                        <a class="menu-item " href="{{ Route('home')}}">
                             <span><i class="fa-regular fa-square-plus"></i></i></span>
                             <h3>Criar</h3>
                         </a>
@@ -96,7 +96,7 @@
 
                     <div class="cardsPosta">
                         <div class="cardPosta">
-                            <h2>10</h2>
+                            <h2>{{$numComentarios}}</h2>
                             <span>Comentarios</span>
                         </div>
                         <i class="fa-regular fa-comment"></i>
@@ -104,7 +104,7 @@
 
                     <div class="cardsPosta">
                         <div class="cardPosta">
-                            <h2>10</h2>
+                            <h2>{{$numSalvos}}</h2>
                             <span>Salvos</span>
                         </div>
                         <i class="fa-regular fa-bookmark"></i>
@@ -115,14 +115,14 @@
 
 
                 <div class="containerTabela">
-                    <h2>Minhas publicações</h2>
+                    <h2>Minhas postagens</h2>
 
                     <div class="sumarioCont">
                         <div class="sumarios">
                             <div class="cor1"></div><span>Aprovado</span>
                         </div>
                         <div class="sumarios">
-                            <div class="cor2"></div> <span>Rejeitado</span>
+                            <div class="cor2"></div> <span>Desativado</span>
                         </div>
                         <div class="sumarios">
                             <div class="cor3"></div> <span>Respondido/comentado</span>
@@ -142,10 +142,13 @@
                         <div class="content-preview">{{ $post->texto}}</div>
                         <div>
                             <div class="statusPost">
-                                <div class="status {{ $post->status == 1 ? 'status-ativo' : 'status-desativado' }}">
-                                    <span>{{ $post->status == 1 ? 'Ativo' : 'Desativado' }}</span>
+                                <div class="status {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'status-respondido' : ($post->status == 1 ? 'status-ativo' : 'status-desativado') }}">
+                                    <span>
+                                        {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'Comentado' : ($post->status == 1 ? 'Ativo' : 'Desativado') }}
+                                    </span>
                                 </div>
                             </div>
+
                         </div>
                         <div class="icons">
 

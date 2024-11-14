@@ -16,9 +16,8 @@
    <div class="sidebar">
         <img src="{{url('assets/img/logoConectec.png')}}" class="logo-sidebar" alt="">
         <ul>
-        <li><a href= "{{ route('admin') }}" >Usúario</a></li>
+        <li><a href= "{{ route('admin') }}" >Usuário</a></li>
             <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
-            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
 
@@ -37,8 +36,10 @@
 
 <div class="container">
 <div class="search-bar">
+<form method="GET" action="{{ route('adminHome') }}">
         <input type="text" name="search" id="search" placeholder="Pesquisar Posts..." value="{{ old('search') }}">
         <button type="submit">Pesquisar</button> <!-- Botão de pesquisa -->
+</form>
     </div>
     </div>
 
@@ -71,7 +72,7 @@
 
            <div class="card2" id="cardModal">
     <h1>Modal</h1>
-    <h3>#</h3>
+    <h3>Hashtag totais</h3>
 </div>
         </div>
     </div>
@@ -155,16 +156,22 @@
             <div>
 
             <div class="filtro">
-    <label for="filter">Ordenar por:</label>
-    <select id="filter">
-        <option value="recentes">Mais Recentes</option>
-        <option value="antigos">Mais Antigos</option>
+            <label for="filter">Ordenar por:</label>
+<form action="{{ route('adminHome') }}" method="GET">
+    <select name="filter" id="filter" onchange="this.form.submit();">
+        <option value="todos" {{ request('filter') == 'todos' ? 'selected' : '' }}>Todos</option>
+        <option value="recentes" {{ request('filter') == 'recentes' ? 'selected' : '' }}>Mais Recentes</option>
+        <option value="antigos" {{ request('filter') == 'antigos' ? 'selected' : '' }}>Mais Antigos</option>
+        <option value="curtidos" {{ request('filter') == 'curtidos' ? 'selected' : '' }}>Mais Curtidos</option>
+        <option value="comentados" {{ request('filter') == 'comentados' ? 'selected' : '' }}>Mais Comentados</option>
+        <option value="inativos" {{ request('filter') == 'inativos' ? 'selected' : '' }}>Inativos</option>
     </select>
+</form>
    
 </div>
 </div>
 
-<table>
+<table> 
     <thead>
         <tr>
             <th>Usuário</th>
@@ -183,8 +190,11 @@
             <td>{{$post->likes->count()}}</td>
             <td>{{$post->comentarios->count()}}</td>
           
-            <td>14/11/2024</td>
-            <td>?</td>
+            <td>{{ $post->created_at->format('d/m/Y') }}</td>
+            <td>  <form action="{{ route('adminHome') }}" method="GET">
+        <input type="hidden" name="search" value="{{ $post->id }}">
+        <button type="submit" class="btn btn-primary">Ver Post</button>
+    </form></td>
         </tr>
    @endforeach
     </tbody>
@@ -198,13 +208,92 @@
         <div class="containerTabelaUser3">
             <div class="tabelaUsers3">
             <div class="filtrotbuser3">
-    <label for="filter">Ordenar por:</label>
-    <select id="filter">
-        <option value="recentes">Mais Recentes</option>
-        <option value="antigos">Mais Antigos</option>
-        <option value="seguidos">Mais Seguidos</option>
+            <label for="filter">Ordenar por:</label>
+<form action="{{ route('adminHome') }}" method="GET">
+    <select name="filter" id="filter" onchange="this.form.submit();">
+        <option value="todos" {{ request('filter') == 'todos' ? 'selected' : '' }}>Todos</option>
+        <option value="recentes" {{ request('filter') == 'recentes' ? 'selected' : '' }}>Mais Recentes</option>
+        <option value="antigos" {{ request('filter') == 'antigos' ? 'selected' : '' }}>Mais Antigos</option>
+        <option value="curtidos" {{ request('filter') == 'curtidos' ? 'selected' : '' }}>Mais Curtidos</option>
+        <option value="comentados" {{ request('filter') == 'comentados' ? 'selected' : '' }}>Mais Comentados</option>
+        <option value="inativos" {{ request('filter') == 'inativos' ? 'selected' : '' }}>Inativos</option>
     </select>
+</form>
 </div>
+@foreach($posts as $post)
+    @php
+        $coresModulo = [
+            '1º' => '#CD4642',
+            '2º' => '#5169B1',
+            '3º' => '#64B467',
+        ];
+    @endphp
+
+    <div class="feeds">
+        <div class="feed">
+            <!-- Seção de informações do usuário -->
+            <div class="user">
+                <div class="profileImg">
+                    @if(isset($post->user->id))
+                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
+                    @else
+                        {{ dd($post->user) }}
+                    @endif
+                </div>
+                <div class="info">
+                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                        <h3>{{ '@' . $post->user->arroba }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
+                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                            <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
+                        </div>
+                    </div>
+                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                </div>
+            </div>
+            <!-- Fim da seção de informações do usuário -->
+
+            <!-- Texto do post -->
+            <div class="textoPost">
+                {{ $post->texto }}
+            </div>
+            <!-- Fim do texto do post -->
+
+            <!-- Imagem do post -->
+            <div class="imgPost">
+                @if($post->fotoPost)
+                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                    </a>
+                @endif
+            </div>
+            <!-- Fim da imagem do post -->
+
+            <!-- Botões de ação -->
+            <div class="action-buttons">
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este post?')">Excluir</button>
+                </form>
+
+                <form action="{{ route('posts.aprovar', $post->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn btn-success" onclick="return confirm('Tem certeza que deseja ativar este post?')">Ativar</button>
+                </form>
+
+                <form action="{{ route('posts.desativar', $post->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn btn-warning" onclick="return confirm('Tem certeza que deseja desativar este post?')">Desativar</button>
+                </form>
+            </div>
+            <!-- Fim dos botões de ação -->
+        </div>
+    </div>
+@endforeach
+
+
             </div>
         </div>
     </div>
@@ -227,7 +316,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Distribuição de Cursos',
+                        text: 'Distribuição de Posts',
                         font: {
                             size: 18
                         }

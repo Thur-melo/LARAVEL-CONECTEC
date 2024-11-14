@@ -214,8 +214,8 @@ main .container .left{
     padding: 20px;
     white-space: nowrap;
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Ajuste o número conforme necessário */
-    gap: 0; /* Remove o espaçamento entre os posts */
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
 }
 
 .post {
