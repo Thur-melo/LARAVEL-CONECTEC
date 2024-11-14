@@ -269,9 +269,9 @@ function relevarDenuncia(denunciaId) {
                                         <div class="textoPost">
                                             ${post.texto}
                                         </div>
-                                        <div class="imgPost">
+                                        <div class="imgPostDenuncia">
                                             <a href="{{ asset('storage') }}/${post.fotoPost}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                                <img src="{{ asset('storage') }}/${post.fotoPost}" alt="" style="max-width: 100%; height: auto;">
+                                                <img src="{{ asset('storage') }}/${post.fotoPost}" alt="">
                                             </a>
                                         </div>
 
@@ -292,6 +292,41 @@ function relevarDenuncia(denunciaId) {
                     document.getElementById('modal').style.display = 'none';
                 }
             </script>
+            <style>
+                
+                .imgPostDenuncia img{
+                    width: 100%;
+                    height: 500px;
+                    object-fit: cover;
+                }
+                .imgPostDenuncia {
+                    border-radius: 1rem;
+                    margin: 0.7rem 0;
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: cover;
+
+                }
+                .modal-content1{
+                   max-width: 800px;
+                   display: flex;
+                    align-items: center;
+                    justify-content: center;
+                   
+                }
+                #modal-content{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                }
+                .feed1{
+                    width: 100%;
+                    padding: 15px;
+                
+                }
+            </style>
             
 
             </table>
