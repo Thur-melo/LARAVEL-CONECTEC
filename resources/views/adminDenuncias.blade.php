@@ -19,22 +19,22 @@
     
    <!-- sidebar inicio -->
    <div class="sidebar">
-        <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
+        <img src="{{url('assets/img/logoConectec.png')}}" class="logo-sidebar" alt="">
         <ul>
-        <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+        <li><a href= "{{ route('admin') }}" >Usuário</a></li>
             <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
-            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
 
                
                 <li class="logout">
-    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+    <a href="{{ route('login') }}">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
 </li>
 
 </li>
         </ul>
+    </div>
     </div>
     <!-- sidebar fim -->
 

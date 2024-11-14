@@ -252,6 +252,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
         <script src="{{ asset('js/like.js') }}"></script>
         <script src="{{ asset('js/seguir.js') }}"></script>
+        <script src="{{ asset('js/salvo.js') }}"></script>
+
 
         <script>
                 document.getElementById('logoutIcon').addEventListener('click', function () {

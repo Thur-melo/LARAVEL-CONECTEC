@@ -406,10 +406,10 @@ class adminController extends Controller
         $user->save(); // Salva as alterações
 
 
-        return response()->json(['message' => 'Usuário desativado com sucesso!']);
+        return redirect()->route('admin')->with('success', 'Status do user desativado com sucesso!');
     }
 
-    // Função para ativar o usuário
+    // Função para ativar o usuário 
     public function AtivaUser(Request $request, $id)
     {
         $user = User::findOrFail($id); // Encontra o usuário pelo ID
@@ -417,7 +417,7 @@ class adminController extends Controller
         $user->save(); // Salva as alterações
 
 
-        return response()->json(['message' => 'Usuário ativado com sucesso']);
+        return redirect()->route('admin')->with('success', 'Status do user ativado com sucesso!');
     }
 
 
