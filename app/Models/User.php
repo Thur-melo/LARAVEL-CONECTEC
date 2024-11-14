@@ -90,4 +90,19 @@ class User extends Authenticatable
 {
     return $this->hasMany(notificacoes::class, 'usuario_id');
 }
+
+public function posts()
+{
+    return $this->hasMany(Post::class); // Um usuário tem muitos posts
+}
+
+public function comentarios()
+{
+    return $this->hasMany(comentarios::class); // Um usuário tem muitos posts
+}
+
+public function salvos()
+{
+    return $this->hasMany(salvos::class); // Um usuário tem muitos posts
+}
 }
