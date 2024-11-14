@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/homeDenuncia.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
 
 
@@ -69,7 +70,7 @@
                             <h3>Chat</h3>
                         </a>
 
-                        <a class="menu-item " data-bs-toggle="modal" data-bs-target="#modalPost">
+                        <a class="menu-item "  href="{{ Route('home')}}"  data-bs-toggle="modal" data-bs-target="#modalPost">
                             <span><i class="fa-regular fa-square-plus"></i></i></span>
                             <h3>Criar</h3>
                         </a>
@@ -225,7 +226,15 @@
 
                             <div class="icons-group">
                                 <div class="bookmark">
-                                    <span><i class="uil uil-bookmark"></i></span>
+                                <span class="salvo-btn @if($post->salvos()->where('user_id', Auth::id())->exists()) salvo @endif" data-post-id="{{ $post->id }}">
+                                    @if($post->salvos()->where('user_id', Auth::id())->exists())
+                                    <i class="fa-solid fa-bookmark salvo"></i>
+                                    @else
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    @endif
+                                </span>
+                                
+                                    
                                 </div>
 
 
@@ -233,19 +242,21 @@
 
 
                                 <!-- Link que abre o modal -->
-                                <a href="javascript:void(0);" onclick="openModal({{ $post->id }})">
-                                    <span class="material-symbols-outlined ">warning</span>
+                                <a class="iconDenuncia" href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+                                    <span class="material-symbols-outlined">
+                                        emergency_home
+                                        </span>
                                 </a>
                             </div>
 
                             <!-- Modal -->
-                            <div id="modal-denuncia" class="modal" style="display: none;">
-                                <div class="modal-content">
+                            <div id="modal1-denuncia" class="modal1" style="display: none;">
+                                <div class="modal1-content">
                                     <span class="close" onclick="closeModal()">&times;</span>
                                     <h2>Denunciar Post</h2>
                                     <p>Deseja realmente denunciar o post de ID {{ $post->id }}?</p>
                                     <input type="text" id="motivo" placeholder="Motivo da denúncia">
-                                    <div class="modal-footer">
+                                    <div class="modal1-footer">
                                         <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
                                         <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
                                     </div>
@@ -255,71 +266,16 @@
                                 </div>
                             </div>
 
-                            <!-- Estilos para o modal -->
-                            <style>
-                                #motivo {
-                                    outline: none;
-                                    background-color: #eaeaea;
-                                    padding: 4px;
-                                    border-radius: 12px;
-                                    border: none;
 
-                                }
-
-                                .icons-group {
-                                    display: flex;
-                                    justify-content: center
-                                }
-
-                                .modal {
-                                    display: none;
-                                    position: fixed;
-                                    z-index: 1;
-                                    padding-top: 100px;
-                                    left: 0;
-                                    top: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    overflow: auto;
-                                    background-color: rgba(0, 0, 0, 0.4);
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                }
-
-                                .modal-content {
-                                    background-color: #fefefe;
-                                    padding: 20px;
-                                    border: 1px solid #888;
-                                    width: 50%;
-                                    /* Ajuste para 50% da largura */
-                                    max-width: 600px;
-                                    /* Limite opcional de largura máxima */
-                                }
-
-                                .close {
-                                    color: #646464;
-                                    float: right;
-                                    font-size: 28px;
-                                    font-weight: bold;
-                                }
-
-                                .close:hover,
-                                .close:focus {
-                                    color: rgb(49, 48, 48);
-                                    text-decoration: none;
-                                    cursor: pointer;
-                                }
-                            </style>
 
                             <!-- Scripts para abrir e fechar o modal -->
                             <script>
                                 function openModal(postId) {
-                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                    document.getElementById('modal1-denuncia').style.display = 'flex';
                                 }
 
                                 function closeModal() {
-                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                    document.getElementById('modal1-denuncia').style.display = 'none';
                                 }
 
                                 function confirmarDenuncia() {
@@ -413,53 +369,6 @@
 
 
 
-    <div class="modal" tabindex="-1" id="modalPost">
-        <form action="{{ route('home')}}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4>Criar uma nova publicação</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <!-- <div class="publicarInput">
-                            <h5 lass="modal-title">Título da publicação</h5>
-                            <p> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
-                            <input type="text" class="form-control" name="texto" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-                            </div> -->
-
-                        <div class="publicarInput">
-                            <h5 class="modal-title" style="font-weight:600">Descrição da publicação</h5>
-                            <p style="font-weight:500; color:#AFAFAF; font-size:10pt"> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
-                            <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Faça sua pergunta aqui..." required></textarea>
-                        </div>
-                        <div class="publicarInput" style="margin-top:10px">
-                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost" accept="image/*" onchange="previewImage(event)">
-                        </div>
-
-                        <select class="form-select" style="margin-top:10px" aria-label="Default select example" name="tipo">
-                            <option value="Duvida">Dúvida</option>
-                            <option value="Aula">Aula</option>
-                            <option value="Informacao">Informação</option>
-                            <option value="Estagio">Estágio</option>
-                        </select>
-                        <div class="previewModal">
-                            <img id="imagePreview" src="" alt="Prévia da Imagem" style="display: none;">
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="modal-footer" id="mf">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="postarBotao">Publicar</button>
-                    </div>
-                </div>
-        </form>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if(session('status'))
     <script>
@@ -487,7 +396,7 @@
 
 
     <!-- Modal de Confirmação -->
-
+    @include ('partials.modalPublicar')
 
 
     <script>
@@ -520,6 +429,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="{{ asset('js/like.js') }}"></script>
+    <script src="{{ asset('js/salvo.js') }}"></script>
     <script src="{{ asset('js/seguir.js') }}"></script>
 </body>
 

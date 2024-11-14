@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{url('assets/css/home.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/user.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
 
 
@@ -93,61 +93,44 @@
             <!-------------------------------------------  Posts -------------------------------------------------------------------------------------->
 
             <div class="meio">
-                <!-- Formulário de criar post -->
-                <form class="criarPost">
-                    <div class="profileImgPost">
-                        <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="">
-                    </div>
-                    <input type="text" placeholder="Faça uma pergunta" id="create-post" data-bs-toggle="modal" data-bs-target="#modalPost">
-                    <button type="button" class="postarBotao" data-bs-toggle="modal" data-bs-target="#modalPost"> Publicar
-                    </button>
-                </form>
-                <!-- Fim do formulário de criar post -->
-
-
-                <div>
-                    <!-- Resultados de usuários -->
-                    @if($users->isEmpty())
+            @if($users->isEmpty())
 
 
 
                     
-                    @else
+@else
 
-                    <div class="userSearch">
-                        <h3>Usuários</h3>
-                        @foreach ($users as $user)
-                        <div class="usersLista">
-                            <div class="usersImg">
-                                <a href="{{ route('perfil', ['id' => $user->id]) }}"> <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                            </div>
-                            <div class="info">
-                                <h3>{{ $user->name }}</h3>
+<div class="userSearch">
+    <h3>Usuários</h3>
+    @foreach ($users as $user)
+    <div class="usersLista">
+        <div class="usersImg">
+            <a href="{{ route('perfil', ['id' => $user->id]) }}"> <img src="{{ asset('storage/' . $user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
+        </div>
+        <div class="info">
+            <h3>{{ $user->name }}</h3>
 
-                                <p>{{ "@". $user->arroba}} </p>
-                            </div>
-                            <div class="btnSeguirCont">
-                                <button class="follow-btn"
-                                    data-user-id="{{ $user->id }}"
-                                    data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'unfollow' : 'follow' }}">
-                                    {{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'Seguindo' : 'Seguir' }}
-                                </button>
+            <p>{{ "@". $user->arroba}} </p>
+        </div>
+        <div class="btnSeguirCont">
+            <button class="follow-btn"
+                data-user-id="{{ $user->id }}"
+                data-action="{{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'unfollow' : 'follow' }}">
+                {{ Auth::user()->seguindo()->where('seguindo_id', $user->id)->exists() ? 'Seguindo' : 'Seguir' }}
+            </button>
 
-                            </div>
+        </div>
 
 
-                        </div>
+    </div>
 
-                        @endforeach
-                    @endif
+    @endforeach
+@endif
 
-                </div>
-           
-                <!-- Fim do loop de postagens -->
-
-            </div>
+</div>
+            
             @include ('partials.emAlta')
-
+                                
 
 
             <div class="amigosCont">

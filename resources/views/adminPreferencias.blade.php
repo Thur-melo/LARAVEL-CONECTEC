@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{url('assets/css/adminPreferencias.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://unpkg.com/heroicons@1.0.0/dist/outline.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=warning" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" rel="stylesheet">
 
     <!--icons -->
 
@@ -20,163 +20,132 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <style>
+
+.btn-adm {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #ffffff;
+    background-color: #0BBDFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    margin-left: px;
+    margin-top: 100px;
+}
+
+.btn-adm:hover {
+    background-color: #0A9ED5;
+}
 
 
+    </style>
 <body>
 
     <!--inicio menu lateral -->
-    <div class="menu-lateral">
-        <div class="brand-name">
-            <img src="{{url('assets/img/logoConectec3.png')}}" id="logo" alt="">
-        </div>
+    <div class="sidebar">
+        <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
         <ul>
-            <a href="{{ route('adminHome') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">post_add</span> <span>Postagens</span> </li>
-            </a>
-            <a href="{{ route('admin') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">people</span> <span>Usuários</span> </li>
-            </a>
-            
-            <a href="{{ route('denuncias') }}" class="sidebarBotao active">
-                <li> <span class="material-symbols-outlined">warning</span><span>denuncias </span> </li>
-            </a>
-            
-            <a href="{{ route('preferenciasLista') }}" class="sidebarBotao active">
-                <li> <span class="material-icons" id="icons">star</span> <span>preferências </span> </li>
-            </a>
-            
-
-        </ul>
-        
-    </div>
-
-    <!--final menu lateral -->
-
-    <div class="container">
-        <div class="header">
-            <div class="nav">
-
-                <div class="usuario">
-                    <img src="{{url('assets/img/perfil.jpg')}}" alt="Perfil" class="user-img">
-                    <div class="botoes">
-                        <button class="btn-adm" id="btncadastroPreferencia">Cadastrar nova Preferência</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content">
-            <div class="cards">
-
-                <!-- Card "Usuários Totais" que agora abre o modal -->
-                <div class="cardPreferencias" id="btnTotal">
-                    <div class="box">
-                        <h1>{{$qnt_preferencia}}</h1>
-                        <h3>Preferências Totais</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" style="color: black;" id="icons-card">people</span>
-                    </div>
-                </div>
-                
-                <div class="cardPreferencias" id="btnOutro">
-                    <div class="box">
-                        <h1>{{$qnt_Outro}}</h1>
-                        <h3>Preferências Outros</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" style="color: #686A6C;" id="icons-card">people</span>
-                    </div>
-                </div>
-
-                <!-- Outros cards -->
-                <div class="cardPreferencias" id="btnDS">
-                    <div class="box">
-                        <h1>{{$qnt_DS}}</h1>
-                        <h3>Preferências DS</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: #0051ffce;"> <i class="fa-solid fa-user-tie"></i></span>
-                    </div>
-                </div>
-
-                <div class="cardPreferencias" id="btnNutri">
-                    <div class="box">
-                        <h2>{{$qnt_Nutri}}</h2>
-                        <h3>Preferências Nutrição</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: #3ea043ec;"> <i class="fa-solid fa-user-graduate"></i></span>
-                    </div>
-                </div>
-
-                <div class="cardPreferencias" id="btnADM">
-                    <div class="box">
-                        <h2>{{$qnt_ADM}}</h2>
-                        <h3>Preferências ADM</h3>
-                    </div>
-                    <div class="icon-case">
-                        <span class="material-icons" id="icons-card" style="color: #ff0000b0;">
-                            <i class="fa-regular fa-circle-question"></i>
-                        </span>
-                    </div>
-                </div>
+        <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+            <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
+            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
+            <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
                
+                <li class="logout">
+    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
+</li>
+
+</li>
+        </ul>
+    </div>
+    <!--final menu lateral -->
+       
+    
+    
+
+    <div class="container">
+        <div class="containerCards">
+
+        <div class="card" id="btncadastroPreferencia" style="background-color: #222222;">
+            <h1>{{$qnt_preferencia}}</h1>
+            <h3>Preferências Totais</h3>
+            <div class="hover-text">Editar Preferências Totais</div>
             </div>
-         
-            
-        <svg width="600" height="350">
-    <text x="40" y="30">Número de Preferências Cadastradas por Curso</text>
 
-    <!-- Eixo X -->
-    <line x1="80" y1="280" x2="520" y2="280" class="axis" />
+            <div class="card" id="btncadastroPreferencia" style="background-color: #444444;">
+            <h1>{{$qnt_Outro}}</h1>
+            <h3>Preferências Outros</h3>
+            <div class="hover-text">Editar</div>
+            </div>
 
-    <svg width="600" height="350">
-    <text x="40" y="30">Número de Preferências Cadastradas por Curso</text>
+            <div class="card" id="btncadastroPreferencia" style="background-color: #1E2A61  ;">             
+            <h1>{{$qnt_DS}}</h1>
+            <h3>Preferências DS</h3>
+            <div class="hover-text">Editar</div>
+            </div>
 
-    <!-- Eixo X -->
-    <line x1="80" y1="280" x2="520" y2="280" class="axis" />
+            <div class="card" id="btncadastroPreferencia" style="background-color: #FF8C00   ;">      
+            <h1>{{$qnt_Nutri}}</h1>
+            <h3>Preferências Nutrição</h3>
+            <div class="hover-text">Editar</div>
+            </div>
 
-    @php
-        // Lista de cursos específicos que você deseja exibir
-        $cursosEspecificos = ['D.S', 'Nutrição', 'ADM', 'Outro'];
+            <div class="card" id="btncadastroPreferencia" style="background-color: #388E3C  ;">            
+            <h1>{{$qnt_ADM}}</h1>
+            <h3>Preferências ADM</h3>
+            <div class="hover-text">Editar </div>
+            </div>
+        </div>
+    </div>
+                <div class="container">
+                <div class="svg-container">
+            <svg>
+                
+                <!-- Título centralizado -->
+                <text x="500" y="50" class="title">Número de Preferências Cadastradas por Curso</text>
 
-        // Definindo as cores para cada curso
-        $coresBarras = [
-            'D.S' => '#0051ffec',
-            'Nutrição' => '#3ea043ec',
-            'ADM' => '#ff0000b0',
-            'Outro' => '#686A6C',
-        ];
-    @endphp
+                <!-- Eixo X -->
+                <line x1="100" y1="400" x2="900" y2="400" class="axis" stroke="#333" stroke-width="2" />
 
-    @foreach($cursosEspecificos as $index => $curso)
-        @php
-            // Obtenha a contagem de preferências para cada curso
-            $qnt_postagens = $qnt_postCursos[$curso]->total ?? 0;
+                <!-- Barras do Gráfico -->
+                @php
+                    $cursosEspecificos = ['D.S', 'Nutrição', 'ADM', 'Outro'];
+                    $coresBarras = [
+                        'D.S' => '#444444',
+                        'Nutrição' => '#FF8C00',
+                        'ADM' => '#ff0000b0',
+                        'Outro' => '#686A6C',
+                    ];
+                @endphp
 
-            // Verifique se $qnt_postagens é um número
-            $qnt_postagens = is_numeric($qnt_postagens) ? $qnt_postagens : 0;
-
-            $barHeight = $qnt_postagens * 1.5; // Ajuste a escala como necessário
-            $yPosition = 280 - $barHeight * 5; // Ajuste a posição Y da barra
-            $xPosition = 100 + ($index * 80); // Espaçamento entre as barras
-        @endphp
-        
-        <!-- Barras -->
-        <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="60" height="{{ $barHeight * 5 }}" class="bar" style="fill: {{ $coresBarras[$curso] ?? '#ccc' }};"/>
-  
-        <!-- Valores Acima das Barras -->
-        <text x="{{ $xPosition + 15 }}" y="{{ $yPosition - 10 }}" class="value">{{ $qnt_postagens }}</text>
-
-        <!-- Rótulos -->
-        <text x="{{ $xPosition }}" y="300" class="label">{{ $curso }}</text>
-    @endforeach
-</svg>
-
-
+                @foreach($cursosEspecificos as $index => $curso)
+                    @php
+                        $qnt_postagens = $qnt_postCursos[$curso]->total ?? 0;
+                        $qnt_postagens = is_numeric($qnt_postagens) ? $qnt_postagens : 0;
+                        $barHeight = $qnt_postagens * 2;
+                        $yPosition = 400 - $barHeight * 5;
+                        $xPosition = 200 + ($index * 180);
+                    @endphp
+                    
+                    <!-- Barras -->
+                    <rect x="{{ $xPosition }}" y="{{ $yPosition }}" width="80" height="{{ $barHeight * 5 }}" class="bar" style="fill: {{ $coresBarras[$curso] ?? '#ccc' }};"/>
+                    
+                    <!-- Valores Acima das Barras -->
+                    <text x="{{ $xPosition + 40 }}" y="{{ $yPosition - 20 }}" class="value">{{ $qnt_postagens }}</text>
+                    
+                    <!-- Rótulos Abaixo das Barras -->
+                    <text x="{{ $xPosition + 40 }}" y="420" class="label">{{ $curso }}</text>
+                @endforeach
+            </svg>
+        </div>
+        </div>
             
                       
 

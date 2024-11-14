@@ -24,6 +24,7 @@ class adminController extends Controller
         // Retornar a view com os dados das denúncias
         return view('AdminDenuncias', compact('denuncias'));
     }
+
 public function showperfil($id) {
 
     
@@ -74,7 +75,7 @@ public function showPerguntas() {
 
 
         
-   
+           $denuncias = Denuncia::with(['user', 'post'])->get();
  
 
 
@@ -82,29 +83,109 @@ public function showPerguntas() {
     $users = User::all();
 
 
-    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_postTipo',  'qnt_postCursos', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos', 'qnt_tipos', 'preferenciasLista'));
+    return view('adminHome', compact( 'user', 'posts', 'qnt_posts', 'qnt_postTipo',  'qnt_postCursos', 'qnt_duvida', 'qnt_estagios', 'qnt_aula', 'qnt_postInativos', 'qnt_postAtivos', 'qnt_tipos', 'preferenciasLista', 'denuncias'));
 }
 
-public function showadmin(){
-    // $user = Auth::User();
-    $qnt_users = User::all()-> count();
-    $qnt_alunos = User::where('perfil', 'Aluno')-> count();
-    $qnt_professores = User::where('perfil', 'professor')-> count();
-    $qnt_outros = User::where('perfil', 'outros')-> count();
-    $users = User::all();
-    $usersAtivo = User::where('status', 1)-> get();
-    // $denunciasUser = DenunciaUsuario::all();
-    $denunciasUser = DenunciaUsuario::with('user')->get();
+    public function showadmin(Request $request)
+    {
+
+
+        // Verifica se há uma pesquisa de postagens
+    $searchTerm = $request->input('search'); 
+        
+        
+
+            
+    if ($searchTerm) {
+
+
+  // Buscar usuários
+  $users = User::where('name', 'like', '%' . $searchTerm . '%')
+  ->orWhere('email', 'like', '%' . $searchTerm . '%')
+  ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
+  ->get(); 
+
+
+    }else{
+        $users = User::all();// Contar total de usuários
+       
+    }
+    $qnt_users = User::count();
+        // qnt por curso
+        $qnt_users_ads = User::where('perfil', 'Ds')->count();
+        $qnt_users_adm = User::where('perfil', 'Adm')->count();
+        $qnt_users_nutri = User::where('perfil', 'Nutri')->count();
+
+    // Calcular porcentagens
+    $porcentagem_ads = 0;
+    $porcentagem_adm = 0;
+    $porcentagem_nutri = 0;
+
+    if ($qnt_users > 0) { // Para evitar divisão por zero
+        $porcentagem_ads = ($qnt_users_ads / $qnt_users) * 100;
+        $porcentagem_adm = ($qnt_users_adm / $qnt_users) * 100;
+        $porcentagem_nutri = ($qnt_users_nutri / $qnt_users) * 100;
+    }
+
+        // Obter todos os usuários ativos
+        $usersAtivo = User::where('status', 1)->get();
+
+        // Carregar denúncias pendentes com eager loading
+        $denunciasUser = DenunciaUsuario::with('user')->where('status', 'pendente')->get();
+
+        // Contar o número de denúncias pendentes e bloqueadas
+        $qnt_pendentes = $denunciasUser->count();
+        $qnt_bloqueados = DenunciaUsuario::where('status', 'bloqueados')->count();
+
+        // Contar seguidores para cada usuário
+        $seguidoresCounts = Seguir::select('seguindo_id', DB::raw('count(*) as count'))
+            ->groupBy('seguindo_id')
+            ->pluck('count', 'seguindo_id');
+
+
+
+
+      // Obtém os 10 usuários com mais seguidores
+      $topUsers = User::select('users.id', 'users.name', DB::raw('COUNT(seguidores.id) as seguidores_count'))
+      ->leftJoin('seguidores', 'seguidores.seguindo_id', '=', 'users.id')
+      ->groupBy('users.id', 'users.name') // Adiciona 'users.name' na cláusula GROUP BY
+      ->orderBy('seguidores_count', 'DESC')
+      ->limit(10)
+      ->get();
+
+      $maisPost = User::withCount('posts')
+      ->orderBy('posts_count', 'desc')
+      ->take(3)
+      ->get();
+  
+  // Prepare dados para a view
+  $userNamesPost = $maisPost->pluck('arroba')->map(function ($arroba) {
+    return '@' . $arroba; // Adiciona '@' a cada nome
+})->toArray(); // Nomes dos usuários
+  $userPostCounts = $maisPost->pluck('posts_count')->toArray(); 
+
+
+// Controller
+$maisComments = User::withCount('comentarios')
+    ->orderBy('comentarios_count', 'desc')
+    ->take(3)
+    ->get();
+
+// Extrair contagens de comentários
+$userPostCounts = $maisComments->pluck('comentarios_count')->toArray();
+
+// Extrair nomes dos usuários com '@'
+$userNamesComment = $maisComments->pluck('arroba')->map(function ($arroba) {
+    return '@' . $arroba; // Adiciona '@' a cada nome
+})->toArray();
+        // Passar os dados para a view
+        return view('admin', compact('qnt_users', 'qnt_pendentes', 'seguidoresCounts', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
+        'users', 'qnt_users_ads', 'qnt_users_adm', 'qnt_users_nutri', 'porcentagem_ads','porcentagem_adm','porcentagem_nutri', 'topUsers', 'maisPost','userPostCounts', 'userNamesComment', 'userNamesPost', 'userPostCounts'));
+    }
 
 
     
 
-    // $qnt_aprovados = Post::where('status', 2)-> count();
-
-    // $qnt_pendentes = Post::where('status', 1)-> count();
-
-    return view('admin', compact('qnt_users', 'usersAtivo', 'users', 'qnt_professores', 'qnt_alunos', 'qnt_outros', 'denunciasUser' ));
-}
 
 // Relacionamento com o usuário denunciado
 
@@ -236,7 +317,7 @@ public function desativaUser($id)
 {
     
     $user = User::findOrFail($id); // Encontre o User$user pelo ID
-    $user->status = 'Off'; // Muda o status para 2
+    $user->status = 'inativo'; // Muda o status para 2
     $user->save(); // Salva as alterações
 
     return redirect()->route('admin')->with('success', 'Status do post atualizado para 2!');

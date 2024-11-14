@@ -412,3 +412,6 @@ label{
     border-radius: 50%;
 
 }
+.interaction-button {
+    cursor: pointer;
+}

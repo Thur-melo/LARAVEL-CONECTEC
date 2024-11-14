@@ -53,6 +53,10 @@
                             <span><i class="fa-regular fa-message"></i></span>
                             <h3>Chat</h3>
                         </a>
+                        <a class="menu-item "  href="{{ Route('home')}}">
+                            <span><i class="fa-regular fa-square-plus"></i></i></span>
+                            <h3>Criar</h3>
+                        </a>
 
 
 
@@ -146,6 +150,7 @@
 
         </div>
         @include('partials.modalContato')
+
     </main>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>

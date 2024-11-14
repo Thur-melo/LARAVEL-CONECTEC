@@ -329,3 +329,7 @@ main .container .left{
 #btnEditBanner{
     cursor: pointer;
 }
+
+.interaction-button {
+    cursor: pointer;
+}

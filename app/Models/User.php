@@ -79,8 +79,30 @@ class User extends Authenticatable
         return $this->perfil;
     }
 
+    public function likedPosts()
+{
+    // Relacionamento com a tabela de likes para obter os posts que o usuário curtiu
+    return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
+}
+
+
     public function notificacoes()
 {
     return $this->hasMany(notificacoes::class, 'usuario_id');
+}
+
+public function posts()
+{
+    return $this->hasMany(Post::class); // Um usuário tem muitos posts
+}
+
+public function comentarios()
+{
+    return $this->hasMany(comentarios::class); // Um usuário tem muitos posts
+}
+
+public function salvos()
+{
+    return $this->hasMany(salvos::class); // Um usuário tem muitos posts
 }
 }

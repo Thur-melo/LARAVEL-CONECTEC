@@ -1,4 +1,17 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* NAVBAR ----------------------------------------------------------------*/
 *{
     padding: 0;
@@ -47,10 +60,10 @@ main .container .left{
 }
 
 
-/* .badge{
+.badge{
     
 
-} */
+}
 
 .left .sidebar{
     margin-top: 1rem;
@@ -270,9 +283,11 @@ main .container .left{
     max-width: 800px;
     
 }
+
 .right {
     position: fixed;
     right: 100px;
+    top: 100px;
 }
 
 
@@ -390,7 +405,6 @@ main .container .left{
     align-items: center;
     font-size: 1.4rem;
     margin: 0.6rem;
-   
 }
 
 .info h3{
@@ -547,16 +561,6 @@ main .container .left{
 
 }
 
-.salvo-btn i{
-    color: #000; /* Cor padrão do ícone não curtido */
-    transition: color 0.3s ease, transform 0.3s ease; /* Suaviza a troca de cor e tamanho */
-}
-
-.salvo-btn.salvo i {
-    color: rgb(255, 251, 0); /* Cor do ícone curtido */
-    transform: scale(1.9); /* Aumenta o tamanho do ícone ao curtir */
-}
-
 
 .interaction-button span{
     font-size: 12pt;
@@ -632,15 +636,20 @@ main .container .left{
         display: none;
     }
 
-    .pbio{
-        padding: 10px;
-    }
-
-    /* ESTILOS DO MODAL------------- */
+   
 
     
 
 }
+
+
+
+
+
+
+
+
+
 
 
 

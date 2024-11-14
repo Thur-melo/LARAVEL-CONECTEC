@@ -32,11 +32,11 @@
 
     <main>
         <div class="container">
-            <div class="left">
+        <div class="left">
                 <div class="sidebar">
                     <div class="sidebarList">
 
-                        <a href="{{ Route('home')}}" class="menu-item">
+                        <a href="{{ Route('home')}}" class="menu-item ">
                             <span><i class="fa-solid fa-house"></i></span>
                             <h3>Home</h3>
                         </a>
@@ -46,9 +46,15 @@
                             <h3>Explorar</h3>
                         </a>
 
-                        <a class="menu-item ">
+                        <a class="menu-item" href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
-                            <h3>Notificações</h3>
+                            <h3>Notificações  @if($naoLidasCount > 0)
+                                <span class="badge rounded-pill text-bg-danger">
+                                    {{ $naoLidasCount }}
+                                    
+                                </span>
+                            @endif</h3>
+                            
                         </a>
 
                         <a href="{{ Route('postagens')}}" class="menu-item">
@@ -60,7 +66,10 @@
                             <h3>Chat</h3>
                         </a>
 
-                     
+                        <a class="menu-item "  href="{{ Route('home')}}" >
+                            <span><i class="fa-regular fa-square-plus"></i></i></span>
+                            <h3>Criar</h3>
+                        </a>
 
 
                     </div>
@@ -286,7 +295,66 @@
                     </div>
                 @endforeach`;
             } else if (tipo === 'salvos') {
-                resultado.innerHTML = '<p>Função de salvos ainda não implementada.</p>';
+                resultado.innerHTML = ` @foreach($postSalvos as $post)
+                @php
+        $coresModulo = [
+            '1º' => '#CD4642',
+            '2º' => '#5169B1',
+            '3º' => '#64B467',
+        ];
+    @endphp
+                    <div class="feeds">
+                        <div class="feed">
+                            <div class="user">
+                                <div class="profileImg">
+                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
+                                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
+                                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                            <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+
+                            <div class="textoPost">{{ $post->texto ?? 'Post não disponível' }}</div>
+
+                            @if($post->fotoPost)
+                                <div class="imgPost">
+                                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
+                                    </a>
+                                </div>
+                            @endif
+
+                            <div class="action-button">
+                                <div class="interaction-button">
+                                    <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
+                                        @if($post->likes()->where('user_id', Auth::id())->exists())
+                                            <i class="fas fa-heart liked"></i>
+                                        @else
+                                            <i class="far fa-heart"></i>
+                                        @endif
+                                    </span>
+                                    <span class="likes-count">{{ $post->likes()->count() }}</span>
+                                    <a href="{{ route('comentarios', $post->id) }}">
+                                        <button class="comentarioCotn">
+                                            <i class="uil uil-comment"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="bookmark">
+                                    <span><i class="uil uil-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach`;
             } else if (tipo === 'curtidas') {
                 resultado.innerHTML += ` @foreach($postCurtidas as $post)
                 @php
@@ -357,7 +425,6 @@
             clickedElement.classList.add('active');
         }
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>

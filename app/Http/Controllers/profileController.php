@@ -30,10 +30,14 @@ class profileController extends Controller
         $curtidas = $usuario->likes()->pluck('post_id');
         $postCurtidas    = Post::whereIn('id', $curtidas)->get();
 
+        $salvos = $usuario->salvos()->pluck('post_id');
+        $postSalvos   = Post::whereIn('id', $salvos)->get();
+
+
         // Contar seguidores e seguindo
         $myseguidores = Seguir::where('seguindo_id', $usuario->id)->count();
         $seguindo = Seguir::where('seguidor_id', $usuario->id)->count();
 
-        return view('profile', compact('usuario', 'posts', 'user', 'likes', 'myseguidores','postCurtidas', 'seguindo'));
+        return view('profile', compact('usuario', 'posts', 'user', 'likes', 'myseguidores','postCurtidas','postSalvos', 'seguindo'));
     }
 }
