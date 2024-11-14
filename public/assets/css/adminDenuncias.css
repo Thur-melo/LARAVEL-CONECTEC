@@ -1,3 +1,93 @@
+body {
+    background-color: #E6E9EE;
+}
+
+/* ESTILOS DO MODAL */
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;  /* Largura do modal ajustada para 50% */
+        max-width: 900px;  /* Largura máxima de 900px */
+        min-width: 400px;  /* Largura mínima de 400px */
+    }
+    
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+/* FIM  DO ESTILOS MODAL */
+.btn{
+    color: white;
+    font-size: 13px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#btnDesativa {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#btnDesativa:hover {
+    background-color: #95362b;
+}
+
+#btnAtivaDesativa{
+    background-color: #00aaff;
+    color: white;
+}
+#btnAtivaDesativa:hover {
+    background-color: #2483b3;
+}
+
+#btnAtiva {
+    background-color: #00aaff;
+    color: white;
+}
+
+#btnAtiva:hover {
+    background-color: #2483b3;
+}
+
+#relevar {
+    background-color: rgb(41, 139, 41);
+    color: white;
+}
+
+#relevar:hover {
+    background-color: rgb(36, 97, 36);
+}
+
+
+
 
 .profileDenunciado{
     width: 50px;
@@ -25,3 +115,266 @@
 #btnDesativa:hover {
     background-color: #95362b;
 }
+
+
+.container{
+    /* background-color: #d4d4d4; */
+    width: 84%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 900px;
+    justify-content: center;
+    gap: 13px;
+    padding: 0px 100px 0px 100px;
+    margin: 0px;
+    margin-left: 0px; 
+    /* mesmo tamanho da sidebar */
+}
+
+
+
+.busca{
+    width: 100%;
+    height: 7vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputBusca{
+    width: auto;
+    height: 100%;
+    border-radius: 20px;
+    width:95% ;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+}
+
+.inputBusca::placeholder{
+    color: gray;
+    font-size: 1.5rem;
+
+}
+
+.ico{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(56, 83, 109);
+    width: 3%;
+    font-size: 2.5rem;
+}
+
+.tabela{
+    width: 100%;
+    height: 35vh;
+    /* background-color: #e5a6ab; */
+    max-height:35vh;  /* Define a largura máxima do contêiner */
+    overflow-x: auto; 
+    padding: 0;
+    border-radius: 30px;
+
+
+
+}
+
+
+h1{
+    text-align: start;
+    width: 100%;
+}
+
+
+/* TABELA USER */
+
+.containerTabelaUsers2 {
+    display: flex;
+    flex-direction: row;
+    /* margin-top: 40px; */
+}
+
+/* Estilo da Tabela */
+.tabelaUsers2 {
+    overflow-y:    auto; /* Habilita rolagem */
+    max-height: 10vh; /* Define altura máxima */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white; /* Adicionando fundo para o contêiner */
+    margin: 0;
+    width: 100%;
+    border-radius: 30px;
+}
+
+/* Estilo da tabela dentro da .tabelaUsers2 */
+.tabelaUsers2 table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+
+}
+
+/* Estilo das células */
+.tabelaUsers2 th,
+.tabelaUsers2 td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.tabelaUsers2 th {
+    background-color: #00aaff; /* Cor de fundo do cabeçalho */
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    position: sticky; /* Cabeçalho fixo */
+    top: 0; /* Fixa o cabeçalho no topo */
+    z-index: 1; /* Garante que o cabeçalho fique acima das linhas */
+}
+
+.tabelaUsers2 td {
+    background-color: #f9f9f9;
+    font-size: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+.tabelaUsers2 tr:hover td {
+    background-color: #e8f5ff;
+}
+
+.tabelaUsers2 td:first-child {
+    font-weight: bold;
+    color: #007bbd;
+}
+
+.tabelaUsers2 tr:last-child td {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
+/* Estilo da barra de rolagem */
+.tabela::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tabela::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.tabela::-webkit-scrollbar-thumb {
+    background-color: #6b94af;
+    border-radius: 8px;
+    border: 2px solid #f1f1f1;
+}
+
+.tabela::-webkit-scrollbar-thumb:hover {
+    background-color: #4d7d97;
+}
+
+
+/* CSS sidebar inicio */
+.sidebar {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background-color: #111111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-sidebar {
+    display: block;
+    width: 270px;
+    margin: 0 auto;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    text-align: justify;
+    font-size: 25px;
+    padding: 15px 30px;
+    width: 80%;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 400;
+    margin-left: 30px;
+    border-radius: 20px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #00aaff; /* Cor de fundo azul claro ao passar o mouse */
+    color: white; /* Texto muda para branco */
+    cursor: pointer;
+    transform: translateX(5px); /* Leve animação de movimento ao passar o mouse */
+}
+
+.sidebar ul li.logout {
+    margin-top: 150%;
+}
+
+.sidebar ul li.logout a {
+    color: #e74c3c;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.sidebar ul li.logout a:hover {
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.sidebar ul li a .material-icons {
+    margin-right: 0;
+    padding: 0;
+    font-size: 24px;
+    vertical-align: middle;
+}
+/* CSS sidebar fim */
+
+/* Estilo para a barra de pesquisa */
+.search-bar {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.search-bar input {
+    width: 500px;
+    height: 40px;
+    padding: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-left: 30px;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #0BBDFF;
+}
+
+/* Estilo para os cards */
+.containerCards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+

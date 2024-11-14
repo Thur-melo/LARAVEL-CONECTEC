@@ -279,32 +279,45 @@
                                 }
 
                                 function confirmarDenuncia() {
-                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
-                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
-                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
+    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+    const postId = document.getElementById('post-id').value; // ID do post denunciado
+    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
 
-                                    fetch("{{ route('denunciar') }}", {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                            },
-                                            body: JSON.stringify({
-                                                user_id: userId,
-                                                post_id: postId,
-                                                motivo: motivo
-                                            })
-                                        })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            alert(data.message); // Exibe a mensagem de sucesso
-                                            closeModal(); // Fecha o modal
-                                        })
-                                        .catch(error => {
-                                            console.error("Erro:", error);
-                                            alert("Ocorreu um erro ao registrar a denúncia.");
-                                        });
-                                }
+    // Verifica se os campos essenciais não estão vazios
+    if (!userId || !postId || !motivo) {
+        alert("Por favor, preencha todos os campos.");
+        return; // Impede o envio se algum campo estiver vazio
+    }
+
+    // Realiza a requisição fetch para enviar a denúncia ao servidor
+    fetch("{{ route('denunciar') }}", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": "{{ csrf_token() }}" // Garantir que o token CSRF esteja sendo enviado
+    },
+    body: JSON.stringify({
+        user_id: userId,
+        post_id: postId,
+        motivo: motivo
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.message) {
+        alert(data.message); // Exibe a mensagem de sucesso
+        closeModal(); // Fecha o modal
+    } else {
+        alert("Erro: " + data.message);
+    }
+})
+.catch(error => {
+    console.error("Erro:", error);
+    alert("Ocorreu um erro ao registrar a denúncia.");
+});
+
+}
+
                             </script>
 
 

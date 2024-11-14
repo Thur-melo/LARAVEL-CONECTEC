@@ -19,11 +19,23 @@ class adminController extends Controller
     //public function showHome()
 
     public function showdenuncias()    {
+
+        $users = User::all();
         // Obter todas as denúncias
         $denuncias = Denuncia::with(['user', 'post'])->get();
 
+        $usersAtivo = User::where('status', 1)->get();
+
+        // Carregar denúncias pendentes com eager loading
+        $denunciasUser = DenunciaUsuario::with('user')->where('status', 'pendente')->get();
+
+        // Contar o número de denúncias pendentes e bloqueadas
+        $qnt_pendentes = $denunciasUser->count();
+        $qnt_bloqueados = DenunciaUsuario::where('status', 'bloqueados')->count();
+
         // Retornar a view com os dados das denúncias
-        return view('AdminDenuncias', compact('denuncias'));
+        return view('AdminDenuncias', compact('denuncias','qnt_pendentes', 'usersAtivo', 'denunciasUser', 'qnt_bloqueados',
+        'users'));
     }
 
 public function showperfil($id) {
@@ -274,9 +286,6 @@ public function registerAdm(Request $request)
 
     
 
-     
- 
-
 }
 
 
@@ -311,18 +320,6 @@ public function showLoginAdmForm()
 
 
 
-
-    
-public function desativaUser($id)
-{
-    
-    $user = User::findOrFail($id); // Encontre o User$user pelo ID
-    $user->status = 'inativo'; // Muda o status para 2
-    $user->save(); // Salva as alterações
-
-    return redirect()->route('admin')->with('success', 'Status do user atualizado para inativo!');
-}
-
 public function desativaUserDenuncias($id)
 {
     
@@ -335,18 +332,31 @@ public function desativaUserDenuncias($id)
 
 
 
+    
+// Função para desativar o usuário
+public function desativaUser($id)
+{
+    $user = User::findOrFail($id); // Encontra o usuário pelo ID
+    $user->status = 'inativo'; // Muda o status para 'inativo'
+    $user->save(); // Salva as alterações
+
+
+    return response()->json(['message' => 'Usuário desativado com sucesso!']);
+
+}
+
+// Função para ativar o usuário
 public function AtivaUser(Request $request, $id)
 {
-    // Encontra o usuário pelo ID ou retorna erro 404
-    $user = User::findOrFail($id);
+    $user = User::findOrFail($id); // Encontra o usuário pelo ID
+    $user->status = 'ativo'; // Muda o status para 'ativo'
+    $user->save(); // Salva as alterações
 
-    // Atualiza o status do usuário para 'Ativo'
-    $user->status = 'Ativo';
-    $user->save(); // Salva as alterações no banco de dados
 
-    // Retorna uma resposta JSON de sucesso
-    return redirect()->route('admin')->with('success', 'Status do user atualizado para ativo!');
+    return response()->json(['message' => 'Usuário ativado com sucesso']);
+
 }
+
 
 
     public function destroyPost($id)

@@ -16,11 +16,25 @@ use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\notificacaoController;
 
+// busca
+Route::get('/denuncia/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
+
+
+// Rota para desativar o usuário
+Route::post('/admin/desativar-usuario/{id}', [AdminController::class, 'desativaUser'])->name('admin.desativarUsuario');
+// Rota para ativar o usuário
+Route::post('/admin/ativar-usuario/{id}', [AdminController::class, 'AtivaUser'])->name('admin.ativarUsuario');
+Route::post('/denuncia/desativar/{userId}', [DenunciaController::class, 'desativarUsuario'])->name('user.desativar');
+Route::post('/denuncia/ativar/{userId}', [DenunciaController::class, 'ativarUsuario'])->name('user.ativar');
+Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
+
+
+Route::post('/denuncia/desativar/{userId}', [DenunciaController::class, 'desativarUsuario'])->name('user.desativar');
+Route::post('/denuncia/ativar/{userId}', [DenunciaController::class, 'ativarUsuario'])->name('user.ativar');
+
 Route::delete('/denuncia/{id}', [DenunciaController::class, 'deletarDenuncia'])->name('denuncia.deletar');
 Route::post('/denunciarUser', [DenunciaController::class, 'storeUser'])->name('denunciarUser');
 
-    
-Route::delete('/denuncias/{id}', [adminController::class, 'desativaUserDenuncias'])->name('user.off.Denuncias');
 Route::post('/denunciar', [DenunciaController::class, 'store'])->name('denunciar');
 Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denuncias');
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
