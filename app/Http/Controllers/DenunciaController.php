@@ -106,5 +106,16 @@ public function store(Request $request)
             'denunciasPosts' => $denunciasPosts
         ]);
     }
+
+    public function relevarDenuncia($id)
+    {
+        $denuncia = Denuncia::find($id);
+
+        if ($denuncia && $denuncia->relevar()) {
+            return response()->json(['message' => 'Denúncia relevada com sucesso']);
+        }
+
+        return response()->json(['error' => 'Denúncia não encontrada'], 404);
+    }
     
 }

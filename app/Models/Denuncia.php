@@ -29,4 +29,9 @@ class Denuncia extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function relevar()
+    {
+        return $this->delete();
+    }
 }
