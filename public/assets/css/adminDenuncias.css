@@ -367,6 +367,7 @@ h1{
     margin-left: 2px;
     vertical-align: middle;
 }
+
 /* CSS sidebar fim */
 
 /* Estilo para a barra de pesquisa */
@@ -461,34 +462,6 @@ h1{
 
 }
 
-.meio .feeds .feed{
-    background: white;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin: 1rem 0;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
-}
-
-.meio .feed .head{
-    display: flex;
-    justify-content: space-between;
-
-}
-
-.meio .feed .user{
-    display: flex;
-    gap: 1rem;
-}
-
-.meio .feed .imgPost{
-    border-radius: 1rem;
-    overflow: hidden;
-    margin: 0.7rem 0;
-    max-width: 800px;
-    
-}
 
 .imgPost img {
     object-fit: cover;
@@ -496,15 +469,18 @@ h1{
     max-height: 600px;
 }
 
-
-.meio .feed .action-button{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.4rem;
-    margin: 0.6rem;
-   
+.feed {
+    width: 100%;
+    max-height: 900px;
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 8px;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
 }
+
 
 .info h3{
     font-size: 12pt;
