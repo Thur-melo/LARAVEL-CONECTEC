@@ -16,10 +16,11 @@ use App\Http\Controllers\seguirController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\notificacaoController;
 
+// Adicione esta rota no arquivo web.php
+Route::patch('/posts/{post}/toggle-status', [PostController::class, 'toggleStatus'])->name('posts.toggleStatus');
+
 // busca
 Route::get('/denuncia/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
-
-
 // Rota para desativar o usuário
 Route::post('/admin/desativar-usuario/{id}', [AdminController::class, 'desativaUser'])->name('admin.desativarUsuario');
 // Rota para ativar o usuário

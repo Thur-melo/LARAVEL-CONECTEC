@@ -21,9 +21,13 @@ body {
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 50%;  /* Largura do modal ajustada para 50% */
+         /* Largura do modal ajustada para 50% */
         max-width: 900px;  /* Largura máxima de 900px */
         min-width: 400px;  /* Largura mínima de 400px */
+        
+            width: 700px;
+            /* background-color: red; */
+        
     }
     
     .close {
@@ -35,7 +39,7 @@ body {
     
     .close:hover,
     .close:focus {
-        color: black;
+        color: rgb(123, 155, 185);
         text-decoration: none;
         cursor: pointer;
     }
@@ -60,11 +64,11 @@ body {
     background-color: #95362b;
 }
 
-#btnAtivaDesativa{
+#btnAtivaDesativa, #togglePostStatus{
     background-color: #00aaff;
     color: white;
 }
-#btnAtivaDesativa:hover {
+#btnAtivaDesativa:hover, #togglePostStatus:hover {
     background-color: #2483b3;
 }
 
@@ -119,17 +123,17 @@ body {
 
 .container{
     /* background-color: #d4d4d4; */
-    width: 84%;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+
     gap: 900px;
     justify-content: center;
     gap: 13px;
     padding: 0px 100px 0px 100px;
-    margin: 0px;
-    margin-left: 0px; 
+    margin: 0px 0px; 
+    padding-left: 900px;
     /* mesmo tamanho da sidebar */
 }
 
@@ -289,6 +293,7 @@ h1{
     color: #fff;
     display: flex;
     flex-direction: column;
+
 }
 
 .logo-sidebar {
@@ -378,3 +383,162 @@ h1{
     flex-wrap: wrap;
 }
 
+.modulo-div{
+    background-color: #9babb4;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #acd1ec;
+    border-radius: 8px;
+    border: 2px solid #f1f1f1;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: #98cbe7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.profileImgPost{
+    width: 65px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+.profileImgPost img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    object-fit:cover;
+    overflow: hidden;
+}
+
+.horaPost{
+    color: rgb(255, 0, 0);
+    font-size: 6pt;
+
+}
+
+.publiSpan{
+    color:#bebebe ;
+    font-size: 9.5pt;
+    font-weight: 500;
+
+}
+
+.meio .feeds .feed{
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
+}
+
+.meio .feed .head{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.meio .feed .user{
+    display: flex;
+    gap: 1rem;
+}
+
+.meio .feed .imgPost{
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0.7rem 0;
+    max-width: 800px;
+    
+}
+
+.imgPost img {
+    object-fit: cover;
+    width: 100%;
+    max-height: 600px;
+}
+
+
+.meio .feed .action-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0.6rem;
+   
+}
+
+.info h3{
+    font-size: 12pt;
+    font-weight: 600;
+    margin: 0;
+    color: #3f3950;
+}
+
+.info p{
+    font-size: 9.5pt;
+    color: #554f66;
+    font-weight: 500;
+}
+
+.postarBotao{
+    padding: 9px 10px;
+    border: none;
+    background-color: #07beff;
+    color: white;
+    font-weight: 600;
+    font-size: 12pt;
+    border-radius: 6px;
+}
+
+.info{
+
+    width: 100%;
+        
+}
+
+.modulo-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 10px; 
+  border-radius: 25px;
+  height: 100%;
+  box-shadow: rgba(110, 110, 110, 0.315) 0px 2px 5px 0px;
+}
+
+.modulo-div p{
+   text-align: center;
+   height: 100%;
+   margin: 0;
+   color: white;
+   font-weight: 600;
+   font-size: 9pt;
+
+}

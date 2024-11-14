@@ -15,7 +15,19 @@ use Illuminate\Support\Str;
 
 class postController extends Controller
 {
-
+    public function toggleStatus($id)
+    {
+        $post = Post::findOrFail($id);
+        
+        // Alterna o status entre 1 (ativo) e 2 (desativado)
+        $post->status = $post->status == 1 ? 2 : 1;
+        $post->save();
+    
+        // Redireciona de volta para a página com uma mensagem de sucesso
+        return redirect()->back()->with('success', 'Status do post atualizado com sucesso!');
+    }
+    
+    
     public function show($id)
     {
         $post = Post::with('user')->findOrFail($id); // Aqui você carrega o post com o usuário associado

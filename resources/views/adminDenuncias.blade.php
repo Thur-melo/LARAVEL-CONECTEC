@@ -4,6 +4,7 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Menu-principal</title>
+    {{-- <link rel="stylesheet" href="{{url('assets/css/Home.css')}}"> --}}
     <link rel="stylesheet" href="{{url('assets/css/adminHome.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/adminDenuncias.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -144,8 +145,6 @@
 
     <h2>Posts denunciados</h2>
     <div class="tabela">
-     
-
         @if($denuncias->isEmpty())
             <p>Nenhuma denúncia encontrada.</p>
         @else
@@ -162,48 +161,97 @@
                         <th></th>
                     </tr>
                 </thead>
-               <!-- Tabela de Denúncias -->
-               <tbody>
-                @foreach($denuncias as $denuncia)
-                    <tr>
-                        <td>{{ $denuncia->id }}</td>
-                        <td>{{ $denuncia->user->name }}</td>
-                        <td>
-                            <a href="javascript:void(0);" onclick="abrirModalPost({{ $denuncia->post->id }})">
-                                {{ $denuncia->post->titulo ?? 'Ver Post' }}
-                            </a>
-                        </td>
-                        <td>{{ $denuncia->motivo }}</td>
-                        <td>{{ ucfirst($denuncia->status) }}</td>
-                        <td>{{ $denuncia->created_at->format('d/m/Y H:i') }}</td>
-                        <td>
-                            <form action="{{route('posts.destroy', $denuncia->post->id)}}" method="POST" onsubmit="return confirm('tem certeza que deseja excluir este post?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn" id="excluirPost" >Excluir Post</button>
+                <!-- Tabela de Denúncias -->
+                <tbody>
+                    @foreach($denuncias as $denuncia)
+                        <tr>
+                            <td>{{ $denuncia->id }}</td>
+                            <td>{{ $denuncia->user->name }}</td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="abrirModalPost({{ $denuncia->post->id }})">
+                                    {{ $denuncia->post->titulo ?? 'Ver Post' }}
+                                </a>
+                            </td>
+                            <td>{{ $denuncia->motivo }}</td>
+                            <!-- Exibe o status do post -->
+                            <td>{{ $denuncia->post->status == 1 ? 'Ativo' : 'Desativado' }}</td>
+                            <td>{{ $denuncia->created_at->format('d/m/Y H:i') }}</td>
+                            <td>
+                                <form action="{{ route('posts.toggleStatus', $denuncia->post->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja alterar o status deste post?');">
+                                    @csrf
+                                    @method('PATCH')
+                                    <!-- Alterna o texto do botão com base no status atual -->
+                                    <button type="submit" class="btn" id="togglePostStatus">
+                                        {{ $denuncia->post->status == 1 ? 'Desativar' : 'Ativar' }}
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form id="desativaUsuarioForm{{ $denuncia->user->id }}" onsubmit="event.preventDefault(); desativarUsuario({{ $denuncia->user->id }});">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn" id="btnDesativa" onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
+                                        Desativar usuário
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
+    <script>
+        // Função para desativar o usuário via requisição AJAX
+        function desativarUsuario(userId) {
+            // Confirmação do usuário
+            if (confirm('Tem certeza que deseja Desativar este usuário?')) {
+                // Envia a requisição para desativar o usuário
+                fetch(`/user/off/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao desativar o usuário');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Exibe uma mensagem no console (opcional)
+                    console.log(data.message);
+                    
+                    // Recarrega a página para refletir a alteração
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Não foi possível desativar o usuário. Tente novamente.');
+                });
+            }
+        }
+    </script>
+    <script>
+        // Adiciona um listener para o evento de envio do formulário de ativação/desativação do post
+        document.querySelectorAll('form[action*="posts.toggleStatus"]').forEach(form => {
+            form.addEventListener('submit', function() {
+                // Recarrega a página após o envio do formulário
+                setTimeout(() => {
+                    location.reload();
+                }, 500); // Pequeno delay para garantir que a ação foi concluída antes do reload
+            });
+        });
+    </script>
+               <style>
+.container{
+    padding-left: 150px;
+    
+}
 
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('user.off', $denuncia->user->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn" id="btnDesativa"
-                                    onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
-                                    Desativar usuário
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            @php
-            $coresModulo = [
-            '1º' => '#CD4642',
-            '2º' => '#5169B1',
-            '3º' => '#64B467',
-            ];
-            @endphp
+            </style>
             <script>
                 function abrirModalPost(postId) {
                     // Requisição AJAX para buscar os dados do post
@@ -222,8 +270,8 @@
                                             </div>
                                             <div class="info">
                                                 <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                                                    <h3>@${post.user.arroba} <span class="publiSpan"> • fez uma nova publicação</span></h3>
-                                                    <div class="modulo-div" style="background-color: ${post.user.modulo ? post.user.modulo : 'defaultColor'};">
+                                                    <h3>@${post.user.arroba}</h3>
+                                                    <div class="modulo-div" >
                                                         <p>${post.user.modulo} ${post.user.perfil}</p>
                                                     </div>
                                                 </div>
@@ -248,6 +296,8 @@
                             }
                         })
                         .catch(error => console.error('Erro ao buscar post:', error));
+                        
+
                 }
             
                 function closeModal() {
@@ -257,7 +307,7 @@
             
 
             </table>
-        @endif
+   
 
 
 
@@ -276,97 +326,26 @@
         document.getElementById('modal').style.display = 'none';
     }
 </script>
+    
+<!-- Modal -->
+<div id="modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modal-content">
+            <!-- O conteúdo do post será inserido aqui -->
+        </div>
+    </div>
+</div>
+<script>
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+</script>
 
 {{-- fim modal --}}
 
-<script>
-function buscarDenuncias() {
-    const buscaTermo = document.getElementById('inputBusca').value;
 
-    // Envia a busca para o servidor via AJAX
-    fetch(`{{ route('denuncia.buscar') }}?termo=${buscaTermo}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Exibe as denúncias filtradas nas tabelas
-        atualizarTabelasDenuncias(data.denunciasUser, data.denunciasPosts);
-    })
-    .catch(error => {
-        console.error("Erro ao buscar denúncias:", error);
-    });
-}
 
-function atualizarTabelasDenuncias(denunciasUser, denunciasPosts) {
-    // Atualize as tabelas de denúncias de usuários
-    const tabelaUsuarios = document.querySelector('.tabelaUsers2');
-    tabelaUsuarios.innerHTML = ""; // Limpa a tabela antes de adicionar os resultados
-
-    denunciasUser.forEach(denuncia => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${denuncia.id}</td>
-            <td>${denuncia.userDenunciado.name}</td>
-            <td>${denuncia.motivo}</td>
-            <td>${denuncia.userDenunciado.status}</td>
-            <td>
-                <button class="btn" onclick="toggleStatusUsuario(${denuncia.userDenunciado.id}, '${denuncia.userDenunciado.status}')">
-                    ${denuncia.userDenunciado.status === 'ativo' ? 'Desativar' : 'Ativar'}
-                </button>
-            </td>
-            <td>
-                <button onclick="deletarDenuncia(${denuncia.id})" class="btn">Relevar</button>
-            </td>
-        `;
-        tabelaUsuarios.appendChild(row);
-    });
-
-    // Atualize a tabela de denúncias de posts
-    const tabelaPosts = document.querySelector('.tabelaUsers2');
-    tabelaPosts.innerHTML = ""; // Limpa a tabela de posts
-
-    denunciasPosts.forEach(denuncia => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${denuncia.id}</td>
-            <td>${denuncia.user.name}</td>
-            <td>
-                <a href="javascript:void(0);" onclick="abrirModalPost(${denuncia.post.id})">
-                    ${denuncia.post.titulo ?? 'Ver Post'}
-                </a>
-            </td>
-            <td>${denuncia.motivo}</td>
-            <td>${denuncia.status}</td>
-            <td>${denuncia.created_at}</td>
-            <td>
-                <form action="{{ route('posts.destroy', $denuncia->post->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn" id="excluirPost">Excluir Post</button>
-</form>
-
-            </td>
-            <td>
-                <form action="{{ route('user.off', $denuncia->user->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn" id="btnDesativa" onclick="return confirm('Tem certeza que deseja Desativar este usuário?')">
-        Desativar usuário
-    </button>
-</form>
-
-            </td>
-        `;
-        tabelaPosts.appendChild(row);
-    });
-}
-
-    
-</script>
 
 </div>
 
