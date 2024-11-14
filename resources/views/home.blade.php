@@ -55,7 +55,7 @@
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
                             @if($naoLidasCount > 0)
-                            <span>{{ $naoLidasCount }}</span>
+                                <span class="badge rounded-pill text-bg-danger">{{$naoLidasCount}}</span>
                             @endif
                         </a>
 
@@ -223,9 +223,13 @@
                             </div>
 
                             <div class="icons-group">
-                                <div class="bookmark">
-                                    <span><i class="uil uil-bookmark"></i></span>
-                                </div>
+                                <span class="salvo-btn @if($post->salvos()->where('user_id', Auth::id())->exists()) salvo @endif" data-post-id="{{ $post->id }}">
+                                    @if($post->salvos()->where('user_id', Auth::id())->exists())
+                                    <i class="fa-solid fa-bookmark salvo"></i>
+                                    @else
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    @endif
+                                </span>
 
 
                                 {{-- aqui --}}
@@ -241,10 +245,10 @@
 
                             <!-- Modal -->
                             <div id="modal-denuncia" class="modal" style="display: none;">
-                                <div class="modal-content">
+                                <div class="modal-content"> 
                                     <span class="close" onclick="closeModal()">&times;</span>
                                     <h2>Denunciar Post</h2>
-                                    <p>Deseja realmente denunciar o post de ID {{ '@' . $user->arroba }}?</p> 
+                                    <p>Deseja realmente denunciar o post de {{ '@' . $post->user->arroba }}?</p> 
                                     <input type="text" id="motivo" placeholder="Motivo da denúncia">
                                     <div class="modal-footer">
                                         <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
@@ -288,14 +292,26 @@
                                         })
                                         .then(response => response.json())
                                         .then(data => {
-                                            alert(data.message); // Exibe a mensagem de sucesso
-                                            closeModal(); // Fecha o modal
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Denúncia registrada!',
+                                                text: data.message,
+                                                confirmButtonText: 'Ok'
+                                            }).then(() => {
+                                                closeModal(); // Fecha o modal após o alerta
+                                            });
                                         })
                                         .catch(error => {
                                             console.error("Erro:", error);
-                                            alert("Ocorreu um erro ao registrar a denúncia.");
+                                            Swal.fire({
+                                                icon: 'error',  
+                                                title: 'Erro',
+                                                text: 'Ocorreu um erro ao registrar a denúncia.',
+                                                confirmButtonText: 'Ok'
+                                            });
                                         });
                                 }
+
                             </script>
 
 
@@ -467,6 +483,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="{{ asset('js/like.js') }}"></script>
+    <script src="{{ asset('js/salvo.js') }}"></script>
+
     <script src="{{ asset('js/seguir.js') }}"></script>
 </body>
 

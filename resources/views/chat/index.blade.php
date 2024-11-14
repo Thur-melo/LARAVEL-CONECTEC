@@ -79,37 +79,44 @@
             </div>
             <div class="listaContainer">
                 <div class="headerContatos">
-                    <h1>Minhas Conversas</h1>
-                   
-                </div>
-                <div class="btnChat">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        Adicionar 
+                    <h1>Chat</h1>
+                    <button data-bs-toggle="modal" data-bs-target="#profileModal" class="addUser">
+                        <i class="fa-solid fa-plus"></i>
                     </button>
+
                 </div>
+                
 
                 <div class="conversationsLista">
 
                     @foreach($conversations as $conversation)
                     <div class="contato">
-                        
 
-                            <a href="{{ url('/conversations/' . $conversation->id) }}">
+
+                        <a href="{{ url('/conversations/' . $conversation->id) }}">
                             <li>
+                            <div class="nameContato">
                                 <div class="imgContato">
-                                <img src="{{ asset('storage/' . ($conversation->user_one_id === $user->id ? $conversation->userTwo->urlDaFoto : $conversation->userOne->urlDaFoto)) }}" class="imgLista" alt="">
+                                    <img src="{{ asset('storage/' . ($conversation->user_one_id === $user->id ? $conversation->userTwo->urlDaFoto : $conversation->userOne->urlDaFoto)) }}" class="imgLista" alt="">
                                 </div>
-                                <div class="nameContato">
-                               <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
-                               </div>
+                                    <div class="infosContato">
+                                    <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
+                                    <span id="nome">{{$conversation->userTwo->arroba}}</span>
 
-                               </li>
-                            </a>
-                       
+                                    <div class="horasMsgContato"><span id="horaMsgConta">5:14</span></div>
+                                </div>
+                                
+                            </div>
+                                
+
+                            </li>
+                        </a>
+
                     </div>
                     @endforeach
 
                 </div>
+            </div>
             </div>
 
             @include('partials.modalContato')

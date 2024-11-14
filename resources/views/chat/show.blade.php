@@ -129,8 +129,13 @@
                 <div class="input-container">
                     <form action="{{ url('/conversations/' . $conversation->id . '/messages') }}" method="POST">
                         @csrf
+                        <div class="input">
                         <input type="text" name="message" placeholder="Sua mensagem" required>
-                        <button type="submit">Enviar</button>
+                        <div class="iconsMandarMsg"><i class="fa-regular fa-face-laugh-beam"></i>
+                        <i class="fa-regular fa-image"></i>
+                    </div>
+                    </div>
+                        <button class="enviarMsgBtn" type="submit"><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
@@ -161,7 +166,6 @@
                                     <div class="infosContato">
                                     <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
                                     <span id="nome">{{$conversation->userTwo->arroba}}</span>
-
                                     <div class="horasMsgContato"><span id="horaMsgConta">5:14</span></div>
                                 </div>
                                 

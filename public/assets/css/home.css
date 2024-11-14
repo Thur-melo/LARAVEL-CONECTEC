@@ -46,10 +46,12 @@ main .container .left{
 }
 
 
-/* .badge{
+ .badge{
+    margin-left: 5px;
+    margin-bottom: 5px;
     
 
-} */
+} 
 
 .left .sidebar{
     margin-top: 1rem;
@@ -532,7 +534,8 @@ main .container .left{
 
 .like-btn i {
     color: #000; /* Cor padrão do ícone não curtido */
-    transition: color 0.3s ease, transform 0.3s ease; /* Suaviza a troca de cor e tamanho */
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 15pt;
 }
 
 .like-btn.liked i {
@@ -554,15 +557,34 @@ main .container .left{
 }
 
 .salvo-btn.salvo i {
-    
     color: rgb(255, 251, 0); /* Cor do ícone curtido */
     transform: scale(1.2); /* Aumenta o tamanho do ícone ao curtir */
+}
+
+.icons-group{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+
+}
+
+.iconDenuncia{
+    margin: 0;
+    display: flex;
+    align-items:center;
+justify-content: center;
+text-decoration: none;
+}
+
+.iconDenuncia i{
+    font-size: 16pt;
+    color: red;
 }
 
 
 .interaction-button span{
     font-size: 12pt;
-
 }
 .textoPost {
     font-size: 18px;
@@ -637,5 +659,6 @@ main .container .left{
     .pbio{
         padding: 10px;
     }
+}
 
     /* ESTILOS DO MODAL------------- */

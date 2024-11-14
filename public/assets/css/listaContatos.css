@@ -52,10 +52,6 @@ main .container .left{
     margin-left: 19px;
 }
 
-
-
-
-
 .left .sidebar{
     margin-top: 1rem;
     background: white;
@@ -245,7 +241,8 @@ form {
 
 input[type="text"] {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: none;
+    outline: none;
     border-radius: 4px;
     flex: 1;
     width: 10px;
