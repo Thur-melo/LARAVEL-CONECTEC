@@ -109,7 +109,7 @@
                 </div>
                 <div class="btnChat">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        Adicionar conversa
+                        Adicionar 
                     </button>
                 </div>
 
@@ -121,12 +121,19 @@
 
                         <a href="{{ url('/conversations/' . $conversation->id) }}">
                             <li>
+                            <div class="nameContato">
                                 <div class="imgContato">
                                     <img src="{{ asset('storage/' . ($conversation->user_one_id === $user->id ? $conversation->userTwo->urlDaFoto : $conversation->userOne->urlDaFoto)) }}" class="imgLista" alt="">
                                 </div>
-                                <div class="nameContato">
+                                    <div class="infosContato">
                                     <span> {{ $conversation->user_one_id === $user->id ? $conversation->userTwo->name : $conversation->userOne->name }} </span>
+                                    <span id="nome">{{$conversation->userTwo->name}}</span>
+
+                                    <div class="horasMsgContato"><span id="horaMsgConta">5:14</span></div>
                                 </div>
+                                
+                            </div>
+                                
 
                             </li>
                         </a>

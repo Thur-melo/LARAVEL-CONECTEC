@@ -25,7 +25,7 @@ main .container {
     position: absolute;
     display: flex;
     right: 100px;
-    gap: 3rem;
+    
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -200,9 +200,6 @@ body {
     font-family: 'Roboto', sans-serif;
     color: #333;
     padding: 20px;
-    background-image: url('/assets/img/backChat.png');
-    background-repeat: no-repeat;
-background-size: cover;
 }
 
 /* Título */
@@ -215,25 +212,20 @@ h1 {
 
 
 li {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: transparent;
+    border: none;
     border-radius: 8px;
-    padding: 15px;
-    width: 300px;
-    height: 80px;
+  
+    width: 100%;
     transition: background-color 0.3s, transform 0.3s;
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
-    box-shadow: #626262cf 0px 10px 11px 0px;
+    gap: 10px;
+    
 }
 
-li:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-}
+
 
 a {
     text-decoration: none;
@@ -247,6 +239,7 @@ form {
     display: flex;
     justify-content: center;
     gap: 10px;
+    
 }
 
 input[type="text"] {
@@ -259,7 +252,7 @@ input[type="text"] {
 
 button {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #ff0000;
     color: white;
     border: none;
     border-radius: 4px;
@@ -326,17 +319,18 @@ button:hover {
 }
 
 .headerContatos h1{
-    font-family: fangsong;
+   
     color: white;
 }
 
 .listaContainer {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    width: 350px;
+   
+    width: 385px;
     min-height: 100px;
-    gap: 10px;
+    background-color: white;
+    
 }
 
 .btnChat {
@@ -347,6 +341,7 @@ button:hover {
     gap: 10px;
     justify-content: center;
     align-items: center;
+    
 }
 .buscarContatos input[type="search"]{
     background: transparent;
@@ -356,12 +351,13 @@ button:hover {
 }
 
 .conversationsLista {
-    gap: 20px;
+ 
     display: flex;
-    width: 300px;
+    width:100%;
     flex-direction: column;
     height: 100%;
-    align-items: flex-start;
+    align-items: start;
+   
 }
 
 .contato {
@@ -369,18 +365,58 @@ button:hover {
     padding: 0;
     max-width: 600px;
     width: 100%;
+    
 }
 
 .contato a{
     text-decoration: none;
     color: black;
+    margin: 0;
+    
 }
 
 .imgLista{
-
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
     object-fit: cover; /* Mantém a proporção e corta a imagem para preencher o contêiner */
+}
+
+.nameContato{
+    display: flex;
+  
+    width: 100%;
+    justify-content: center;
+
+}
+
+.nameContato #nome{
+    color: #bebebe;
+    margin: 0;
+    font-weight: normal;
+    font-size: 10.5pt;
+
+}
+
+#horaMsgConta{
+    font-size: 10.2pt;
+    color: #bebebe;
+    font-weight: normal;
+}
+
+.horasMsgContato{
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+}
+
+.infosContato{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left:5px ;
+
 }

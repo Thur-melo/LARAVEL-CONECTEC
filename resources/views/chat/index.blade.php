@@ -80,7 +80,7 @@
                 </div>
                 <div class="btnChat">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        Adicionar conversa
+                        Adicionar 
                     </button>
                 </div>
 
