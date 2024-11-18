@@ -365,3 +365,54 @@ border-radius: 50%;
 
     background-color: #a7a7a71f;
     }
+
+
+ .icons-group2{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+       
+    
+ }
+    
+    .iconDenuncia2{
+        margin: 0;
+        display: flex;
+        align-items:center;
+    justify-content: center;
+    text-decoration: none;
+    color: rgb(126, 0, 0);
+
+    }
+    
+    .iconDenuncia2 i{
+        font-size: 16pt;
+        /* color: red; */
+    }
+
+    .like-btn i {
+        color: #000; /* Cor padrão do ícone não curtido */
+        transition: color 0.3s ease, transform 0.3s ease;
+        font-size: 15pt;
+    }
+    
+    .like-btn.liked i {
+        color: red; /* Cor do ícone curtido */
+        transform: scale(1.2); /* Aumenta o tamanho do ícone ao curtir */
+    }
+    
+    .salvo-btn i{
+        cursor: pointer;
+        font-size: 15pt;
+        /* Cor padrão do ícone não curtido */
+        transition: color 0.3s ease, transform 0.3s ease; /* Suaviza a troca de cor e tamanho */
+    }
+    
+    .salvo-btn.salvo i {
+        /* border: 1px solid rgb(172, 172, 1); */
+        color: rgb(255, 251, 0); /* Cor do ícone curtido */
+        transform: scale(1.2); /* Aumenta o tamanho do ícone ao curtir */
+    }
+    
+    
