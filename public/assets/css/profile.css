@@ -45,6 +45,12 @@ main .container .left{
     border-radius: 50%;
     margin-left: 19px;
 }
+.badge{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    
+
+}
 
 
 
@@ -332,4 +338,45 @@ main .container .left{
 
 .interaction-button {
     cursor: pointer;
+}
+
+.like-btn i {
+    color: #000; /* Cor padrão do ícone não curtido */
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 15pt;
+}
+
+.like-btn.liked i {
+    color: red; /* Cor do ícone curtido */
+    transform: scale(1.2); /* Aumenta o tamanho do ícone ao curtir */
+}
+
+.interaction-button i{
+    
+    cursor: pointer;
+
+}
+
+.salvo-btn i{
+    cursor: pointer;
+    font-size: 13pt;
+    color: #000; /* Cor padrão do ícone não curtido */
+    transition: color 0.3s ease, transform 0.3s ease; /* Suaviza a troca de cor e tamanho */
+}
+
+.salvo-btn.salvo i {
+    color: rgb(255, 251, 0); /* Cor do ícone curtido */
+    transform: scale(1.2); /* Aumenta o tamanho do ícone ao curtir */
+}
+
+.icons-group{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.likes-count{
+    font-size: 13pt;
+
 }

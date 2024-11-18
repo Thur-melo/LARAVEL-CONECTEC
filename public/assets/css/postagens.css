@@ -36,6 +36,12 @@ main .container .left{
 .menu-item{
     text-decoration: none;
 }
+.badge{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    
+
+}
 
 .profileImgSide{
     width:40px;
