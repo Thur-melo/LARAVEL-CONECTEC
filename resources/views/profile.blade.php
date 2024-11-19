@@ -108,7 +108,7 @@
 
                     <div class="infoContainer">
                         <div class="rowEditarPerfil">
-                            <button type="button" class="btn-edit"
+                            <button type="button" class="botaoEditar"
                                 data-bs-toggle="modal" data-bs-target="#profileModal">
                                 Editar Perfil
                             </button>

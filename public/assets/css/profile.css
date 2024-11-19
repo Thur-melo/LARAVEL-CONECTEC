@@ -380,3 +380,23 @@ main .container .left{
     font-size: 13pt;
 
 }
+
+.botaoEditar{
+    background-color: #07beff;
+    border: none;
+    border: 1px solid #07beff;
+    border-radius: 25px;
+    padding: 7px 12px;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background 0.2s ;
+}
+
+.botaoEditar:hover{
+    background-color:transparent;
+    border: 1px solid #07beff;
+    color: #07beff;
+    
+
+}
