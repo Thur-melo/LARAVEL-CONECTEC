@@ -309,6 +309,12 @@ function relevarDenuncia(denunciaId) {
         </div>
     </div>
 </div>
+<style>
+    .modal-content{
+        width: 430px;
+        height:50%;
+    }
+</style>
 <script>
     function closeModal() {
         document.getElementById('modal').style.display = 'none';
