@@ -37,9 +37,13 @@ public function showPostagens()
     $postsCount = $posts->count(); 
     $numComentarios = Comentarios::where('user_id', $user)->count();
     $numSalvos = salvos::where('user_id', $user)->count();
-
     
-    return view('postagens',compact('user', 'usuariosSugestoes', 'posts','postsCount','numComentarios','numSalvos'));
+
+    $salvos = $user->salvos()->pluck('post_id');
+    $postSalvos   = Post::whereIn('id', $salvos)->get();
+    $qntSalvos  = $postSalvos->count();
+    
+    return view('postagens',compact('user', 'usuariosSugestoes', 'posts','postsCount','numComentarios','numSalvos','postSalvos', 'salvos','qntSalvos' ));
 }
 public function showHome(Request $request)
 {

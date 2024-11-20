@@ -373,6 +373,7 @@ background-color: #e6fdda;
     justify-content: space-between;
     box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
     border-radius: 7px;
+    border: none;
 
 }
 .cardsPosta i{
@@ -400,3 +401,14 @@ background-color: #e6fdda;
     color: #3f3950;
 
 }
+
+.active2{
+
+    border-bottom: #07beff solid 10px;
+}
+
+/* .cardPosta.active2{
+    border-bottom: #07beff solid 10px;
+} 
+
+ */
