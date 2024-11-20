@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{url('assets/css/nav.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/comentarios.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -13,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+    <link rel="stylesheet" href="{{url('assets/css/modalDenunciaPost.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -107,7 +110,7 @@
                 <div class="info">
                     <!-- Início do cabeçalho das informações -->
                     <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
+                        <h3>{{ '@' . $post->user->arroba }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
 
                         <!-- Início da div do módulo do usuário -->
                         <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
@@ -161,10 +164,28 @@
                 </div>
                 <!-- Fim dos botões de interação -->
 
+
                 <!-- Início do botão de salvar -->
-                <div class="bookmark">
-                    <span><i class="uil uil-bookmark"></i></span>
-                </div>
+               <div class="icons-group">
+                                <span class="salvo-btn @if($post->salvos()->where('user_id', Auth::id())->exists()) salvo @endif" data-post-id="{{ $post->id }}">
+                                    @if($post->salvos()->where('user_id', Auth::id())->exists())
+                                    <i class="fa-solid fa-bookmark salvo"></i>
+                                    @else
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    @endif
+                                </span>
+
+
+                                {{-- aqui --}}
+
+
+                                <!-- Link que abre o modal -->
+                                <a class="iconDenuncia" href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+                                    <span class="material-symbols-outlined">
+                                        emergency_home
+                                        </span>
+                                </a>
+                            </div>
                 <!-- Fim do botão de salvar -->
             </div>
             <!-- Fim dos botões de ação -->
@@ -212,7 +233,7 @@
                         
                         <div class="info">
                             <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                            <h3>{{ '@' . $comentario->user->name }} <span class="publiSpan"> • Comentou na publicação de {{$post->user->name}}</span></h3>
+                            <h3>{{ '@' . $comentario->user->arroba }} <span class="publiSpan"> • Comentou na publicação de {{$post->user->arroba}}</span></h3>
                                 <div class="modulo-div" style="background-color: {{ $coresModulo[$comentario->user->modulo] ?? 'defaultColor' }};">
                                     <p>{{ $comentario->user->modulo }} {{ $post->user->perfil }}</p>
                                 </div>
@@ -239,7 +260,7 @@
             <!-- comentarios -->
 
 
-            @include('partials.modalsair')
+            
 
 
 
@@ -248,24 +269,83 @@
 
 
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+        <div id="modal-denuncia" class="modal" style="display: none;">
+                                <div class="modal-content" id="denunciaContent"> 
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Denunciar Post</h2>
+                                    <p>Deseja realmente denunciar o post de {{ '@' . $post->user->arroba }}?</p> 
+                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+                                        <button class="btn btn-info"style="color: white;" onclick="confirmarDenuncia()">Confirmar</button>
+                                    </div>
+                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" id="post-id" value="{{ $post->id }}">
+
+                                </div>
+                            </div>
+
+        <script>
+                                function openModal(postId) {
+                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                }
+
+                                function closeModal() {
+                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                }
+
+                                function confirmarDenuncia() {
+                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
+                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
+
+                                    fetch("{{ route('denunciar') }}", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                user_id: userId,
+                                                post_id: postId,
+                                                motivo: motivo
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Denúncia registrada!',
+                                                text: data.message,
+                                                confirmButtonText: 'Ok'
+                                            }).then(() => {
+                                                closeModal(); // Fecha o modal após o alerta
+                                            });
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            Swal.fire({
+                                                icon: 'error',  
+                                                title: 'Erro',
+                                                text: 'Ocorreu um erro ao registrar a denúncia.',
+                                                confirmButtonText: 'Ok'
+                                            });
+                                        });
+                                }
+
+                            </script>
+
         <script src="{{ asset('js/like.js') }}"></script>
         <script src="{{ asset('js/seguir.js') }}"></script>
         <script src="{{ asset('js/salvo.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+      
 
 
-        <script>
-                document.getElementById('logoutIcon').addEventListener('click', function () {
-            var myModal = new bootstrap.Modal(document.getElementById('confirmLogoutModal'));
-            myModal.show();
-        });
 
-        // Quando o botão "Sair" do modal for clicado, submete o formulário de logout
-        document.getElementById('confirmLogoutBtn').addEventListener('click', function () {
-            document.getElementById('logout-form').submit();
-        });
-        </script>
+@include('partials.modalsair')
 </body>
 
 </html>

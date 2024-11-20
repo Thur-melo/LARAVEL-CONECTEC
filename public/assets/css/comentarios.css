@@ -338,22 +338,54 @@ main .container .left{
 
 .modal-header{
     background-color: #00c9e9;
-    width: 700px;
     color: #fff;
     font-weight: 600;
+}
+
+.badge{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    
+
+} 
+
+.icons-group{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
 
 }
 
-.modal-body{
-    background-color: #f4f4f4;
-    height: 500px;
-    width: 700px;
+.iconDenuncia{
+    margin: 0;
+    display: flex;
+    align-items:center;
+justify-content: center;
+text-decoration: none;
 }
 
-#mf{
-    background-color: #f4f4f4;
-    width: 700px;
+.iconDenuncia span{
+    font-size: 18pt;
+    color: red;
 }
+
+.salvo-btn i{
+    cursor: pointer;
+    font-size: 15pt;
+    color: #000; /* Cor padrão do ícone não curtido */
+    transition: color 0.3s ease, transform 0.3s ease; /* Suaviza a troca de cor e tamanho */
+}
+
+.salvo-btn.salvo i {
+    color: rgb(255, 251, 0); /* Cor do ícone curtido */
+    transform: scale(1.2); /* Aumenta o tamanho do ícone ao curtir */
+}
+
+
+
+
+
 
 .comentarioCotn:hover{
     width: 32px;

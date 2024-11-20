@@ -30,7 +30,7 @@
                 <div class="sidebar">
                     <div class="sidebarList">
 
-                        <a href="{{ Route('home')}}" class="menu-item ">
+                    <a href="{{ Route('home')}}" class="menu-item ">
                             <span><i class="fa-solid fa-house"></i></span>
                             <h3>Home</h3>
                         </a>
@@ -40,12 +40,15 @@
                             <h3>Explorar</h3>
                         </a>
 
-                        <a class="menu-item ">
+                        <a class="menu-item" href="{{ Route('notificacoes.index')}}">
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
+                            @if($naoLidasCount > 0)
+                            <span class="badge rounded-pill text-bg-danger">{{$naoLidasCount}}</span>
+                            @endif
                         </a>
 
-                        <a href="{{ Route('postagens')}}" class="menu-item">
+                        <a href="{{ Route('postagens')}}" class="menu-item ">
                             <span><i class="fa-regular fa-images"></i></span>
                             <h3>Postagens</h3>
                         </a>
@@ -53,7 +56,8 @@
                             <span><i class="fa-regular fa-message"></i></span>
                             <h3>Chat</h3>
                         </a>
-                        <a class="menu-item "  href="{{ Route('home')}}">
+
+                        <a class="menu-item " href="{{ Route('home')}}">
                             <span><i class="fa-regular fa-square-plus"></i></i></span>
                             <h3>Criar</h3>
                         </a>
@@ -185,8 +189,10 @@
         @include('partials.modalContato')
 
     </main>
+    @include('partials.modalsair')
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>

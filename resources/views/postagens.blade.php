@@ -25,6 +25,7 @@
 
 <body>
     @include('partials.navbar')
+   
 
     <main>
         <div class="container">
@@ -360,6 +361,7 @@
 
                     </div>
                     @endforeach
+                    
                 </div>
                 `;
             } else if (tipo === 'salvos') {

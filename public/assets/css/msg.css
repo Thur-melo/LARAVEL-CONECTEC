@@ -205,6 +205,12 @@ padding: 10px;
     align-items: center;
     gap: 4px;
 }
+.badge{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    
+
+}
 
 .online span{
     font-size: 10pt;
@@ -214,7 +220,7 @@ padding: 10px;
 .bolinha{
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: rgb(15, 235, 15);
     border-radius: 50%;
 }
 

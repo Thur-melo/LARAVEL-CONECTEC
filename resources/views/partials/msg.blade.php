@@ -64,5 +64,6 @@
         <!-- Fim da Lista de "Em Alta" -->
     </div>
     <!-- Fim do Contêiner de "Em Alta" -->
+    @include('partials.modalsair')
 </body>
 </html>

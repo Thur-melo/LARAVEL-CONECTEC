@@ -241,14 +241,14 @@
 
                             <!-- Modal denuncia -->
                             <div id="modal-denuncia" class="modal" style="display: none;">
-                                <div class="modal-content"> 
+                                <div class="modal-content" id="denunciaContent"> 
                                     <span class="close" onclick="closeModal()">&times;</span>
                                     <h2>Denunciar Post</h2>
                                     <p>Deseja realmente denunciar o post de {{ '@' . $post->user->arroba }}?</p> 
                                     <input type="text" id="motivo" placeholder="Motivo da denúncia">
                                     <div class="modal-footer">
                                         <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
-                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
+                                        <button class="btn btn-info"style="color: white;" onclick="confirmarDenuncia()">Confirmar</button>
                                     </div>
                                     <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
                                     <input type="hidden" id="post-id" value="{{ $post->id }}">
@@ -389,9 +389,9 @@
                             </div> -->
 
                         <div class="publicarInput">
-                            <h5 class="modal-title" style="font-weight:600">Descrição da publicação</h5>
-                            <p style="font-weight:500; color:#AFAFAF; font-size:10pt"> Para postagem ser enviada são necessário pelo menos 10 caracteres. </p>
-                            <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Faça sua pergunta aqui..." required></textarea>
+                            <h5 class="modal-title">Descrição da publicação</h5>
+                            <p style="font-weight:500; color:#AFAFAF; font-size:10pt"> Para postagem ser enviada são necessário pelo menos 10 caracteres, você pode usar '#' para aumentar o alcançe da sua publicação </p>
+                            <textarea class="form-control" aria-label="With textarea" name="texto" placeholder="Faça sua pergunta aqui... " required></textarea>
                         </div>
                         <div class="publicarInput" style="margin-top:10px">
                             <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="fotoPost" accept="image/*" onchange="previewImage(event)">
@@ -413,7 +413,7 @@
 
                     <div class="modal-footer" id="mf">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="postarBotao">Publicar</button>
+                        <button type="submit" class="btn btn-info" style="color: white;">Publicar</button>
                     </div>
                 </div>
         </form>
