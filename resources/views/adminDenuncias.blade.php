@@ -4,8 +4,6 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Menu-principal</title>
-    {{-- <link rel="stylesheet" href="{{url('assets/css/Home.css')}}"> --}}
-    <link rel="stylesheet" href="{{url('assets/css/adminHome.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/adminDenuncias.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -14,27 +12,28 @@
 
 
 </head>
-<body>
+<body style="background-color: #E6E9EE;">
     <div class="main">
     
    <!-- sidebar inicio -->
    <div class="sidebar">
-        <img src="{{url('assets/img/logoConectec4.png')}}" class="logo-sidebar" alt="">
+   <div class="sidebar">
+        <img src="{{url('assets/img/logoConectec.png')}}" class="logo-sidebar" alt="">
         <ul>
-        <li><a href= "{{ route('admin') }}" >Úsuario</a></li>
+        <li><a href= "{{ route('admin') }}" >Usuário</a></li>
             <li><a href= "{{ route('adminHome') }}" >Postagens</a></li>
-            <li><a href="{{ route('preferenciasLista') }}">Preferências</a></li>
             <li><a href="{{ route('denuncias') }}">Denúncias</a></li>
 
 
                
                 <li class="logout">
-    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+                <a href="{{ route('login') }}">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
 </li>
 
 </li>
         </ul>
+    </div>
     </div>
     <!-- sidebar fim -->
 
@@ -67,7 +66,7 @@
                 @foreach($denunciasUser as $denuncia)
                 <tr>
                     <td>{{ $denuncia->id }}</td>
-                    <td>{{ $denuncia->userDenunciado->name }}</td>
+                    <td>{{'@'. $denuncia->userDenunciado->arroba }}</td>
                     <td>{{ $denuncia->motivo }}</td>
                     <td>{{ $denuncia->userDenunciado->status }}</td>
                     <td>
@@ -269,9 +268,9 @@ function relevarDenuncia(denunciaId) {
                                         <div class="textoPost">
                                             ${post.texto}
                                         </div>
-                                        <div class="imgPost">
+                                        <div class="imgPostDenuncia">
                                             <a href="{{ asset('storage') }}/${post.fotoPost}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                                <img src="{{ asset('storage') }}/${post.fotoPost}" alt="" style="max-width: 100%; height: auto;">
+                                                <img src="{{ asset('storage') }}/${post.fotoPost}" alt="">
                                             </a>
                                         </div>
 
@@ -292,6 +291,41 @@ function relevarDenuncia(denunciaId) {
                     document.getElementById('modal').style.display = 'none';
                 }
             </script>
+            <style>
+                
+                .imgPostDenuncia img{
+                    width: 100%;
+                    height: 500px;
+                    object-fit: cover;
+                }
+                .imgPostDenuncia {
+                    border-radius: 1rem;
+                    margin: 0.7rem 0;
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: cover;
+
+                }
+                .modal-content1{
+                   max-width: 800px;
+                   display: flex;
+                    align-items: center;
+                    justify-content: center;
+                   
+                }
+                #modal-content{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                }
+                .feed1{
+                    width: 100%;
+                    padding: 15px;
+                
+                }
+            </style>
             
 
             </table>

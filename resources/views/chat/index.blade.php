@@ -123,7 +123,18 @@
 
 
 
+        <div class="imagemConectecCont">
+            <div class="imagemConversa">
+                <img src="{{url('assets/img/Work chat-pana.png')}}" alt="">
+                <div class="titulo">
+                    <h1>Conectec</h1>
+                    <span>"Bem-vindo ao Conecte Chat! Aqui é um lugar para compartilhar ideias, aprender juntos e se conectar com colegas. Sinta-se à vontade para fazer perguntas, participar das discussões e colaborar com a comunidade. Vamos juntos construir um espaço de aprendizado e troca de experiências!"</span>
+                </div>
+            </div>
 
+            
+            
+        </div>
         </div>
 
     </main>

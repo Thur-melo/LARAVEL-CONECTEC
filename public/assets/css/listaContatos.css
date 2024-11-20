@@ -421,3 +421,35 @@ button:hover {
     margin-left:5px ;
 
 }
+
+
+.imagemConectecCont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagemConversa img{
+    width: 800px;
+    height: 599px;
+    object-fit: cover;
+}
+
+.imagemConversa h1{
+    font-weight: 600;
+    color: #8b8b8b;
+
+}
+
+.titulo{
+    display: flex;
+    align-items: center;
+    width: 800px;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.titulo span{
+    color: #bebebe;
+    font-size: 10pt;
+}

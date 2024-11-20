@@ -30,7 +30,7 @@
 
                
                 <li class="logout">
-    <a href="#logout">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
+                <a href="{{ route('login') }}">Logout <span class="material-symbols-outlined icon-logout">logout</span></a>
 
 </li>
 

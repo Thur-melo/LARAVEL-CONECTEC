@@ -615,6 +615,11 @@ text-decoration: none;
     flex-direction: column;
 }
 
+.material-symbols-outlined{
+    color: red;
+
+}
+
 
 .usersLista {
     display: flex;

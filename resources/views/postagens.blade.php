@@ -44,7 +44,7 @@
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
                             @if($naoLidasCount > 0)
-                            <span>{{ $naoLidasCount }}</span>
+                            <span class="badge rounded-pill text-bg-danger">{{$naoLidasCount}}</span>
                             @endif
                         </a>
 
@@ -89,7 +89,7 @@
                     <div class="cardsPosta">
                         <div class="cardPosta">
                             <h2>{{$postsCount}}</h2>
-                            <span>Perguntas</span>
+                            <span>Postangens</span>
                         </div>
                         <i class="fa-regular fa-images"></i>
                     </div>

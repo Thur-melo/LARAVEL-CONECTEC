@@ -16,6 +16,7 @@
     <title>Conectec Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.1/css/fontisto/fontisto.min.css" integrity="sha512-OCX+kEmTPN1oyWnFzjD7g/7SLd9urTeI/VUZR6nZFFN7sedDoBSaSv/FDvCF8hf1jvadHsp0y0kie9Zdm899YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -50,7 +51,7 @@
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
                             @if($naoLidasCount > 0)
-                            <span>{{ $naoLidasCount }}</span>
+                            <span class="badge rounded-pill text-bg-danger">{{$naoLidasCount}}</span>
                             @endif
                         </a>
 
@@ -226,40 +227,43 @@
                             }
 
                             function confirmarDenuncia() {
-    const userId = document.getElementById('user-id').value; // ID do usuário que está fazendo a denúncia
-    const user_denunciado_id = document.getElementById('user_denunciado_id').value; // ID do usuário denunciado
-    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
+                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
+                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
 
-    // Verifique se os dados estão sendo capturados corretamente
-    console.log(userId, user_denunciado_id, motivo);  // Isso ajudará a debugar os valores
-
-    fetch("{{ route('denunciarUser') }}", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-        },
-        body: JSON.stringify({
-            user_id: userId,
-            user_denunciado_id: user_denunciado_id,
-            motivo: motivo
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            alert(data.message);  // Exibe a mensagem de sucesso
-            closeModal();  // Fecha o modal
-        } else {
-            console.error("Erro nos dados:", data);  // Verifique o conteúdo do erro
-            alert("Ocorreu um erro ao registrar a denúncia.");
-        }
-    })
-    .catch(error => {
-        console.error("Erro:", error);  // Exibe o erro completo
-        alert("Ocorreu um erro ao registrar a denúncia.");
-    });
-}
+                                    fetch("{{ route('denunciar') }}", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                user_id: userId,
+                                                post_id: postId,
+                                                motivo: motivo
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Denúncia registrada!',
+                                                text: data.message,
+                                                confirmButtonText: 'Ok'
+                                            }).then(() => {
+                                                closeModal(); // Fecha o modal após o alerta
+                                            });
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            Swal.fire({
+                                                icon: 'error',  
+                                                title: 'Erro',
+                                                text: 'Ocorreu um erro ao registrar a denúncia.',
+                                                confirmButtonText: 'Ok'
+                                            });
+                                        });
+                                }
 
 
 
@@ -358,9 +362,43 @@
                                         </button>
                                     </a>
                                 </div>
-                                <div class="bookmark">
-                                    <span><i class="uil uil-bookmark"></i></span>
+
+                                <div class="icons-group2">
+                                <span class="salvo-btn @if($post->salvos()->where('user_id', Auth::id())->exists()) salvo @endif" data-post-id="{{ $post->id }}">
+                                    @if($post->salvos()->where('user_id', Auth::id())->exists())
+                                    <i class="fa-solid fa-bookmark salvo"></i>
+                                    @else
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    @endif
+                                </span>
+
+                                <a class="iconDenuncia2" href="javascript:void(0);" onclick="openModal({{ $post->id }})">
+                                    <span class="material-symbols-outlined">
+                                        emergency_home
+                                        </span>
+                                </a>
                                 </div>
+
+                                                            <!-- Modal denuncia -->
+                            <div id="modal-denuncia" class="modal" style="display: none;">
+                                <div class="modal-content"> 
+                                    <span class="close" onclick="closeModal()">&times;</span>
+                                    <h2>Denunciar Post</h2>
+                                    <p>Deseja realmente denunciar o post de {{ '@' . $post->user->arroba }}?</p> 
+                                    <input type="text" id="motivo" placeholder="Motivo da denúncia">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+                                        <button class="postarBotao" onclick="confirmarDenuncia()">Confirmar</button>
+                                    </div>
+                                    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" id="post-id" value="{{ $post->id }}">
+
+                                </div>
+                            </div>
+
+                            
+
+
                             </div>
                         </div>
                     </div>
@@ -378,7 +416,57 @@
     @include('partials.modalsair')
     <!-- Modal de Confirmação -->
 
+    <script>
+                                function openModal(postId) {
+                                    document.getElementById('modal-denuncia').style.display = 'flex';
+                                }
 
+                                function closeModal() {
+                                    document.getElementById('modal-denuncia').style.display = 'none';
+                                }
+
+                                function confirmarDenuncia() {
+                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
+                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
+                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
+
+                                    fetch("{{ route('denunciar') }}", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                            },
+                                            body: JSON.stringify({
+                                                user_id: userId,
+                                                post_id: postId,
+                                                motivo: motivo
+                                            })
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Denúncia registrada!',
+                                                text: data.message,
+                                                confirmButtonText: 'Ok'
+                                            }).then(() => {
+                                                closeModal(); // Fecha o modal após o alerta
+                                            });
+                                        })
+                                        .catch(error => {
+                                            console.error("Erro:", error);
+                                            Swal.fire({
+                                                icon: 'error',  
+                                                title: 'Erro',
+                                                text: 'Ocorreu um erro ao registrar a denúncia.',
+                                                confirmButtonText: 'Ok'
+                                            });
+                                        });
+                                }
+
+                            </script>
+
+<script src="{{ asset('js/salvo.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>

@@ -42,7 +42,7 @@
                             <span><i class="fa-regular fa-bell"></i></span>
                             <h3>Notificações</h3>
                             @if($naoLidasCount > 0)
-                            <span>{{ $naoLidasCount }}</span>
+                            <span class="badge rounded-pill text-bg-danger">{{$naoLidasCount}}</span>
                             @endif
                         </a>
 
@@ -252,6 +252,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
         <script src="{{ asset('js/like.js') }}"></script>
         <script src="{{ asset('js/seguir.js') }}"></script>
+        <script src="{{ asset('js/salvo.js') }}"></script>
+
 
         <script>
                 document.getElementById('logoutIcon').addEventListener('click', function () {
