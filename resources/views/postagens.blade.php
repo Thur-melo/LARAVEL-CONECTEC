@@ -97,7 +97,7 @@
                         <i class="fa-regular fa-images"></i>
                     </button>
 
-                    <div class="cardsPosta">
+                    <div class="cardsPosta" onclick="mudarConteudo('comentarios')">
                         <div class="cardPosta">
                             <h2>{{$numComentarios}}</h2>
                             <span>Comentarios</span>
@@ -119,8 +119,11 @@
                 </div>
 
 
-                {{-- <div class="containerTabela">
-                    <h2>Minhas postagens</h2>
+
+
+{{-- eita --}}
+                <div class="containerTabela">
+                    <h2>Meus Comentários</h2>
 
                     <div class="sumarioCont">
                         <div class="sumarios">
@@ -136,49 +139,58 @@
 
                     <div class="headerTabela">
                         <div>Data de Publicação</div>
+                        <div>Comentário</div>
+                        <div>post</div>
                         <div>Conteúdo</div>
-                        <div>Status</div>
                         <div>Operações</div>
                     </div>
 
-                    @foreach($posts as $post)
+                    @foreach($comentarios as $comm)
                     <div class="question-row">
-                        <div>{{ $post->created_at->diffForHumans() }}</div>
-                        <div class="content-preview">{{ $post->texto}}</div>
+                        <div>{{ $comm->created_at->diffForHumans() }}</div>
+                        <div class="content-preview">{{ $comm->texto}}</div>
                         <div>
                             <div class="statusPost">
-                                <div class="status {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'status-respondido' : ($post->status == 1 ? 'status-ativo' : 'status-desativado') }}">
+                              
+                                    <div class="imagemLittle">
+                                        <img src="{{ asset('storage/' . $comm->post->fotoPost) }}" >
+
+                                    
+{{--                                     
                                     <span>
-                                        {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'Comentado' : ($post->status == 1 ? 'Ativo' : 'Desativado') }}
-                                    </span>
+                                        {{ $comm->post->fotoPost }}
+
+                                    </span> --}}
                                 </div>
                             </div>
 
                         </div>
+
+                        <div class="conteudoPost">{{$comm->post->texto}}</div>
                         <div class="icons">
 
-                            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"> @csrf
+                            <form id="deleteForm-{{ $comm->id }}" action="{{ route('posts.destroy', $comm->id) }}" method="POST"> @csrf
                                 @method('DELETE')
-                                <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
+                                <button type="button" class="delete-button" data-post-id="{{ $comm->id }}">
                                     <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
                                 </button>
                             </form>
 
 
 
-                            <a href="{{ route('comentarios', $post->id) }}">
+                            <a href="{{ route('comentarios', $comm->post->id) }}">
                                 <i class="fa-regular fa-eye"></i>
                             </a>
 
                             <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
                                 data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                @endif"></i>
+                                @endif"></i> 
 
                         </div>
 
                     </div>
                     @endforeach
-                </div> --}}
+                </div>
 
 
                 @include('partials.modalsair')
@@ -425,20 +437,80 @@
                     
 
                 @endforeach`;
-            } 
+            } else if(tipo === 'comentarios'){
+                resultado.innerHTML = `
+                <div class="containerTabela">
+                  
+                    <h2>Minhas postagens</h2>
+
+                    <div class="sumarioCont">
+                        <div class="sumarios">
+                            <div class="cor1"></div><span>Aprovado</span>
+                        </div>
+                        <div class="sumarios">
+                            <div class="cor2"></div> <span>Desativado</span>
+                        </div>
+                        <div class="sumarios">
+                            <div class="cor3"></div> <span>Respondido/comentado</span>
+                        </div>
+                    </div>
+
+                    <div class="headerTabela">
+                        <div>Data de Publicação</div>
+                        <div>Conteúdo</div>
+                        <div>Status</div>
+                        <div>Operações</div>
+                    </div>
+
+                    @foreach($posts as $post)
+                    <div class="question-row">
+                        <div>{{ $post->created_at->diffForHumans() }}</div>
+                        <div class="content-preview">{{ $post->texto}}</div>
+                        <div>
+                            <div class="statusPost">
+                                <div class="status {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'status-respondido' : ($post->status == 1 ? 'status-ativo' : 'status-desativado') }}">
+                                    <span>
+                                        {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'Comentado' : ($post->status == 1 ? 'Ativo' : 'Desativado') }}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="icons">
+
+                            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"> @csrf
+                                @method('DELETE')
+                                <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
+                                    <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
+                                </button>
+                            </form>
 
 
+
+                            <a href="{{ route('comentarios', $post->id) }}">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
+
+                            <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
+                                data-image="{{ asset('storage/' . $post->fotoPost) }}"
+                                @endif"></i>
+
+                        </div>
+
+                    </div>
+                    @endforeach
+               
+                </div>
+                    `
+            }
+
+
+            // Atualizar a classe active
             const categorias = document.querySelectorAll('.cardPosta');
             categorias.forEach(cat => cat.classList.remove('active'));
             const clickedElement = document.querySelector(`.cardPosta[onclick*="${tipo}"]`);
             clickedElement.classList.add('active');
-        // Atualizar a classe active
-        // const categorias = document.querySelectorAll('.cardPosta');
-        // categorias.forEach(cat => cat.classList.remove('active2'));
-        // console.log("tudao", categorias)
-        // const clickedElement = document.querySelector(`.cardsPosta[onclick*="${tipo}"]`);
-        // console.log("clicadao pae:", clickedElement);  // Adiciona a mensagem ao console
-        // clickedElement.classList.add('active2');
+
     }
 </script>
 

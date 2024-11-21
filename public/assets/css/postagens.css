@@ -407,8 +407,17 @@ background-color: #e6fdda;
     border-bottom: #07beff solid 10px;
 }
 
-/* .cardPosta.active2{
-    border-bottom: #07beff solid 10px;
-} 
+.imagemLittle {
+    width: 60px; /* Largura desejada */
+    max-width: 72px;
+    overflow: hidden; /* Garante que o conteúdo fora da área seja cortado */
 
- */
+
+}
+
+.imagemLittle img {
+    width: 100%; /* Preenche o contêiner na largura */
+    /* height: 100%;  */
+    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
+    object-position: top; /* Centraliza a parte visível da imagem */
+}
