@@ -90,13 +90,13 @@
             {{-- ronnie --}}
             <div class="meio">
                 <div class="cardsCont">
-                    <button  class="cardsPosta active2"  onclick="mudarConteudo('meusPosts')">
+                    <div  class="cardsPosta active2"  onclick="mudarConteudo('meusPosts')">
                         <div class="cardPosta">
                             <h2>{{$postsCount}}</h2>
                             <span>Postangens</span>
                         </div>
                         <i class="fa-regular fa-images"></i>
-                    </button>
+                </div>
 
                     <div class="cardsPosta">
                         <div class="cardPosta">
@@ -107,15 +107,15 @@
                     </div>
 
 
-            <button  class="cardsPosta"  onclick="mudarConteudo('salvos')">
-                    {{-- <div class="cardsPosta" onclick="mudarConteudo('salvos')"> --}}
+            <div  class="cardsPosta"  onclick="mudarConteudo('salvos')">
+                    
                         <div class="cardPosta">
                             <h2>{{$qntSalvos}}</h2>
                             <span>Salvos</span>
                         </div>
                         <i class="fa-regular fa-bookmark"></i>
                     {{-- </div> --}}
-                </button>
+                </div>
 
                 </div>
 
@@ -430,17 +430,12 @@
             } 
 
 
-            const categorias = document.querySelectorAll('.cardPosta');
-            categorias.forEach(cat => cat.classList.remove('active'));
-            const clickedElement = document.querySelector(`.cardPosta[onclick*="${tipo}"]`);
-            clickedElement.classList.add('active');
-        // Atualizar a classe active
-        // const categorias = document.querySelectorAll('.cardPosta');
-        // categorias.forEach(cat => cat.classList.remove('active2'));
-        // console.log("tudao", categorias)
-        // const clickedElement = document.querySelector(`.cardsPosta[onclick*="${tipo}"]`);
-        // console.log("clicadao pae:", clickedElement);  // Adiciona a mensagem ao console
-        // clickedElement.classList.add('active2');
+          
+        
+            const categorias = document.querySelectorAll('.cardsPosta');
+            categorias.forEach(cat => cat.classList.remove('active2'));
+            const clickedElement = document.querySelector(`.cardsPosta[onclick*="${tipo}"]`);
+            clickedElement.classList.add('active2');
     }
 </script>
 
