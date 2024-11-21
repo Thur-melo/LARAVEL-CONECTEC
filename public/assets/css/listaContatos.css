@@ -312,6 +312,7 @@ button:hover {
     flex-direction: row;
     align-items: center;
     width: 350px;
+    width: 100%;
     justify-content: space-between;
     padding: 5px;
     
@@ -348,6 +349,12 @@ button:hover {
     width: 30vw;
     border: none;
     outline: none;
+}
+.badge{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    
+
 }
 
 .conversationsLista {

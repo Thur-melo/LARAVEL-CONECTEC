@@ -6,30 +6,30 @@
     object-fit:contain;
 }
 
-.modal-dialog {
+#postModal2 .modal-dialog {
     max-width: 40%;
     width: auto; /* Define a largura que você preferir */
     
 }
 
-.modal-body{
+#postModal2 .modal-body{
     background-color:#ffffff;
 
 }
 
-.modal.show .modal-dialog {
+#postModal2 .modal.show .modal-dialog {
     display: flex;
     align-items: center;
     justify-content: center;
    
 }
-.modal-header{
+#postModal2 .modal-header{
     background-color: white;
     color: #3f3950;
    
 }
 
-.modal-header h5{
+#postModal2 .modal-header h5{
     font-weight:600;
     font-size:17pt;
 }

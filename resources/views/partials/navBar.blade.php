@@ -145,7 +145,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                     <input
                     type="search"
-                    placeholder="Pesquisar... "
+                    placeholder="Pesquisar, usuarios, hashtags '#', sugestões... "
                     name="s"
                      id="s"
                     />

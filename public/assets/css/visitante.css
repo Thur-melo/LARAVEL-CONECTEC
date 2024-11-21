@@ -322,16 +322,14 @@ main .container .left{
     justify-content: center;
     width: 30%;
     height: 40px;
-    border-bottom: #07beff solid 10px;    cursor: pointer;
+    cursor: pointer;
+    color: #3f3950;
+   font-size: 17px;
+    border-bottom: #07beff solid 5px;
+    border-radius: 5px;
 }
 
-.btn-edit{
-    background-color: white;
-    padding: 5px;
-    border-radius: 20px;
-    width: 100px;
-    
-}
+
 
 #btnEditBanner{
     cursor: pointer;

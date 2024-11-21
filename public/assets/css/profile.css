@@ -306,7 +306,7 @@ main .container .left{
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     align-items: end;
 }
 
@@ -317,11 +317,13 @@ main .container .left{
     width: 30%;
     height: 50px;
     cursor: pointer;
+    color: #3f3950;
 }
 
 .categoria.active{
-    height: 40px;
-    border-bottom: #07beff solid 10px;
+    height: 45px;
+    border-bottom: #07beff solid 5px;
+    border-radius: 5px;
 }
 
 .btn-edit{

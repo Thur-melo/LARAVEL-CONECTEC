@@ -25,6 +25,7 @@
 
 <body>
     @include('partials.navbar')
+   
 
     <main>
         <div class="container">
@@ -89,13 +90,13 @@
             {{-- ronnie --}}
             <div class="meio">
                 <div class="cardsCont">
-                    <button  class="cardsPosta active2"  onclick="mudarConteudo('meusPosts')">
+                    <div  class="cardsPosta active2"  onclick="mudarConteudo('meusPosts')">
                         <div class="cardPosta">
                             <h2>{{$postsCount}}</h2>
                             <span>Postangens</span>
                         </div>
                         <i class="fa-regular fa-images"></i>
-                    </button>
+                </div>
 
                     <div class="cardsPosta" onclick="mudarConteudo('comentarios')">
                         <div class="cardPosta">
@@ -106,15 +107,15 @@
                     </div>
 
 
-            <button  class="cardsPosta"  onclick="mudarConteudo('salvos')">
-                    {{-- <div class="cardsPosta" onclick="mudarConteudo('salvos')"> --}}
+            <div  class="cardsPosta"  onclick="mudarConteudo('salvos')">
+                    
                         <div class="cardPosta">
                             <h2>{{$qntSalvos}}</h2>
                             <span>Salvos</span>
                         </div>
                         <i class="fa-regular fa-bookmark"></i>
                     {{-- </div> --}}
-                </button>
+                </div>
 
                 </div>
 
@@ -372,6 +373,7 @@
 
                     </div>
                     @endforeach
+                    
                 </div>
                 `;
             } else if (tipo === 'salvos') {
@@ -487,29 +489,17 @@
 
 
 
-                            <a href="{{ route('comentarios', $post->id) }}">
-                                <i class="fa-regular fa-eye"></i>
-                            </a>
 
-                            <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
-                                data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                @endif"></i>
-
-                        </div>
-
-                    </div>
-                    @endforeach
-               
-                </div>
                     `
             }
 
 
             // Atualizar a classe active
-            const categorias = document.querySelectorAll('.cardPosta');
-            categorias.forEach(cat => cat.classList.remove('active'));
-            const clickedElement = document.querySelector(`.cardPosta[onclick*="${tipo}"]`);
-            clickedElement.classList.add('active');
+        
+            const categorias = document.querySelectorAll('.cardsPosta');
+            categorias.forEach(cat => cat.classList.remove('active2'));
+            const clickedElement = document.querySelector(`.cardsPosta[onclick*="${tipo}"]`);
+            clickedElement.classList.add('active2');
 
     }
 </script>
