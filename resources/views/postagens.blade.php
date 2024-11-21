@@ -123,25 +123,14 @@
 
 
 {{-- eita --}}
-                <div class="containerTabela">
+                {{-- <div class="containerTabela">
                     <h2>Meus Comentários</h2>
 
-                    <div class="sumarioCont">
-                        <div class="sumarios">
-                            <div class="cor1"></div><span>Aprovado</span>
-                        </div>
-                        <div class="sumarios">
-                            <div class="cor2"></div> <span>Desativado</span>
-                        </div>
-                        <div class="sumarios">
-                            <div class="cor3"></div> <span>Respondido/comentado</span>
-                        </div>
-                    </div>
 
                     <div class="headerTabela">
                         <div>Data de Publicação</div>
                         <div>Comentário</div>
-                        <div>post</div>
+                        <div>Imagem do post</div>
                         <div>Conteúdo</div>
                         <div>Operações</div>
                     </div>
@@ -157,11 +146,7 @@
                                         <img src="{{ asset('storage/' . $comm->post->fotoPost) }}" >
 
                                     
-{{--                                     
-                                    <span>
-                                        {{ $comm->post->fotoPost }}
 
-                                    </span> --}}
                                 </div>
                             </div>
 
@@ -170,12 +155,15 @@
                         <div class="conteudoPost">{{$comm->post->texto}}</div>
                         <div class="icons">
 
-                            <form id="deleteForm-{{ $comm->id }}" action="{{ route('posts.destroy', $comm->id) }}" method="POST"> @csrf
+                            <form id="deleteForm-{{ $comm->id }}" action="{{ route('comentarios.destroy', $comm->id) }}" method="POST">
+                                @csrf
                                 @method('DELETE')
-                                <button type="button" class="delete-button" data-post-id="{{ $comm->id }}">
+                                <button type="button" class="delete-button" data-id="{{ $comm->id }}" data-type="comment">
                                     <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
                                 </button>
                             </form>
+                            
+                            
 
 
 
@@ -183,17 +171,17 @@
                                 <i class="fa-regular fa-eye"></i>
                             </a>
 
-                            <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
+                            {{-- <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
                                 data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                @endif"></i> 
-
+                                @endif"></i>  --}}
+{{-- 
                         </div>
 
                     </div>
                     @endforeach
-                </div>
+                </div> --}}
 
-
+                 
                 @include('partials.modalsair')
 
 
@@ -236,9 +224,10 @@
                             </div>
                             <div class="icons">
     
-                                <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"> @csrf
+                                <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                    @csrf
                                     @method('DELETE')
-                                    <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
+                                    <button type="button" class="delete-button" data-id="{{ $post->id }}" data-type="post">
                                         <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
                                     </button>
                                 </form>
@@ -269,6 +258,7 @@
     <script>
         //-----------------------------------------Modal de confirmção do DELETE------------------------------------------------------------------
 
+
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function() {
                 const postId = this.getAttribute('data-post-id');
@@ -298,7 +288,7 @@
             });
         });
 
-        
+    
         // -----------------------------------------Modal de confirmção do DELETE------------------------------------------------------------------
     </script>
 
@@ -358,6 +348,7 @@
                                     <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
                                 </button>
                             </form>
+
 
 
 
@@ -441,61 +432,71 @@
                 @endforeach`;
             } else if(tipo === 'comentarios'){
                 resultado.innerHTML = `
+                {{-- eita --}}
                 <div class="containerTabela">
-                  
-                    <h2>Minhas postagens</h2>
+                    <h2>Meus Comentários</h2>
 
-                    <div class="sumarioCont">
-                        <div class="sumarios">
-                            <div class="cor1"></div><span>Aprovado</span>
-                        </div>
-                        <div class="sumarios">
-                            <div class="cor2"></div> <span>Desativado</span>
-                        </div>
-                        <div class="sumarios">
-                            <div class="cor3"></div> <span>Respondido/comentado</span>
-                        </div>
-                    </div>
 
                     <div class="headerTabela">
                         <div>Data de Publicação</div>
+                        <div>Comentário</div>
+                        <div>Imagem do post</div>
                         <div>Conteúdo</div>
-                        <div>Status</div>
                         <div>Operações</div>
                     </div>
 
-                    @foreach($posts as $post)
+                    @foreach($comentarios as $comm)
                     <div class="question-row">
-                        <div>{{ $post->created_at->diffForHumans() }}</div>
-                        <div class="content-preview">{{ $post->texto}}</div>
+                        <div>{{ $comm->created_at->diffForHumans() }}</div>
+                        <div class="content-preview">{{ $comm->texto}}</div>
                         <div>
                             <div class="statusPost">
-                                <div class="status {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'status-respondido' : ($post->status == 1 ? 'status-ativo' : 'status-desativado') }}">
-                                    <span>
-                                        {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'Comentado' : ($post->status == 1 ? 'Ativo' : 'Desativado') }}
-                                    </span>
+                              
+                                    <div class="imagemLittle">
+                                        <img src="{{ asset('storage/' . $comm->post->fotoPost) }}" >
+
+                                    
+
                                 </div>
                             </div>
 
                         </div>
+
+                        <div class="conteudoPost">{{$comm->post->texto}}</div>
                         <div class="icons">
 
-                            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"> @csrf
+                            <form id="deleteForm-{{ $comm->id }}" action="{{ route('comentarios.destroy', $comm->id) }}" method="POST">
+                                @csrf
                                 @method('DELETE')
-                                <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
+                                <button type="button" class="delete-button" data-id="{{ $comm->id }}" data-type="comment">
                                     <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
                                 </button>
                             </form>
+                            
+                            
 
 
 
+                            <a href="{{ route('comentarios', $comm->post->id) }}">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
 
+                            {{-- <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
+                                data-image="{{ asset('storage/' . $post->fotoPost) }}"
+                                @endif"></i>  --}}
+
+                        </div>
+
+                    </div>
+                    @endforeach
+                </div>
+
+                
                     `
             }
 
 
             // Atualizar a classe active
-        
             const categorias = document.querySelectorAll('.cardsPosta');
             categorias.forEach(cat => cat.classList.remove('active2'));
             const clickedElement = document.querySelector(`.cardsPosta[onclick*="${tipo}"]`);

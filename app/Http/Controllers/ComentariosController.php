@@ -60,7 +60,13 @@ class ComentariosController extends Controller
       
     }
    
-      
+      public  function destroy($id){
+        $comentario = Comentarios::findOrFail($id);
+        $comentario->delete();
+
+        return redirect()->back()->with('success', 'comm deletado com sucessoaee!');
+
+      }
     
 
 }

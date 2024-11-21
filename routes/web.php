@@ -110,6 +110,7 @@ Route::patch('/admin/{id}', [adminController::class, 'AtivaUser'])->name('user.a
 Route::get('/posts/{id}/comentarios', [ComentariosController::class, 'showcomentarios'])->name('comentarios.show');
 Route::get('/comentarios/{id}', [ComentariosController::class, 'showcomentarios'])->name('comentarios');
 Route::post('/comentarios/{postId}/comentarios', [ComentariosController::class, 'comentar'])->name('comentarios.store');
+Route::delete('/comentarios/{id}', [ComentariosController::class, 'destroy'] )->name('comentarios.destroy');
 
 
 

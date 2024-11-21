@@ -420,4 +420,5 @@ background-color: #e6fdda;
     /* height: 100%;  */
     object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
     object-position: top; /* Centraliza a parte visível da imagem */
+    box-shadow: #cccccc 6px;
 }
