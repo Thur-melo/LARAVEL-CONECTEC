@@ -229,6 +229,8 @@ body {
     z-index: 1; /* Garante que o cabeçalho fique acima das linhas */
 }
 
+
+
 .tabelaUsers2 td {
     background-color: #f9f9f9;
     font-size: 15px;
