@@ -407,18 +407,31 @@ background-color: #e6fdda;
     border-bottom: #07beff solid 10px;
 }
 
-.imagemLittle {
-    width: 60px; /* Largura desejada */
-    max-width: 72px;
-    overflow: hidden; /* Garante que o conteúdo fora da área seja cortado */
+/* .cardPosta.active2{
+    border-bottom: #07beff solid 10px;
+} 
+
+ */
 
 
-}
+ .sumarioLine{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-.imagemLittle img {
-    width: 100%; /* Preenche o contêiner na largura */
-    /* height: 100%;  */
-    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
-    object-position: top; /* Centraliza a parte visível da imagem */
-    box-shadow: #cccccc 6px;
-}
+ }
+ .filtros{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+ }
+
+ select{
+    width: 100%;
+
+ }
+
+ #filtroForm{
+    width: 100%;
+ }

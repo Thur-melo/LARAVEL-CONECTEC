@@ -90,7 +90,7 @@
             {{-- ronnie --}}
             <div class="meio">
                 <div class="cardsCont">
-                    <div  class="cardsPosta active2"  onclick="mudarConteudo('meusPosts')">
+                    <div  class="cardsPosta"  onclick="mudarConteudo('meusPosts')">
                         <div class="cardPosta">
                             <h2>{{$postsCount}}</h2>
                             <span>Postangens</span>
@@ -120,12 +120,44 @@
                 </div>
 
 
+             <div class="containerTabela">
+                    <h2>Minhas postagens</h2>
 
+                    <div class="sumarioLine">
 
-{{-- eita --}}
-                {{-- <div class="containerTabela">
-                    <h2>Meus Comentários</h2>
+                    <div class="sumarioCont">
+                        <div class="sumarios">
+                            <div class="cor1"></div><span>Aprovado</span>
+                        </div>
+                        <div class="sumarios">
+                            <div class="cor2"></div> <span>Desativado</span>
+                        </div>
+                        <div class="sumarios">
+                            <div class="cor3"></div> <span>Respondido/comentado</span>
+                        </div>
+                    </div>
 
+                    <div class="filtros">
+                        <form method="GET" action="">
+                                <input 
+                                    type="text" 
+                                    name="search" 
+                                    value="{{ request('search') }}" 
+                                    placeholder="Pesquisar posts..." 
+                                    class="form-control" 
+                                />
+                            </form>
+                            <form method="GET" action="{{ route('postagens') }}" id="filtroForm">
+                                <select name="filter" class="form-select" onchange="this.form.submit()">
+                                <option value="oldest" {{ request('filter') == 'oldest' ? 'selected' : '' }}>Mais antigos</option>
+                                    <option value="newest" {{ request('filter') == 'newest' ? 'selected' : '' }}>Mais recentes</option>
+                                    
+                                    <option value="most_liked" {{ request('filter') == 'most_liked' ? 'selected' : '' }}>Mais curtidos</option>
+                                </select>
+                            </form>
+
+                        </div>
+                    </div>
 
                     <div class="headerTabela">
                         <div>Data de Publicação</div>
@@ -173,80 +205,19 @@
 
                             {{-- <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
                                 data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                @endif"></i>  --}}
-{{-- 
+                                @endif"></i>
+
                         </div>
 
                     </div>
                     @endforeach
-                </div> --}}
+                </div> 
 
                  
                 @include('partials.modalsair')
 
 
-                <div id="resultado" class="resultado">
-                    <div class="containerTabela">
-                        <h2>Minhas postagens</h2>
-    
-                        <div class="sumarioCont">
-                            <div class="sumarios">
-                                <div class="cor1"></div><span>Aprovado</span>
-                            </div>
-                            <div class="sumarios">
-                                <div class="cor2"></div> <span>Desativado</span>
-                            </div>
-                            <div class="sumarios">
-                                <div class="cor3"></div> <span>Respondido/comentado</span>
-                            </div>
-                        </div>
-    
-                        <div class="headerTabela">
-                            <div>Data de Publicação</div>
-                            <div>Conteúdo</div>
-                            <div>Status</div>
-                            <div>Operações</div>
-                        </div>
-    
-                        @foreach($posts as $post)
-                        <div class="question-row">
-                            <div>{{ $post->created_at->diffForHumans() }}</div>
-                            <div class="content-preview">{{ $post->texto}}</div>
-                            <div>
-                                <div class="statusPost">
-                                    <div class="status {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'status-respondido' : ($post->status == 1 ? 'status-ativo' : 'status-desativado') }}">
-                                        <span>
-                                            {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'Comentado' : ($post->status == 1 ? 'Ativo' : 'Desativado') }}
-                                        </span>
-                                    </div>
-                                </div>
-    
-                            </div>
-                            <div class="icons">
-    
-                                <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="delete-button" data-id="{{ $post->id }}" data-type="post">
-                                        <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
-                                    </button>
-                                </form>
-    
-    
-    
-                                <a href="{{ route('comentarios', $post->id) }}">
-                                    <i class="fa-regular fa-eye"></i>
-                                </a>
-    
-                                <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
-                                    data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                    @endif"></i>
-    
-                            </div>
-    
-                        </div>
-                        @endforeach
-                    </div>
+                
                 </div>
 
     </main>
@@ -288,222 +259,12 @@
             });
         });
 
-    
-        // -----------------------------------------Modal de confirmção do DELETE------------------------------------------------------------------
-    </script>
+        </script>
 
-
-{{-- ronnie --}}
-<script>
-    function mudarConteudo(tipo) {
-        console.log("Função mudarConteudo foi chamada com o tipo:", tipo);  // Adiciona a mensagem ao console
-
-        const resultado = document.getElementById('resultado');
-        resultado.innerHTML = ''; // Limpa o conteúdo atual
-        console.log(resultado); // Verifique se o resultado está correto
         
-        if (tipo === 'meusPosts') { // Mude 'posts' para 'meusPosts'
-                resultado.innerHTML += `
-                <div class="containerTabela">
-                    <h2>Minhas postagens</h2>
-
-                    <div class="sumarioCont">
-                        <div class="sumarios">
-                            <div class="cor1"></div><span>Aprovado</span>
-                        </div>
-                        <div class="sumarios">
-                            <div class="cor2"></div> <span>Desativado</span>
-                        </div>
-                        <div class="sumarios">
-                            <div class="cor3"></div> <span>Respondido/comentado</span>
-                        </div>
-                    </div>
-
-                    <div class="headerTabela">
-                        <div>Data de Publicação</div>
-                        <div>Conteúdo</div>
-                        <div>Status</div>
-                        <div>Operações</div>
-                    </div>
-
-                    @foreach($posts as $post)
-                    <div class="question-row">
-                        <div>{{ $post->created_at->diffForHumans() }}</div>
-                        <div class="content-preview">{{ $post->texto}}</div>
-                        <div>
-                            <div class="statusPost">
-                                <div class="status {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'status-respondido' : ($post->status == 1 ? 'status-ativo' : 'status-desativado') }}">
-                                    <span>
-                                        {{ $post->status == 1 && $post->comentarios->count() > 0 ? 'Comentado' : ($post->status == 1 ? 'Ativo' : 'Desativado') }}
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="icons">
-
-                            <form id="deleteForm-{{ $post->id }}" action="{{ route('posts.destroy', $post->id) }}" method="POST"> @csrf
-                                @method('DELETE')
-                                <button type="button" class="delete-button" data-post-id="{{ $post->id }}">
-                                    <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
-                                </button>
-                            </form>
 
 
 
-
-                            <a href="{{ route('comentarios', $post->id) }}">
-                                <i class="fa-regular fa-eye"></i>
-                            </a>
-
-                            <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
-                                data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                @endif"></i>
-
-                        </div>
-
-                    </div>
-                    @endforeach
-                    
-                </div>
-                `;
-            } else if (tipo === 'salvos') {
-                resultado.innerHTML = ` @foreach($postSalvos as $post)
-                @php
-        $coresModulo = [
-            '1º' => '#CD4642',
-            '2º' => '#5169B1',
-            '3º' => '#64B467',
-        ];
-    @endphp
-                    <div class="feeds">
-                        <div class="feed">
-                            <div class="user">
-                                <div class="profileImg">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
-                                        <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <div class="infoHeader" style="display:flex; align-items:center; justify-content:space-between; width:100%">
-                                        <h3>{{ '@' . $post->user->name }} <span class="publiSpan"> • fez uma nova publicação</span></h3>
-                                        <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
-                                            <p>{{ $post->user->modulo }} {{ $post->user->perfil }}</p>
-                                        </div>
-                                    </div>
-                                    <p class="horaPost">{{ $post->created_at->diffForHumans() }}</p>
-                                </div>
-                            </div>
-
-                            <div class="textoPost">{{ $post->texto ?? 'Post não disponível' }}</div>
-
-                            @if($post->fotoPost)
-                                <div class="imgPost">
-                                    <a href="{{ asset('storage/' . $post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
-                                        <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-                                    </a>
-                                </div>
-                            @endif
-
-                            <div class="action-button">
-                                <div class="interaction-button">
-                                    <span class="like-btn @if($post->likes()->where('user_id', Auth::id())->exists()) liked @endif" data-post-id="{{ $post->id }}">
-                                        @if($post->likes()->where('user_id', Auth::id())->exists())
-                                            <i class="fas fa-heart liked"></i>
-                                        @else
-                                            <i class="far fa-heart"></i>
-                                        @endif
-                                    </span>
-                                    <span class="likes-count">{{ $post->likes()->count() }}</span>
-                                    <a href="{{ route('comentarios', $post->id) }}">
-                                        <button class="comentarioCotn">
-                                            <i class="uil uil-comment"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                                <div class="bookmark">
-                                    <span><i class="uil uil-bookmark"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                @endforeach`;
-            } else if(tipo === 'comentarios'){
-                resultado.innerHTML = `
-                {{-- eita --}}
-                <div class="containerTabela">
-                    <h2>Meus Comentários</h2>
-
-
-                    <div class="headerTabela">
-                        <div>Data de Publicação</div>
-                        <div>Comentário</div>
-                        <div>Imagem do post</div>
-                        <div>Conteúdo</div>
-                        <div>Operações</div>
-                    </div>
-
-                    @foreach($comentarios as $comm)
-                    <div class="question-row">
-                        <div>{{ $comm->created_at->diffForHumans() }}</div>
-                        <div class="content-preview">{{ $comm->texto}}</div>
-                        <div>
-                            <div class="statusPost">
-                              
-                                    <div class="imagemLittle">
-                                        <img src="{{ asset('storage/' . $comm->post->fotoPost) }}" >
-
-                                    
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="conteudoPost">{{$comm->post->texto}}</div>
-                        <div class="icons">
-
-                            <form id="deleteForm-{{ $comm->id }}" action="{{ route('comentarios.destroy', $comm->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="delete-button" data-id="{{ $comm->id }}" data-type="comment">
-                                    <i class="fa-regular fa-trash-can"></i> <!-- Ícone de lixeira -->
-                                </button>
-                            </form>
-                            
-                            
-
-
-
-                            <a href="{{ route('comentarios', $comm->post->id) }}">
-                                <i class="fa-regular fa-eye"></i>
-                            </a>
-
-                            {{-- <i class="fa-regular fa-pen-to-square edit-button" data-bs-toggle="modal" data-bs-target="#postModal2" data-id="{{ $post->id }}" data-post="{{ $post->texto }}" data-hora="{{ $post->created_at->diffForHumans() }}" @if(!empty($post->fotoPost))
-                                data-image="{{ asset('storage/' . $post->fotoPost) }}"
-                                @endif"></i>  --}}
-
-                        </div>
-
-                    </div>
-                    @endforeach
-                </div>
-
-                
-                    `
-            }
-
-
-            // Atualizar a classe active
-            const categorias = document.querySelectorAll('.cardsPosta');
-            categorias.forEach(cat => cat.classList.remove('active2'));
-            const clickedElement = document.querySelector(`.cardsPosta[onclick*="${tipo}"]`);
-            clickedElement.classList.add('active2');
-
-    }
-</script>
 
 
     <!-- Script para os MODAIS LEGAIS tmnc bootrape -->

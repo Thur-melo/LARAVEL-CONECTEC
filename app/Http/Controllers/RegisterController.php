@@ -28,12 +28,31 @@ class RegisterController extends Controller
     return view('login');
 }
 
-public function showPostagens()
+public function showPostagens(Request $request)
 {   
 
     $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
     $user = Auth::user();
-    $posts = Post::where('user_id', $user->id)->get();
+    $search = $request->input('search');
+    $filter = $request->input('filter');
+
+    // Filtra os posts com base no texto da busca, se fornecido
+    $posts = Post::where('user_id', $user->id)
+    
+    ->when($search, function ($query, $search) {
+        return $query->where('conteudo', 'LIKE', '%' . $search . '%');
+    })
+    ->withCount('likes')
+    ->when($filter, function ($query, $filter) {
+        if ($filter === 'most_liked') {
+            return $query->orderBy('likes_count', 'desc'); // Ordena pelos mais curtidos
+        } elseif ($filter === 'oldest') {
+            return $query->orderBy('created_at', 'asc'); // Ordena pelos mais antigos
+        } elseif ($filter === 'newest') {
+            return $query->orderBy('created_at', 'desc'); // Ordena pelos mais recentes
+        }
+    })
+    ->get();
     $postsCount = $posts->count(); 
     $numComentarios = Comentarios::where('user_id', $user->id)->count();
     $numSalvos = salvos::where('user_id', $user)->count();
