@@ -153,28 +153,45 @@
                     <div class="scroll-container" id="curtidas">
                         <div id="resultado" class="resultado">
                             @foreach($posts as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                            @if($post->fotoPost)
+        <!-- Layout para posts com imagem -->
+                                <div class="post com-imagem">
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
                                         <div class="infosExplorar">
                                             <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
+                                            <p>{{ "@" . $post->user->arroba }}</p>
+                                            <p>{{ $post->created_at->diffForHumans() }}</p>
                                         </div>
+                                    </div>
                                 </div>
+                            @else
+                                <!-- Layout para posts sem imagem -->
+                                <div class="post sem-imagem">
+                                    <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                    </div>
 
-                            </div>
-                            </a>
+                                    <div class="textoPostagem">
+                                        <span> "{{ $post->texto }}" </span>
+                                    </div>
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
+                                        <div class="infosExplorar">
+                                            
+                                            <p>{{ "@" . $post->user->arroba }}</p>
+                                            <span class="perfil">{{$post->user->perfil}}</span>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>
