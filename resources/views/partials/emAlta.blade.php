@@ -77,11 +77,7 @@
         <div class="listaAlta">
             <!-- Item 1 da lista -->
 
-            <div class="cursoAlta">
-                <span class="cursoLista">DS- Programação e algoritmos</span>
-                <span class="assuntoAlta">#JavaOuPython</span>
-                <span class="qtdsPostAlta">129 Posts</span>
-            </div>
+      
             @foreach ($cardHashtags as $hashtag)
 
 @php

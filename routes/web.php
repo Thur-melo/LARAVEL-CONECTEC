@@ -43,6 +43,8 @@ Route::get('/denuncias', [adminController::class, 'showdenuncias']) ->name('denu
 Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
 Route::get('/postagens', [RegisterController::class, 'showPostagens'])->name('postagens');
+Route::get('/dashboardComm', [RegisterController::class, 'showComm'])->name('dashboardComm');
+
 
 
 // Route::get('/postagens/{id}', [RegisterController::class, 'showPostagens']) ->name('postagens');

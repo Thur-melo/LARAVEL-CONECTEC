@@ -11,6 +11,8 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Hashtag;
+
 use App\Models\Comentarios;
 use App\Models\notificacoes;
 
@@ -31,8 +33,14 @@ class ComentariosController extends Controller
             ->with('user')
             ->orderBy('created_at', $sortOrder)
             ->get();
+
+                 
+        $cardHashtags = Hashtag::withCount('posts')
+        ->orderBy('posts_count', 'desc')
+        ->take(3) // Limitando a 3 hashtags
+        ->get();
     
-        return view('comentarios', compact('post', 'comentarios', 'user', 'sortOrder'));
+        return view('comentarios', compact('post','cardHashtags', 'comentarios', 'user', 'sortOrder'));
     }
 
     public function comentar(Request $request, $postId,)
@@ -54,6 +62,9 @@ class ComentariosController extends Controller
         ]);
     
         // return redirect()->route('comentarios')->with('status', 'Comentário registrado com sucesso');
+
+   
+
 
         return redirect()->route('comentarios', ['id' => $postId])->with('status', 'Comentário registrado com sucesso');
 

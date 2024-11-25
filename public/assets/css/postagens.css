@@ -374,7 +374,7 @@ background-color: #e6fdda;
     box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
     border-radius: 7px;
     border: none;
-
+    text-decoration: none;
 }
 .cardsPosta i{
     font-size: 40pt;

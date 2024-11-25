@@ -40,7 +40,7 @@ public function showPostagens(Request $request)
     $posts = Post::where('user_id', $user->id)
     
     ->when($search, function ($query, $search) {
-        return $query->where('conteudo', 'LIKE', '%' . $search . '%');
+        return $query->where('texto', 'LIKE', '%' . $search . '%');
     })
     ->withCount('likes')
     ->when($filter, function ($query, $filter) {
@@ -65,6 +65,47 @@ public function showPostagens(Request $request)
     
     return view('postagens',compact('user', 'usuariosSugestoes', 'posts','postsCount','numComentarios','comentarios','numSalvos','postSalvos', 'salvos','qntSalvos' ));
 }
+
+
+
+public function showComm(Request $request)
+{   
+
+    $usuariosSugestoes = User::inRandomOrder()->limit(5)->get();
+    $user = Auth::user();
+    $search = $request->input('search');
+    $filter = $request->input('filter');
+
+    // Filtra os posts com base no texto da busca, se fornecido
+    $posts = Post::where('user_id', $user->id)
+    
+    ->when($search, function ($query, $search) {
+        return $query->where('conteudo', 'LIKE', '%' . $search . '%');
+    })
+    ->withCount('likes')
+    ->when($filter, function ($query, $filter) {
+        if ($filter === 'most_liked') {
+            return $query->orderBy('likes_count', 'desc'); // Ordena pelos mais curtidos
+        } elseif ($filter === 'oldest') {
+            return $query->orderBy('created_at', 'asc'); // Ordena pelos mais antigos
+        } elseif ($filter === 'newest') {
+            return $query->orderBy('created_at', 'desc'); // Ordena pelos mais recentes
+        }
+    })
+    ->get();
+    $postsCount = $posts->count(); 
+    $numComentarios = Comentarios::where('user_id', $user->id)->count();
+    $numSalvos = salvos::where('user_id', $user)->count();
+    
+    $salvos = $user->salvos()->pluck('post_id');
+    $postSalvos   = Post::whereIn('id', $salvos)->get();
+    $qntSalvos  = $postSalvos->count();
+
+    $comentarios = Comentarios::where('user_id', $user->id)->get();
+    
+    return view('dashboardComm',compact('user', 'usuariosSugestoes', 'posts','postsCount','numComentarios','comentarios','numSalvos','postSalvos', 'salvos','qntSalvos' ));
+}
+
 public function showHome(Request $request)
 {
     $user = Auth::user();
