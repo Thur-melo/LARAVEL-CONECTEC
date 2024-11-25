@@ -129,7 +129,12 @@ public function showHome(Request $request)
         }
     }
 
-    return view('home', compact('user', 'users', 'posts', 'preferenciasLista', 'usuariosSugestoes', 'searchTerm'));
+    $cardHashtags = Hashtag::withCount('posts')
+    ->orderBy('posts_count', 'desc')
+    ->take(3) // Limitando a 3 hashtags
+    ->get();
+
+    return view('home', compact('user', 'users', 'posts','cardHashtags', 'preferenciasLista', 'usuariosSugestoes', 'searchTerm'));
 }
 
 

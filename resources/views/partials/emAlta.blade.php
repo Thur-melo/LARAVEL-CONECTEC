@@ -71,30 +71,46 @@
             <h2>Em alta</h2>
         </div>
         <!-- Fim do Cabeçalho de "Em Alta" -->
+
+
         <!-- Lista de "Em Alta" -->
         <div class="listaAlta">
             <!-- Item 1 da lista -->
+
             <div class="cursoAlta">
                 <span class="cursoLista">DS- Programação e algoritmos</span>
                 <span class="assuntoAlta">#JavaOuPython</span>
                 <span class="qtdsPostAlta">129 Posts</span>
             </div>
-            <!-- Fim do Item 1 -->
-            <!-- Item 2 da lista -->
-            <div class="cursoAlta">
-                <span class="cursoLista">Nutrição- Comidas e massinhas</span>
-                <span class="assuntoAlta">#ComoFazerArrozSemPanelaEeAguaKkkkj</span>
-                <span class="qtdsPostAlta">2 Posts</span>
-            </div>
-            <!-- Fim do Item 2 -->
-            <!-- Item 3 da lista -->
-            <div class="cursoAlta">
-                <span class="cursoLista">ADM- Caixa de mercado e uber</span>
-                <span class="assuntoAlta">#ComoImprimirDinheirokkkkj</span>
-                <span class="qtdsPostAlta">1.200 Posts</span>
-            </div>
-            <!-- Fim do Item 3 -->
-            <!-- Item 4 da lista -->
+            @foreach ($cardHashtags as $hashtag)
+
+@php
+    // Dicionário de cursos
+    $cursoEmAlta = [
+        'Ds' => 'Desenvolvimento de Sistemas',
+        'Nutri' => 'Nutrição',
+        'Adm' => 'Administração',
+        'desc' => 'Desconhecido',
+    ];
+@endphp
+
+<div class="cursoAlta">
+        @php
+            $perfilUsuario = $hashtag->posts[0]->user->perfil ?? 'desc';
+
+            $nomeCurso = $cursoEmAlta[$perfilUsuario] ?? 'Desconhecido';
+        @endphp
+        
+        <span class="cursoLista">{{ $perfilUsuario }} - {{ $nomeCurso }}</span>
+
+    <span class="assuntoAlta">{{ "#" . $hashtag->hashtag }}</span> <!-- Exibindo o nome da hashtag -->
+    <span class="qtdsPostAlta">{{ $hashtag->posts_count }} Posts</span> <!-- Exibindo a contagem de posts -->
+</div>
+
+@endforeach
+
+         
+    
           
             <!-- Fim do Item 4 -->
         </div>

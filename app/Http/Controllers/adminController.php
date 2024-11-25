@@ -62,7 +62,13 @@ class adminController extends Controller
         $myseguidores = Seguir::where('seguindo_id', $usuario->id)->count();
         $seguindo = Seguir::where('seguidor_id', $usuario->id)->count();
 
-        return view('perfil', compact('usuario', 'posts', 'user', 'myseguidores', 'seguindo'));
+
+        $cardHashtags = Hashtag::withCount('posts')
+        ->orderBy('posts_count', 'desc')
+        ->take(3) // Limitando a 3 hashtags
+        ->get();
+
+        return view('perfil', compact('usuario','cardHashtags', 'posts', 'user', 'myseguidores', 'seguindo'));
     }
 
     public function showprofile()

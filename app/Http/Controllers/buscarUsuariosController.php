@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User; // Certifique-se de incluir o modelo User
 use App\Models\DenunciaUsuario;
 use App\Models\Seguir; // Outros imports
+use App\Models\Hashtag; // Outros imports
+
 use Illuminate\Support\Facades\DB; // Importa a classe DB
 
 
@@ -30,8 +32,14 @@ class BuscarUsuariosController extends Controller // Renomeando a classe
            ->orWhere('arroba', 'like', '%' . ltrim($searchTerm, '@') . '%')
            ->get(); 
 
+           
+        $cardHashtags = Hashtag::withCount('posts')
+        ->orderBy('posts_count', 'desc')
+        ->take(3) // Limitando a 3 hashtags
+        ->get();
+
         // Retornar a view com os usuários encontrados e o termo de busca
-        return view('users', compact('users', 'user', 'searchTerm', 'usuariosSugestoes'));
+        return view('users', compact('users','cardHashtags', 'user', 'searchTerm', 'usuariosSugestoes'));
     }
 
     public function buscarUsuariosAdmin(Request $request)
