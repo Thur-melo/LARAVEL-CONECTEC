@@ -38,7 +38,6 @@
 <div class="search-bar">
 <form method="GET" action="{{ route('adminHome') }}">
         <input type="text" name="search" id="search" placeholder="Pesquisar Posts..." value="{{ old('search') }}">
-        <button type="submit">Pesquisar</button> <!-- Botão de pesquisa -->
 </form>
     </div>
     </div>
@@ -168,7 +167,7 @@
             <td>{{ $post->created_at->format('d/m/Y') }}</td>
             <td>  <form action="{{ route('adminHome') }}" method="GET">
         <input type="hidden" name="search" value="{{ $post->id }}">
-        <button type="submit" class="btn btn-primary">Ver Post</button>
+        <button type="submit" class="botaoPosts" style="background-color: #007bbd;" >Ver Post</button>
     </form></td>
         </tr>
    @endforeach
@@ -248,19 +247,19 @@
                 <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este post?')">Excluir</button>
-                </form>
+                    <button type="submit" class="botaoPosts" style="background-color: #e74c3c;" onclick="return confirm('Tem certeza que deseja excluir este post?')">Excluir</button>
+                    </form>
 
                 <form action="{{ route('posts.aprovar', $post->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-success" onclick="return confirm('Tem certeza que deseja ativar este post?')">Ativar</button>
+                    <button type="submit" class="botaoPosts" style="background-color: #008000;" onclick="return confirm('Tem certeza que deseja ativar este post?')">Ativar</button>
                 </form>
 
                 <form action="{{ route('posts.desativar', $post->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-warning" onclick="return confirm('Tem certeza que deseja desativar este post?')">Desativar</button>
+                    <button type="submit" class="botaoPosts" style="background-color: #007bbd;" onclick="return confirm('Tem certeza que deseja desativar este post?')">Desativar</button>
                 </form>
             </div>
             <!-- Fim dos botões de ação -->
@@ -310,61 +309,109 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-  const ctx = document.getElementById('myChart').getContext('2d');
-     
-   // Passando dados do PHP para o JavaScript
-        const hashtagsNames = @json($hashtagsNames); // Nomes dos usuários
-        const hashtagsPostCounts = @json($hashtagsPostCounts); // Contagem de comentários
-        
-        const userPostsChart = new Chart(ctx, {
-            type: 'bar', // Tipo do gráfico
-            data: {
-                labels: hashtagsNames, // Rótulos dos usuários
-                datasets: [{
-                    label: 'hashtags com maior Número de posts', // Rótulo da série de dados
-                    data: hashtagsPostCounts, // Dados do gráfico (número de posts por usuário)
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)', // Cor de fundo da barra 1
-                        'rgba(153, 102, 255, 0.2)', // Cor de fundo da barra 2
-                        'rgba(255, 159, 64, 0.2)'  // Cor de fundo da barra 3
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 1)', // Cor da borda da barra 1
-                        'rgba(153, 102, 255, 1)', // Cor da borda da barra 2
-                        'rgba(255, 159, 64, 1)'  // Cor da borda da barra 3
-                    ],
-                    borderWidth: 1 // Largura da borda
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true, // Começar o eixo Y a partir do zero
-                        title: {
-                            display: true,
-                            text: 'Número de posts'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Usuários'
-                        }
-                    }
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+// Passando dados do PHP para o JavaScript
+const hashtagsNames = @json($hashtagsNames); // Nomes das hashtags
+const hashtagsPostCounts = @json($hashtagsPostCounts); // Contagem de posts
+
+const userPostsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: hashtagsNames, // Rótulos das hashtags
+        datasets: [{
+            label: 'Hashtags com maior número de posts',
+            data: hashtagsPostCounts, // Dados do gráfico
+            backgroundColor: [
+                '#007bbd', // Vermelho vibrante
+                '#007bbd', // Verde vibrante
+                '#007bbd', // Azul vibrante
+                '#007bbd', // Rosa vibrante
+                '#007bbd', // Amarelo ouro
+                '#007bbd', // Roxo vibrante
+                '#007bbd'  // Turquesa
+            ],
+            borderColor: '#111111', // Cor de borda sólida para todas as barras
+            borderWidth: 1,
+            borderRadius: 8, // Bordas arredondadas das barras
+            hoverBackgroundColor: '#000000', // Destaque preto ao passar o mouse
+            hoverBorderColor: '#ffffff'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false, // Ajusta ao container
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(220, 220, 220, 0.5)', // Linhas da grade em cinza claro
+                    borderDash: [3, 3] // Linhas tracejadas
                 },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`; // Personaliza o texto do tooltip
-                            }
-                        }
+                title: {
+                    display: true,
+                    text: 'Número de Posts',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
                     }
                 }
+            },
+            x: {
+                grid: {
+                    display: false // Remove a grade horizontal
+                },
+                title: {
+                    display: true,
+                    text: 'Hashtags',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                ticks: {
+                    maxRotation: 45,
+                    minRotation: 45
+                }
             }
-        });
-    });
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    color: '#333333' // Cor do texto da legenda
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return `Posts: ${tooltipItem.raw}`; // Texto personalizado do tooltip
+                    }
+                },
+                backgroundColor: '#111111', // Fundo escuro do tooltip
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
+                },
+                bodyFont: {
+                    size: 12
+                },
+                padding: 10,
+                borderColor: '#ffffff',
+                borderWidth: 1
+            }
+        },
+        animation: {
+            duration: 800, // Animação mais rápida
+            easing: 'easeInOutQuad'
+        }
+    }
+});
 
 
         var modal = document.getElementById("myModal");

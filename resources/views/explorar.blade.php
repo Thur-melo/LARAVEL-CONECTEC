@@ -103,7 +103,7 @@
 
 
                 <div class="fileiraPreferencias-container">
-                    <button class="scroll-button" type="button" onclick="scrollHorizontal('left')"><</button>
+                    <button class="scroll-button" type="button" onclick="scrollHorizontal('left')">←</button>
 
                     <div class="fileiraPreferencias">
                         <button class="categoriaCard active" onclick="mudarConteudo('all')">

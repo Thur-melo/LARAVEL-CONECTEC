@@ -307,10 +307,11 @@ main .container .left{
     color: #777;
 
 }/* Contêiner Principal */
+
 .fileiraPreferencias {
     width: 100%;
     max-width: 1000px;
-    height: 50px;
+    height: 60px;
     display: flex;
     flex-direction: row;
     align-items: center;

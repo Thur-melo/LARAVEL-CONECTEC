@@ -389,8 +389,7 @@ canvas {
     padding: 10px 15px;
     font-size: 16px;
     border: 1px solid #007bbd;
-    border-right: none; /* Remove a borda direita para unir com o botão */
-    border-radius: 20px 0 0 20px; /* Arredonda apenas os cantos esquerdo superior e inferior */
+    border-radius: 20px;
     background-color: #fff;
     outline: none;
     transition: border-color 0.3s ease;
@@ -400,22 +399,6 @@ canvas {
     border-color: #0BBDFF;
 }
 
-.search-bar button {
-    height: 40px;
-    padding: 0 20px;
-    font-size: 16px;
-    background-color: #007bbd;
-    color: #fff;
-    border: 1px solid #007bbd;
-    border-radius: 0 20px 20px 0; /* Arredonda apenas os cantos direito superior e inferior */
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.search-bar button:hover {
-    background-color: #005f8d;
-    box-shadow: 0 0 5px rgba(0, 91, 141, 0.5);
-}
 
 .modal {
     display: none;
@@ -586,4 +569,32 @@ canvas {
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: row;
+}
+
+.botaoPosts {
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+.botaoPosts:hover {
+    background-color: #0BBDFF;
+    transform: scale(1.05);
+}
+
+.botaoPosts:active {
+    background-color: #111111;
+    transform: scale(0.95);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+
 }

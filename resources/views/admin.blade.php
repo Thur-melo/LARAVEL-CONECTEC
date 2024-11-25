@@ -257,54 +257,114 @@
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const ctx = document.getElementById('userPostsChart').getContext('2d');
-        
+
         // Passando dados do PHP para o JavaScript
-        const userNamesComment = @json($userNamesComment); // Nomes dos usuários
-        const userPostCounts = @json($userPostCounts); // Contagem de comentários
-        
+        const userNamesComment = @json($userNamesComment);
+        const userPostCounts = @json($userPostCounts);
+
         const userPostsChart = new Chart(ctx, {
-            type: 'bar', // Tipo do gráfico
+            type: 'bar',
             data: {
-                labels: userNamesComment, // Rótulos dos usuários
+                labels: userNamesComment,
                 datasets: [{
-                    label: 'Usuários com maior Número de Comentários', // Rótulo da série de dados
-                    data: userPostCounts, // Dados do gráfico (número de comentários por usuário)
+                    label: 'Usuários com maior Número de Comentários',
+                    data: userPostCounts,
                     backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)', // Cor de fundo da barra 1
-                        'rgba(153, 102, 255, 0.2)', // Cor de fundo da barra 2
-                        'rgba(255, 159, 64, 0.2)'  // Cor de fundo da barra 3
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)'
                     ],
                     borderColor: [
-                        'rgba(75, 192, 192, 1)', // Cor da borda da barra 1
-                        'rgba(153, 102, 255, 1)', // Cor da borda da barra 2
-                        'rgba(255, 159, 64, 1)'  // Cor da borda da barra 3
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
                     ],
-                    borderWidth: 1 // Largura da borda
+                    borderWidth: 1.5,
+                    hoverBackgroundColor: 'rgba(0, 0, 0, 0.1)'
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true, // Começar o eixo Y a partir do zero
-                        title: {
-                            display: true,
-                            text: 'Número de Comentários'
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Arial, sans-serif',
+                                style: 'italic'
+                            },
+                            color: '#333'
                         }
                     },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Usuários'
-                        }
-                    }
-                },
-                plugins: {
                     tooltip: {
                         callbacks: {
                             label: function(tooltipItem) {
-                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`; // Personaliza o texto do tooltip
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
+                            }
+                        },
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold',
+                            family: 'Arial, sans-serif'
+                        },
+                        bodyFont: {
+                            size: 12,
+                            family: 'Arial, sans-serif'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.3)',
+                            borderDash: [5, 5]
+                        },
+                        title: {
+                            display: true,
+                            text: 'Comentários',
+                            font: {
+                                size: 16,
+                                family: 'Arial, sans-serif'
+                            },
+                            color: '#444'
+                        },
+                        ticks: {
+                            color: '#555',
+                            font: {
+                                size: 12
                             }
                         }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                      
+                        ticks: {
+                            color: '#555',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                layout: {
+                    padding: {
+                        top: 20,
+                        left: 10,
+                        right: 10,
+                        bottom: 10
                     }
                 }
             }
@@ -316,60 +376,121 @@
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         const ctx = document.getElementById('userPostsChart2').getContext('2d');
-        
+
         // Passando dados do PHP para o JavaScript
-        const userNamesPost = @json($userNamesPost); // Nomes dos usuários
-        const userPostCounts = @json($userPostCounts); // Contagem de posts
-        
+        const userNamesPost = @json($userNamesPost);
+        const userPostCounts = @json($userPostCounts);
+
         const userPostsChart2 = new Chart(ctx, {
-            type: 'bar', // Tipo do gráfico
+            type: 'bar',
             data: {
-                labels: userNamesPost, // Rótulos dos usuários
+                labels: userNamesPost,
                 datasets: [{
-                    label: 'Usuários com maior Número de Posts', // Rótulo da série de dados
-                    data: userPostCounts, // Dados do gráfico (número de posts por usuário)
+                    label: 'Usuários com maior Número de Posts',
+                    data: userPostCounts,
                     backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)', // Cor de fundo da barra 1
-                        'rgba(153, 102, 255, 0.2)', // Cor de fundo da barra 2
-                        'rgba(255, 159, 64, 0.2)'  // Cor de fundo da barra 3
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)'
                     ],
                     borderColor: [
-                        'rgba(75, 192, 192, 1)', // Cor da borda da barra 1
-                        'rgba(153, 102, 255, 1)', // Cor da borda da barra 2
-                        'rgba(255, 159, 64, 1)'  // Cor da borda da barra 3
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
                     ],
-                    borderWidth: 1 // Largura da borda
+                    borderWidth: 1.5,
+                    hoverBackgroundColor: 'rgba(0, 0, 0, 0.1)'
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true, // Começar o eixo Y a partir do zero
-                        title: {
-                            display: true,
-                            text: 'Número de Posts'
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Arial, sans-serif',
+                                style: 'italic'
+                            },
+                            color: '#333'
                         }
                     },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Usuários'
-                        }
-                    }
-                },
-                plugins: {
                     tooltip: {
                         callbacks: {
                             label: function(tooltipItem) {
-                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`; // Personaliza o texto do tooltip
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
+                            }
+                        },
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold',
+                            family: 'Arial, sans-serif'
+                        },
+                        bodyFont: {
+                            size: 12,
+                            family: 'Arial, sans-serif'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.3)',
+                            borderDash: [5, 5]
+                        },
+                        title: {
+                            display: true,
+                            text: 'Posts',
+                            font: {
+                                size: 16,
+                                family: 'Arial, sans-serif'
+                            },
+                            color: '#444'
+                        },
+                        ticks: {
+                            color: '#555',
+                            font: {
+                                size: 12
                             }
                         }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                      
+                        ticks: {
+                            color: '#555',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                layout: {
+                    padding: {
+                        top: 20,
+                        left: 10,
+                        right: 10,
+                        bottom: 10
                     }
                 }
             }
         });
     });
 </script>
+
 
 </body>
 

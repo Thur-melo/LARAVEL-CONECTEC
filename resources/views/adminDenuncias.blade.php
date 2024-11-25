@@ -39,12 +39,17 @@
 
 <!-- cards inicio -->
 
+
 <div class="container">
-    <div class="busca">
-        <input type="text" class="inputBusca" id="inputBusca" placeholder="Buscar denúncia..." onkeyup="buscarDenuncias()">
-        <i class="fa-solid fa-magnifying-glass ico"></i>
+       <form method="GET" action="{{ route('admin') }}">
+    <div class="search-bar">
+    <input type="text" class="inputBusca" id="inputBusca" placeholder="Buscar denúncia..." onkeyup="buscarDenuncias()">
     </div>
+</form>
+
     
+  
+
     <h2>Usuários denunciados</h2>
     
     <div class="tabela">
@@ -295,7 +300,7 @@ function relevarDenuncia(denunciaId) {
                 
                 .imgPostDenuncia img{
                     width: 100%;
-                    height: 500px;
+                    height: 5000px;
                     object-fit: cover;
                 }
                 .imgPostDenuncia {
