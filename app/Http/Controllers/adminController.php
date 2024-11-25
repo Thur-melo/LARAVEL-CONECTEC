@@ -162,7 +162,19 @@ class adminController extends Controller
         $hashtagsNames = $topHashtags->pluck('hashtag')->toArray();
 
 
-        return view('adminHome', compact('users', 'posts', 'postAtivos', 'postInativos', 'postsAds', 'postsAdm', 'postsNutri', 'topHashtags', 'hashtagsPostCounts', 'hashtagsNames'));
+        $totalHashtags = Hashtag::withCount('posts')->orderBy('posts_count', 'desc')->get();
+        $quantHashtag = Hashtag::all()->count();
+        
+
+        $cardHashtags = Hashtag::withCount('posts')
+    ->orderBy('posts_count', 'desc')
+    ->take(3) // ou use ->limit(3)
+    ->get();
+
+
+
+
+        return view('adminHome', compact('users','cardHashtags','totalHashtags', 'quantHashtag', 'posts', 'postAtivos', 'postInativos', 'postsAds', 'postsAdm', 'postsNutri', 'topHashtags', 'hashtagsPostCounts', 'hashtagsNames'));
     }
 
     public function showadmin(Request $request)

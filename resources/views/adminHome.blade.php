@@ -71,8 +71,18 @@
             </div>
 
            <div class="card2" id="cardModal">
-    <h1>Modal</h1>
-    <h3>Hashtag totais</h3>
+            <div class="tituloHashtagCard">
+            <h3>Hashtag totais: {{$quantHashtag}}</h3>
+            </div>
+            <div class="mainHashtagCard">
+                @foreach ($cardHashtags as $cardHashtag)
+                <div class="hashtagLista"><h3>{{"#" . $cardHashtag->hashtag}}</h3>  {{"posts relacionados:". $cardHashtag->posts_count}}</div>
+                @endforeach
+            </div>
+            <div class="footerHashtagModal">
+            <p style="color: #007bbd;">Ver Mais</p>
+
+            </div>
 </div>
         </div>
     </div>
@@ -80,65 +90,30 @@
     <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <div class="containerTabelaUsers2">
-            <div class="tabelaUsers2">
-            <div>
-</div>
+    <div class="containerTabelaUsers2" id="tabelaModal">
+            <div class="tabelaUsers2"  id="tabelaModal">
+  
 
 <table>
     <thead>
         <tr>
-            <th>Usuário</th>
-            <th>Seguidores</th>
-            <th>Posição</th>
-            <th>Status</th>
-            <th>Curso</th>
+            <th>Hashtag</th>
+            <th>quant. Post relacionados</th>
+            <th>Posição mais posts relacionados</th>
+     
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>@vinisilva</td>
-            <td>100</td>
-            <td>1</td>
-            <td>Ativo</td>
-            <td>DS</td>
-        </tr>
-        <tr>
-            <td>@Hygorwanderley</td>
-            <td>80</td>
-            <td>2</td>
-            <td>Bloqueado</td>
-            <td>Nutri</td>
-        </tr>
-        <tr>
-            <td>@mariaeduarda</td>
-            <td>60</td>
-            <td>3</td>
-            <td>Ativo</td>
-            <td>ADM</td>
-        </tr>
-        <tr>
-            <td>@tutudanado</td>
-            <td>40</td>
-            <td>4</td>
-            <td>Ativo</td>
-            <td>DS</td>
-        </tr>
-        <tr>
-            <td>@ronnisilva</td>
-            <td>20</td>
-            <td>5</td>
-            <td>Ativo</td>
-            <td>DS</td>
-        </tr>
+    @foreach ( $totalHashtags as $index => $hashtag)
 
         <tr>
-            <td>@ronnisilva</td>
-            <td>20</td>
-            <td>5</td>
-            <td>Ativo</td>
-            <td>DS</td>
+            <td>{{"#". $hashtag->hashtag}}</td>
+            <td>{{$hashtag->posts_count}}</td>
+            <td>{{$index + 1 . "º "}}</td>
         </tr>
+     @endforeach
+     
+     
     </tbody>
 </table>
 
