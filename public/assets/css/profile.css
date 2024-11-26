@@ -275,6 +275,12 @@ main .container .left{
     -webkit-line-clamp: 5; /* Número de linhas a exibir */
     
 }
+.nomeecurso{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
 
 .bio p{
     font-size: 16px; /* Tamanho da fonte */

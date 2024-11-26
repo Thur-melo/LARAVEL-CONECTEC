@@ -294,6 +294,13 @@ main .container .left{
     align-items: flex-start;
 }
 
+.nomeecurso{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
 .itensData{
     display: flex;
     flex-direction: row;

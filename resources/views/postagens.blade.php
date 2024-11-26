@@ -132,7 +132,7 @@
 
                     <div class="sumarioCont">
                         <div class="sumarios">
-                            <div class="cor1"></div><span>Aprovado</span>
+                            <div class="cor1"></div><span>Ativo</span>
                         </div>
                         <div class="sumarios">
                             <div class="cor2"></div> <span>Desativado</span>
@@ -166,9 +166,8 @@
 
                     <div class="headerTabela">
                         <div>Data de Publicação</div>
-                        <div>Comentário</div>
-                        <div>Imagem do post</div>
-                        <div>Conteúdo</div>
+                        <div>Conteudo</div>
+                        <div>Status</div>
                         <div>Operações</div>
                     </div>
     

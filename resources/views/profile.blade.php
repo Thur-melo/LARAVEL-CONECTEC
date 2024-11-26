@@ -31,6 +31,13 @@
     <!-------------------------------------------  NavAbar -------------------------------------------------------------------------------------->
 
     <main>
+                    @php
+                    $coresModulo = [
+                            '1º' => '#CD4642',
+                            '2º' => '#5169B1',
+                            '3º' => '#64B467',
+                            ];
+                            @endphp
         <div class="container">
         <div class="left">
                 <div class="sidebar">
@@ -116,8 +123,17 @@
 
                         </div>
                         <div class="rowNomeUser">
-                            <h1 class="username">{{ $user->name}}</h1>
+                            <div class="nomeecurso">
+                                <h1 class="username">{{ $user->name}}</h1>
+                                
+                                <div class="modulo-div" style="background-color: {{ $coresModulo[$user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $user->modulo }} {{ $user->perfil }} </p>
+                                    </div>
+                            </div>
+                            
                             <p class="arroba"> {{ '@' . $user->arroba }} </p>
+                            
+                           
                         </div>
 
                         <div class="rowBio">
@@ -136,6 +152,7 @@
                             <div class="itensFollow">
                                 <p>{{$seguindo}} Seguindo</p>
                                 <p>{{$myseguidores}} Seguidores</p>
+                              
                             </div>
                         </div>
 

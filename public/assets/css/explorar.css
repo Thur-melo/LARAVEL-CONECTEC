@@ -203,6 +203,7 @@ main .container .left{
     align-items: flex-start;
     margin-left: 40px;
     margin-top: 20px;
+    box-shadow: rgba(194, 214, 218, 0.315) 0px 2px 5px 0px;
 }
   
 #resultado {
@@ -220,6 +221,7 @@ main .container .left{
 .post {
     display: flex;
     background-color: #fff;
+    
     padding: 12px; /* Remove o padding para que fiquem colados */
     width: 380px;
     box-shadow: rgba(131, 131, 131, 0.315) 0px 2px 5px 0px;
@@ -247,7 +249,7 @@ main .container .left{
 
 .post img {
     width: 100%; /* Ajusta a imagem para ocupar todo o espaço */
-    object-fit: cover;
+    object-fit: contain;
     max-height: 150px;
     border-radius: 12px; /* Remove os cantos arredondados */
 }
@@ -311,17 +313,17 @@ main .container .left{
 
 .fileiraPreferencias {
     width: 100%;
-    max-width: 1000px;
-    height: 60px;
+   
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-    padding: 15px;
+    padding: 12px;
     border-radius: 15px;
     overflow: hidden;
-    background-color: #f8f8f8; /* Cor de fundo suave */
+   /* Cor de fundo suave */
 }
 
 /* Contêiner Geral para Controle */
@@ -331,8 +333,11 @@ main .container .left{
     justify-content: center;
     position: relative;
     overflow: hidden; /* Oculta as barras de rolagem */
-    width: 1000px;
+    width: 1300px;
     gap: 10px;
+    
+    border-radius: 9px;
+   
 }
 
 /* Formulário dentro da Fileira */
@@ -364,21 +369,22 @@ main .container .left{
 /* Cards de Categoria */
 .categoriaCard {
     min-height: 20px;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 9px;
+    gap: 5px;
+    
+    border-radius: 6px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: #ffffff;
-    color: #272727;
-    border: 1px solid #ddd; /* Melhor percepção de limite */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    color: #3f3950;
+    border: 1px solid #e0e0e0; /* Melhor percepção de limite */
+    /* Sombra suave */
     transition: all 0.3s ease; /* Transições suaves */
 }
 
 .categoriaCard:hover {
     transform: scale(1.05); /* Leve aumento ao passar o mouse */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Realce */
+    box-shadow: 0 4px 10px rgba(107, 107, 107, 0.2); /* Realce */
 }
 
 .categoriaCard.active {
@@ -386,13 +392,13 @@ main .container .left{
     background-color: #07beff; /* Cor ativa */
     color: #fff;
     border: none;
-    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3); /* Destaque ativo */
+ /* Destaque ativo */
 }
 
 /* Título dentro do Card */
 .categoriaCard h2 {
     margin: 0;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: inherit; /* Adota a cor do card */
     white-space: nowrap;
@@ -409,8 +415,77 @@ main .container .left{
     /* Ou outras diferenças de layout */
 }
 .post.sem-imagem {
-    background-color: #f9f9f9;
+    background-color: white;
     color: #666;
     text-align: center;
+    height: 200px;
 }
 
+.post .arrobaExplorar {
+    font-size: 12pt;
+    color: #272727;
+    font-weight:500;
+
+}
+
+.modulo-div{
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    text-align: center;
+    padding: 2px 7px; 
+    border-radius: 25px;
+   
+    box-shadow: rgba(170, 170, 170, 0.315) 0px 2px 5px 0px;
+  }
+
+  .modulo-div p{
+    color: white;
+    font-size: 8pt;
+    font-weight: 600;
+  }
+
+  .modulo{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 3%; 
+  }
+
+  .horas p{
+    font-size: 9pt;
+    color: #666;
+  }
+
+  .infosExplorar h3{
+    font-size: 10pt;
+    color: #272727;
+
+
+  }
+
+  .textoPostagem{
+    color: #666;
+    white-space: normal; /* Evita quebras de linha */
+    overflow: hidden;  
+    width: 360px;
+    text-align: start;  /* Oculta o texto que ultrapassa os limites */
+    text-overflow: ellipsis; /* Adiciona "..." ao final do texto */
+  }
+
+  .profileEInfo{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+   margin-top: 10px;
+
+  }
+
+  .infosEx{
+    margin-left: 5px;
+    display: flex;
+    align-items: start;
+    justify-content:start;
+    flex-direction: column;
+
+  }

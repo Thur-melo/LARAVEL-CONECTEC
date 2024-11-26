@@ -107,29 +107,34 @@
 
                     <div class="fileiraPreferencias">
                         <button class="categoriaCard active" onclick="mudarConteudo('all')">
-                            <h2>all</h2>
+                        <i class="fa-solid fa-earth-americas"></i>
+                            <h2>Todos</h2>
                         </button>
 
                         <button class="categoriaCard" onclick="mudarConteudo('emalta')">
+                        <i class="fa-solid fa-fire"></i>
                             <h2>Em Alta</h2>
                         </button>
 
                         <button class="categoriaCard" onclick="mudarConteudo('ads')">
+                            <i class="fa-solid fa-desktop"></i>
                             <h2>Desenvolvimento de Sistemas</h2>
                         </button>
 
                         <button class="categoriaCard" onclick="mudarConteudo('nutri')">
+                        <i class="fa-solid fa-stethoscope"></i>
                             <h2>Nutrição</h2>
                         </button>
 
                         <button class="categoriaCard" onclick="mudarConteudo('adm')">
+                        <i class="fa-solid fa-user-tie"></i>
                             <h2>Administração</h2>
                         </button>
 
                         <form action="{{ route('home') }}" method="get">
                             @foreach($hashtags as $hashtag)
                             <button class="categoriaCard" name="s" value="{{ '#' . $hashtag->hashtag }}" type="submit">
-                                <h2>{{ $hashtag->hashtag }}</h2> <!-- Supondo que 'hashtag' seja o campo que contém o nome da hashtag -->
+                                <h2>{{'#' . $hashtag->hashtag }}</h2> <!-- Supondo que 'hashtag' seja o campo que contém o nome da hashtag -->
                             </button>
                             @endforeach
                         </form>
@@ -153,26 +158,55 @@
                     <div class="scroll-container" id="curtidas">
                         <div id="resultado" class="resultado">
                             @foreach($posts as $post)
+                            @php
+                            $coresModulo = [
+                            '1º' => '#CD4642',
+                            '2º' => '#5169B1',
+                            '3º' => '#64B467',
+                            ];
+                            @endphp
+
                             @if($post->fotoPost)
         <!-- Layout para posts com imagem -->
-                                <div class="post com-imagem">
+                            <div class="post com-imagem">
+                                <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
                                     <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    
                                     <div class="headerExplorar">
+                                        
+                                        <div class="infosExplorar">
+                                        <div class="textoPostagem">
+                                            <span> "{{ $post->texto }}" </span>
+                                        </div>
+                                        <div class="profileEInfo">
                                         <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
                                             <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                           
                                         </a>
-                                        <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p>{{ "@" . $post->user->arroba }}</p>
+                                        <div class="infosEx">
+                                        <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
                                             <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            
+                                        
+
                                         </div>
                                     </div>
                                 </div>
                             @else
                                 <!-- Layout para posts sem imagem -->
                                 <div class="post sem-imagem">
-                                    <div class="horas">
-                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                    <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
                                     </div>
 
                                     <div class="textoPostagem">
@@ -184,8 +218,11 @@
                                         </a>
                                         <div class="infosExplorar">
                                             
-                                            <p>{{ "@" . $post->user->arroba }}</p>
-                                            <span class="perfil">{{$post->user->perfil}}</span>
+                                            <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                            
                                             
                                         </div>
                                     </div>
@@ -218,128 +255,328 @@
             if (tipo === 'all') { // Mude 'posts' para 'meusPosts'
                 resultado.innerHTML += `
                   @foreach($posts as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                  @if($post->fotoPost)
+                            <div class="post com-imagem">
+                                <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    
+                                    <div class="headerExplorar">
+                                        
                                         <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
+                                        <div class="textoPostagem">
+                                            <span> "{{ $post->texto }}" </span>
                                         </div>
-                                </div>
+                                        <div class="profileEInfo">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                           
+                                        </a>
+                                        <div class="infosEx">
+                                        <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                            <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            
+                                        
 
-                            </div>
-                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- Layout para posts sem imagem -->
+                                <div class="post sem-imagem">
+                                    <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="textoPostagem">
+                                        <span> "{{ $post->texto }}" </span>
+                                    </div>
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
+                                        <div class="infosExplorar">
+                                            
+                                            <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            @endif
                             @endforeach`;
             } else if (tipo === 'emalta') {
                 resultado.innerHTML = `   @foreach($postsCurtidas as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                             @if($post->fotoPost)
+                            <div class="post com-imagem">
+                                <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    
+                                    <div class="headerExplorar">
+                                        
                                         <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
+                                        <div class="textoPostagem">
+                                            <span> "{{ $post->texto }}" </span>
                                         </div>
-                                </div>
+                                        <div class="profileEInfo">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                           
+                                        </a>
+                                        <div class="infosEx">
+                                        <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                            <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            
+                                        
 
-                            </div>
-                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- Layout para posts sem imagem -->
+                                <div class="post sem-imagem">
+                                    <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="textoPostagem">
+                                        <span> "{{ $post->texto }}" </span>
+                                    </div>
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
+                                        <div class="infosExplorar">
+                                            
+                                            <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            @endif
                             @endforeach`;
             } else if (tipo === 'ads') {
                 resultado.innerHTML += ` @foreach($postsAds as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                             @if($post->fotoPost)
+                            <div class="post com-imagem">
+                                <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    
+                                    <div class="headerExplorar">
+                                        
                                         <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
+                                        <div class="textoPostagem">
+                                            <span> "{{ $post->texto }}" </span>
                                         </div>
-                                </div>
+                                        <div class="profileEInfo">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                           
+                                        </a>
+                                        <div class="infosEx">
+                                        <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                            <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            
+                                        
 
-                            </div>
-                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- Layout para posts sem imagem -->
+                                <div class="post sem-imagem">
+                                    <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="textoPostagem">
+                                        <span> "{{ $post->texto }}" </span>
+                                    </div>
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
+                                        <div class="infosExplorar">
+                                            
+                                            <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            @endif
                             @endforeach`;
             } else if (tipo === 'nutri') {
                 resultado.innerHTML += ` @foreach($postsNutri as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                            @if($post->fotoPost)
+                            <div class="post com-imagem">
+                                <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    
+                                    <div class="headerExplorar">
+                                        
                                         <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
+                                        <div class="textoPostagem">
+                                            <span> "{{ $post->texto }}" </span>
                                         </div>
-                                </div>
+                                        <div class="profileEInfo">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                           
+                                        </a>
+                                        <div class="infosEx">
+                                        <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                            <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            
+                                        
 
-                            </div>
-                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- Layout para posts sem imagem -->
+                                <div class="post sem-imagem">
+                                    <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="textoPostagem">
+                                        <span> "{{ $post->texto }}" </span>
+                                    </div>
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
+                                        <div class="infosExplorar">
+                                            
+                                            <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            @endif
                             @endforeach`;
             } else if (tipo === 'adm') {
                 resultado.innerHTML += ` @foreach($postsAdm as $post)
-                            <div class="post">
-                                <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="" style="max-width: 100%; height: auto;">
-
-                                <div class="headerExplorar">
-                                    <a href="{{ route('perfil', ['id' => $post->user->id]) }}"> <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="" class="perfilPostImg"> </a>
-                                    <a href="{{ route('comentarios', $post->id) }}" style="text-decoration: none;">
+                             @if($post->fotoPost)
+                            <div class="post com-imagem">
+                                <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+                                    <img src="{{ asset('storage/' . $post->fotoPost) }}" alt="Imagem do post" style="max-width: 100%; height: auto;">
+                                    
+                                    <div class="headerExplorar">
+                                        
                                         <div class="infosExplorar">
-                                            <h3> {{ $post->texto }} </h3>
-                                            <p> {{"@" . $post->user->arroba}} </p>
-                                            <div class="contsExplorar">
-                                                <div class="likes">
-                                                    <i class="far fa-heart"></i>
-                                                    <p class="likes-count">{{ $post->likes()->count() }}</p>
-                                                </div>
-                                                <p>{{ $post->created_at->diffForHumans() }}</p>
-
-                                            </div>
+                                        <div class="textoPostagem">
+                                            <span> "{{ $post->texto }}" </span>
                                         </div>
-                                </div>
+                                        <div class="profileEInfo">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                           
+                                        </a>
+                                        <div class="infosEx">
+                                        <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                            <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        </div>
+                                        </div>
+                                            
+                                        
 
-                            </div>
-                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- Layout para posts sem imagem -->
+                                <div class="post sem-imagem">
+                                    <div class="modulo">
+                                    <div class="modulo-div" style="background-color: {{ $coresModulo[$post->user->modulo] ?? 'defaultColor' }};">
+                                        <p>{{ $post->user->modulo }} {{ $post->user->perfil }} </p>
+                                    </div>
+                                    </div>
+
+                                    <div class="textoPostagem">
+                                        <span> "{{ $post->texto }}" </span>
+                                    </div>
+                                    <div class="headerExplorar">
+                                        <a href="{{ route('perfil', ['id' => $post->user->id]) }}">
+                                            <img src="{{ asset('storage/' . $post->user->urlDaFoto) }}" alt="Imagem de perfil" class="perfilPostImg">
+                                        </a>
+                                        <div class="infosExplorar">
+                                            
+                                            <p class="arrobaExplorar">{{ "@" . $post->user->arroba }}</p>
+                                        <div class="horas">
+                                        <p>{{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            @endif
                             @endforeach`;
             }
 
