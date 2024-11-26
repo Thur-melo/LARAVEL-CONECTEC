@@ -133,30 +133,33 @@
 
                     <div class="headerTabela">
                         <div>Data de Publicação</div>
-                        <div>Comentário</div>
+                        <div> Conteúdo</div>
                         <div>Imagem do post</div>
-                        <div>Conteúdo</div>
+                        <div>Comentário</div>
                         <div>Operações</div>
                     </div>
 
                     @foreach($comentarios as $comm)
                     <div class="question-row">
                         <div>{{ $comm->created_at->diffForHumans() }}</div>
-                        <div class="content-preview">{{ $comm->texto}}</div>
+                        <div class="content-preview">{{$comm->post->texto}}</div>
                         <div>
                             <div class="statusPost">
                               
                                     <div class="imagemLittle">
-                                        <img src="{{ asset('storage/' . $comm->post->fotoPost) }}" style="widht: 200px;height:200px;" >
+                                    <a href="{{ asset('storage/' .  $comm->post->fotoPost) }}" data-lightbox="gallery" data-title="Descrição da imagem">
+                                        <img src="{{ asset('storage/' . $comm->post->fotoPost) }}" style=" height: 50px; width: 100px;
+" >
+                                        </a>
 
-                                    
+
 
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="conteudoPost">{{$comm->post->texto}}</div>
+                        <div class="conteudoPost"> {{ $comm->texto}}</div>
                         <div class="icons">
 
                             
@@ -230,6 +233,29 @@
     </script>
 
 
+
+<script>
+        function previewImage(event) {
+            var image = document.getElementById('imagePreview');
+            var file = event.target.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                    image.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        @if(session('showModal'))
+        document.addEventListener('DOMContentLoaded', function() {
+            var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+            myModal.show();
+        });
+        @endif
+    </script>
 
 
     <!-- Script para os MODAIS LEGAIS tmnc bootrape -->
