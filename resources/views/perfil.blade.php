@@ -417,52 +417,62 @@
     <!-- Modal de Confirmação -->
 
     <script>
-                                function openModal(postId) {
-                                    document.getElementById('modal-denuncia').style.display = 'flex';
-                                }
+                         // Função para abrir o modal
+function openModal(userId) {
+    document.getElementById('modal-denuncia').style.display = 'flex';
+    document.getElementById('user_denunciado_id').value = userId; // Preenche o ID do usuário denunciado
+}
 
-                                function closeModal() {
-                                    document.getElementById('modal-denuncia').style.display = 'none';
-                                }
+// Função para fechar o modal
+function closeModal() {
+    document.getElementById('modal-denuncia').style.display = 'none';
+}
 
-                                function confirmarDenuncia() {
-                                    const userId = document.getElementById('user-id').value; // ID do usuário que fez a denúncia
-                                    const postId = document.getElementById('post-id').value; // ID do post denunciado
-                                    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
+// Função para confirmar a denúncia
+function confirmarDenuncia() {
+    const userId = document.getElementById('user-id').value; // ID do usuário que está denunciando
+    const postId = document.getElementById('user_denunciado_id').value; // ID do usuário denunciado
+    const motivo = document.getElementById('motivo').value; // Motivo da denúncia
 
-                                    fetch("{{ route('denunciar') }}", {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                            },
-                                            body: JSON.stringify({
-                                                user_id: userId,
-                                                post_id: postId,
-                                                motivo: motivo
-                                            })
-                                        })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Denúncia registrada!',
-                                                text: data.message,
-                                                confirmButtonText: 'Ok'
-                                            }).then(() => {
-                                                closeModal(); // Fecha o modal após o alerta
-                                            });
-                                        })
-                                        .catch(error => {
-                                            console.error("Erro:", error);
-                                            Swal.fire({
-                                                icon: 'error',  
-                                                title: 'Erro',
-                                                text: 'Ocorreu um erro ao registrar a denúncia.',
-                                                confirmButtonText: 'Ok'
-                                            });
-                                        });
-                                }
+    if (!motivo) {
+        alert("Por favor, informe o motivo da denúncia.");
+        return;
+    }
+
+    fetch("{{ route('denunciarUser') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            user_denunciado_id: postId,
+            motivo: motivo
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Denúncia registrada!',
+            text: data.message,
+            confirmButtonText: 'Ok'
+        }).then(() => {
+            closeModal(); // Fecha o modal após o alerta
+        });
+    })
+    .catch(error => {
+        console.error("Erro:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Ocorreu um erro ao registrar a denúncia.',
+            confirmButtonText: 'Ok'
+        });
+    });
+}
+
 
                             </script>
 
