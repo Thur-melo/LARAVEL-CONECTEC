@@ -92,34 +92,41 @@
 @endif
         
         <script>
-            // Função para alternar entre ativar e desativar o status do usuário
-            function toggleStatusUsuario(userId, statusAtual) {
-                const novaAcao = statusAtual === 'ativo' ? 'Desativar' : 'Ativar';
-                const confirmMessage = `Tem certeza que deseja ${novaAcao.toLowerCase()} este usuário?`;
-        
-                if (confirm(confirmMessage)) {
-                    const url = statusAtual === 'ativo'
-                        ? `{{ url('/admin/desativar-usuario') }}/${userId}` // Usando a rota de desativar
-                        : `{{ url('/admin/ativar-usuario') }}/${userId}`; // Usando a rota de ativar
-        
-                    fetch(url, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                            },
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            alert(data.message); // Mensagem de sucesso
-                            location.reload(); // Recarrega a página para refletir a alteração do status do usuário
-                        })
-                        .catch(error => {
-                            console.error("Erro:", error);
-                            alert("Ocorreu um erro ao alterar o status do usuário.");
-                        });
-                }
+      // Função para alternar entre ativar e desativar o status do usuário
+function toggleStatusUsuario(userId, statusAtual) {
+    const novaAcao = statusAtual === 'ativo' ? 'Desativar' : 'Ativar';
+    const confirmMessage = `Tem certeza que deseja ${novaAcao.toLowerCase()} este usuário?`;
+
+    if (confirm(confirmMessage)) {
+        // Define a URL dependendo do status atual do usuário
+        const url = statusAtual === 'ativo'
+            ? `{{ url('/admin/desativar-usuario') }}/${userId}`  // Desativa o usuário
+            : `{{ url('/admin/ativar-usuario') }}/${userId}`;    // Ativa o usuário
+
+        // Envia a requisição fetch para ativar ou desativar
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"  // Adiciona o token CSRF para segurança
+            },
+        })
+        .then(response => response.json())  // Trata a resposta JSON
+        .then(data => {
+            if (data.success) {  // Se a resposta tiver sucesso
+                alert(data.message);  // Exibe mensagem de sucesso
+                location.reload();     // Recarrega a página para refletir a alteração
+            } else {  // Se houver falha no servidor
+                alert('Erro: ' + data.message);  // Exibe mensagem de erro
             }
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Status do usuário alterada com sucesso.");
+        });
+    }
+}
+
         
             // Função para deletar uma denúncia
             function deletarDenuncia(denunciaId) {

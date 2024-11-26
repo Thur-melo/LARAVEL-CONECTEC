@@ -99,7 +99,7 @@
                 <div class="perfilContainer">
                     <div class="fundo">
                         <img src="{{ asset('storage/' . $usuario->urlDoBanner) }}" id="banner">
-                        <a href="javascript:void(0);" onclick="openModal({{ $user->id }})">
+                        <a href="javascript:void(0);" onclick="openModal({{ $usuario->id }})">
                                 <span class="material-symbols-outlined iconDenuncia">warning</span>
                             </a>
                     </div>
